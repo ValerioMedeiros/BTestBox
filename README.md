@@ -9,9 +9,11 @@ Linux and OS X. It is performed the script file configAtelierB.py,
 which must be granted rights to execute and write in Atelier-B's directory.
 This procedure installs configuration files for Atelier-B that contain descriptions
 of the interface elements and their association with BTestKit options.
-In the directory where BTestKit will be maintained, execute the following command in a terminal to start installation:
+In the directory where BTestKit will be maintained, execute the following commands in a terminal to start installation:
 
 ```{r, engine='bash', count_lines}
+git clone https://github.com/ValerioMedeiros/BTestKit/
+cd BTestKit
 $python2.7  configAtelierB.py
 ```
   * Requirements: 
