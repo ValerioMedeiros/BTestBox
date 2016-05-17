@@ -12,8 +12,8 @@ of the interface elements and their association with BTestKit options.
 In the directory where BTestKit will be maintained, execute the following commands in a terminal to start installation:
 
 ```{r, engine='bash', count_lines}
-git clone https://github.com/ValerioMedeiros/BTestKit/
-cd BTestKit
+$git clone https://github.com/ValerioMedeiros/BTestKit/
+$cd BTestKit
 $python2.7  configAtelierB.py
 ```
   * Requirements: 
