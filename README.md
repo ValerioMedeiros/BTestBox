@@ -22,8 +22,12 @@ $python2.7  configAtelierB.py
     * B2LLVM (https://bitbucket.org/ddeharbe/b2llvm)
 
 # Usage instructions
+
  * TODO: add more details
+ 
 [![Video demonstration BTestKit](http://img.youtube.com/vi/xXV-DkUP_8E/0.jpg)](https://www.youtube.com/watch?v=xXV-DkUP_8E)
+
+
 ## Contributing
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
