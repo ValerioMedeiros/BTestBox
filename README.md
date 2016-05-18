@@ -1,4 +1,4 @@
-# BTestKit
+# BTestBox
  It is a tool to automatically test the translation of B in another language. BTestKit takes a target language and a B implementation as input and generate
  a test case to compare the execution of the translated B code and the B implementation. The tool uses ProB to animate the B implementation and get the expected states.
 
