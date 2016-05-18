@@ -1,19 +1,19 @@
 # BTestBox
- It is a tool to automatically test the translation of B in another language. BTestKit takes a target language and a B implementation as input and generate
+ It is a tool to automatically test the translation of B in another language. BTestBox takes a target language and a B implementation as input and generate
  a test case to compare the execution of the translated B code and the B implementation. The tool uses ProB to animate the B implementation and get the expected states.
 
 
 # Installation procedure
-The installation of BTestKit in Atelier-B is similar in Windows,
+The installation of BTestBox in Atelier-B is similar in Windows,
 Linux and OS X. It is performed the script file configAtelierB.py, 
 which must be granted rights to execute and write in Atelier-B's directory.
 This procedure installs configuration files for Atelier-B that contain descriptions
-of the interface elements and their association with BTestKit options.
-In the directory where BTestKit will be maintained, execute the following commands in a terminal to start installation:
+of the interface elements and their association with BTestBox options.
+In the directory where BTestBox will be maintained, execute the following commands in a terminal to start installation:
 
 ```{r, engine='bash', count_lines}
-$git clone https://github.com/ValerioMedeiros/BTestKit/
-$cd BTestKit
+$git clone https://github.com/ValerioMedeiros/BTestBox/
+$cd BTestBox
 $python2.7  configAtelierB.py
 ```
   * Requirements: 
@@ -25,7 +25,7 @@ $python2.7  configAtelierB.py
 
  * TODO: add more details
  
-[![Video demonstration BTestKit](http://img.youtube.com/vi/xXV-DkUP_8E/0.jpg)](https://www.youtube.com/watch?v=xXV-DkUP_8E)
+[![Video demonstration BTestBox](http://img.youtube.com/vi/xXV-DkUP_8E/0.jpg)](https://www.youtube.com/watch?v=xXV-DkUP_8E)
 
 
 ## Contributing
