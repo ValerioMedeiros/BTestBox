@@ -11,7 +11,7 @@ import argparse
 import shutil
 import src.generate
 import src.utils
-
+import src.gui2
 
 import time
 
@@ -63,14 +63,24 @@ if not os.path.exists(directory_test):
     os.makedirs(directory_test)
 
 #Executa the ProB
+
+
+
+parameters_tests = {"defined": False, "max_cases":"0" ,"languages":[],"heuristic":"","criteria":""}
+
+src.gui2.draw_gui(parameters_tests)
+
+if not(parameters_tests["defined"]):
+    print("No script tests defined!")
+    exit()
+
 start_time = time.time()
-random_animation=8
-src.utils.executeSub(""+args.probcli_path+" -animate "+str(random_animation) +" -his "+directory_test+os.sep+"history.txt -his_option show_init -his_option show_states "+args.directory+os.sep+args.b_module+".imp",args.b_module,True)
+src.utils.executeSub(""+args.probcli_path+" -animate "+str(parameters_tests["max_cases"]) +" -his "+directory_test+os.sep+"history.txt -his_option show_init -his_option show_states "+args.directory+os.sep+args.b_module+".imp",args.b_module,True)
 
 
 #caminho,arquivo = ("../../Testes/PrimeirosExemplos/Array", 'test_results.xml')  
 #caminho,arquivo = ("../../Testes/PrimeirosExemplos/Calculator", 'test_results.xml')    
-caminho,arquivo = ("../../Testes/PrimeirosExemplos/Counter", 'test_results.xml')
+#caminho,arquivo = ("../../Testes/PrimeirosExemplos/Counter", 'test_results.xml')
 #caminho,arquivo = ("../../Testes/PrimeirosExemplos/ATM", 'test_results.xml')
 
 #resultado = gerar_casos_de_testes_xml(caminho, arquivo)
@@ -85,21 +95,13 @@ shutil.copyfile(os.path.dirname(os.path.abspath(__file__))+os.sep+"libs/cutest.h
 
 
 #Gerar os testes e grava os resultados
-
 f = open(directory_test+os.sep+args.b_module+"_btest.c" ,'w')
 f.write(res) 
 f.close() 
 print("Btest executed successfully")
-print("Random animation of  %s operations --- and time of execution: %s seconds." % ((random_animation),(time.time() - start_time)))
-print("Estimated random animation of  %s operations and estimated time of execution %s seconds." % ((10*random_animation),10*(time.time() - start_time)))
-print("Estimated random animation of  %s operations and estimated time of execution %s seconds. " % ((50*random_animation),50*(time.time() - start_time)))
-print("Estimated random animation of  %s operations and estimated time of execution %s hours." % ((5000*random_animation),5000*(time.time() - start_time)/60/60))
-print("Estimated random animation of  %s operations and estimated time of execution %s hours." % ((50000*random_animation),50000*(time.time() - start_time)/60/60))
+print("Random animation of  %s operations and time of execution: %s seconds." % (int(parameters_tests["max_cases"]),(time.time() - start_time)))
 
 spent_time_to_run_lot = time.time() - start_time
 seconds_in_one_hour= 60*60
 slots_in_one_hour = seconds_in_one_hour/spent_time_to_run_lot
-
-
-
-print("Estimated random animation of  %d operations in one hour " % (slots_in_one_hour*random_animation) )
+print("Estimated random animation of  %d operations in one hour " % (slots_in_one_hour*int(parameters_tests["max_cases"])) )
