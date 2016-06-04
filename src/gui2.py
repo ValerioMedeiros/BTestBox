@@ -6,7 +6,7 @@ Created on May 26, 2016
 from Tkinter import *
 import tkMessageBox
 
-global lparam, top, Lb1,E1,w,variable
+global lparam, top, variable_,E1,w,variable
 
 def center(toplevel):
     toplevel.update_idletasks()
@@ -20,11 +20,11 @@ def center(toplevel):
 
 
 def callBTest():
-    global lparam,top
+    global lparam, top, variable_,E1,w,variable
     #tkMessageBox.showinfo( "BTesBox - Results", "Script tests was generated with successful.")
     lparam["defined"] = True 
-    #print(map(int,Lb1.curselection()))
-    lparam["languages"] = map(int,Lb1.curselection())
+    #print(variable.get())
+    lparam["languages"] = variable.get()
     #print(E1.get())
     lparam["heuristic"] = E1.get()
     #print(w.get())
@@ -35,25 +35,31 @@ def callBTest():
       
 
 def draw_gui(parameters_tests):
-    global lparam, top,Lb1,E1,w,variable
+    global lparam, top,variable_,E1,w,variable
     lparam = parameters_tests
     top = Tk()
     
     top.title("BTestBox")
-    L1 = Label(top, text="Maximun case tests:")
+    L1 = Label(top, text="Maximun tests case:")
     L1.pack()
-    w = Spinbox( from_=0, to=1000000)
-    w.insert(0,"500")
+    w = Spinbox( from_=0, to=10000000)
+    w.insert(0,"10")
     w.pack()
     
     
     L0 = Label( text="Language of test script:")
     L0.pack( )
-    Lb1 = Listbox(top,selectmode=EXTENDED)
-    Lb1.insert(1, "LLVM")
-    Lb1.insert(2, "C++ - Unsupported yet")
-    Lb1.insert(3, "JAVA - Unsupported yet")
-    Lb1.pack()
+    #Lb1 = Listbox(top,selectmode=EXTENDED)
+    #Lb1.insert(1, "LLVM")
+    #Lb1.insert(2, "C++ - Unsupported yet")
+    #Lb1.insert(3, "JAVA - Unsupported yet")
+    #Lb1.pack()
+    variable_ = StringVar(top)
+    variable_.set("LLVM")
+    opt_ = OptionMenu(top, variable_, "LLVM", "C++ - Unsupported yet", "Java - Unsupported yet")
+    opt_.pack()
+    
+    
     
     L2 = Label( text="Heuristic test strategy:")
     L2.pack( )
@@ -67,6 +73,9 @@ def draw_gui(parameters_tests):
     variable.set("None")
     opt = OptionMenu(top, variable, "None", "CCC", "CCA","MCDC")
     opt.pack()
+    
+    L4 = Label( text="______")
+    L4.pack( )
     
     B = Button(top, text ="Generate", command = callBTest)
     B.pack(side=BOTTOM)

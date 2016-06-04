@@ -75,7 +75,7 @@ if not(parameters_tests["defined"]):
     exit()
 
 start_time = time.time()
-src.utils.executeSub(""+args.probcli_path+" -animate "+str(parameters_tests["max_cases"]) +" -his "+directory_test+os.sep+"history.txt -his_option show_init -his_option show_states "+args.directory+os.sep+args.b_module+".imp",args.b_module,True)
+src.utils.executeSub(""+args.probcli_path+" -animate "+str(3+int(parameters_tests["max_cases"])) +" -his "+directory_test+os.sep+"history.txt -his_option show_init -his_option show_states "+args.directory+os.sep+args.b_module+".imp",args.b_module,True)
 
 
 #caminho,arquivo = ("../../Testes/PrimeirosExemplos/Array", 'test_results.xml')  
