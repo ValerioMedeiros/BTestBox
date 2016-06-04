@@ -25,7 +25,7 @@ $python2.7  configAtelierB.py
 
  * TODO: add more details
  
-[![Video demonstration BTestBox](http://img.youtube.com/vi/xXV-DkUP_8E/0.jpg)](https://www.youtube.com/watch?v=xXV-DkUP_8E)
+[![Video demonstration BTestBox](http://img.youtube.com/vi/a4G6pSLVKpk/0.jpg)](https://www.youtube.com/watch?v=a4G6pSLVKpk)
 
 
 ## Contributing
