@@ -21,9 +21,7 @@ $python2.7  configAtelierB.py
     * ProB 1.6  (https://www3.hhu.de/stups/prob/index.php/Download)
     * B2LLVM (https://bitbucket.org/ddeharbe/b2llvm)
 
-# Usage instructions
-
- * TODO: add more details
+# Video demonstration
  
 [![Video demonstration BTestBox](http://img.youtube.com/vi/a4G6pSLVKpk/0.jpg)](https://www.youtube.com/watch?v=a4G6pSLVKpk)
 
