@@ -17,7 +17,7 @@ $cd BTestBox
 $python2.7  configAtelierB.py
 ```
   * Requirements: 
-    * Python 2.7 (https://www.python.org/downloads/)
+    * Python 2.7 (https://www.python.org/downloads/) and the Tkinter module (http://tkinter.unpythonic.net/wiki/How_to_install_Tkinter) 
     * ProB 1.6  (https://www3.hhu.de/stups/prob/index.php/Download)
     * B2LLVM (https://bitbucket.org/ddeharbe/b2llvm)
 
