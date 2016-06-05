@@ -2,6 +2,11 @@
  It is a tool to automatically test the translation of B in another language. BTestBox takes a target language and a B implementation as input and generate
  a test case to compare the execution of the translated B code and the B implementation. The tool uses ProB to animate the B implementation and get the expected states.
 
+# Demonstration video
+ 
+[![Video demonstration BTestBox](http://img.youtube.com/vi/a4G6pSLVKpk/0.jpg)](https://www.youtube.com/watch?v=a4G6pSLVKpk)
+
+
 
 # Installation procedure
 The installation of BTestBox in Atelier-B is similar in Windows,
@@ -20,10 +25,6 @@ $python2.7  configAtelierB.py
     * Python 2.7 (https://www.python.org/downloads/) and the Tkinter module (http://tkinter.unpythonic.net/wiki/How_to_install_Tkinter) 
     * ProB 1.6  (https://www3.hhu.de/stups/prob/index.php/Download)
     * B2LLVM (https://bitbucket.org/ddeharbe/b2llvm)
-
-# Video demonstration
- 
-[![Video demonstration BTestBox](http://img.youtube.com/vi/a4G6pSLVKpk/0.jpg)](https://www.youtube.com/watch?v=a4G6pSLVKpk)
 
 
 ## Contributing
