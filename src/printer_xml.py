@@ -1,4 +1,5 @@
 import sys
+
 import b2llvm.codebuf as codebuf
 from b2llvm.strutils import NL, SP, TB
 

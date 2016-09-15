@@ -1,8 +1,9 @@
 import os
-import xml.etree.ElementTree as ET
-import src.printer_xml
-import src.printer_history
 import re
+
+import src.printer_history
+import src.printer_xml
+import xml.etree.ElementTree as ET
 
 
 def gerar_casos_de_testes_xml(caminho, arquivo): 

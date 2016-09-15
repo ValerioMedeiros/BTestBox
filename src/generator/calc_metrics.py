@@ -1,16 +1,15 @@
 # -*- encoding: utf-8 -*-
-import collections
 import codecs
-import shutil
-import random
-import time
+import collections
 import pickle
+import random
+import shutil
+import time
+
 import functions_tests as f
 
 
-
 #Printing the file IMPLEMENTATION
-
 pProject = "/Users/valerio/Dropbox/B_Resources/ExamplesB0/"
 pBXML = "/Applications/AtelierB_4.3/AtelierB.app/AB/bbin/macosx/bxml"
 pOut ="/Users/valerio/Dropbox/B_Resources/ExamplesB0/bdp/"

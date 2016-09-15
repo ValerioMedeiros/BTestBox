@@ -7,7 +7,6 @@ import codecs
 import subprocess
 
 
-
 def executeSub(cmd, n="" , out=True):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, errors = p.communicate()

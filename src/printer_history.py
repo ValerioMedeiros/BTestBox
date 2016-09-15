@@ -1,7 +1,9 @@
+import re
 import sys
+
 import b2llvm.codebuf as codebuf
 from b2llvm.strutils import NL, SP, TB
-import re
+
 
 # replace multiple strings ( convert B exp to C exp)
 rep = {"=": "==", " FALSE ": " 0 ", " TRUE ": " 1 ", " not":" ! "," or ":" || " } 

@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
-import collections
 import codecs
-import shutil
+import collections
 import random
+import shutil
 import time
+
 import functions_tests as f
+
 
 # aux functions
 def operations_ID():

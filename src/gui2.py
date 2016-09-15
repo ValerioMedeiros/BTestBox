@@ -40,7 +40,7 @@ def draw_gui(parameters_tests):
     top = Tk()
     
     top.title("BTestBox")
-    L1 = Label(top, text="Maximun tests case:")
+    L1 = Label(top, text="Maximun test cases:")
     L1.pack()
     w = Spinbox( from_=0, to=10000000)
     w.insert(0,"10")
