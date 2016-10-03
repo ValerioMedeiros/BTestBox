@@ -33,10 +33,10 @@ def BranchCoverage(branchesPaths, branchStatus, paths):
             if count[p] > count[pathToCover]:
                     pathToCover = p
         predicate = makePredicate(aux[pathToCover], branchStatus, branchesPaths, pathToCover) #Finding the predicate
-        for branch in branchStatus: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
+        for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch] == True:
                 countcover += 1
-        if countcover == len(branchStatus): #Counting if all branches were covered, if True, the while stops.
+        if countcover == len(branchStatus): 
             covered = True
         del aux[pathToCover] #Deleting the path of aux to start a new path
         if len(aux) != 0: #If still existing a path, pathToCover receives the lowest number
@@ -64,7 +64,7 @@ def makePredicateWithoutWhile(path, branchStatus, branchesPaths, pathToCover):
         node = aux[len(aux) - 1]
         predicate = findpredicate(node, predicate, aux, path) #Find the predicate
         del aux[len(aux) - 1]
-        for branch in branchesPaths[pathToCover]:
+        for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
             branchStatus[branch] = True
     return predicate
 
