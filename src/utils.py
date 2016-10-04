@@ -7,7 +7,7 @@ import codecs
 import subprocess
 
 
-def executeSub(cmd, n="" , out=True):
+def executeSubWithReturn(cmd, n="" , out=True):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, errors = p.communicate()
     if out:
@@ -20,8 +20,11 @@ def executeSub(cmd, n="" , out=True):
             print(output)
             print(errors)
 
-    return p.returncode
+    return p.returncode, output, errors
 
+def executeSub(cmd, n="" , out=True):
+    rcode, output, errors = executeSubWithReturn(cmd, n , out)
+    return rcode
 
 makefile_text = '''#Defining variables used in compilation.
 
