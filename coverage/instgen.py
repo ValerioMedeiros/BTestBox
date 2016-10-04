@@ -5,7 +5,7 @@ def make_operation(node):
     text = "\n"
     for i in range(node.childNodes.length): #Return every child of the node (could be better)
         if node.childNodes.item(i).nodeType != node.childNodes.item(i).TEXT_NODE: #Exclude every node that is a TEXT_NODE
-            text += "Operation : " + node.childNodes.item(i).getAttribute("name") + "\n"
+            text += "Operation : " + node.childNodes.item(i).getAttribute("name") + " " + make_inputs(node.childNodes.item(i).getElementsByTagName("Input_Parameters")[0]) + "\n"
             text += make_inst(node.childNodes.item(i)) + "\n" #Call to make every instruction in the child, the child of Operations are the Operation.
             text += "EndOperation\n"
             text += "\n"
@@ -17,6 +17,18 @@ def make_assig(node):
     text += make_inst(node.childNodes.item(3)) #Variables Child
     text += " := "
     text += make_inst(node.childNodes.item(5)) #Values Child
+    return text
+
+def make_inputs(node):
+    """Build the inputs"""
+    text = "("
+    for childnode in node.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            text += make_id(childnode)
+            if childnode != node.lastChild.previousSibling:
+                text += ", "
+            else:
+                text += ")"
     return text
 
 def make_binaryexp(node):
@@ -95,6 +107,10 @@ def selfcaller(node):
         text += make_expcomparison(node)
     elif tag == "Nary_Pred":
         text += make_narypred(node)
+    elif tag == "Quantified_Pred":
+        text += make_quantifiedpred(node)
+    elif tag == "Binary_Pred":
+        text += make_binarypred(node)
     return text
 
 def make_if_sub(node):
@@ -150,7 +166,7 @@ def make_binarypred(node):
     """Build a Binary Predicate in a string"""
     text = "("
     text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary predicate
-    text += " " + node.getAttribute("op") + " " 
+    text += " " + node.getAttribute("op") + " "
     text += selfcaller(node.childNodes.item(5)) #Second operand of a binary predicate
     text += ")"
     return text
@@ -165,6 +181,20 @@ def make_narypred(node):
         if count < node.childNodes.length:
             text += " " + node.getAttribute("op") + " "
     text += ")"
+    return text
+
+def make_precondition(node):
+    """Build a Precondition in a string"""
+    text = ""
+    text += callmake(node, node.childNodes.item(1).tagName)
+    text +=""
+    return text
+
+def make_quantifiedpred(node):
+    """Build a quantified precondition"""
+    text = node.getAttribute("type")
+    text += make_inst(node.childNodes.item(3)) #Variables Child
+    text += make_inst(node.childNodes.item(5)) #Body
     return text
 
 def callmake(node, tag):
@@ -201,6 +231,10 @@ def callmake(node, tag):
         text += make_narypred(childnode)
     elif tag == "Binary_Pred":
         text += make_binarypred(childnode)
+    elif tag == "Precondition":
+        text += make_precondition(childnode)
+    elif tag == "Quantified_Pred":
+        text += make_quantifiedpred(childnode)
     return text
 
 def make_inst(node):
@@ -215,9 +249,8 @@ def make_inst(node):
 """
 If you want to test there is a sample, you will need to pass to the parse a bxml file of an implementation.
 """
-
 """
-doc = minidom.parse("ifwithtwo_i.bxml")
+doc = minidom.parse("guptaex.bxml")
 
 operations = doc.getElementsByTagName("Operations")[0]
 

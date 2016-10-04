@@ -1,5 +1,6 @@
 import buildpaths
-import graphgen
+import genmachine
+import utils
 from xml.dom import minidom
 import re
 
@@ -8,14 +9,7 @@ First of all, be careful since this is not well implemented. Implementations wit
 shall not work properly. Everything will be handled before, the implementations with more than one operation can even work.
 """
 
-#To change the implementation, change the next line
-doc = minidom.parse("guptaex_i.bxml")
-operations = doc.getElementsByTagName("Operations")[0] #Surfing until Operations
-graphgen.mapOperations(operations) #Creating graph #Still need to get the precondition of the operation in the abstract machine
-buildpaths.makepaths(graphgen.nodemap) #Building paths
-buildpaths.makebranches(buildpaths.paths) #Building branches
-
-def BranchCoverage(branchesPaths, branchStatus, paths):
+def BranchCoverage(branchesPaths, branchStatus, paths, inputs, operationname):
     """Branch Coverage"""
     #Initialisation
     count = dict()
@@ -32,7 +26,7 @@ def BranchCoverage(branchesPaths, branchStatus, paths):
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        predicate = makePredicate(aux[pathToCover], branchStatus, branchesPaths, pathToCover) #Finding the predicate
+        predicate = makePredicate(aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname) #Finding the predicate
         for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch] == True:
                 countcover += 1
@@ -43,7 +37,7 @@ def BranchCoverage(branchesPaths, branchStatus, paths):
             pathToCover = min(aux.keys()) #Passing the lowest number
         print(predicate + "\n") #Priting the predicate, this is not the final version
 
-def makePredicate(path, branchStatus, branchesPaths, pathToCover):
+def makePredicate(path, branchStatus, branchesPaths, pathToCover, inputs, operationname):
     """Finding the predicate, change the call if the implementation has while"""
     thereIsWhile = False #To check if has a while
     for node in path:
@@ -52,10 +46,15 @@ def makePredicate(path, branchStatus, branchesPaths, pathToCover):
     if thereIsWhile == True:
         predicate = makePredicateWithWhile(path, body, branchStatus, branchesPaths, pathToCover) # *Not implemented yet*
     else:
-        predicate = makePredicateWithoutWhile(path, branchStatus, branchesPaths, pathToCover) 
+        predicate = makePredicateWithoutWhile(path, pathToCover)
+        ExistValues = checkPredicate(predicate, pathToCover, inputs, operationname)
+        if ExistValues == True:
+            for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
+                branchStatus[branch] = True
     return predicate
 
-def makePredicateWithoutWhile(path, branchStatus, branchesPaths, pathToCover):
+def makePredicateWithoutWhile(path, pathToCover):
+    """Make the predicate if the implementation don't have a while structure"""
     predicate = ""
     aux = list()
     for key in path:
@@ -64,11 +63,10 @@ def makePredicateWithoutWhile(path, branchStatus, branchesPaths, pathToCover):
         node = aux[len(aux) - 1]
         predicate = findpredicate(node, predicate, aux, path) #Find the predicate
         del aux[len(aux) - 1]
-        for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
-            branchStatus[branch] = True
     return predicate
 
 def findpredicate(node, predicate, aux, path):
+    """Find and return the predicate in a string"""
     newpredicate = ""
     if buildpaths.graphgen.nodetype[node] == "Condition" or buildpaths.graphgen.nodetype[node] == "ConditionWhile":
         """If enters here, then we shall add it to the predicate"""
@@ -96,4 +94,8 @@ def findpredicate(node, predicate, aux, path):
         None
     return predicate + newpredicate
 
-BranchCoverage(buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths)
+def checkPredicate(predicate, pathToCover, inputs, operationname):
+    """Check if the generated predicate can hold true"""
+    genmachine.createMachineFile(predicate, inputs, "BC", pathToCover, operationname) #Creating a B machine with the Precondition equal the predicate
+    ##### INSERT utils.executeSub HERE #####
+    return True
