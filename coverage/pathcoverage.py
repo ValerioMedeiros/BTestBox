@@ -3,47 +3,22 @@ import callprob
 from xml.dom import minidom
 import re
 
-"""
-First of all, be careful since this is not well implemented. Implementations with more than one operation, while structure and operation calls
-shall not work properly. Everything will be handled before, the implementations with more than one operation can even work.
-"""
-
-def BranchCoverage(branchesPaths, branchStatus, paths, inputs, operationname):
-    """Branch Coverage"""
+def PathCoverage(paths, inputs, operationname):
+    """Path Coverage"""
     #Initialisation
     count = dict()
     pathToCover = 1
     aux = paths
-    covered = False
+    covered = True
     #Process
-    while(len(aux) != 0 and covered == False):
-        countcover = 0
-        for p in sorted(aux.keys()): #Searching for the path with the biggest number of non covered branches
-            count[p] = 0
-            for branch in branchesPaths[p]:
-                if branchStatus[branch] == False:
-                    count[p] += 1
-            if count[p] > count[pathToCover]:
-                    pathToCover = p
-        makePredicate(aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname) #Finding the predicate
-        for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
-            if branchStatus[branch] == True:
-                countcover += 1
-        if countcover == len(branchStatus): 
-            covered = True
+    while(len(aux) != 0 and covered == True):
+        covered = makePredicate(aux[pathToCover], pathToCover, inputs, operationname) #Finding the predicate
         del aux[pathToCover] #Deleting the path of aux to start a new path
-        for p in sorted(aux.keys()): #Searching for the path with the biggest number of non covered branches
-            count[p] = 0
-            for branch in branchesPaths[p]:
-                if branchStatus[branch] == False:
-                    count[p] += 1
-            if count[p] == 0: #If all branches of this path are covered, delete this path from aux
-                del aux[p]
         if len(aux) != 0: #If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
 
-def makePredicate(path, branchStatus, branchesPaths, pathToCover, inputs, operationname):
+def makePredicate(path, pathToCover, inputs, operationname):
     """Finding the predicate, change the call if the implementation has while"""
     thereIsWhile = False #To check if has a while
     whilenodes = list()
@@ -58,9 +33,10 @@ def makePredicate(path, branchStatus, branchesPaths, pathToCover, inputs, operat
             whilebodypaths[str(len(bodypaths)+1)] = buildpaths.makewhilebody(buildpaths.graphgen.nodemap, str(int(node)+1), node)
         #makePredicateWithWhile(path, pathToCover, whilebodypaths) # *Not implemented yet*
     else:
-        makePredicateWithoutWhile(path, pathToCover, inputs, operationname, branchStatus, branchesPaths)
+        ans = makePredicateWithoutWhile(path, pathToCover, inputs, operationname)
+    return ans
 
-def makePredicateWithoutWhile(path, pathToCover, inputs, operationname, branchStatus, branchesPaths):
+def makePredicateWithoutWhile(path, pathToCover, inputs, operationname):
     """Make the predicate if the implementation don't have a while structure"""
     predicate = ""
     aux = list()
@@ -73,13 +49,12 @@ def makePredicateWithoutWhile(path, pathToCover, inputs, operationname, branchSt
     predicate = "(" + predicate + ")"
     ExistValues, variables = checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
     if ExistValues == True:
-        for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
-            branchStatus[branch] = True
         print("Inputs were found for the predicate: "+predicate)
-        print("An input option is "+variables+"\n")
+        print("An option is "+variables+"\n")
     else:
         print("Inputs were NOT found for the predicate: "+predicate)
         print("The branches of this path can NOT be covered yet\n")
+    return ExistValues
 
 def makePredicateWithWhile(path, pathToCover, whilebodypath):
     """Make the predicate if the implementation have a while structure"""
@@ -98,8 +73,6 @@ def makePredicateWithWhile(path, pathToCover, whilebodypath):
             del aux[len(aux) - 1]
         ExistValues = checkPredicate(predicate, pathToCover, inputs, operationname)
         if ExistValues == True:
-            for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered) -> It only shall occur if the predicate can hold True *Not implemented yet*
-                branchStatus[branch] = True
             limit = ntry
         else:
             for way in whilebodypath:

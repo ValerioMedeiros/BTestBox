@@ -6,13 +6,6 @@ from collections import defaultdict
 Starting the process of building a graph, passing the BXML file
 If you want to test, just uncomment the next lines, remember to pass a proper implementation to the parser.
 """
-
-doc = minidom.parse("guptaex_i.bxml")
-operations = doc.getElementsByTagName("Operations")[0]
-mch = doc.getElementsByTagName("Abstraction")[0] #Getting the Machine name
-mch = minidom.parse(mch.firstChild.data+".bxml")
-operationsmch = mch.getElementsByTagName("Operations")[0] #Surfing until Operations in the machine
-
 """
 Note: While building our graph of the implementation, after the initialisation, there will exists at least an END and a CONDITION node.
 And every node added to the graph manipulates the END node
@@ -157,6 +150,12 @@ def mapOperations(operationimp, operationmch):
     makeMap(operationimp, operationmch)
     nodetype[str(len(nodetype)+ 1)] = "Instruction" #Adding a type for the END node
     nodedata[str(len(nodedata) + 1)] = "END" #Adding data for the END node
+
+def clearGraphs():
+    nodemap.clear()
+    nodetype.clear()
+    nodedata.clear()
+    nodecond.clear()
 
 """mapOperations(operations, operationsmch) #Mapping all operations
 
