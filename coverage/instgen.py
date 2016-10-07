@@ -111,6 +111,12 @@ def selfcaller(node):
         text += make_quantifiedpred(node)
     elif tag == "Binary_Pred":
         text += make_binarypred(node)
+    elif tag == "Invariant":
+        text += make_invariant(node)
+    elif tag == "Unary_Exp":
+        text += make_unaryexp(node)
+    elif tag == "Nary_Exp":
+        text += make_naryexp(node)
     return text
 
 def make_if_sub(node):
@@ -133,7 +139,7 @@ def make_expcomparison(node):
     text = ""
     text += callmake(node, node.childNodes.item(3).tagName) #Make the first operand
     text += " " + node.getAttribute("op") + " "
-    text += make_id(node.childNodes.item(5)) #Make the second operand
+    text += selfcaller(node.childNodes.item(5)) #Make the second operand
     return text
 
 def make_while(node):
@@ -144,6 +150,9 @@ def make_while(node):
     text += ") DO\n"
     #While Body
     text += callmake(node, node.childNodes.item(5).tagName) #Make the while body
+    #While Invariant
+    text += "\nINVARIANT "
+    text += callmake(node, node.childNodes.item(7).tagName)
     text += "\nENDWHILE"
     return text
 
@@ -190,11 +199,37 @@ def make_precondition(node):
     text +=""
     return text
 
+def make_invariant(node):
+    """Build the INVARIANT in a string"""
+    text = ""
+    text += make_inst(node)
+    return text
+
 def make_quantifiedpred(node):
     """Build a quantified precondition"""
     text = node.getAttribute("type")
     text += make_inst(node.childNodes.item(3)) #Variables Child
     text += make_inst(node.childNodes.item(5)) #Body
+    return text
+
+def make_unaryexp(node):
+    """Build a Unary_Exp in a string"""
+    text = ""+node.getAttribute("op")+"("
+    text += selfcaller(node.childNodes.item(3)) #Instruction
+    text += ")"
+    return text
+
+def make_naryexp(node):
+    """Build a Nary_exp in a string"""
+    text = node.getAttribute("op")
+    count = 3 #Position of childnodes non TEXT_NODE and Attr are always 3 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+    while(count < node.childNodes.length):
+        text += selfcaller(node.childNodes.item(count)) #Making operands
+        count += 2 #Position of childnodes non TEXT_NODE are always 1 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+        if count < node.childNodes.length:
+            text += ","
+    if node.getAttribute("op") == '{':
+        text += "}"
     return text
 
 def callmake(node, tag):
@@ -235,6 +270,10 @@ def callmake(node, tag):
         text += make_precondition(childnode)
     elif tag == "Quantified_Pred":
         text += make_quantifiedpred(childnode)
+    elif tag == "Invariant":
+        text += make_invariant(childnode)
+    elif tag == "Unary_Exp":
+        text += make_unaryexp(childnode)
     return text
 
 def make_inst(node):
@@ -250,7 +289,7 @@ def make_inst(node):
 If you want to test there is a sample, you will need to pass to the parse a bxml file of an implementation.
 """
 """
-doc = minidom.parse("guptaex.bxml")
+doc = minidom.parse("While_i.bxml")
 
 operations = doc.getElementsByTagName("Operations")[0]
 

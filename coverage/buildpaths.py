@@ -1,4 +1,5 @@
 import graphgen
+from xml.dom import minidom
 
 paths = dict() #Initialisation of the dict of paths
 branchesPath = dict() #Initialisation of the dict of branches paths
@@ -44,6 +45,7 @@ def makepaths(graph):
     for p in range(len(pt)):
         paths[p+1] = pt[p]
         paths[p+1] = list(reversed(paths[p+1]))
+        idetifyWhileEnd(paths[p+1])
 
 def makebranches(paths):
     """Finding all branches paths and setting every branch to False (Not covered), used only in Branch Coverage"""
@@ -55,19 +57,20 @@ def makebranches(paths):
         for branches in branchesPath[key]:
             branchesStatus[branches] = False
 
-def makewhilebody(graph, start, end):
-    """Finding all paths of a while body, used only in operation with while"""
-    body = dict()
-    pt = find_all_paths(graph, start, end) #Find all paths from a graph to a point to other
-    for p in range(len(pt)):
-        body[p+1] = pt[p]
-        body[p+1] = list(reversed(body[p+1]))
-    return body
-
 def makenodes(graph):
     """Setting every node to False (not visited/covered), used in Code Coverage"""
     for node in graph:
         nodeStatus[node] = False
+
+def idetifyWhileEnd(path):
+    countlist = list()
+    for i in range(len(path)):
+        if path[i] not in countlist:
+            countlist.append(path[i])
+        else:
+            if "ENDWHILE" not in graphgen.nodeinva[str(path[i-1])]:
+                graphgen.nodeinva[str(path[i-1])] += " ENDWHILE"
+    
 
 def clearGraphs():
     """Cleaning all dicts to start another coverage"""
@@ -75,10 +78,27 @@ def clearGraphs():
     branchesPath.clear()
     branchesStatus.clear()
     nodeStatus.clear()
-    
+
+#Uncomment the next lines to test    
 """Finding all paths"""
-#makepaths(graphgen.nodemap) #Uncomment this line if want to test
-"""Finding all branches paths and setting every branch to False (Not covered)"""
-#makebranches(paths) #Uncomment this line if want to test
+"""
+impName = "whilenested_i"
+imp = minidom.parse(impName+".bxml")
+mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
+mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
+operationsimp = imp.getElementsByTagName("Operations")[0] #Surfing until Operations
+operationsmch = mch.getElementsByTagName("Operations")[0] #Surfing until Operations in the machine   
 
-
+for operationImp in operationsimp.childNodes:
+        if operationImp.nodeType != operationImp.TEXT_NODE:
+            operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
+            while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
+                operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
+            graphgen.mapOperations(operationImp, operationMch)
+            makepaths(graphgen.nodemap)
+            makebranches(paths)
+            for key in sorted(graphgen.nodemap.keys()):
+                print(key, graphgen.nodemap[key], graphgen.nodetype[key], graphgen.nodedata[key], graphgen.nodecond[key], graphgen.nodeinva[key])
+            for key in sorted(paths.keys()):
+                print(key, paths[key])
+"""

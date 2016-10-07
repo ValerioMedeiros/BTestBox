@@ -18,6 +18,7 @@ nodemap = defaultdict(list) #Graph dict
 nodetype = dict() #Dict of the type of the nodes
 nodedata = dict() #Dict of the data of the nodes
 nodecond = dict() #Dict of the previous condition of the node. If the parent is a Condition node we know if the path comes from the True or the False condition.
+nodeinva = dict() #Dict with the invariant of the while and where it end.
 
 def startMap(opmch):
     """Initialisation of the Graph, the first node is always the Call"""
@@ -25,9 +26,9 @@ def startMap(opmch):
     nodetype[str(len(nodetype) + 1)] = "Condition"
     nodedata[str(len(nodedata) + 1)] = instgen.make_precondition(opmch.getElementsByTagName("Precondition")[0])
     nodecond[str(len(nodecond) + 1)] = "True"
+    nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
     nodecond[str(len(nodecond) + 1)] = "True"
-
 
 def mapAssig(node, opmch):
     """Adding an Instruction node to the Graph"""
@@ -35,6 +36,7 @@ def mapAssig(node, opmch):
     nodedata[str(len(nodedata) + 1)] = instgen.make_assig(node)
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
+    nodeinva[str(len(nodemap) - 1)] = instgen.make_inst(node.childNodes.item(3))
 
 def mapIf(node, opmch):
     """Adding an If to the Graph"""
@@ -42,6 +44,7 @@ def mapIf(node, opmch):
     condition = node.childNodes.item(3)
     nodetype[str(len(nodetype) + 1)] = "Condition"
     nodedata[str(len(nodedata) + 1)] = instgen.make_inst(condition)
+    nodeinva[str(len(nodeinva) + 1)] = ""
     conditionNode = str(len(nodemap)) #To add in the END*
     nodemap[str(len(nodemap) + 1)].append(conditionNode) #Adding in the END* node
     #Then
@@ -72,8 +75,10 @@ def mapWhile(node, opmch):
     condition = node.childNodes.item(3)
     nodetype[str(len(nodetype) + 1)] = "ConditionWhile"
     nodedata[str(len(nodedata) + 1)] = instgen.make_inst(condition)
+    nodeinva[str(len(nodeinva) + 1)] = ""
     conditionNode = str(len(nodemap)) #To Connect at the END*
     nodemap[str(len(nodemap) + 1)].append(conditionNode)
+    nodeinva[conditionNode] = instgen.make_inst(node.childNodes.item(7))
     #WhileBody
     nodecond[str(int(conditionNode)+1)] = "True"
     body = node.childNodes.item(5)
@@ -83,19 +88,21 @@ def mapWhile(node, opmch):
     nodemap[conditionNode].append(bodyNode)
     nodemap[str(int(bodyNode) + 1)] = [conditionNode]
     nodecond[str(int(bodyNode) + 1)] = "False"
-
+    
 def mapSkip(node, opmch):
     """Adding a SKIP to the Graph"""
     nodetype[str(len(nodetype)+ 1)] = "Instruction"
     nodedata[str(len(nodedata) + 1)] = "Skip"
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
+    nodeinva[str(len(nodeinva) + 1)] = ""
 
 def mapOperationcall(node, opmch):
     """Adding a Operation Call to the Graph"""
     nodetype[str(len(nodetype) + 1)] = "Call"
     nodedata[str(len(nodedata) + 1)] = instgen.make_operationcall(node)
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
-    nodetype[str(len(nodetype) + 1)] = ""    
+    nodetype[str(len(nodetype) + 1)] = ""
+    nodeinva[str(len(nodeinva) + 1)] = ""
     
 def mapNary(node, opmch):
     """Handling the Nary_Sub and adding every child in the Graph"""
@@ -150,14 +157,32 @@ def mapOperations(operationimp, operationmch):
     makeMap(operationimp, operationmch)
     nodetype[str(len(nodetype)+ 1)] = "Instruction" #Adding a type for the END node
     nodedata[str(len(nodedata) + 1)] = "END" #Adding data for the END node
+    nodeinva[str(len(nodeinva) + 1)] = ""
 
 def clearGraphs():
     nodemap.clear()
     nodetype.clear()
     nodedata.clear()
     nodecond.clear()
+    nodeinva.clear()
 
-"""mapOperations(operations, operationsmch) #Mapping all operations
+#To test uncomment the next comment.
+
+"""
+impName = "whilenested_i"
+imp = minidom.parse(impName+".bxml")
+mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
+mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
+operationsimp = imp.getElementsByTagName("Operations")[0] #Surfing until Operations
+operationsmch = mch.getElementsByTagName("Operations")[0] #Surfing until Operations in the machine   
+
+for operationImp in operationsimp.childNodes:
+        if operationImp.nodeType != operationImp.TEXT_NODE:
+            operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
+            while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
+                operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
+            mapOperations(operationImp, operationMch)
 
 for key in sorted(nodemap.keys()):
-    print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key])"""
+    print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key], nodeinva[key])
+"""

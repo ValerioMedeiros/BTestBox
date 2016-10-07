@@ -119,11 +119,7 @@ def findpredicate(node, predicate, aux, path):
         else:
             newpredicate += "("
         newpredicate += buildpaths.graphgen.nodedata[node] #add the data to the NEWpredicate, and the join with the predicate
-        if buildpaths.graphgen.nodecond[path[len(aux)]] == "False" or buildpaths.graphgen.nodecond[path[len(aux)]] == "True and False":
-            """Check if the condition is false and add a ")" after the predicate, closing the not""" 
-            newpredicate += ")"
-        else:
-            newpredicate += ")"
+        newpredicate += ")"
     elif buildpaths.graphgen.nodetype[node] == "Instruction":
         """If enters here, then we may change the predicate with the data of the instruction"""
         for i in range(len(buildpaths.graphgen.nodedata[node])): #Searches the assignement (can be improved using regex)
