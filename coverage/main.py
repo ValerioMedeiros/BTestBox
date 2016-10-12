@@ -98,6 +98,8 @@ def DoCodeCoverage():
             graphgen.mapOperations(operationImp, operationMch)
             buildpaths.makepaths(graphgen.nodemap) #Building paths
             buildpaths.makenodes(graphgen.nodemap) #Building node, setting them to False (uncovered).
+            for key in buildpaths.paths:
+                    print(key, buildpaths.paths[key])
             covered = coverage.CodeCoverage(buildpaths.paths, inputs, operationname, buildpaths.nodeStatus)
             if covered == True:
                 print("The operation "+operationname+" is covered by Code Coverage\n")
@@ -143,4 +145,4 @@ def getInputs(operationImp):
             return entries
     
         
-DoPathCoverage()
+DoBranchCoverage()
