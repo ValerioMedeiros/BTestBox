@@ -73,15 +73,22 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
     if " ENDWHILE" in buildpaths.graphgen.nodeinva[node]:
         startwhile = node #The node that start the while 
         condwhile = path[len(aux)] #The node that contain the type ConditionWhile
-        newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, condwhile)
+        #CHECK IF THE PREDICATE CONTAINS A #, IF YES, NEED TO MANAGE THE PREDICATE
+        if "#" not in predicate:
+            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, condwhile)
+        else:
+            pointer = predicate.find("#")
+            previouswhile = predicate[pointer-1::] #previouswhile, saves the previous while
+            predicate = predicate[:pointer-4:]
+            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, condwhile)
+            newpredicate = newpredicate+" & "+previouswhile
+            predicate = ""
         for mutable in newposmut:
             if mutable not in whilemutables:
                 whilemutables += " "+mutable
         return newpredicate, whilemutables
     elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile" and
-                                                         aux[len(aux)-1] < aux[len(aux)-2]):
-        if predicate != "": #Check if the predicate is empty, if not, add " & "
-            newpredicate +=" & "
+                                                         int(aux[len(aux)-1]) < int(aux[len(aux)-2])):
         if buildpaths.graphgen.nodecond[path[len(aux)]] == "False" or buildpaths.graphgen.nodecond[path[len(aux)]] == "True and False":
             #Check if the condition is false and add a "not(" before the predicate
             newpredicate += "not("
@@ -90,7 +97,6 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
         newpredicate += buildpaths.graphgen.nodedata[node] #add the data to the NEWpredicate, and the join with the predicate
         newpredicate += ")"
     elif buildpaths.graphgen.nodetype[node] == "ConditionWhile": #This means that the ConditionWhile is a false condition
-        newpredicate += " & "
         newpredicate += "not("+buildpaths.graphgen.nodedata[node]+")" #Receives the negation of the guard
         newpredicate += " & ("+buildpaths.graphgen.nodeinva[node]+")" #Receives the invariant of the loop
     elif buildpaths.graphgen.nodetype[node] == "Instruction":
@@ -106,7 +112,13 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
                     predicate = re.sub(usingRegex, inst, predicate) #Replacing using regex
     elif buildpaths.graphgen.nodetype[node] == "Operation Call": #*Not implemented yet*
         None
-    return predicate + newpredicate, whilemutables
+    if predicate == "":
+        return newpredicate, whilemutables
+    else:
+        if newpredicate != "":
+            return newpredicate+" & "+predicate, whilemutables
+        else:
+            return predicate, whilemutables
 
 def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, firstwhile, whilepredicate = "", posmut = []):
     #Find the predicate inside a while
@@ -143,7 +155,7 @@ def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile
         newpredicate += "("+predicate+" & "+buildpaths.graphgen.nodeinva[node]+"))" #The predicate is the one before the while
         return newpredicate, posmut
     elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile" and
-                                                               aux[len(aux)-1] < aux[len(aux)-2]):
+                                                               int(aux[len(aux)-1]) < int(aux[len(aux)-2])):
         if whilepredicate != "": #Check if the predicate is empty, if not, add " & "
             whilepredicate +=" & "
         if buildpaths.graphgen.nodecond[path[len(aux)]] == "False" or buildpaths.graphgen.nodecond[path[len(aux)]] == "True and False":
@@ -162,7 +174,7 @@ def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile
     elif buildpaths.graphgen.nodetype[node] == "Instruction":
         #Here we shall get the possible mutables *important step since we need to know who put inside the exists*
         #posmut -> possible mutables
-        if buildpaths.graphgen.nodeinva[node].replace(" ENDWHILE", "") not in posmut:
+         if buildpaths.graphgen.nodeinva[node].replace(" ENDWHILE", "") not in posmut:
             posmut.append(buildpaths.graphgen.nodeinva[node].replace(" ENDWHILE", ""))
     elif buildpaths.graphgen.nodetype[node] == "Operation Call": #*Not implemented yet*
         None
@@ -197,6 +209,3 @@ def checkPredicate(predicate, message, inputs):
     for variable in variables:
               entry += variable+" "
     return ans, entry
-
-#The right sentence
-# ((xx : NAT & yy:NAT) & (#(ii,aux).((#(jj,aux).(jj<yy & (jj>=0 & jj<=yy & aux = ii*yy + jj))) & (#(jj,aux).(not(jj<yy) & (jj>=0 & jj<=yy & aux=ii*yy+jj))) & ii<xx & (ii>=0 & ii<=xx & aux = ii*yy))) & (#(ii,aux).(not(ii<xx) & (ii>=0 & ii<=xx & aux = ii*yy))))

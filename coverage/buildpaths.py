@@ -36,7 +36,8 @@ def find_all_paths(graph, start, end, path=[]):
                 paths.append(newpath)
         else:
              newpath = find_all_paths_cycle(graph, node, end, path)
-             paths.append(newpath[0])
+             for i in range(len(newpath)):
+                 paths.append(newpath[i])
     return paths
 
 def makepaths(graph):
@@ -82,7 +83,7 @@ def clearGraphs():
 #Uncomment the next lines to test    
 """Finding all paths"""
 """
-impName = "whilenested_i"
+impName = "whileseq_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -97,8 +98,5 @@ for operationImp in operationsimp.childNodes:
             graphgen.mapOperations(operationImp, operationMch)
             makepaths(graphgen.nodemap)
             makebranches(paths)
-            for key in sorted(graphgen.nodemap.keys()):
-                print(key, graphgen.nodemap[key], graphgen.nodetype[key], graphgen.nodedata[key], graphgen.nodecond[key], graphgen.nodeinva[key])
-            for key in sorted(paths.keys()):
-                print(key, paths[key])
 """
+

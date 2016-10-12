@@ -7,7 +7,7 @@ from xml.dom import minidom
 """Careful while reading this algorithm, operation and operations are different things"""
 
 #Initialisation
-impName = "whilenested_i"
+impName = "while_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -30,6 +30,8 @@ def DoBranchCoverage():
             graphgen.mapOperations(operationImp, operationMch)
             buildpaths.makepaths(graphgen.nodemap) #Building paths
             buildpaths.makebranches(buildpaths.paths) #Building branches
+            for key in buildpaths.paths: #Printing the paths (for control)
+                    print(key, buildpaths.paths[key])
             covered = coverage.BranchCoverage(buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths, inputs, operationname)
             if covered == True:
                 print("The operation "+operationname+" is covered by Branch Coverage\n")
@@ -128,7 +130,8 @@ def getInputs(operationImp):
             if inputs[i] == ',':
                 commas.append(i)
         if len(commas) == 0:
-            return inputs
+            entries.append(inputs[1:len(inputs)-1:])
+            return entries
         else:
             for i in range(len(commas)):
                 if i == 0:
