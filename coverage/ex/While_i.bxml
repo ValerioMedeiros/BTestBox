@@ -95,9 +95,9 @@
 <Pos l='15' c='13' s='5'/>
 </Attr>
 <Condition>
-<Exp_Comparison op='&lt;='>
+<Exp_Comparison op='&lt;'>
 <Attr>
-<Pos l='15' c='23' s='2'/>
+<Pos l='15' c='23' s='1'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
@@ -106,7 +106,7 @@
 </Id>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='15' c='26' s='2'/>
+<Pos l='15' c='25' s='2'/>
 </Attr>
 </Id>
 </Exp_Comparison>
@@ -199,57 +199,72 @@
 </Body>
 <Invariant>
 <Nary_Pred op='&amp;'>
-<Exp_Comparison op='&lt;='>
+<Exp_Comparison op='&gt;='>
 <Attr>
-<Pos l='20' c='26' s='2'/>
+<Pos l='20' c='25' s='2'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
 <Pos l='20' c='23' s='2'/>
 </Attr>
 </Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='20' c='27' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;='>
+<Attr>
+<Pos l='20' c='34' s='2'/>
+</Attr>
+<Id value='ii' typref='2701647786'>
+<Attr>
+<Pos l='20' c='31' s='2'/>
+</Attr>
+</Id>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='20' c='29' s='2'/>
+<Pos l='20' c='37' s='2'/>
 </Attr>
 </Id>
 </Exp_Comparison>
 <Exp_Comparison op='='>
 <Attr>
-<Pos l='20' c='38' s='1'/>
+<Pos l='20' c='46' s='1'/>
 </Attr>
 <Id value='aux' typref='2701647786'>
 <Attr>
-<Pos l='20' c='34' s='3'/>
+<Pos l='20' c='42' s='3'/>
 </Attr>
 </Id>
 <Binary_Exp op='-' typref='2701647786'>
 <Attr>
-<Pos l='20' c='53' s='1'/>
+<Pos l='20' c='61' s='1'/>
 </Attr>
 <Unary_Exp op='max' typref='2701647786'>
 <Attr>
-<Pos l='20' c='40' s='3'/>
+<Pos l='20' c='48' s='3'/>
 </Attr>
 <Nary_Exp op='{' typref='3603043417'>
 <Attr>
-<Pos l='20' c='44' s='1'/>
+<Pos l='20' c='52' s='1'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='20' c='45' s='2'/>
+<Pos l='20' c='53' s='2'/>
 </Attr>
 </Id>
 <Integer_Literal value='5' typref='2701647786'>
 <Attr>
-<Pos l='20' c='49' s='1'/>
+<Pos l='20' c='57' s='1'/>
 </Attr>
 </Integer_Literal>
 </Nary_Exp>
 </Unary_Exp>
 <Integer_Literal value='5' typref='2701647786'>
 <Attr>
-<Pos l='20' c='55' s='1'/>
+<Pos l='20' c='63' s='1'/>
 </Attr>
 </Integer_Literal>
 </Binary_Exp>

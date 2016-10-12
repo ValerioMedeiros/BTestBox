@@ -8,7 +8,7 @@
 <Pos l='8' c='1' s='2' endLine='12'/>
 </Attr>
 <Output_Parameters>
-<Id value='rr' typref='2701647786'>
+<Id value='rr' typref='2043437594'>
 <Attr>
 <Pos l='8' c='1' s='2'/>
 </Attr>
@@ -66,34 +66,27 @@
 <Pos l='11' c='12' s='2'/>
 </Attr>
 <Variables>
-<Id value='rr' typref='2701647786'>
+<Id value='rr' typref='2043437594'>
 <Attr>
 <Pos l='11' c='9' s='2'/>
 </Attr>
 </Id>
 </Variables>
 <Values>
-<Binary_Exp op='+' typref='2701647786'>
+<Boolean_Literal value='TRUE' typref='2043437594'>
 <Attr>
-<Pos l='11' c='18' s='1'/>
+<Pos l='11' c='15' s='4'/>
 </Attr>
-<Id value='xx' typref='2701647786'>
-<Attr>
-<Pos l='11' c='15' s='2'/>
-</Attr>
-</Id>
-<Id value='yy' typref='2701647786'>
-<Attr>
-<Pos l='11' c='20' s='2'/>
-</Attr>
-</Id>
-</Binary_Exp>
+</Boolean_Literal>
 </Values>
 </Assignement_Sub>
 </Body>
 </Operation>
 </Operations>
 <TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
 <Type id='2701647786'>
 <Id value='INTEGER'/>
 </Type>
