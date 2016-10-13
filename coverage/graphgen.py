@@ -94,6 +94,7 @@ def mapSkip(node, opmch):
     nodetype[str(len(nodetype)+ 1)] = "Instruction"
     nodedata[str(len(nodedata) + 1)] = "Skip"
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
+    nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
 
 def mapOperationcall(node, opmch):
@@ -101,7 +102,7 @@ def mapOperationcall(node, opmch):
     nodetype[str(len(nodetype) + 1)] = "Call"
     nodedata[str(len(nodedata) + 1)] = instgen.make_operationcall(node)
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
-    nodetype[str(len(nodetype) + 1)] = ""
+    nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     
 def mapNary(node, opmch):

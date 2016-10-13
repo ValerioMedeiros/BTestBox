@@ -7,7 +7,7 @@ from xml.dom import minidom
 """Careful while reading this algorithm, operation and operations are different things"""
 
 #Initialisation
-impName = "while_i"
+impName = "exoperationcall_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine

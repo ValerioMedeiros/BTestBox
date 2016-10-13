@@ -161,7 +161,7 @@ def make_operationcall(node):
     text = ""
     count = 0
     text += callmake(node, node.childNodes.item(3).tagName) #Make the operation
-    text += " ("
+    text += "("
     for i in range(node.childNodes.item(5).childNodes.length): #Making the parameters of the call
         count += 1
         if node.childNodes.item(5).childNodes.item(i).nodeType != node.childNodes.item(5).childNodes.item(i).TEXT_NODE:
@@ -169,6 +169,17 @@ def make_operationcall(node):
             if count != node.childNodes.item(5).childNodes.length - 1:
                 text += ", "
     text += ")"
+    if node.childNodes.item(7).nodeType != node.childNodes.item(7).TEXT_NODE:
+        output = "("
+        count = 0
+        for outputchild in node.childNodes.item(7).childNodes:
+            count += 1
+            if outputchild.nodeType != outputchild.TEXT_NODE:
+                output += selfcaller(outputchild)
+                if count != node.childNodes.item(7).childNodes.length - 1:
+                    output += ", "
+        output += ")"
+        text = output+" <-- "+text
     return text
 
 def make_binarypred(node):
