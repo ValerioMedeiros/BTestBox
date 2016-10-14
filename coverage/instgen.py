@@ -1,4 +1,11 @@
 from xml.dom import minidom
+'''
+minidom: Module responsible to read a xml file in a tree.
+
+
+This file generates every needed instrunction, depends of the imp tree.
+'''
+
 
 def make_operation(node):
     """Build all the operation in a string"""

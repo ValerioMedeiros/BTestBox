@@ -1,9 +1,33 @@
 import buildpaths
+import solverop
 import callprob
 import re
+'''
+buildpaths: module responsible of building the paths, branchStatus, branchesPaths
+solverop: module responsible of solving the predicate for operation calls
+re: Regex module
+callprob: module responsible of calling ProB to evaluate a predicate
+'''
 
-def makePredicateBranchCoverage(path, branchStatus, branchesPaths, pathToCover, inputs, operationname):
-    """Make the predicate for Branch Coverage"""
+def makePredicateBranchCoverage(operationImp, path, branchStatus, branchesPaths, pathToCover, inputs, operationname, importedImp):
+    '''
+    Make the predicate for Branch Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    path: The path being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    branchesPaths: A dict with the branches of a given path
+    branchesStatus: A dict with every branch status, initially every branchStatus is False (uncovered)
+    importedImp: A list with the parse of all imported implementations
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+    '''
     way = list()
     predicate = ""
     whilemutables = ""
@@ -11,10 +35,10 @@ def makePredicateBranchCoverage(path, branchStatus, branchesPaths, pathToCover, 
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicate, whilemutables = findpredicate(node, predicate, way, path, whilemutables, inputs) #Find the predicate
+        predicate, whilemutables = findpredicate(operationImp, node, predicate, way, path, whilemutables, inputs, operationname, importedImp) #Find the predicate
         del way[len(way) - 1]
     predicate = "("+predicate+")"
-    ExistValues, variables = checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
+    ExistValues, variables = checkPredicate(predicate, "Branch Coverage - trying to get inputs for path "+str(pathToCover), inputs)
     if ExistValues == True:
         for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered)
             branchStatus[branch] = True
@@ -24,8 +48,23 @@ def makePredicateBranchCoverage(path, branchStatus, branchesPaths, pathToCover, 
         print("Inputs were NOT found for the predicate: "+predicate)
         print("The branches of this path were NOT covered\n")
 
-def makePredicatePathCoverage(path, pathToCover, inputs, operationname):
-    """Make the predicate for Path Coverage"""
+def makePredicatePathCoverage(operationImp, path, pathToCover, inputs, operationname, importedImp):
+    '''
+    Make the predicate for Path Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    path: The path being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    importedImp: A list with the parse of all imported implementations
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+    '''
     predicate = ""
     whilemutables = ""
     way = list()
@@ -33,7 +72,7 @@ def makePredicatePathCoverage(path, pathToCover, inputs, operationname):
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicate, whilemutables = findpredicate(node, predicate, way, path, whilemutables, inputs) #Find the predicate
+        predicate, whilemutables = findpredicate(operationImp, node, predicate, way, path, whilemutables, inputs, operationname, importedImp) #Find the predicate
         del way[len(way) - 1]
     predicate = "("+predicate+")"
     ExistValues, variables = checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
@@ -45,8 +84,24 @@ def makePredicatePathCoverage(path, pathToCover, inputs, operationname):
         print("This path can NOT be covered\n")
     return ExistValues
 
-def makePredicateCodeCoverage(path, pathToCover, inputs, operationname, nodeStatus):
-    """Make the predicate for Code Coverage"""
+def makePredicateCodeCoverage(operationImp, path, pathToCover, inputs, operationname, nodeStatus, importedImp):
+    '''
+    Make the predicate for Code Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    nodeStatus: A dict with every node status, initially every nodeStatus is False
+    importedImp: A list with the parse of all imported implementations
+    path: The path being evaluated
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+    '''
     predicate = ""
     whilemutables = ""
     way = list()
@@ -54,10 +109,10 @@ def makePredicateCodeCoverage(path, pathToCover, inputs, operationname, nodeStat
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicate, whilemutables = findpredicate(node, predicate, way, path, whilemutables, inputs) #Find the predicate
+        predicate, whilemutables = findpredicate(operationImp, node, predicate, way, path, whilemutables, inputs, operationname, importedImp) #Find the predicate
         del way[len(way) - 1]
     predicate = "("+predicate+")"
-    ExistValues, variables = checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
+    ExistValues, variables = checkPredicate(predicate, "Code Coverage - trying to get inputs for path "+str(pathToCover), inputs)
     if ExistValues == True:
         for node in path: #Setting all branches of the path to True (Covered)
             nodeStatus[node] = True
@@ -67,7 +122,20 @@ def makePredicateCodeCoverage(path, pathToCover, inputs, operationname, nodeStat
         print("Inputs were NOT found for the predicate: "+predicate)
         print("The nodes of this path were NOT covered yet\n")
 
-def findpredicate(node, predicate, aux, path, whilemutables, inputs):
+def findpredicate(operationImp, node, predicate, aux, path, whilemutables, inputs, operationname, importedImp):
+    '''
+    Function responsible to find and return the predicate for a given node (if it is a while node, it return the predicate for various nodes)
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    node: The node being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    importedImp: A list with the parse of all imported implementations
+    path: The path being evaluated
+    aux = The way variable
+    whilemutables: Every variable that change inside the while
+    '''
     #Find and return the predicate in a string
     newpredicate = ""
     if " ENDWHILE" in buildpaths.graphgen.nodeinva[node]:
@@ -75,12 +143,12 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
         condwhile = path[len(aux)] #The node that contain the type ConditionWhile
         #CHECK IF THE PREDICATE CONTAINS A #, IF YES, NEED TO MANAGE THE PREDICATE
         if "#" not in predicate:
-            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, condwhile)
+            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, operationname, startwhile, condwhile, condwhile, importedImp)
         else:
             pointer = predicate.find("#")
             previouswhile = predicate[pointer-1::] #previouswhile, saves the previous while
-            predicate = predicate[:pointer-4:]
-            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, condwhile)
+            predicate = predicate[:pointer-4:] #Erasing everything after the " & (#"
+            newpredicate, newposmut = findPredicateWhile(node, predicate, aux, path, inputs, operationname, startwhile, condwhile, condwhile, importedImp)
             newpredicate = newpredicate+" & "+previouswhile
             predicate = ""
         for mutable in newposmut:
@@ -110,8 +178,9 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
                 if variable not in whilemutables:
                     usingRegex = r"\b" + re.escape(variable) + r"\b" #Using regex to change the string
                     predicate = re.sub(usingRegex, inst, predicate) #Replacing using regex
-    elif buildpaths.graphgen.nodetype[node] == "Operation Call": #*Not implemented yet*
-        None
+    elif buildpaths.graphgen.nodetype[node] == "Call": #*Not implemented yet*
+        newpredicate = solverop.getPredicateOP(operationImp, node, importedImp, operationname, predicate)
+        predicate = ""
     if predicate == "":
         return newpredicate, whilemutables
     else:
@@ -120,7 +189,7 @@ def findpredicate(node, predicate, aux, path, whilemutables, inputs):
         else:
             return predicate, whilemutables
 
-def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, firstwhile, whilepredicate = "", posmut = []):
+def findPredicateWhile(node, predicate, aux, path, inputs, operationname, startwhile, condwhile, firstwhile, importedImp, whilepredicate = "", posmut = []):
     #Find the predicate inside a while
     #whilepredicate are the conditions inside the while, starting with none until anyone appear
     #We need to know when it first entered the while to get the mutables
@@ -131,13 +200,13 @@ def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile
         startwhileIN = node
         condwhileIN = path[len(aux)]
         #Doing the Inside
-        newpredicate, newposmut = findPredicateWhile(node, whilepredicate, aux, path, inputs, startwhileIN, condwhileIN, firstwhile, "", [])
+        newpredicate, newposmut = findPredicateWhile(node, whilepredicate, aux, path, inputs, operationname, startwhileIN, condwhileIN, firstwhile, importedImp, "", [])
         for mutable in newposmut:
             if mutable not in posmut:
                 posmut.append(mutable)
         whilepredicate = newpredicate
         #Doing the False Guard (Continuing the previous while)
-        newpredicate, newposmut = findPredicateWhile(path[len(aux)-2], predicate, aux, path, inputs, startwhile, condwhile, firstwhile, whilepredicate, posmut)
+        newpredicate, newposmut = findPredicateWhile(path[len(aux)-2], predicate, aux, path, inputs, operationname, startwhile, condwhile, firstwhile, importedImp, whilepredicate, posmut)
         for mutable in newposmut:
             if mutable not in posmut:
                 posmut.append(mutable)
@@ -180,7 +249,7 @@ def findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile
         None
     del aux[len(aux)-1]
     node = aux[len(aux) - 1]
-    newpredicate, posmut = findPredicateWhile(node, predicate, aux, path, inputs, startwhile, condwhile, firstwhile, whilepredicate, posmut)
+    newpredicate, posmut = findPredicateWhile(node, predicate, aux, path, inputs, operationname, startwhile, condwhile, firstwhile, importedImp, whilepredicate, posmut)
     return newpredicate, posmut
 
 def getMutables(node, inputs, path, condwhile, firstwhile, posmut):
@@ -200,7 +269,6 @@ def getMutables(node, inputs, path, condwhile, firstwhile, posmut):
         whilemutables += mutable
         whilemutables += ","
     return whilemutables[:len(whilemutables)-1:], mutables
-    
     
 def checkPredicate(predicate, message, inputs):
     """Check if the generated predicate can hold true"""

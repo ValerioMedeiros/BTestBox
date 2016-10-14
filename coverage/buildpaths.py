@@ -1,13 +1,35 @@
 import graphgen
 from xml.dom import minidom
+'''
+graphgen: module responsible of generating the graphs
+minidom: module responsible of making a tree from a xml file
+'''
 
+
+'''
+In this file we build all branches and paths of a given operation.
+Also we create dict for the status of the branches and the nodes, initially everythin is set to False (uncovered)
+
+paths: A dict of all paths of a given graph/operation
+branchesPath: Dict of all branches paths
+branchesStatus: Dict of all branches status, initially everything is set to false
+nodeStatus: Dict of all nodes status, initially everthing is set to false
+'''
 paths = dict() #Initialisation of the dict of paths
 branchesPath = dict() #Initialisation of the dict of branches paths
 branchesStatus = dict() #Initialisation of the dict of the status of each branch, used in branch coverage
 nodeStatus = dict() #Initialisation of the dict of the status of each node, used in code coverage
 
 def find_all_paths_cycle(graph, start, end, path=[]):
-    """Finding all paths inside a while"""
+    '''
+    Function responsible to find every path inside a while of an operation
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    start: The start of the graph, as we do it backwards the start is the last node
+    end: The end of the graph, as we do it backwards the end is the first node
+    path: The path until here
+    '''
     path = path + [start]
     if start == end:
         return [path]
@@ -22,7 +44,15 @@ def find_all_paths_cycle(graph, start, end, path=[]):
     return paths
 
 def find_all_paths(graph, start, end, path=[]):
-    """Finding all paths of the operation"""
+    '''
+    Function responsible to find every path inside an operation
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    start: The start of the graph, as we do it backwards the start is the last node
+    end: The end of the graph, as we do it backwards the end is the first node
+    path: The path until here
+    '''
     path = path + [start]
     if start == end:
         return [path]
@@ -41,15 +71,44 @@ def find_all_paths(graph, start, end, path=[]):
     return paths
 
 def makepaths(graph):
-    """Finding all paths of a operation"""
+    '''
+    Function responsible to find every path inside an operation and add the path to paths dict.
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    '''
     pt = find_all_paths(graph, str(len(graph)), '1') #Find all paths from a graph to a point to other
     for p in range(len(pt)):
         paths[p+1] = pt[p]
         paths[p+1] = list(reversed(paths[p+1]))
-        idetifyWhileEnd(paths[p+1])
+        identifyWhileEnd(paths[p+1])
+
+def makepathsOperationCall(graph, finish):
+    '''
+    Function responsible to find every path inside an operation call.
+    All paths are added  to path dict.
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    finish: For the total operation, the finish is the first node, for a operation call it is the first node after graph of the total operation.
+    '''
+    #Finding all paths of a operation
+    pt = find_all_paths(graph, str(len(graph)), str(finish)) #Find all paths from a graph to a point to other
+    pmax = (max(paths.keys()))
+    #p = 0,1,2... *range of the dict paths*
+    #pmax = max value of the dict paths
+    for p in range(len(pt)):
+        paths[pmax+p+1] = pt[p]
+        paths[pmax+p+1] = list(reversed(paths[pmax+p+1]))
+        identifyWhileEnd(paths[pmax+p+1])
 
 def makebranches(paths):
-    """Finding all branches paths and setting every branch to False (Not covered), used only in Branch Coverage"""
+    '''
+    Finding all branches paths and setting every branch to False (Not covered), used only in Branch Coverage
+
+    Input:
+    paths: paths dict
+    '''
     for key in paths:
         br = []
         for i in range(len(paths[key]) - 1):
@@ -59,11 +118,22 @@ def makebranches(paths):
             branchesStatus[branches] = False
 
 def makenodes(graph):
-    """Setting every node to False (not visited/covered), used in Code Coverage"""
+    '''
+    Setting every node to False (not visited/covered), used in Code Coverage
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    '''
     for node in graph:
         nodeStatus[node] = False
 
-def idetifyWhileEnd(path):
+def identifyWhileEnd(path):
+    '''
+    Function responsible to identify the end of a while and add the nodeinva dict of this node to ENDWHILE
+
+    Input:
+    path: A path in the paths dicts
+    '''
     countlist = list()
     for i in range(len(path)):
         if path[i] not in countlist:
@@ -74,7 +144,9 @@ def idetifyWhileEnd(path):
     
 
 def clearGraphs():
-    """Cleaning all dicts to start another coverage"""
+    '''
+    Cleaning all dicts to start another coverage
+    '''
     paths.clear()
     branchesPath.clear()
     branchesStatus.clear()
