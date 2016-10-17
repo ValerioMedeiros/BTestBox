@@ -27,6 +27,9 @@ def makePredicateBranchCoverage(operationImp, path, branchStatus, branchesPaths,
     way: A scapegoat variable to do not erase the path variable
     predicate: The predicate (a string)
     whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
     '''
     way = list()
     predicate = ""
@@ -64,6 +67,10 @@ def makePredicatePathCoverage(operationImp, path, pathToCover, inputs, operation
     way: A scapegoat variable to do not erase the path variable
     predicate: The predicate (a string)
     whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
+    ExistValues: Boolean, if exist inputs that satisfy the predicate, than it return True, otherwise return false
     '''
     predicate = ""
     whilemutables = ""
@@ -101,6 +108,9 @@ def makePredicateCodeCoverage(operationImp, path, pathToCover, inputs, operation
     way: A scapegoat variable to do not erase the path variable
     predicate: The predicate (a string)
     whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
     '''
     predicate = ""
     whilemutables = ""
@@ -135,6 +145,11 @@ def findpredicate(operationImp, node, predicate, aux, path, whilemutables, input
     path: The path being evaluated
     aux = The way variable
     whilemutables: Every variable that change inside the while
+    predicate: The actual predicate / The predicate before the while
+
+    Outuput:
+    Return the predicate
+    whilemutables: A list of variables that change inside the while
     '''
     #Find and return the predicate in a string
     newpredicate = ""
@@ -190,6 +205,29 @@ def findpredicate(operationImp, node, predicate, aux, path, whilemutables, input
             return predicate, whilemutables
 
 def findPredicateWhile(node, predicate, aux, path, inputs, operationname, startwhile, condwhile, firstwhile, importedImp, whilepredicate = "", posmut = []):
+    '''
+    Function responsible to find and return the predicate for a nodes inside a while
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    node: The node being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    importedImp: A list with the parse of all imported implementations
+    path: The path being evaluated
+    aux = The way variable
+    whilemutables: Every variable that change inside the while
+    predicate: The actual predicate / The predicate before the while
+    startwhile: The node that start the while
+    condwhile: The node with the type of conditionwhile, the node that ends the while
+    firstwhile: The node with the type of condition while, the node that ends the while (important for nested while)
+    whilepredicate: The predicate inside the while
+    posmut: A list of possible mutables inside the while / Different of while mutables
+
+    Output:
+    whilepredicate: The predicate inside the while but not inside a nested while
+    posmut: A list of possible mutables inside the while / Different of while mutables
+    '''
     #Find the predicate inside a while
     #whilepredicate are the conditions inside the while, starting with none until anyone appear
     #We need to know when it first entered the while to get the mutables
@@ -253,6 +291,20 @@ def findPredicateWhile(node, predicate, aux, path, inputs, operationname, startw
     return newpredicate, posmut
 
 def getMutables(node, inputs, path, condwhile, firstwhile, posmut):
+    '''
+    Function to get each variable that changes inside a while
+
+    Input:
+    inputs: The inputs of the operation
+    node: The actual node being evaluated
+    path: The being run in the while
+    condwhile: The node that has the invariant of the while
+    firstwhile: The node that ends the while (if is not a nested while, it is the same than condwhile)
+
+    Output:
+    whilemutables[:len(whilemutables)-1:]: A string of the variables that change inside the while, the format is Ex: xx,yy
+    mutables: Every variable that changes inside an while
+    '''
     #Get the whilemutables
     #The whilemutables are every variable that changes in the while scope
     whilemutables = ""
@@ -271,7 +323,18 @@ def getMutables(node, inputs, path, condwhile, firstwhile, posmut):
     return whilemutables[:len(whilemutables)-1:], mutables
     
 def checkPredicate(predicate, message, inputs):
-    """Check if the generated predicate can hold true"""
+    '''
+    Check if the generated predicate can hold true
+
+    Input:
+    predicate: The predicate
+    message: A message to appear to the user
+    inputs: The inputs of the operation
+
+    Output:
+    ans: The answer if the predicate is false or true
+    entry: A possible entry to the predicate be true (if exists)
+    '''
     entry = ""
     ans, variables = callprob.evaluate(predicate, message, inputs)
     for variable in variables:
