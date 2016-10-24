@@ -42,7 +42,7 @@ def startMap(opmch):
     #Initialisation of the Graph, the first node is always the Call
     nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
     nodetype[str(len(nodetype) + 1)] = "Condition"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_precondition(opmch.getElementsByTagName("Precondition")[0])
+    nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
@@ -57,7 +57,7 @@ def mapAssig(node, opmch):
     node: The node of the assignement
     '''
     nodetype[str(len(nodetype) + 1)] = "Instruction"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_assig(node)
+    nodedata[str(len(nodedata) + 1)] = node
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodemap) - 1)] = instgen.make_inst(node.childNodes.item(3))
@@ -72,8 +72,9 @@ def mapIf(node, opmch):
     '''
     #If Condition
     condition = node.childNodes.item(3)
+    condition = condition.childNodes.item(1)
     nodetype[str(len(nodetype) + 1)] = "Condition"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_inst(condition)
+    nodedata[str(len(nodedata) + 1)] = condition
     nodeinva[str(len(nodeinva) + 1)] = ""
     conditionNode = str(len(nodemap)) #To add in the END*
     nodemap[str(len(nodemap) + 1)].append(conditionNode) #Adding in the END* node
@@ -110,12 +111,13 @@ def mapWhile(node, opmch):
     '''
     #WhileCondition
     condition = node.childNodes.item(3)
+    condition = condition.childNodes.item(1)
     nodetype[str(len(nodetype) + 1)] = "ConditionWhile"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_inst(condition)
+    nodedata[str(len(nodedata) + 1)] = condition
     nodeinva[str(len(nodeinva) + 1)] = ""
     conditionNode = str(len(nodemap)) #To Connect at the END*
     nodemap[str(len(nodemap) + 1)].append(conditionNode)
-    nodeinva[conditionNode] = instgen.make_inst(node.childNodes.item(7))
+    nodeinva[conditionNode] = node.childNodes.item(7)
     #WhileBody
     nodecond[str(int(conditionNode)+1)] = "True"
     body = node.childNodes.item(5)
@@ -134,8 +136,8 @@ def mapSkip(node, opmch):
     opmch: The node of the operation in the machine (to get the Precondition)
     node: The node of the Skip
     '''
-    nodetype[str(len(nodetype)+ 1)] = "Instruction"
-    nodedata[str(len(nodedata) + 1)] = "Skip"
+    nodetype[str(len(nodetype)+ 1)] = "Skip"
+    nodedata[str(len(nodedata) + 1)] = node
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
@@ -149,10 +151,15 @@ def mapOperationcall(node, opmch):
     node: The node of the Operation_Call
     '''
     nodetype[str(len(nodetype) + 1)] = "Call"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_operationcall(node)
+    nodedata[str(len(nodedata) + 1)] = node
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
-    nodeinva[str(len(nodeinva) + 1)] = ""
+    inva = ""
+    for childNode in node.childNodes:
+        if childNode.nodeType != childNode.TEXT_NODE:
+            if childNode.tagName == "Output_Parameters":
+                inva = instgen.make_outputParameters(childNode)
+    nodeinva[str(len(nodeinva) + 1)] = inva
     
 def mapNary(node, opmch):
     '''
@@ -305,7 +312,7 @@ def clearGraphs():
 
 #To test uncomment the next comment.
 
-"""
+'''
 impName = "whilenested_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
@@ -322,4 +329,4 @@ for operationImp in operationsimp.childNodes:
 
 for key in sorted(nodemap.keys()):
     print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key], nodeinva[key])
-"""
+'''

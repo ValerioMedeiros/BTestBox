@@ -1,0 +1,92 @@
+<Machine name='exoperationcall2out_i' type='implementation'>
+<Abstraction>exoperationcall2out</Abstraction>
+<Imports>
+<Attr>
+<Pos l='9' c='1' s='7'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='10' c='5' s='22'/>
+</Attr>
+<Name>calledoperation2output</Name>
+</Referenced_Machine>
+</Imports>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='op'>
+<Attr>
+<Pos l='13' c='5' s='2' endLine='16'/>
+</Attr>
+<Output_Parameters>
+<Id value='rr' typref='2701647786'>
+<Attr>
+<Pos l='13' c='5' s='2'/>
+</Attr>
+</Id>
+<Id value='ss' typref='2701647786'>
+<Attr>
+<Pos l='13' c='9' s='2'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='13' c='19' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='13' c='23' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<Operation_Call>
+<Attr>
+<Pos l='15' c='16' s='3'/>
+</Attr>
+<Name>
+<Id value='call2out'>
+<Attr>
+<Pos l='15' c='20' s='8'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='15' c='29' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='15' c='33' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Output_Parameters>
+<Id value='rr' typref='2701647786'>
+<Attr>
+<Pos l='15' c='9' s='2'/>
+</Attr>
+</Id>
+<Id value='ss' typref='2701647786'>
+<Attr>
+<Pos l='15' c='13' s='2'/>
+</Attr>
+</Id>
+</Output_Parameters>
+</Operation_Call>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>

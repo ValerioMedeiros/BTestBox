@@ -139,8 +139,8 @@ def identifyWhileEnd(path):
         if path[i] not in countlist:
             countlist.append(path[i])
         else:
-            if "ENDWHILE" not in graphgen.nodeinva[str(path[i-1])]:
-                graphgen.nodeinva[str(path[i-1])] += " ENDWHILE"
+            if "ENDWHILE" not in graphgen.nodecond[str(path[i-1])]:
+                graphgen.nodecond[str(path[i-1])] += " ENDWHILE"
     
 
 def clearGraphs():
@@ -154,8 +154,8 @@ def clearGraphs():
 
 #Uncomment the next lines to test    
 """Finding all paths"""
-"""
-impName = "exoperationcall_i"
+'''
+impName = "whilenested_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -177,4 +177,4 @@ for key in sorted(paths.keys()):
 for key in sorted(branchesPath.keys()):
     print(key, branchesPath[key])
 print(branchesStatus)
-"""
+'''

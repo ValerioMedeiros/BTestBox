@@ -17,28 +17,23 @@ In the initialisation we get all the implementations of the imported machines, a
 impName: Name of the implementation
 imp: Variable with the parse of the implementation bxml
 mch: Variable with the parse of the implementation bxml
-importedImp: list of parses, with all implementation imported.
+importedMch: list of parses, with all implementation imported.
 operationsimp: An node with all the operations of the implementation
 operationsmch: An node with all the operations of the machine
 '''
-impName = "excallnested_i"
+impName = "whileafteraoperation_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
-importedImp = list()
-importedall = False
-while(importedall != True):
-    for childnode in imp.getElementsByTagName("Machine")[0].childNodes:
-        if childnode.nodeType != childnode.TEXT_NODE:
-            if childnode.tagName == "Imports":
-                importedMchTree = imp.getElementsByTagName("Imports")[0] #Getting all Imports branch
-                importedMchTree = importedMchTree.getElementsByTagName("Referenced_Machine")[0] #Getting all referenced machine
-                importedMchTree = importedMchTree.getElementsByTagName("Name")#Getting all names of imported machines
-                for name in importedMchTree:
-                    importedImp.append(minidom.parse(name.firstChild.data+"_i.bxml")) #Getting the imported implementation
-                    #importImp = importedMch.getElementsByTagName("Abstraction")[0]  #Getting the implementation of the imported machine
-                    #importedImp.append(minidom.parse(importImp.firstChild.data+".bxml"))
-    importedall = True
+importedMch = list()
+for childnode in imp.getElementsByTagName("Machine")[0].childNodes:
+    if childnode.nodeType != childnode.TEXT_NODE:
+        if childnode.tagName == "Imports":
+            importedMchTree = imp.getElementsByTagName("Imports")[0] #Getting all Imports branch
+            importedMchTree = importedMchTree.getElementsByTagName("Referenced_Machine")[0] #Getting all referenced machine
+            importedMchTree = importedMchTree.getElementsByTagName("Name")#Getting all names of imported machines
+            for name in importedMchTree:
+                importedMch.append(minidom.parse(name.firstChild.data+".bxml")) #Getting the imported abstraction machine
 operationsimp = imp.getElementsByTagName("Operations")[0] #Surfing until Operations
 operationsmch = mch.getElementsByTagName("Operations")[0] #Surfing until Operations in the machine    
 
@@ -68,9 +63,11 @@ def DoBranchCoverage():
             graphgen.mapOperations(operationImp, operationMch)
             buildpaths.makepaths(graphgen.nodemap) #Building paths
             buildpaths.makebranches(buildpaths.paths) #Building branches
-            for key in buildpaths.paths: #Printing the paths (for control)
-                    print(key, buildpaths.paths[key])
-            covered = coverage.BranchCoverage(imp, buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths, inputs, operationname, importedImp)
+            #for key in buildpaths.paths: #Printing the paths (for control)
+            #        print(key, buildpaths.paths[key])
+            #for key in sorted(buildpaths.graphgen.nodemap.keys()):
+            #    print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
+            covered = coverage.BranchCoverage(imp, buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths, inputs, operationname, importedMch, impName)
             if covered == True:
                 print("The operation "+operationname+" is covered by Branch Coverage\n")
             else:
@@ -80,7 +77,8 @@ def DoBranchCoverage():
                             if branch[i] == '-':
                                 node1 = branch[0:i:]
                                 node2 = branch[i+1:len(branch):]
-                        print("There is no way to reach the instruction "+graphgen.nodedata[node2]+" passing through the instruction "+graphgen.nodedata[node1])
+                        print("There is no way to reach the instruction "+instgen.selfcaller(graphgen.nodedata[node2])
+                              +" passing through the instruction "+instgen.selfcaller(graphgen.nodedata[node1]))
                 print("The operation "+operationname+" is NOT covered by Branch Coverage\n")
                 allcovered = False
             graphgen.clearGraphs()
@@ -115,7 +113,7 @@ def DoPathCoverage():
                 operationname = operationImp.getAttribute("name")
                 graphgen.mapOperations(operationImp, operationMch)
                 buildpaths.makepaths(graphgen.nodemap) #Building paths
-                covered = coverage.PathCoverage(imp, buildpaths.paths, inputs, operationname, importedImp)
+                covered = coverage.PathCoverage(imp, buildpaths.paths, inputs, operationname, importedMch, impName)
                 if covered == True:
                     print("The operation: "+operationname+" is covered by Path Coverage\n")
                 else:
@@ -160,7 +158,7 @@ def DoCodeCoverage():
             buildpaths.makenodes(graphgen.nodemap) #Building node, setting them to False (uncovered).
             for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
-            covered = coverage.CodeCoverage(operationImp, buildpaths.paths, inputs, operationname, buildpaths.nodeStatus, importedImp)
+            covered = coverage.CodeCoverage(operationImp, buildpaths.paths, inputs, operationname, buildpaths.nodeStatus, importedMch, impName)
             if covered == True:
                 print("The operation "+operationname+" is covered by Code Coverage\n")
             else:

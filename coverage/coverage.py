@@ -5,7 +5,7 @@ predicate: module responsible for making the predicate that walk through a path.
 minidom: module responsible for making a tree from a xml file.
 '''
 
-def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importedImp):
+def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importedMch, impName):
     '''
     Code Coverage, function responsible of making the Code Coverage, in CC we need to exercise every instruction of the code at least once.
 
@@ -15,13 +15,17 @@ def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importe
     inputs: The inputs of the operation
     operationname: The name of the operation
     nodeStatus: A dict with every node status, initially every nodeStatus is False
-    importedImp: A list with the parse of all imported implementations
+    importedMch: A list with the parse of all imported implementations
+    impName: The implementation Name
 
     Variables:
     count: a counter to we know which path has the more uncovered nodes
     pathToCover: the path to be covered
     aux: A scapegoat variable, to dont erase the paths variable
     covered: the answer if the operation is code covered or not
+
+    Return:
+    covered: If the operation is covered or not
     '''
     #Initialisation
     count = dict()
@@ -38,7 +42,7 @@ def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importe
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        predicate.makePredicateCodeCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, nodeStatus, importedImp) #Finding the predicate
+        predicate.makePredicateCodeCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, nodeStatus, importedMch, impName) #Finding the predicate
         for node in nodeStatus: #Counting if all branches were covered, if True, the while stops.
             if nodeStatus[node] == True:
                 countcover += 1
@@ -56,7 +60,7 @@ def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importe
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
 
-def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, operationname, importedImp):
+def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, operationname, importedMch, impName):
     '''
     Branch Coverage, function responsible of making the Branch Coverage, in BC we need to exercise every branch of the code at least once.
 
@@ -67,13 +71,17 @@ def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, ope
     operationname: The name of the operation
     branchesPaths: A dict with the branches of a given path
     branchesStatus: A dict with every branch status, initially every branchStatus is False (uncovered)
-    importedImp: A list with the parse of all imported implementations
+    importedMch: A list with the parse of all imported implementations
+    impName: The implementation Name
 
     Variables:
     count: a counter to we know which path has the more uncovered nodes
     pathToCover: the path to be covered
     aux: A scapegoat variable, to dont erase the paths variable
     covered: the answer if the operation is code covered or not
+
+    Return:
+    covered: If the operation is covered or not
     '''
     #Initialisation
     count = dict()
@@ -90,7 +98,7 @@ def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, ope
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        predicate.makePredicateBranchCoverage(operationImp, aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname, importedImp) #Finding the predicate
+        predicate.makePredicateBranchCoverage(operationImp, aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
         for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch] == True:
                 countcover += 1
@@ -108,7 +116,7 @@ def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, ope
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
 
-def PathCoverage(operationImp, paths, inputs, operationname, importedImp):
+def PathCoverage(operationImp, paths, inputs, operationname, importedMch, impName):
     '''
     Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at least once.
 
@@ -117,13 +125,17 @@ def PathCoverage(operationImp, paths, inputs, operationname, importedImp):
     paths: All paths of the graph of the operation
     inputs: The inputs of the operation
     operationname: The name of the operation
-    importedImp: A list with the parse of all imported implementations
+    importedMch: A list with the parse of all imported implementations
+    impName: The implementation Name
 
     Variables:
     count: a counter to we know which path has the more uncovered nodes
     pathToCover: the path to be covered
     aux: A scapegoat variable, to dont erase the paths variable
     covered: the answer if the operation is code covered or not
+
+    Return:
+    covered: If the operation is covered or not
     '''
     #Initialisation
     count = dict()
@@ -132,7 +144,7 @@ def PathCoverage(operationImp, paths, inputs, operationname, importedImp):
     covered = True
     #Process
     while(len(aux) != 0 and covered == True):
-        covered = predicate.makePredicatePathCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, importedImp) #Finding the predicate
+        covered = predicate.makePredicatePathCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
         del aux[pathToCover] #Deleting the path of aux to start a new path
         if len(aux) != 0: #If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys()) #Passing the lowest number

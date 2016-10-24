@@ -33,9 +33,14 @@
 <Pos l='12' c='13' s='2'/>
 </Attr>
 </Id>
+<Id value='jj' typref='2701647786'>
+<Attr>
+<Pos l='12' c='17' s='2'/>
+</Attr>
+</Id>
 <Id value='aux' typref='2701647786'>
 <Attr>
-<Pos l='12' c='17' s='3'/>
+<Pos l='12' c='21' s='3'/>
 </Attr>
 </Id>
 </Variables>
@@ -79,23 +84,42 @@
 </Integer_Literal>
 </Values>
 </Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='15' c='16' s='2'/>
+</Attr>
+<Variables>
+<Id value='jj' typref='2701647786'>
+<Attr>
+<Pos l='15' c='13' s='2'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='15' c='19' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
 <While>
 <Attr>
-<Pos l='15' c='13' s='5'/>
+<Pos l='16' c='13' s='5'/>
 </Attr>
 <Condition>
 <Exp_Comparison op='&lt;'>
 <Attr>
-<Pos l='15' c='22' s='1'/>
+<Pos l='16' c='22' s='1'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='15' c='19' s='2'/>
+<Pos l='16' c='19' s='2'/>
 </Attr>
 </Id>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='15' c='24' s='2'/>
+<Pos l='16' c='24' s='2'/>
 </Attr>
 </Id>
 </Exp_Comparison>
@@ -104,28 +128,28 @@
 <Nary_Sub op=';'>
 <Assignement_Sub>
 <Attr>
-<Pos l='16' c='21' s='2'/>
+<Pos l='17' c='21' s='2'/>
 </Attr>
 <Variables>
 <Id value='aux' typref='2701647786'>
 <Attr>
-<Pos l='16' c='17' s='3'/>
+<Pos l='17' c='17' s='3'/>
 </Attr>
 </Id>
 </Variables>
 <Values>
 <Binary_Exp op='+' typref='2701647786'>
 <Attr>
-<Pos l='16' c='28' s='1'/>
+<Pos l='17' c='28' s='1'/>
 </Attr>
 <Id value='aux' typref='2701647786'>
 <Attr>
-<Pos l='16' c='24' s='3'/>
+<Pos l='17' c='24' s='3'/>
 </Attr>
 </Id>
 <Integer_Literal value='1' typref='2701647786'>
 <Attr>
-<Pos l='16' c='30' s='1'/>
+<Pos l='17' c='30' s='1'/>
 </Attr>
 </Integer_Literal>
 </Binary_Exp>
@@ -133,28 +157,28 @@
 </Assignement_Sub>
 <Assignement_Sub>
 <Attr>
-<Pos l='17' c='20' s='2'/>
+<Pos l='18' c='20' s='2'/>
 </Attr>
 <Variables>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='17' c='17' s='2'/>
+<Pos l='18' c='17' s='2'/>
 </Attr>
 </Id>
 </Variables>
 <Values>
 <Binary_Exp op='+' typref='2701647786'>
 <Attr>
-<Pos l='17' c='26' s='1'/>
+<Pos l='18' c='26' s='1'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='17' c='23' s='2'/>
+<Pos l='18' c='23' s='2'/>
 </Attr>
 </Id>
 <Integer_Literal value='1' typref='2701647786'>
 <Attr>
-<Pos l='17' c='28' s='1'/>
+<Pos l='18' c='28' s='1'/>
 </Attr>
 </Integer_Literal>
 </Binary_Exp>
@@ -166,46 +190,46 @@
 <Nary_Pred op='&amp;'>
 <Exp_Comparison op='&gt;='>
 <Attr>
-<Pos l='18' c='26' s='2'/>
+<Pos l='19' c='26' s='2'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='18' c='23' s='2'/>
+<Pos l='19' c='23' s='2'/>
 </Attr>
 </Id>
 <Integer_Literal value='0' typref='2701647786'>
 <Attr>
-<Pos l='18' c='29' s='1'/>
+<Pos l='19' c='29' s='1'/>
 </Attr>
 </Integer_Literal>
 </Exp_Comparison>
 <Exp_Comparison op='&lt;='>
 <Attr>
-<Pos l='18' c='36' s='2'/>
+<Pos l='19' c='36' s='2'/>
 </Attr>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='18' c='33' s='2'/>
+<Pos l='19' c='33' s='2'/>
 </Attr>
 </Id>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='18' c='39' s='2'/>
+<Pos l='19' c='39' s='2'/>
 </Attr>
 </Id>
 </Exp_Comparison>
 <Exp_Comparison op='='>
 <Attr>
-<Pos l='18' c='48' s='1'/>
+<Pos l='19' c='48' s='1'/>
 </Attr>
 <Id value='aux' typref='2701647786'>
 <Attr>
-<Pos l='18' c='44' s='3'/>
+<Pos l='19' c='44' s='3'/>
 </Attr>
 </Id>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='18' c='50' s='2'/>
+<Pos l='19' c='50' s='2'/>
 </Attr>
 </Id>
 </Exp_Comparison>
@@ -214,40 +238,21 @@
 <Variant>
 <Binary_Exp op='-' typref='2701647786'>
 <Attr>
-<Pos l='19' c='24' s='1'/>
+<Pos l='20' c='24' s='1'/>
 </Attr>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='19' c='21' s='2'/>
+<Pos l='20' c='21' s='2'/>
 </Attr>
 </Id>
 <Id value='ii' typref='2701647786'>
 <Attr>
-<Pos l='19' c='26' s='2'/>
+<Pos l='20' c='26' s='2'/>
 </Attr>
 </Id>
 </Binary_Exp>
 </Variant>
 </While>
-<Assignement_Sub>
-<Attr>
-<Pos l='21' c='16' s='2'/>
-</Attr>
-<Variables>
-<Id value='ii' typref='2701647786'>
-<Attr>
-<Pos l='21' c='13' s='2'/>
-</Attr>
-</Id>
-</Variables>
-<Values>
-<Integer_Literal value='0' typref='2701647786'>
-<Attr>
-<Pos l='21' c='19' s='1'/>
-</Attr>
-</Integer_Literal>
-</Values>
-</Assignement_Sub>
 <While>
 <Attr>
 <Pos l='22' c='13' s='5'/>
@@ -257,7 +262,7 @@
 <Attr>
 <Pos l='22' c='22' s='1'/>
 </Attr>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='22' c='19' s='2'/>
 </Attr>
@@ -305,7 +310,7 @@
 <Pos l='24' c='20' s='2'/>
 </Attr>
 <Variables>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='24' c='17' s='2'/>
 </Attr>
@@ -316,7 +321,7 @@
 <Attr>
 <Pos l='24' c='26' s='1'/>
 </Attr>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='24' c='23' s='2'/>
 </Attr>
@@ -337,7 +342,7 @@
 <Attr>
 <Pos l='25' c='26' s='2'/>
 </Attr>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='25' c='23' s='2'/>
 </Attr>
@@ -352,7 +357,7 @@
 <Attr>
 <Pos l='25' c='36' s='2'/>
 </Attr>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='25' c='33' s='2'/>
 </Attr>
@@ -381,7 +386,7 @@
 <Pos l='25' c='50' s='2'/>
 </Attr>
 </Id>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='25' c='55' s='2'/>
 </Attr>
@@ -400,7 +405,7 @@
 <Pos l='26' c='21' s='2'/>
 </Attr>
 </Id>
-<Id value='ii' typref='2701647786'>
+<Id value='jj' typref='2701647786'>
 <Attr>
 <Pos l='26' c='26' s='2'/>
 </Attr>

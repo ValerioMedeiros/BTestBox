@@ -24,7 +24,7 @@ def evaluate(stringexpression, message, entries): #Use this function to evaluate
     positions = list()
     inputs = list()
     end = list()
-    rcode, output, errors = executeSubWithReturn('"/Users/Diego Oliveira/Documents/ProB/probcli.exe"'+" -p MAXINT 2147483647 -p MININT -2147483648 -eval "+'"'+stringexpression+'"', message, True)  # Simple call (Exampe 4)
+    rcode, output, errors = executeSubWithReturn('"/Users/Diego Oliveira/Documents/ProB/probcli.exe"'+" -p MAXINT 2147483647 -p MININT -2147483648 -eval "+'"'+stringexpression+'"', message, True)
 
     if (rcode==0): #evaluate the return code
         if "TRUE/1" in str(output):

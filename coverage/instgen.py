@@ -122,8 +122,14 @@ def selfcaller(node):
         text += make_invariant(node)
     elif tag == "Unary_Exp":
         text += make_unaryexp(node)
+    elif tag == "Unary_Pred":
+        text += make_unarypred(node)
     elif tag == "Nary_Exp":
         text += make_naryexp(node)
+    elif tag == "Precondition":
+        text += make_precondition(node)
+    elif tag == "Condition":
+        text += make_inst(node)  
     return text
 
 def make_if_sub(node):
@@ -189,6 +195,16 @@ def make_operationcall(node):
         text = output+" <-- "+text
     return text
 
+def make_outputParameters(node):
+    text = ""
+    for childnode in node.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            text += make_id(childnode)
+        if childnode != node.lastChild.previousSibling:
+            text += " "
+    return text
+            
+
 def make_binarypred(node):
     """Build a Binary Predicate in a string"""
     text = "("
@@ -225,13 +241,30 @@ def make_invariant(node):
 
 def make_quantifiedpred(node):
     """Build a quantified precondition"""
-    text = node.getAttribute("type")
-    text += make_inst(node.childNodes.item(3)) #Variables Child
+    if(node.getAttribute("type")) == '!':
+        text = "#("
+    else:
+        text = "Quantified unknown, need to define in instgen make_quantifiedpred function"
+    count = 1
+    for childnode in node.childNodes.item(3).childNodes: #Variables Node
+        if childnode.nodeType != childnode.TEXT_NODE:
+            text += make_id(childnode)
+            count += 2
+            if count < node.childNodes.item(3).childNodes.length:
+                text += ", "
+    text += ")."
     text += make_inst(node.childNodes.item(5)) #Body
     return text
 
 def make_unaryexp(node):
     """Build a Unary_Exp in a string"""
+    text = ""+node.getAttribute("op")+"("
+    text += selfcaller(node.childNodes.item(3)) #Instruction
+    text += ")"
+    return text
+
+def make_unarypred(node):
+    """Build a Unary_Pred in a string"""
     text = ""+node.getAttribute("op")+"("
     text += selfcaller(node.childNodes.item(3)) #Instruction
     text += ")"
@@ -248,13 +281,13 @@ def make_naryexp(node):
             text += ","
     if node.getAttribute("op") == '{':
         text += "}"
-    return text
+    return text  
 
 def callmake(node, tag):
     """Surfing the tree and building everychild"""
     text = ""
     childnode = node.getElementsByTagName(tag)[0]
-    if tag == "Body":
+    if tag == "Body" or tag == "Condition":
         text += make_inst(childnode)
     elif tag == "Assignement_Sub":
         text += make_assig(childnode)
@@ -292,6 +325,8 @@ def callmake(node, tag):
         text += make_invariant(childnode)
     elif tag == "Unary_Exp":
         text += make_unaryexp(childnode)
+    elif tag == "Unary_Pred":
+        text += make_unarypred(childnode)
     return text
 
 def make_inst(node):
