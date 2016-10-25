@@ -4,10 +4,6 @@ import os
 import codecs
 import subprocess
 
-'''
-minidom: Module to manage the XML file as a tree
-'''
-
 def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut):
     '''
     Return the predicate of a called operation
@@ -31,6 +27,9 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
     auxXML = predicateXML
     output = make_Sub_Calculus(operationIBXML, auxXML)
     predicateXML.replaceChild(solveOutputPredicate(output, docXML, posMut), predicateXML.firstChild.nextSibling)
+    os.remove("encodeddocumentinput.xml")
+    os.remove("encodeddocumentoutput.xml")
+    os.remove(impName+".ibxml")
     return predicateXML
 
 def getMchWithTheCalledOperation(operationImp, node, importedMch, ImpOperationName):
