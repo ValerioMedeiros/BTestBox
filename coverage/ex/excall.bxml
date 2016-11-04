@@ -5,9 +5,9 @@
 </Attr>
 <Referenced_Machine>
 <Attr>
-<Pos l='9' c='5' s='4'/>
+<Pos l='9' c='5' s='8'/>
 </Attr>
-<Name>call</Name>
+<Name>exchoice</Name>
 </Referenced_Machine>
 </Includes>
 <Initialisation>
@@ -104,11 +104,11 @@
 </Id>
 </Variables>
 <Values>
-<Integer_Literal value='3' typref='2701647786'>
+<Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='15' c='15' s='1'/>
+<Pos l='15' c='15' s='2'/>
 </Attr>
-</Integer_Literal>
+</Id>
 </Values>
 </Assignement_Sub>
 </Body>

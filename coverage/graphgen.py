@@ -1,6 +1,7 @@
 from xml.dom import minidom
 import instgen
 from collections import defaultdict
+import nodescreator
 '''
 minidom: Module responsible of manipulating a xml file in a tree.
 instgen: Module to generate every instruction.
@@ -32,7 +33,7 @@ nodedata = dict() #Dict of the data of the nodes
 nodecond = dict() #Dict of the previous condition of the node. If the parent is a Condition node we know if the path comes from the True or the False condition.
 nodeinva = dict() #Dict with the invariant of the while and where it end.
 
-def startMap(opmch):
+def startMap(node, opmch):
     '''
     Function responsible for the initialisation of the map.
     
@@ -41,8 +42,21 @@ def startMap(opmch):
     '''
     #Initialisation of the Graph, the first node is always the Call
     nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
-    nodetype[str(len(nodetype) + 1)] = "Condition"
-    nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
+    if opmch.getElementsByTagName("Precondition") != []:
+        nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
+        nodetype[str(len(nodetype) + 1)] = "Condition"
+    else:
+        nodetype[str(len(nodetype) + 1)] = "PreconditionTrue"
+        nodedata[str(len(nodedata) + 1)] = None
+    for child in node.parentNode.parentNode.childNodes:
+        if child.nodeType != child.TEXT_NODE:
+            if child.tagName == 'Invariant':
+                if nodetype[str(len(nodetype))] == "Condition":
+                    doc = minidom.getDOMImplementation()
+                    docXML = doc.createDocument(None, "Scapegoat", None)
+                    nodedata[str(len(nodedata))] = createNaryPred(child, nodedata[str(len(nodedata))], '&', docXML) 
+                else:
+                    nodedata[str(len(nodedata))] = child
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
@@ -100,6 +114,63 @@ def mapIf(node, opmch):
     else:
         nodemap[str(len(nodemap))].append(conditionNode) #Adding in the END
 
+def mapCase(node, opmch):
+    '''
+    Adding a Case to the Graph:
+
+    Input:
+    opmch: The node of the operation in the machine (to get the Precondition)
+    node: The node of the Case_Sub in the BXML tree
+    '''
+    #First part of the condition for everycase
+    firstconditionpart = node.childNodes.item(3).firstChild.nextSibling
+    #The condition of every other case
+    choices = node.childNodes.item(5).childNodes
+    allThenNodes = list()
+    for choice in choices:
+        case = minidom.getDOMImplementation()
+        caseXML = case.createDocument(None, "Scapegoat", None)
+        caseCondition = caseXML.documentElement
+        if choice.nodeType != choice.TEXT_NODE:
+            for child in choice.childNodes:
+                if child.nodeType != choice.TEXT_NODE:
+                    if child.tagName == "Value":
+                        caseCondition.appendChild(nodescreator.createExpComparison(firstconditionpart.cloneNode(10), child.firstChild.nextSibling.cloneNode(10), '=', caseXML))
+            if len(caseCondition.childNodes) > 1:
+                condition = nodescreator.createNaryPred(caseCondition.childNodes.item(0), caseCondition.childNodes.item(1), 'or', caseXML)
+                for i in range(len(caseCondition.childNodes)):
+                    if i > 1:
+                        condition.appendChild(caseCondition.childNodes.item(i).cloneNode(10))
+                        condition.appendChild(caseXML.createTextNode('\n'))
+            else:
+                condition = caseCondition.firstChild
+            nodetype[str(len(nodetype) + 1)] = "Condition"
+            nodedata[str(len(nodedata) + 1)] = condition
+            nodeinva[str(len(nodeinva) + 1)] = ""
+            conditionNode = str(len(nodemap)) #To add in the END
+            nodemap[str(len(nodemap) + 1)].append(conditionNode) #Adding in the END* node
+            #Then
+            nodecond[str(int(conditionNode)+1)] = "True"
+            then = choice.getElementsByTagName('Then')[0]
+            makeMap(then, opmch)
+            thenNode = str(len(nodemap) - 1) #To add in the END*
+            nodecond[str(int(thenNode) + 1)] = "False"
+            #Conecting an condition in the other (nested if's)
+            allThenNodes.append(thenNode)
+            nodemap[str(int(thenNode)+1)] = [conditionNode]
+    if node.lastChild.previousSibling.tagName == "Else":
+        body = node.lastChild.previousSibling.firstChild.nextSibling
+        body = body.childNodes.item(3)
+        nodecond[str(int(thenNode)+1)] = "False"
+        makeMap(body, opmch)
+        elseNode = str(len(nodemap)-1) #To add in the END*
+        allThenNodes.append(str(len(nodemap) - 1))
+    else:
+        allThenNodes.append(conditionNode)
+    #Conecting the END
+    nodecond[str(len(nodemap))] = "True and False"
+    nodemap[str(len(nodemap))] = allThenNodes
+
 def mapWhile(node, opmch):
     '''
     Adding an While to the Graph
@@ -154,12 +225,12 @@ def mapOperationcall(node, opmch):
     nodedata[str(len(nodedata) + 1)] = node
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
-    inva = ""
+    outputs = ""
     for childNode in node.childNodes:
         if childNode.nodeType != childNode.TEXT_NODE:
             if childNode.tagName == "Output_Parameters":
-                inva = instgen.make_outputParameters(childNode)
-    nodeinva[str(len(nodeinva) + 1)] = inva
+                outputs = instgen.make_outputParameters(childNode)
+    nodeinva[str(len(nodeinva) + 1)] = outputs
     
 def mapNary(node, opmch):
     '''
@@ -194,6 +265,8 @@ def makeMapNary(node, opmch):
         mapSkip(node, opmch)
     if tag == "Operation_Call":
         mapOperationcall(node, opmch)
+    if tag == "Case_Sub":
+        mapCase(node, opmch)
 
 def makeMap(node, opmch):
     '''
@@ -209,7 +282,7 @@ def makeMap(node, opmch):
             tag = childnode.tagName
             if tag == "Body":
                 if node.tagName == "Operation":
-                    startMap(opmch) #Initialisation of the Graph
+                    startMap(node, opmch) #Initialisation of the Graph
                     makeMap(childnode, opmch)
                 else:
                     makeMap(childnode, opmch)
@@ -227,6 +300,8 @@ def makeMap(node, opmch):
                 mapSkip(childnode, opmch)
             if tag == "Operation_Call":
                 mapOperationcall(childnode, opmch)
+            if tag == "Case_Sub":
+                mapCase(childnode, opmch)
 
 def mapOperations(operationimp, operationmch):
     '''
@@ -238,7 +313,38 @@ def mapOperations(operationimp, operationmch):
     '''
     makeMap(operationimp, operationmch)
     nodetype[str(len(nodetype)+ 1)] = "END" #Adding a type for the END node
-    nodedata[str(len(nodedata) + 1)] = "END" #Adding data for the END node
+    outputs = None
+    for childNode in operationimp.childNodes:
+        if childNode.nodeType != childNode.TEXT_NODE:
+            if childNode.tagName == "Output_Parameters":
+                outputs = childNode
+    doc = minidom.getDOMImplementation()
+    docXML = doc.createDocument(None, "Scapegoat", None)
+    finalOutputXML = docXML.createElement('Output')
+    count = 1
+    for child in outputs.childNodes:
+        if child.nodeType != child.TEXT_NODE:
+            outputNode = docXML.createElement('Id')
+            outputNode.setAttribute('value', 'output'+str(count)+child.getAttribute('value'))
+            count += 1
+            outputNode.appendChild(docXML.createTextNode('\n'))
+            outputNode.appendChild(docXML.createElement('Attr'))
+            outputNode.appendChild(docXML.createTextNode('\n'))
+            outputs.replaceChild(nodescreator.createExpComparison(outputNode, child.cloneNode(10), '=', docXML), child)
+    for output in outputs.childNodes:
+        if output.nodeType != output.TEXT_NODE:
+            if finalOutputXML.hasChildNodes():
+                if finalOutputXML.firstChild.nextSibling.tagName == 'Nary_Pred':
+                    finalOutputXML.firstChild.nextSibling.appendChild(output)
+                    finalOutputXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+                else:
+                    naryPredNode = nodescreator.createNaryPred(finalOutputXML.firstChild.nextSibling, output, '&', docXML)
+                    finalOutputXML.replaceChild(naryPredNode, finalOutputXML.firstChild.nextSibling)
+            else:
+                finalOutputXML.appendChild(docXML.createTextNode('\n'))
+                finalOutputXML.appendChild(output)
+                finalOutputXML.appendChild(docXML.createTextNode('\n'))
+    nodedata[str(len(nodedata) + 1)] = finalOutputXML.firstChild.nextSibling #Adding data for the END node
     nodeinva[str(len(nodeinva) + 1)] = ""
 
 def startMapOperation(node):
@@ -250,7 +356,12 @@ def startMapOperation(node):
     '''
     nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
     nodetype[str(len(nodetype) + 1)] = "Inputs"
-    nodedata[str(len(nodedata) + 1)] = instgen.make_inputs(node.getElementsByTagName("Input_Parameters")[0])
+    inputs = None
+    for childNode in node.childNodes:
+        if childNode.nodeType != childNode.TEXT_NODE:
+            if childNode.tagName == "Input_Parameters":
+                inputs = childNode
+    nodedata[str(len(nodedata) + 1)] = inputs
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
@@ -288,7 +399,7 @@ def makeMapOperation(node, opmch = ""):
             if tag == "Operation_Call":
                 mapOperationcall(childnode, opmch)
 
-def mapOperationsCall(operation):
+def mapImplementationOperationCall(operation):
     '''
     Start function to OperationCalls
 
@@ -297,7 +408,12 @@ def mapOperationsCall(operation):
     '''
     makeMapOperation(operation)
     nodetype[str(len(nodetype) + 1)] = "END" #Adding a type for the END node
-    nodedata[str(len(nodedata) + 1)] = instgen.make_inputs(operation.getElementsByTagName("Output_Parameters")[0]) #Adding the output parameters to the end node
+    outputs = None
+    for childNode in operation.childNodes:
+        if childNode.nodeType != childNode.TEXT_NODE:
+            if childNode.tagName == "Output_Parameters":
+                outputs = childNode
+    nodedata[str(len(nodedata) + 1)] = outputs
     nodeinva[str(len(nodeinva) + 1)] = ""
 
 def clearGraphs():
@@ -310,10 +426,10 @@ def clearGraphs():
     nodecond.clear()
     nodeinva.clear()
 
-#To test uncomment the next comment.
+#To test, uncomment the next comment.
 
 '''
-impName = "whilenested_i"
+impName = "case_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -329,4 +445,5 @@ for operationImp in operationsimp.childNodes:
 
 for key in sorted(nodemap.keys()):
     print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key], nodeinva[key])
+
 '''

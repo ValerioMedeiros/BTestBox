@@ -21,9 +21,14 @@ def make_operation(node):
 def make_assig(node):
     """Build an assignement in a string"""
     text = ""
-    text += make_inst(node.childNodes.item(3)) #Variables Child
-    text += " := "
-    text += make_inst(node.childNodes.item(5)) #Values Child
+    if node.childNodes.item(1).tagName == "Attr":
+        text += make_inst(node.childNodes.item(3)) #Variables Child
+        text += " := "
+        text += make_inst(node.childNodes.item(5)) #Values Child
+    else:
+        text += make_inst(node.childNodes.item(1)) #Variables Child
+        text += " := "
+        text += make_inst(node.childNodes.item(3)) #Values Child
     return text
 
 def make_inputs(node):
@@ -41,15 +46,26 @@ def make_inputs(node):
 def make_binaryexp(node):
     """Build a binary exp in a string"""
     text = ""
-    if node.childNodes.item(3).tagName == "Binary_Exp":
-        text = "("
-    text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary evaluation
-    if node.childNodes.item(3).tagName == "Binary_Exp":
-        text += ")"
-    text += " " + node.getAttribute("op") + " " 
-    text += selfcaller(node.childNodes.item(5)) #Second operand of a binary evaluation
-    if node.getAttribute("op") == '(': #If it is a '(', then we need to close with ')'
-        text += ' )'
+    if node.childNodes.item(1).tagName == "Attr":
+        if node.childNodes.item(3).tagName == "Binary_Exp":
+            text = "("
+        text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary evaluation
+        if node.childNodes.item(3).tagName == "Binary_Exp":
+            text += ")"
+        text += " " + node.getAttribute("op") + " " 
+        text += selfcaller(node.childNodes.item(5)) #Second operand of a binary evaluation
+        if node.getAttribute("op") == '(': #If it is a '(', then we need to close with ')'
+            text += ' )'
+    else:
+        if node.childNodes.item(1).tagName == "Binary_Exp":
+            text = "("
+        text += callmake(node, node.childNodes.item(1).tagName) #First operand of a binary evaluation
+        if node.childNodes.item(1).tagName == "Binary_Exp":
+            text += ")"
+        text += " " + node.getAttribute("op") + " " 
+        text += selfcaller(node.childNodes.item(3)) #Second operand of a binary evaluation
+        if node.getAttribute("op") == '(': #If it is a '(', then we need to close with ')'
+            text += ' )'
     return text
 
 def make_variables(node):
@@ -150,9 +166,14 @@ def make_if_sub(node):
 def make_expcomparison(node):
     """Build a comparison evaluation in a string"""
     text = ""
-    text += callmake(node, node.childNodes.item(3).tagName) #Make the first operand
-    text += " " + node.getAttribute("op") + " "
-    text += selfcaller(node.childNodes.item(5)) #Make the second operand
+    if node.childNodes.item(1).tagName == "Attr":
+        text += callmake(node, node.childNodes.item(3).tagName) #Make the first operand
+        text += " " + node.getAttribute("op") + " "
+        text += selfcaller(node.childNodes.item(5)) #Make the second operand
+    else:
+        text += callmake(node, node.childNodes.item(1).tagName) #Make the first operand
+        text += " " + node.getAttribute("op") + " "
+        text += selfcaller(node.childNodes.item(3)) #Make the second operand
     return text
 
 def make_while(node):
@@ -208,9 +229,14 @@ def make_outputParameters(node):
 def make_binarypred(node):
     """Build a Binary Predicate in a string"""
     text = "("
-    text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary predicate
-    text += " " + node.getAttribute("op") + " "
-    text += selfcaller(node.childNodes.item(5)) #Second operand of a binary predicate
+    if node.childNodes.item(1).tagName == "Attr":
+        text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary predicate
+        text += " " + node.getAttribute("op") + " "
+        text += selfcaller(node.childNodes.item(5)) #Second operand of a binary predicate
+    else:
+        text += callmake(node, node.childNodes.item(1).tagName) #First operand of a binary predicate
+        text += " " + node.getAttribute("op") + " "
+        text += selfcaller(node.childNodes.item(3)) #Second operand of a binary predicate
     text += ")"
     return text
 
@@ -246,39 +272,63 @@ def make_quantifiedpred(node):
     else:
         text = "Quantified unknown, need to define in instgen make_quantifiedpred function"
     count = 1
-    for childnode in node.childNodes.item(3).childNodes: #Variables Node
-        if childnode.nodeType != childnode.TEXT_NODE:
-            text += make_id(childnode)
-            count += 2
-            if count < node.childNodes.item(3).childNodes.length:
-                text += ", "
-    text += ")."
-    text += make_inst(node.childNodes.item(5)) #Body
+    if node.childNodes.item(1).tagName == "Attr":
+        for childnode in node.childNodes.item(3).childNodes: #Variables Node
+            if childnode.nodeType != childnode.TEXT_NODE:
+                text += make_id(childnode)
+                count += 2
+                if count < node.childNodes.item(3).childNodes.length:
+                    text += ", "
+        text += ")."
+        text += make_inst(node.childNodes.item(5)) #Body
+    else:
+        for childnode in node.childNodes.item(1).childNodes: #Variables Node
+            if childnode.nodeType != childnode.TEXT_NODE:
+                text += make_id(childnode)
+                count += 2
+                if count < node.childNodes.item(1).childNodes.length:
+                    text += ", "
+        text += ")."
+        text += make_inst(node.childNodes.item(3)) #Body
     return text
 
 def make_unaryexp(node):
     """Build a Unary_Exp in a string"""
     text = ""+node.getAttribute("op")+"("
-    text += selfcaller(node.childNodes.item(3)) #Instruction
+    if node.childNodes.item(1).tagName == "Attr":
+        text += selfcaller(node.childNodes.item(3)) #Instruction
+    else:
+        text += selfcaller(node.childNodes.item(1)) #Instruction
     text += ")"
     return text
 
 def make_unarypred(node):
     """Build a Unary_Pred in a string"""
     text = ""+node.getAttribute("op")+"("
-    text += selfcaller(node.childNodes.item(3)) #Instruction
+    if node.childNodes.item(1).tagName == "Attr":
+        text += selfcaller(node.childNodes.item(3)) #Instruction
+    else:
+        text += selfcaller(node.childNodes.item(1)) #Instruction
     text += ")"
     return text
 
 def make_naryexp(node):
     """Build a Nary_exp in a string"""
     text = node.getAttribute("op")
-    count = 3 #Position of childnodes non TEXT_NODE and Attr are always 3 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
-    while(count < node.childNodes.length):
-        text += selfcaller(node.childNodes.item(count)) #Making operands
-        count += 2 #Position of childnodes non TEXT_NODE are always 1 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
-        if count < node.childNodes.length:
-            text += ","
+    if node.childNodes.item(1).tagName == "Attr":
+        count = 3 #Position of childnodes non TEXT_NODE and Attr are always 3 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+        while(count < node.childNodes.length):
+            text += selfcaller(node.childNodes.item(count)) #Making operands
+            count += 2 #Position of childnodes non TEXT_NODE are always 1 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+            if count < node.childNodes.length:
+                text += ","
+    else:
+        count = 1 #Position of childnodes non TEXT_NODE is always 1 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+        while(count < node.childNodes.length):
+            text += selfcaller(node.childNodes.item(count)) #Making operands
+            count += 2 #Position of childnodes non TEXT_NODE is always 1 + 2 * (n - 1), where n is the number of the child non TEXT_NODE
+            if count < node.childNodes.length:
+                text += ","
     if node.getAttribute("op") == '{':
         text += "}"
     return text  

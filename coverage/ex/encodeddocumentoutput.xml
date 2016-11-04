@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Sub_Calculus_Father>
+    <Nary_Pred op="&amp;">
+        <Tag goalTag="Precondition predicate">
+            <Nary_Pred op="&amp;">
+                <Exp_Comparison op=":">
+                    <Attr>
+                        <Pos c="12" l="10" s="1"/>
+                    </Attr>
+                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,.\any.bxml:1:2:1:3:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                        <Attr>
+                            <Pos c="24" l="16" s="2"/>
+                        </Attr>
+                    </Id>
+                    <Id typref="3603043417" tag=".\any.bxml:1:2:1:3:1:1:2,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="NAT">
+                        <Attr>
+                            <Pos c="14" l="10" s="3"/>
+                        </Attr>
+                    </Id>
+                </Exp_Comparison>
+                <Exp_Comparison op=">=">
+                    <Attr>
+                        <Pos c="23" l="10" s="2"/>
+                    </Attr>
+                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,.\any.bxml:1:2:1:3:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                        <Attr>
+                            <Pos c="24" l="16" s="2"/>
+                        </Attr>
+                    </Id>
+                    <Integer_Literal typref="2701647786" tag=".\any.bxml:1:2:1:3:1:2:2,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="0">
+                        <Attr>
+                            <Pos c="26" l="10" s="1"/>
+                        </Attr>
+                    </Integer_Literal>
+                </Exp_Comparison>
+            </Nary_Pred>
+        </Tag>
+        <Quantified_Pred type="!">
+            <Variables>
+                <Id typref="2701647786" suffix="" value="ii">
+                    <Attr>
+                        <Pos c="13" l="15" s="2"/>
+                    </Attr>
+                </Id>
+            </Variables>
+            <Body>
+                <Binary_Pred op="=>">
+                    <Nary_Pred op="&amp;"/>
+                    <Nary_Pred op="&amp;">
+                        <Tag goalTag="Loop initialisation">
+                            <Nary_Pred op="&amp;">
+                                <Exp_Comparison op="&lt;=">
+                                    <Attr>
+                                        <Pos c="25" l="21" s="2"/>
+                                    </Attr>
+                                    <Integer_Literal typref="2701647786" value="0">
+                                        <Attr>
+                                            <Pos c="23" l="21" s="1"/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                    <Integer_Literal typref="2701647786" tag=",,,,,," value="0">
+                                        <Attr>
+                                            <Pos c="19" l="16" s="1"/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                </Exp_Comparison>
+                                <Exp_Comparison op="&lt;=">
+                                    <Attr>
+                                        <Pos c="36" l="21" s="2"/>
+                                    </Attr>
+                                    <Integer_Literal typref="2701647786" tag=",,,,,," value="0">
+                                        <Attr>
+                                            <Pos c="19" l="16" s="1"/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                        <Attr>
+                                            <Pos c="24" l="16" s="2"/>
+                                        </Attr>
+                                    </Id>
+                                </Exp_Comparison>
+                                <Exp_Comparison op="=">
+                                    <Attr>
+                                        <Pos c="48" l="21" s="1"/>
+                                    </Attr>
+                                    <Integer_Literal typref="2701647786" tag=",lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="10">
+                                        <Attr>
+                                            <Pos c="20" l="17" s="2"/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                    <Integer_Literal typref="2701647786" value="10">
+                                        <Attr>
+                                            <Pos c="50" l="21" s="2"/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                </Exp_Comparison>
+                            </Nary_Pred>
+                        </Tag>
+                        <Tag goalTag="Loop variant is positive">
+                            <Quantified_Pred type="!">
+                                <Variables>
+                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                        <Attr>
+                                            <Pos c="13" l="16" s="3"/>
+                                        </Attr>
+                                    </Id>
+                                    <Id typref="2701647786" tag=",," suffix="1" value="ii">
+                                        <Attr>
+                                            <Pos c="13" l="15" s="2"/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Body>
+                                    <Binary_Pred op="=>">
+                                        <Nary_Pred op="&amp;">
+                                            <Exp_Comparison op="&lt;=">
+                                                <Attr>
+                                                    <Pos c="25" l="21" s="2"/>
+                                                </Attr>
+                                                <Integer_Literal typref="2701647786" value="0">
+                                                    <Attr>
+                                                        <Pos c="23" l="21" s="1"/>
+                                                    </Attr>
+                                                </Integer_Literal>
+                                                <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                    <Attr>
+                                                        <Pos c="13" l="15" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                            </Exp_Comparison>
+                                            <Exp_Comparison op="&lt;=">
+                                                <Attr>
+                                                    <Pos c="36" l="21" s="2"/>
+                                                </Attr>
+                                                <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                    <Attr>
+                                                        <Pos c="13" l="15" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                                <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                    <Attr>
+                                                        <Pos c="24" l="16" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                            </Exp_Comparison>
+                                            <Exp_Comparison op="=">
+                                                <Attr>
+                                                    <Pos c="48" l="21" s="1"/>
+                                                </Attr>
+                                                <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                                    <Attr>
+                                                        <Pos c="13" l="16" s="3"/>
+                                                    </Attr>
+                                                </Id>
+                                                <Integer_Literal typref="2701647786" value="10">
+                                                    <Attr>
+                                                        <Pos c="50" l="21" s="2"/>
+                                                    </Attr>
+                                                </Integer_Literal>
+                                            </Exp_Comparison>
+                                        </Nary_Pred>
+                                        <Exp_Comparison op="&lt;=">
+                                            <Integer_Literal value="0"/>
+                                            <Binary_Exp typref="2701647786" op="-">
+                                                <Attr>
+                                                    <Pos c="24" l="22" s="1"/>
+                                                </Attr>
+                                                <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                    <Attr>
+                                                        <Pos c="24" l="16" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                                <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                    <Attr>
+                                                        <Pos c="13" l="15" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                            </Binary_Exp>
+                                        </Exp_Comparison>
+                                    </Binary_Pred>
+                                </Body>
+                            </Quantified_Pred>
+                        </Tag>
+                        <Tag goalTag="Loop invariant is preserved">
+                            <Quantified_Pred type="!">
+                                <Variables>
+                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                        <Attr>
+                                            <Pos c="13" l="16" s="3"/>
+                                        </Attr>
+                                    </Id>
+                                    <Id typref="2701647786" tag=",," suffix="1" value="ii">
+                                        <Attr>
+                                            <Pos c="13" l="15" s="2"/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Body>
+                                    <Binary_Pred op="=>">
+                                        <Nary_Pred op="&amp;">
+                                            <Nary_Pred op="&amp;">
+                                                <Exp_Comparison op="&lt;=">
+                                                    <Attr>
+                                                        <Pos c="25" l="21" s="2"/>
+                                                    </Attr>
+                                                    <Integer_Literal typref="2701647786" value="0">
+                                                        <Attr>
+                                                            <Pos c="23" l="21" s="1"/>
+                                                        </Attr>
+                                                    </Integer_Literal>
+                                                    <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                        <Attr>
+                                                            <Pos c="13" l="15" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                                <Exp_Comparison op="&lt;=">
+                                                    <Attr>
+                                                        <Pos c="36" l="21" s="2"/>
+                                                    </Attr>
+                                                    <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                        <Attr>
+                                                            <Pos c="13" l="15" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                        <Attr>
+                                                            <Pos c="24" l="16" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                                <Exp_Comparison op="=">
+                                                    <Attr>
+                                                        <Pos c="48" l="21" s="1"/>
+                                                    </Attr>
+                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                                        <Attr>
+                                                            <Pos c="13" l="16" s="3"/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Integer_Literal typref="2701647786" value="10">
+                                                        <Attr>
+                                                            <Pos c="50" l="21" s="2"/>
+                                                        </Attr>
+                                                    </Integer_Literal>
+                                                </Exp_Comparison>
+                                            </Nary_Pred>
+                                            <Exp_Comparison op="&lt;">
+                                                <Attr>
+                                                    <Pos c="22" l="18" s="1"/>
+                                                </Attr>
+                                                <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                    <Attr>
+                                                        <Pos c="24" l="16" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                                <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                    <Attr>
+                                                        <Pos c="13" l="15" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                            </Exp_Comparison>
+                                        </Nary_Pred>
+                                        <While_Pred>
+                                            <Binary_Exp typref="2701647786" op="-">
+                                                <Attr>
+                                                    <Pos c="24" l="22" s="1"/>
+                                                </Attr>
+                                                <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                    <Attr>
+                                                        <Pos c="24" l="16" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                                <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                    <Attr>
+                                                        <Pos c="13" l="15" s="2"/>
+                                                    </Attr>
+                                                </Id>
+                                            </Binary_Exp>
+                                            <Quantified_Pred type="!">
+                                                <Variables>
+                                                    <Id typref="2701647786" suffix="" value="kk">
+                                                        <Attr>
+                                                            <Pos c="13" l="12" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Variables>
+                                                <Body>
+                                                    <Binary_Pred op="=>">
+                                                        <Nary_Pred op="&amp;">
+                                                            <Exp_Comparison op="=">
+                                                                <Id typref="2701647786" tag=",," suffix="" value="kk">
+                                                                    <Attr>
+                                                                        <Pos c="13" l="12" s="2"/>
+                                                                    </Attr>
+                                                                </Id>
+                                                                <Integer_Literal typref="2701647786" value="10">
+                                                                    <Attr>
+                                                                        <Pos c="24" l="12" s="2"/>
+                                                                    </Attr>
+                                                                </Integer_Literal>
+                                                            </Exp_Comparison>
+                                                        </Nary_Pred>
+                                                        <Nary_Pred op="&amp;">
+                                                            <Nary_Pred op="&amp;">
+                                                                <Exp_Comparison op="&lt;=">
+                                                                    <Attr>
+                                                                        <Pos c="25" l="21" s="2"/>
+                                                                    </Attr>
+                                                                    <Integer_Literal typref="2701647786" value="0">
+                                                                        <Attr>
+                                                                            <Pos c="23" l="21" s="1"/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                    <Binary_Exp typref="2701647786" tag=",,,,,,,,,,,,,,,,,," op="+">
+                                                                        <Attr>
+                                                                            <Pos c="26" l="20" s="1"/>
+                                                                        </Attr>
+                                                                        <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii" fixed="false">
+                                                                            <Attr>
+                                                                                <Pos c="13" l="15" s="2"/>
+                                                                            </Attr>
+                                                                        </Id>
+                                                                        <Integer_Literal typref="2701647786" value="1">
+                                                                            <Attr>
+                                                                                <Pos c="28" l="20" s="1"/>
+                                                                            </Attr>
+                                                                        </Integer_Literal>
+                                                                    </Binary_Exp>
+                                                                </Exp_Comparison>
+                                                                <Exp_Comparison op="&lt;=">
+                                                                    <Attr>
+                                                                        <Pos c="36" l="21" s="2"/>
+                                                                    </Attr>
+                                                                    <Binary_Exp typref="2701647786" tag=",,,,,,,,,,,,,,,,,," op="+">
+                                                                        <Attr>
+                                                                            <Pos c="26" l="20" s="1"/>
+                                                                        </Attr>
+                                                                        <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii" fixed="false">
+                                                                            <Attr>
+                                                                                <Pos c="13" l="15" s="2"/>
+                                                                            </Attr>
+                                                                        </Id>
+                                                                        <Integer_Literal typref="2701647786" value="1">
+                                                                            <Attr>
+                                                                                <Pos c="28" l="20" s="1"/>
+                                                                            </Attr>
+                                                                        </Integer_Literal>
+                                                                    </Binary_Exp>
+                                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                                        <Attr>
+                                                                            <Pos c="24" l="16" s="2"/>
+                                                                        </Attr>
+                                                                    </Id>
+                                                                </Exp_Comparison>
+                                                                <Exp_Comparison op="=">
+                                                                    <Attr>
+                                                                        <Pos c="48" l="21" s="1"/>
+                                                                    </Attr>
+                                                                    <Id typref="2701647786" tag=",,,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="" value="kk">
+                                                                        <Attr>
+                                                                            <Pos c="13" l="12" s="2"/>
+                                                                        </Attr>
+                                                                    </Id>
+                                                                    <Integer_Literal typref="2701647786" value="10">
+                                                                        <Attr>
+                                                                            <Pos c="50" l="21" s="2"/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                </Exp_Comparison>
+                                                            </Nary_Pred>
+                                                            <Variant>
+                                                                <Binary_Exp typref="2701647786" op="-">
+                                                                    <Attr>
+                                                                        <Pos c="24" l="22" s="1"/>
+                                                                    </Attr>
+                                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                                        <Attr>
+                                                                            <Pos c="24" l="16" s="2"/>
+                                                                        </Attr>
+                                                                    </Id>
+                                                                    <Binary_Exp typref="2701647786" tag=",,,,,,,,,,,,,,,,,," op="+">
+                                                                        <Attr>
+                                                                            <Pos c="26" l="20" s="1"/>
+                                                                        </Attr>
+                                                                        <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii" fixed="false">
+                                                                            <Attr>
+                                                                                <Pos c="13" l="15" s="2"/>
+                                                                            </Attr>
+                                                                        </Id>
+                                                                        <Integer_Literal typref="2701647786" value="1">
+                                                                            <Attr>
+                                                                                <Pos c="28" l="20" s="1"/>
+                                                                            </Attr>
+                                                                        </Integer_Literal>
+                                                                    </Binary_Exp>
+                                                                </Binary_Exp>
+                                                            </Variant>
+                                                        </Nary_Pred>
+                                                    </Binary_Pred>
+                                                </Body>
+                                            </Quantified_Pred>
+                                        </While_Pred>
+                                    </Binary_Pred>
+                                </Body>
+                            </Quantified_Pred>
+                        </Tag>
+                        <Tag goalTag="End of loop">
+                            <Quantified_Pred type="!">
+                                <Variables>
+                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                        <Attr>
+                                            <Pos c="13" l="16" s="3"/>
+                                        </Attr>
+                                    </Id>
+                                    <Id typref="2701647786" tag=",," suffix="1" value="ii">
+                                        <Attr>
+                                            <Pos c="13" l="15" s="2"/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Body>
+                                    <Binary_Pred op="=>">
+                                        <Nary_Pred op="&amp;">
+                                            <Nary_Pred op="&amp;">
+                                                <Exp_Comparison op="&lt;=">
+                                                    <Attr>
+                                                        <Pos c="25" l="21" s="2"/>
+                                                    </Attr>
+                                                    <Integer_Literal typref="2701647786" value="0">
+                                                        <Attr>
+                                                            <Pos c="23" l="21" s="1"/>
+                                                        </Attr>
+                                                    </Integer_Literal>
+                                                    <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                        <Attr>
+                                                            <Pos c="13" l="15" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                                <Exp_Comparison op="&lt;=">
+                                                    <Attr>
+                                                        <Pos c="36" l="21" s="2"/>
+                                                    </Attr>
+                                                    <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                        <Attr>
+                                                            <Pos c="13" l="15" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                        <Attr>
+                                                            <Pos c="24" l="16" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                                <Exp_Comparison op="=">
+                                                    <Attr>
+                                                        <Pos c="48" l="21" s="1"/>
+                                                    </Attr>
+                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                                        <Attr>
+                                                            <Pos c="13" l="16" s="3"/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Integer_Literal typref="2701647786" value="10">
+                                                        <Attr>
+                                                            <Pos c="50" l="21" s="2"/>
+                                                        </Attr>
+                                                    </Integer_Literal>
+                                                </Exp_Comparison>
+                                            </Nary_Pred>
+                                            <Unary_Pred op="not">
+                                                <Exp_Comparison op="&lt;">
+                                                    <Attr>
+                                                        <Pos c="22" l="18" s="1"/>
+                                                    </Attr>
+                                                    <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1,,.\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="xx">
+                                                        <Attr>
+                                                            <Pos c="24" l="16" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id typref="2701647786" tag=",,,,,,,," suffix="1" value="ii">
+                                                        <Attr>
+                                                            <Pos c="13" l="15" s="2"/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                            </Unary_Pred>
+                                        </Nary_Pred>
+                                        <Exp_Comparison op="=">
+                                            <Attr>
+                                                <Pos c="19" l="17" s="1"/>
+                                            </Attr>
+                                            <Id typref="2701647786" value="xx">
+                                                <Attr>
+                                                    <Pos c="16" l="17" s="2"/>
+                                                </Attr>
+                                            </Id>
+                                            <Id typref="2701647786" tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,lottery_i.bxml:1:4:1:3:1:2:1:1:3:1,,.\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" suffix="1" value="aux">
+                                                <Attr>
+                                                    <Pos c="13" l="16" s="3"/>
+                                                </Attr>
+                                            </Id>
+                                        </Exp_Comparison>
+                                    </Binary_Pred>
+                                </Body>
+                            </Quantified_Pred>
+                        </Tag>
+                    </Nary_Pred>
+                </Binary_Pred>
+            </Body>
+        </Quantified_Pred>
+    </Nary_Pred>
+</Sub_Calculus_Father>

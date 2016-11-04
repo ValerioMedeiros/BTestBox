@@ -1,0 +1,705 @@
+<Machine name="excallany_i" type="implementation">
+<Abstraction tag="excallany_i.bxml:1:1">
+<Machine name="excall" type="abstraction">
+<Includes>
+<Attr>
+<Pos l="8" s="8" c="1"/>
+</Attr>
+<Machine name="exchoice" type="abstraction">
+<Initialisation>
+<Skip tag=".\exchoice.bxml:1:1:1"/>
+</Initialisation>
+<Operations>
+<Operation name="op3">
+<Attr>
+<Pos l="9" endLine="19" s="2" c="4"/>
+</Attr>
+<Output_Parameters>
+<Id tag=".\exchoice.bxml:1:2:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="9" s="2" c="4"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id tag=".\exchoice.bxml:1:2:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="9" s="2" c="15"/>
+</Attr>
+</Id>
+<Id tag=".\exchoice.bxml:1:2:1:2:2" typref="2701647786" value="yy">
+<Attr>
+<Pos l="9" s="2" c="19"/>
+</Attr>
+</Id>
+<Id tag=".\exchoice.bxml:1:2:1:2:3" typref="2701647786" value="zz">
+<Attr>
+<Pos l="9" s="2" c="23"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="11"/>
+</Attr>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:1:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="10" s="2" c="8"/>
+</Attr>
+</Id>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:1:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="13"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="22"/>
+</Attr>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:2:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="10" s="2" c="19"/>
+</Attr>
+</Id>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:2:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="24"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="33"/>
+</Attr>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:3:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="10" s="2" c="30"/>
+</Attr>
+</Id>
+<Id tag=".\exchoice.bxml:1:2:1:3:1:3:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="35"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Nary_Sub op="CHOICE">
+<Attr>
+<Pos l="12" s="6" c="8"/>
+</Attr>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="13" s="2" c="12"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="13" s="2" c="12"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:2:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="15" s="2" c="12"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:2:2:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="15" s="2" c="12"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:3:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="17" s="2" c="12"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\exchoice.bxml:1:2:1:4:1:3:2:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="17" s="2" c="12"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id="2701647786">
+<Id tag=".\exchoice.bxml:1:3:1:1" value="INTEGER"/>
+</Type>
+<Type id="3603043417">
+<Unary_Exp op="POW">
+<Id tag=".\exchoice.bxml:1:3:2:1:1" value="INTEGER"/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+</Machine>
+</Includes>
+<Initialisation>
+<Skip tag=".\excall.bxml:1:2:1"/>
+</Initialisation>
+<Operations>
+<Operation name="op2">
+<Attr>
+<Pos l="12" endLine="16" s="2" c="5"/>
+</Attr>
+<Output_Parameters>
+<Id tag=".\excall.bxml:1:3:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="12" s="2" c="5"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id tag=".\excall.bxml:1:3:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="12" s="2" c="16"/>
+</Attr>
+</Id>
+<Id tag=".\excall.bxml:1:3:1:2:2" typref="2701647786" value="yy">
+<Attr>
+<Pos l="12" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\excall.bxml:1:3:1:2:3" typref="2701647786" value="zz">
+<Attr>
+<Pos l="12" s="2" c="24"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="13" s="1" c="12"/>
+</Attr>
+<Id tag=".\excall.bxml:1:3:1:3:1:1:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="13" s="2" c="9"/>
+</Attr>
+</Id>
+<Id tag=".\excall.bxml:1:3:1:3:1:1:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="13" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="13" s="1" c="23"/>
+</Attr>
+<Id tag=".\excall.bxml:1:3:1:3:1:2:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="13" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\excall.bxml:1:3:1:3:1:2:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="13" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="13" s="1" c="34"/>
+</Attr>
+<Id tag=".\excall.bxml:1:3:1:3:1:3:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="13" s="2" c="31"/>
+</Attr>
+</Id>
+<Id tag=".\excall.bxml:1:3:1:3:1:3:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="13" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\excall.bxml:1:3:1:4:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="15" s="2" c="9"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\excall.bxml:1:3:1:4:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="15" s="2" c="9"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id="2701647786">
+<Id tag=".\excall.bxml:1:4:1:1" value="INTEGER"/>
+</Type>
+<Type id="3603043417">
+<Unary_Exp op="POW">
+<Id tag=".\excall.bxml:1:4:2:1:1" value="INTEGER"/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+</Machine>
+</Abstraction>
+<Imports>
+<Attr>
+<Pos l="9" s="7" c="1"/>
+</Attr>
+<Machine name="any" type="abstraction">
+<Initialisation>
+<Skip tag=".\any.bxml:1:1:1"/>
+</Initialisation>
+<Operations>
+<Operation name="op3">
+<Attr>
+<Pos l="9" endLine="13" s="2" c="5"/>
+</Attr>
+<Output_Parameters>
+<Id tag=".\any.bxml:1:2:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="9" s="2" c="5"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id tag=".\any.bxml:1:2:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="9" s="2" c="16"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:2:2" typref="2701647786" value="yy">
+<Attr>
+<Pos l="9" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:2:3" typref="2701647786" value="zz">
+<Attr>
+<Pos l="9" s="2" c="25"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="12"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:1:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="10" s="2" c="9"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:1:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="23"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:2:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="10" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:2:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="34"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:3:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="10" s="2" c="31"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:3:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<ANY_Sub>
+<Attr>
+<Pos l="12" s="3" c="9"/>
+</Attr>
+<Variables>
+<Id tag=".\any.bxml:1:2:1:4:1:1:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="13"/>
+</Attr>
+</Id>
+</Variables>
+<Pred>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="12" s="1" c="25"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:4:1:2:1:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="22"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:4:1:2:1:2" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="12" s="3" c="27"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Pred>
+<Then>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\any.bxml:1:2:1:4:1:3:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="12" s="2" c="36"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\any.bxml:1:2:1:4:1:3:1:2:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="36"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+</Then>
+</ANY_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id="2701647786">
+<Id tag=".\any.bxml:1:3:1:1" value="INTEGER"/>
+</Type>
+<Type id="3603043417">
+<Unary_Exp op="POW">
+<Id tag=".\any.bxml:1:3:2:1:1" value="INTEGER"/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+</Machine>
+</Imports>
+<Initialisation>
+<Skip tag="excallany_i.bxml:1:3:1"/>
+</Initialisation>
+<Operations>
+<Operation name="op2">
+<Attr>
+<Pos l="13" endLine="23" s="2" c="5"/>
+</Attr>
+<Output_Parameters>
+<Id tag="excallany_i.bxml:1:4:1:1:1" typref="2701647786" suffix="1" value="rr">
+<Attr>
+<Pos l="13" s="2" c="5"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id tag="excallany_i.bxml:1:4:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Id tag="excallany_i.bxml:1:4:1:2:2" typref="2701647786" value="yy">
+<Attr>
+<Pos l="13" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag="excallany_i.bxml:1:4:1:2:3" typref="2701647786" value="zz">
+<Attr>
+<Pos l="13" s="2" c="24"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<VAR_IN>
+<Attr>
+<Pos l="15" s="3" c="9"/>
+</Attr>
+<Variables>
+<Id tag="excallany_i.bxml:1:4:1:3:1:1:1" typref="2701647786" value="aux">
+<Attr>
+<Pos l="15" s="3" c="13"/>
+</Attr>
+</Id>
+</Variables>
+<Body>
+<Nary_Sub op=";">
+<Operation_Call>
+<Attr>
+<Pos l="16" s="3" c="17"/>
+</Attr>
+<Name>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" value="op3">
+<Attr>
+<Pos l="16" s="3" c="21"/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:1:2:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="16" s="2" c="25"/>
+</Attr>
+</Id>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:1:2:2" typref="2701647786" value="yy">
+<Attr>
+<Pos l="16" s="2" c="29"/>
+</Attr>
+</Id>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:1:2:3" typref="2701647786" value="zz">
+<Attr>
+<Pos l="16" s="2" c="33"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Output_Parameters>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:1:3:1" typref="2701647786" value="aux">
+<Attr>
+<Pos l="16" s="3" c="13"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Operation name="op3">
+<Attr>
+<Pos l="9" endLine="13" s="2" c="5"/>
+</Attr>
+<Output_Parameters>
+<Id tag=".\any.bxml:1:2:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="9" s="2" c="5"/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id tag=".\any.bxml:1:2:1:2:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="9" s="2" c="16"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:2:2,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="9" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:2:3,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="9" s="2" c="25"/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="12"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="xx">
+<Attr>
+<Pos l="10" s="2" c="9"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:1:2,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="23"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:2:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="yy">
+<Attr>
+<Pos l="10" s="2" c="20"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:2:2,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="34"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:3:1:3:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="zz">
+<Attr>
+<Pos l="10" s="2" c="31"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:3:1:3:2,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="10" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<ANY_Sub>
+<Attr>
+<Pos l="12" s="3" c="9"/>
+</Attr>
+<Variables>
+<Id tag=".\any.bxml:1:2:1:4:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="13"/>
+</Attr>
+</Id>
+</Variables>
+<Pred>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="12" s="1" c="25"/>
+</Attr>
+<Id tag=".\any.bxml:1:2:1:4:1:2:1:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="22"/>
+</Attr>
+</Id>
+<Id tag=".\any.bxml:1:2:1:4:1:2:1:2,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="3603043417" value="NAT">
+<Attr>
+<Pos l="12" s="3" c="27"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Pred>
+<Then>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag=".\any.bxml:1:2:1:4:1:3:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="rr">
+<Attr>
+<Pos l="12" s="2" c="36"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id tag=".\any.bxml:1:2:1:4:1:3:1:2:1,excallany_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="kk">
+<Attr>
+<Pos l="12" s="2" c="36"/>
+</Attr>
+</Id>
+</Values>
+</Simple_Assignement_Sub>
+</Then>
+</ANY_Sub>
+</Body>
+</Operation>
+</Operation_Call>
+<If_Sub elseif="no">
+<Attr>
+<Pos l="17" s="2" c="13"/>
+</Attr>
+<Condition>
+<Exp_Comparison op=">">
+<Attr>
+<Pos l="17" s="1" c="20"/>
+</Attr>
+<Id tag="excallany_i.bxml:1:4:1:3:1:2:1:2:1:1:1" typref="2701647786" value="aux">
+<Attr>
+<Pos l="17" s="3" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal tag="excallany_i.bxml:1:4:1:3:1:2:1:2:1:1:2" typref="2701647786" value="10">
+<Attr>
+<Pos l="17" s="2" c="22"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag="excallany_i.bxml:1:4:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:2:2:1:1:1," typref="2701647786" suffix="1" value="rr">
+<Attr>
+<Pos l="13" s="2" c="5"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal tag="excallany_i.bxml:1:4:1:3:1:2:1:2:2:1:2:1" typref="2701647786" value="25">
+<Attr>
+<Pos l="13" s="2" c="5"/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Simple_Assignement_Sub>
+</Then>
+<Else>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag="excallany_i.bxml:1:4:1:1:1,excallany_i.bxml:1:4:1:3:1:2:1:2:3:1:1:1," typref="2701647786" suffix="1" value="rr">
+<Attr>
+<Pos l="13" s="2" c="5"/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal tag="excallany_i.bxml:1:4:1:3:1:2:1:2:3:1:2:1" typref="2701647786" value="10">
+<Attr>
+<Pos l="13" s="2" c="5"/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Simple_Assignement_Sub>
+</Else>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</VAR_IN>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id="2701647786">
+<Id tag="excallany_i.bxml:1:5:1:1" value="INTEGER"/>
+</Type>
+</TypeInfos>
+<Renaming_Implicit_Gluing>
+<Simple_Assignement_Sub>
+<Variables/>
+<Values/>
+</Simple_Assignement_Sub>
+</Renaming_Implicit_Gluing>
+</Machine>

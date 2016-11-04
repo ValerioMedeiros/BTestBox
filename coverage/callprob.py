@@ -24,12 +24,14 @@ def evaluate(stringexpression, message, entries): #Use this function to evaluate
     positions = list()
     inputs = list()
     end = list()
-    rcode, output, errors = executeSubWithReturn('"/Users/Diego Oliveira/Documents/ProB/probcli.exe"'+" -p MAXINT 2147483647 -p MININT -2147483648 -eval "+'"'+stringexpression+'"', message, True)
+    rcode, output, errors = executeSubWithReturn('"/Users/Diego Oliveira/Documents/ProB/probcli.exe"'+" -p MAXINT 50000 -p MININT -50000 -eval "+'"'+stringexpression+'"', message, True)
 
     if (rcode==0): #evaluate the return code
         if "TRUE/1" in str(output):
             stringoutput = str(output)
             stringoutput = stringoutput.replace("\\"," ")
+            solutionposition = stringoutput.find("Solution:")
+            stringoutput = stringoutput[solutionposition::]
             aux = list()
             count = 0
             for entry in entries:
@@ -48,7 +50,8 @@ def evaluate(stringexpression, message, entries): #Use this function to evaluate
                         break
                     j += 1
             for i in range(len(positions)):
-                variables.append(str(output)[positions[i]:end[i]:])
+                variables.append(stringoutput[positions[i]:end[i]:])
+            print(errors)
             return True, variables
         elif "FALSE/1" in str(output):
             return False, []

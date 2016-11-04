@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Sub_Calculus_Father>
+	<Sub_Calculus>
+		<Operation_Call>
+			
+
+			<Attr>
+				
+
+				<Pos c="17" l="16" s="3"/>
+				
+
+			</Attr>
+			
+
+			<Name>
+				
+
+				<Id tag="lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" value="op">
+					
+
+					<Attr>
+						
+
+						<Pos c="21" l="16" s="2"/>
+						
+
+					</Attr>
+					
+
+				</Id>
+				
+
+			</Name>
+			
+
+			<Input_Parameters>
+				
+
+				<Id tag="lottery_i.bxml:1:4:1:3:1:2:1:1:2:1" typref="2701647786" value="xx">
+					
+
+					<Attr>
+						
+
+						<Pos c="24" l="16" s="2"/>
+						
+
+					</Attr>
+					
+
+				</Id>
+				
+
+			</Input_Parameters>
+			
+
+			<Output_Parameters>
+				
+
+				<Id tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1" typref="2701647786" value="aux">
+					
+
+					<Attr>
+						
+
+						<Pos c="13" l="16" s="3"/>
+						
+
+					</Attr>
+					
+
+				</Id>
+				
+
+			</Output_Parameters>
+			
+
+			<Operation name="op">
+				
+
+				<Attr>
+					
+
+					<Pos c="5" endLine="13" l="9" s="3"/>
+					
+
+				</Attr>
+				
+
+				<Output_Parameters>
+					
+
+					<Id tag=".\any.bxml:1:2:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="res">
+						
+
+						<Attr>
+							
+
+							<Pos c="5" l="9" s="3"/>
+							
+
+						</Attr>
+						
+
+					</Id>
+					
+
+				</Output_Parameters>
+				
+
+				<Input_Parameters>
+					
+
+					<Id tag=".\any.bxml:1:2:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="xx">
+						
+
+						<Attr>
+							
+
+							<Pos c="16" l="9" s="2"/>
+							
+
+						</Attr>
+						
+
+					</Id>
+					
+
+				</Input_Parameters>
+				
+
+				<Precondition>
+					
+
+					<Nary_Pred op="&amp;">
+						
+
+						<Exp_Comparison op=":">
+							
+
+							<Attr>
+								
+
+								<Pos c="12" l="10" s="1"/>
+								
+
+							</Attr>
+							
+
+							<Id tag=".\any.bxml:1:2:1:3:1:1:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="xx">
+								
+
+								<Attr>
+									
+
+									<Pos c="9" l="10" s="2"/>
+									
+
+								</Attr>
+								
+
+							</Id>
+							
+
+							<Id tag=".\any.bxml:1:2:1:3:1:1:2,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="3603043417" value="NAT">
+								
+
+								<Attr>
+									
+
+									<Pos c="14" l="10" s="3"/>
+									
+
+								</Attr>
+								
+
+							</Id>
+							
+
+						</Exp_Comparison>
+						
+
+						<Exp_Comparison op="&gt;=">
+							
+
+							<Attr>
+								
+
+								<Pos c="23" l="10" s="2"/>
+								
+
+							</Attr>
+							
+
+							<Id tag=".\any.bxml:1:2:1:3:1:2:1,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="xx">
+								
+
+								<Attr>
+									
+
+									<Pos c="20" l="10" s="2"/>
+									
+
+								</Attr>
+								
+
+							</Id>
+							
+
+							<Integer_Literal tag=".\any.bxml:1:2:1:3:1:2:2,lottery_i.bxml:1:4:1:3:1:2:1:1:1:1" typref="2701647786" value="0">
+								
+
+								<Attr>
+									
+
+									<Pos c="26" l="10" s="1"/>
+									
+
+								</Attr>
+								
+
+							</Integer_Literal>
+							
+
+						</Exp_Comparison>
+						
+
+					</Nary_Pred>
+					
+
+				</Precondition>
+				
+
+				<Body>
+					
+
+					<VAR_IN>
+						
+
+						<Attr>
+							
+
+							<Pos c="9" l="15" s="3"/>
+							
+
+						</Attr>
+						
+
+						<Variables>
+							
+
+							<Id typref="2701647786" value="ii">
+								
+
+								<Attr>
+									
+
+									<Pos c="13" l="15" s="2"/>
+									
+
+								</Attr>
+								
+
+							</Id>
+							
+
+						</Variables>
+						
+
+						<Body>
+							
+
+							<Nary_Sub op=";">
+								
+
+								<Simple_Assignement_Sub>
+									
+
+									<Attr>
+										
+
+										<Pos c="16" l="16" s="2"/>
+										
+
+									</Attr>
+									
+
+									<Variables>
+										
+
+										<Id typref="2701647786" value="ii">
+											
+
+											<Attr>
+												
+
+												<Pos c="13" l="16" s="2"/>
+												
+
+											</Attr>
+											
+
+										</Id>
+										
+
+									</Variables>
+									
+
+									<Values>
+										
+
+										<Integer_Literal typref="2701647786" value="0">
+											
+
+											<Attr>
+												
+
+												<Pos c="19" l="16" s="1"/>
+												
+
+											</Attr>
+											
+
+										</Integer_Literal>
+										
+
+									</Values>
+									
+
+								</Simple_Assignement_Sub>
+								
+
+								<Simple_Assignement_Sub>
+									
+
+									<Attr>
+										
+
+										<Pos c="17" l="17" s="2"/>
+										
+
+									</Attr>
+									
+
+									<Variables>
+										
+
+										<Id typref="2701647786" value="res">
+											
+
+											<Attr>
+												
+
+												<Pos c="13" l="17" s="3"/>
+												
+
+											</Attr>
+											
+
+										</Id>
+										
+
+									</Variables>
+									
+
+									<Values>
+										
+
+										<Integer_Literal typref="2701647786" value="10">
+											
+
+											<Attr>
+												
+
+												<Pos c="20" l="17" s="2"/>
+												
+
+											</Attr>
+											
+
+										</Integer_Literal>
+										
+
+									</Values>
+									
+
+								</Simple_Assignement_Sub>
+								
+
+								<While>
+									
+
+									<Attr>
+										
+
+										<Pos c="13" l="18" s="5"/>
+										
+
+									</Attr>
+									
+
+									<Condition>
+										
+
+										<Exp_Comparison op="&lt;">
+											
+
+											<Attr>
+												
+
+												<Pos c="22" l="18" s="1"/>
+												
+
+											</Attr>
+											
+
+											<Id typref="2701647786" value="xx">
+												
+
+												<Attr>
+													
+
+													<Pos c="19" l="18" s="2"/>
+													
+
+												</Attr>
+												
+
+											</Id>
+											
+
+											<Id typref="2701647786" value="ii">
+												
+
+												<Attr>
+													
+
+													<Pos c="24" l="18" s="2"/>
+													
+
+												</Attr>
+												
+
+											</Id>
+											
+
+										</Exp_Comparison>
+										
+
+									</Condition>
+									
+
+									<Body>
+										
+
+										<Nary_Sub op=";">
+											
+
+											<LET_Sub>
+												
+
+												<Attr>
+													
+
+													<Pos c="9" l="12" s="3"/>
+													
+
+												</Attr>
+												
+
+												<Variables>
+													
+
+													<Id typref="2701647786" value="kk">
+														
+
+														<Attr>
+															
+
+															<Pos c="13" l="12" s="2"/>
+															
+
+														</Attr>
+														
+
+													</Id>
+													
+
+												</Variables>
+												
+
+												<Values>
+													
+
+													<Valuation ident="kk" typref="2701647786">
+														
+
+														<Attr>
+															
+
+															<Pos c="19" l="12" s="2"/>
+															
+
+														</Attr>
+														
+
+														<Integer_Literal typref="2701647786" value="10">
+															
+
+															<Attr>
+																
+
+																<Pos c="24" l="12" s="2"/>
+																
+
+															</Attr>
+															
+
+														</Integer_Literal>
+														
+
+													</Valuation>
+													
+
+												</Values>
+												
+
+												<Then>
+													
+
+													<Simple_Assignement_Sub>
+														
+
+														<Attr>
+															
+
+															<Pos c="37" l="12" s="2"/>
+															
+
+														</Attr>
+														
+
+														<Variables>
+															
+
+															<Id typref="2701647786" value="res">
+																
+
+																<Attr>
+																	
+
+																	<Pos c="17" l="19" s="3"/>
+																	
+
+																</Attr>
+																
+
+															</Id>
+															
+
+														</Variables>
+														
+
+														<Values>
+															
+
+															<Id typref="2701647786" value="kk">
+																
+
+																<Attr>
+																	
+
+																	<Pos c="40" l="12" s="2"/>
+																	
+
+																</Attr>
+																
+
+															</Id>
+															
+
+														</Values>
+														
+
+													</Simple_Assignement_Sub>
+													
+
+												</Then>
+												
+
+											</LET_Sub>
+											
+
+											<Simple_Assignement_Sub>
+												
+
+												<Attr>
+													
+
+													<Pos c="20" l="20" s="2"/>
+													
+
+												</Attr>
+												
+
+												<Variables>
+													
+
+													<Id typref="2701647786" value="ii">
+														
+
+														<Attr>
+															
+
+															<Pos c="17" l="20" s="2"/>
+															
+
+														</Attr>
+														
+
+													</Id>
+													
+
+												</Variables>
+												
+
+												<Values>
+													
+
+													<Binary_Exp op="+" typref="2701647786">
+														
+
+														<Attr>
+															
+
+															<Pos c="26" l="20" s="1"/>
+															
+
+														</Attr>
+														
+
+														<Id typref="2701647786" value="ii">
+															
+
+															<Attr>
+																
+
+																<Pos c="23" l="20" s="2"/>
+																
+
+															</Attr>
+															
+
+														</Id>
+														
+
+														<Integer_Literal typref="2701647786" value="1">
+															
+
+															<Attr>
+																
+
+																<Pos c="28" l="20" s="1"/>
+																
+
+															</Attr>
+															
+
+														</Integer_Literal>
+														
+
+													</Binary_Exp>
+													
+
+												</Values>
+												
+
+											</Simple_Assignement_Sub>
+											
+
+										</Nary_Sub>
+										
+
+									</Body>
+									
+
+									<Invariant>
+										
+
+										<Nary_Pred op="&amp;">
+											
+
+											<Exp_Comparison op="&lt;=">
+												
+
+												<Attr>
+													
+
+													<Pos c="25" l="21" s="2"/>
+													
+
+												</Attr>
+												
+
+												<Integer_Literal typref="2701647786" value="0">
+													
+
+													<Attr>
+														
+
+														<Pos c="23" l="21" s="1"/>
+														
+
+													</Attr>
+													
+
+												</Integer_Literal>
+												
+
+												<Id typref="2701647786" value="ii">
+													
+
+													<Attr>
+														
+
+														<Pos c="28" l="21" s="2"/>
+														
+
+													</Attr>
+													
+
+												</Id>
+												
+
+											</Exp_Comparison>
+											
+
+											<Exp_Comparison op="&lt;=">
+												
+
+												<Attr>
+													
+
+													<Pos c="36" l="21" s="2"/>
+													
+
+												</Attr>
+												
+
+												<Id typref="2701647786" value="ii">
+													
+
+													<Attr>
+														
+
+														<Pos c="33" l="21" s="2"/>
+														
+
+													</Attr>
+													
+
+												</Id>
+												
+
+												<Id typref="2701647786" value="xx">
+													
+
+													<Attr>
+														
+
+														<Pos c="39" l="21" s="2"/>
+														
+
+													</Attr>
+													
+
+												</Id>
+												
+
+											</Exp_Comparison>
+											
+
+											<Exp_Comparison op="=">
+												
+
+												<Attr>
+													
+
+													<Pos c="48" l="21" s="1"/>
+													
+
+												</Attr>
+												
+
+												<Id typref="2701647786" value="res">
+													
+
+													<Attr>
+														
+
+														<Pos c="44" l="21" s="3"/>
+														
+
+													</Attr>
+													
+
+												</Id>
+												
+
+												<Integer_Literal typref="2701647786" value="10">
+													
+
+													<Attr>
+														
+
+														<Pos c="50" l="21" s="2"/>
+														
+
+													</Attr>
+													
+
+												</Integer_Literal>
+												
+
+											</Exp_Comparison>
+											
+
+										</Nary_Pred>
+										
+
+									</Invariant>
+									
+
+									<Variant>
+										
+
+										<Binary_Exp op="-" typref="2701647786">
+											
+
+											<Attr>
+												
+
+												<Pos c="24" l="22" s="1"/>
+												
+
+											</Attr>
+											
+
+											<Id typref="2701647786" value="xx">
+												
+
+												<Attr>
+													
+
+													<Pos c="21" l="22" s="2"/>
+													
+
+												</Attr>
+												
+
+											</Id>
+											
+
+											<Id typref="2701647786" value="ii">
+												
+
+												<Attr>
+													
+
+													<Pos c="26" l="22" s="2"/>
+													
+
+												</Attr>
+												
+
+											</Id>
+											
+
+										</Binary_Exp>
+										
+
+									</Variant>
+									
+
+								</While>
+								
+
+							</Nary_Sub>
+							
+
+						</Body>
+						
+
+					</VAR_IN>
+					
+
+				</Body>
+				
+
+			</Operation>
+			
+
+		</Operation_Call>
+		<Exp_Comparison op="=">
+			
+
+			<Attr>
+				
+
+				<Pos c="19" l="17" s="1"/>
+				
+
+			</Attr>
+			
+
+			<Id typref="2701647786" value="xx">
+				
+
+				<Attr>
+					
+
+					<Pos c="16" l="17" s="2"/>
+					
+
+				</Attr>
+				
+
+			</Id>
+			
+
+			<Id tag="lottery_i.bxml:1:4:1:3:1:2:1:1:3:1" typref="2701647786" value="aux">
+				
+
+				<Attr>
+					
+
+					<Pos c="13" l="16" s="3"/>
+					
+
+				</Attr>
+				
+
+			</Id>
+			
+
+		</Exp_Comparison>
+	</Sub_Calculus>
+</Sub_Calculus_Father>

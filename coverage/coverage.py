@@ -1,4 +1,5 @@
-import predicate
+import buildpredicate
+import instgen
 from xml.dom import minidom
 '''
 predicate: module responsible for making the predicate that walk through a path.
@@ -42,7 +43,7 @@ def CodeCoverage(operationImp, paths, inputs, operationname, nodeStatus, importe
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        predicate.makePredicateCodeCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, nodeStatus, importedMch, impName) #Finding the predicate
+        makePredicateCodeCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, nodeStatus, importedMch, impName) #Finding the predicate
         for node in nodeStatus: #Counting if all branches were covered, if True, the while stops.
             if nodeStatus[node] == True:
                 countcover += 1
@@ -98,7 +99,7 @@ def BranchCoverage(operationImp, branchesPaths, branchStatus, paths, inputs, ope
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        predicate.makePredicateBranchCoverage(operationImp, aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
+        makePredicateBranchCoverage(operationImp, aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
         for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch] == True:
                 countcover += 1
@@ -144,11 +145,144 @@ def PathCoverage(operationImp, paths, inputs, operationname, importedMch, impNam
     covered = True
     #Process
     while(len(aux) != 0 and covered == True):
-        covered = predicate.makePredicatePathCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
+        covered = makePredicatePathCoverage(operationImp, aux[pathToCover], pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
         del aux[pathToCover] #Deleting the path of aux to start a new path
         if len(aux) != 0: #If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
+
+def makePredicateBranchCoverage(operationImp, path, branchStatus, branchesPaths, pathToCover, inputs, operationName, importedMch, impName):
+    '''
+    Make the predicate for Branch Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    path: The path being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    branchesPaths: A dict with the branches of a given path
+    branchesStatus: A dict with every branch status, initially every branchStatus is False (uncovered)
+    importedMch: A list with the parse of all imported implementations
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
+    '''
+    pred = minidom.getDOMImplementation()
+    docXML = pred.createDocument(None, "Condition", None)
+    predicateXML = docXML.documentElement
+    way = list()
+    posMut = list()
+    for key in path:
+        way.append(key)
+    while(len(way) != 0): #While there is nodes in the way, get the predicate
+        node = way[len(way) - 1]
+        predicateXML, posMut = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs,
+                                                                          docXML, posMut, operationImp, importedMch,
+                                                                          operationName, impName)
+        del way[len(way) - 1]
+    predicate = instgen.make_inst(predicateXML)
+    ExistValues, variables = buildpredicate.checkPredicate(predicate, "Branch Coverage - trying to get inputs for path "+str(pathToCover), inputs)
+    if ExistValues == True:
+        for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered)
+            branchStatus[branch] = True
+        print("Inputs were found for the predicate: "+predicate)
+        print("An input option is "+variables+"\n")
+    else:
+        print("Inputs were NOT found for the predicate: "+predicate)
+        print("The branches of this path were NOT covered\n")
+
+def makePredicatePathCoverage(operationImp, path, pathToCover, inputs, operationName, importedMch, impName):
+    '''
+    Make the predicate for Path Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    path: The path being evaluated
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    importedMch: A list with the parse of all imported implementations
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
+    ExistValues: Boolean, if exist inputs that satisfy the predicate, than it return True, otherwise return false
+    '''
+    pred = minidom.getDOMImplementation()
+    docXML = pred.createDocument(None, "Condition", None)
+    predicateXML = docXML.documentElement
+    way = list()
+    for key in path:
+        way.append(key)
+    while(len(way) != 0): #While there is nodes in the way, get the predicate
+        node = way[len(way) - 1]
+        predicateXML, posMut = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs,
+                                                                          docXML, posMut, operationImp, importedMch,
+                                                                          operationName, impName)
+        del way[len(way) - 1]
+    predicate = instgen.make_inst(predicateXML)
+    ExistValues, variables = buildpredicate.checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
+    if ExistValues == True:
+        print("Inputs were found for the predicate: "+predicate)
+        print("An option is "+variables+"\n")
+    else:
+        print("Inputs were NOT found for the predicate: "+predicate)
+        print("This path can NOT be covered\n")
+    return ExistValues
+
+def makePredicateCodeCoverage(operationImp, path, pathToCover, inputs, operationName, nodeStatus, importedMch, impName):
+    '''
+    Make the predicate for Code Coverage
+
+    Input:
+    operationImp: The node of the operation in the implementation tree.
+    inputs: The inputs of the operation
+    operationname: The name of the operation
+    nodeStatus: A dict with every node status, initially every nodeStatus is False
+    importedMch: A list with the parse of all imported implementations
+    path: The path being evaluated
+    pathToCover: The number of the path in the path dicts
+
+    Variables:
+    way: A scapegoat variable to do not erase the path variable
+    predicate: The predicate (a string)
+    whilemutables: Every variable that change inside the while
+
+    Output:
+    It says to the user if the path can be walked (and the inputs for this) or not
+    '''
+    pred = minidom.getDOMImplementation()
+    docXML = pred.createDocument(None, "Condition", None)
+    predicateXML = docXML.documentElement
+    way = list()
+    for key in path:
+        way.append(key)
+    while(len(way) != 0): #While there is nodes in the way, get the predicate
+        node = way[len(way) - 1]
+        predicateXML, posMut = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs,
+                                                                          docXML, posMut, operationImp, importedMch,
+                                                                          operationName, impName)
+        del way[len(way) - 1]
+    predicate = instgen.make_inst(predicateXML)
+    ExistValues, variables = buildpredicate.checkPredicate(predicate, "Code Coverage - trying to get inputs for path "+str(pathToCover), inputs)
+    if ExistValues == True:
+        for node in path: #Setting all branches of the path to True (Covered)
+            nodeStatus[node] = True
+        print("Inputs were found for the predicate: "+predicate)
+        print("An input option is "+variables+"\n")
+    else:
+        print("Inputs were NOT found for the predicate: "+predicate)
+        print("The nodes of this path were NOT covered yet\n")
 
 #For testing uncomment the next lines
 """

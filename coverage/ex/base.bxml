@@ -1,0 +1,46 @@
+<Machine name='base' type='abstraction'>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opbase'>
+<Attr>
+<Pos l='9' c='5' s='7'/>
+</Attr>
+<Output_Parameters>
+<Id value='resBASE' typref='2701647786'>
+<Attr>
+<Pos l='9' c='5' s='7'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='9' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='resBASE' typref='2701647786'>
+<Attr>
+<Pos l='9' c='26' s='7'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='10' typref='2701647786'>
+<Attr>
+<Pos l='9' c='37' s='2'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>
