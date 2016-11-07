@@ -157,6 +157,9 @@ def mapCase(node, opmch):
             nodecond[str(int(thenNode) + 1)] = "False"
             #Conecting an condition in the other (nested if's)
             allThenNodes.append(thenNode)
+            for thennode in nodemap[str(int(thenNode)+1)]:
+                if thennode not in allThenNodes:
+                    allThenNodes.append(thennode)
             nodemap[str(int(thenNode)+1)] = [conditionNode]
     if node.lastChild.previousSibling.tagName == "Else":
         body = node.lastChild.previousSibling.firstChild.nextSibling
@@ -169,7 +172,9 @@ def mapCase(node, opmch):
         allThenNodes.append(conditionNode)
     #Conecting the END
     nodecond[str(len(nodemap))] = "True and False"
-    nodemap[str(len(nodemap))] = allThenNodes
+    for thennode in allThenNodes:
+        if thennode not in nodemap[str(len(nodemap))]:
+            nodemap[str(len(nodemap))].append(thennode)
 
 def mapWhile(node, opmch):
     '''
@@ -427,9 +432,8 @@ def clearGraphs():
     nodeinva.clear()
 
 #To test, uncomment the next comment.
-
 '''
-impName = "case_i"
+impName = "nested_case_case_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -445,5 +449,4 @@ for operationImp in operationsimp.childNodes:
 
 for key in sorted(nodemap.keys()):
     print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key], nodeinva[key])
-
 '''

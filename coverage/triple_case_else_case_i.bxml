@@ -1,0 +1,1552 @@
+<Machine name='triple_case_else_case_i' type='implementation'>
+<Abstraction>triple_case_else_case</Abstraction>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='optriple_case_else_case'>
+<Attr>
+<Pos l='10' c='5' s='4' endLine='82'/>
+</Attr>
+<Output_Parameters>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='10' c='5' s='4'/>
+</Attr>
+</Id>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='10' c='11' s='4'/>
+</Attr>
+</Id>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='10' c='17' s='4'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='10' c='50' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='10' c='54' s='2'/>
+</Attr>
+</Id>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='10' c='58' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<Case_Sub>
+<Attr>
+<Pos l='12' c='9' s='4'/>
+</Attr>
+<Value>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='12' c='14' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='13' c='13' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='13' c='20' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='14' c='17' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&lt;'>
+<Attr>
+<Pos l='14' c='23' s='1'/>
+</Attr>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='14' c='20' s='2'/>
+</Attr>
+</Id>
+<Integer_Literal value='5' typref='2701647786'>
+<Attr>
+<Pos l='14' c='25' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Case_Sub>
+<Attr>
+<Pos l='15' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='15' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='16' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='16' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='17' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='17' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='17' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='17' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='17' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='17' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='17' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='17' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='17' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='18' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='18' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='19' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='19' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='19' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='19' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='19' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='19' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='19' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='19' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='19' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='20' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='21' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='21' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='21' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='21' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='21' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='21' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Then>
+<Else>
+<Case_Sub>
+<Attr>
+<Pos l='25' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='25' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='26' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='26' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='27' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='27' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='27' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='27' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='27' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='27' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='28' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='28' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='29' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='29' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='29' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='29' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='29' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='29' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='29' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='29' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='29' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='30' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='31' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='31' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='31' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='31' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='31' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='31' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='31' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='31' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='31' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Else>
+</If_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='35' c='13' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='35' c='16' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='36' c='17' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&lt;'>
+<Attr>
+<Pos l='36' c='23' s='1'/>
+</Attr>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='36' c='20' s='2'/>
+</Attr>
+</Id>
+<Integer_Literal value='5' typref='2701647786'>
+<Attr>
+<Pos l='36' c='25' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Case_Sub>
+<Attr>
+<Pos l='37' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='37' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='38' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='38' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='39' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='39' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='39' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='39' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='39' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='39' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='39' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='39' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='39' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='40' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='40' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='41' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='41' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='41' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='41' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='41' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='41' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='41' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='41' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='41' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='42' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='43' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='43' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='43' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='43' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='43' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='43' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='43' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='43' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='43' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Then>
+<Else>
+<Case_Sub>
+<Attr>
+<Pos l='47' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='47' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='48' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='48' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='49' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='49' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='49' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='49' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='49' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='49' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='49' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='49' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='49' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='50' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='50' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='51' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='51' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='51' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='51' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='51' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='51' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='51' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='51' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='51' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='52' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='53' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='53' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='53' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='53' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='53' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='53' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='53' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='53' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='53' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Else>
+</If_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='57' c='13' s='4'/>
+</Attr>
+<Then>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='58' c='17' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&lt;'>
+<Attr>
+<Pos l='58' c='23' s='1'/>
+</Attr>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='58' c='20' s='2'/>
+</Attr>
+</Id>
+<Integer_Literal value='5' typref='2701647786'>
+<Attr>
+<Pos l='58' c='25' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Case_Sub>
+<Attr>
+<Pos l='59' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='59' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='60' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='60' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='61' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='61' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='61' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='61' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='61' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='61' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='61' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='61' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='61' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='62' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='62' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='63' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='63' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='63' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='63' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='63' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='63' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='63' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='63' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='63' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='64' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='65' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='65' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='65' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='65' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='65' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='65' c='49' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='65' c='57' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='65' c='52' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='65' c='60' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Then>
+<Else>
+<Case_Sub>
+<Attr>
+<Pos l='69' c='21' s='4'/>
+</Attr>
+<Value>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='69' c='26' s='2'/>
+</Attr>
+</Id>
+</Value>
+<Choices>
+<Choice>
+<Attr>
+<Pos l='70' c='25' s='6'/>
+</Attr>
+<Value>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='70' c='32' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='71' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='71' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='71' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='71' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='71' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='71' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='71' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='71' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='71' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+<Choice>
+<Attr>
+<Pos l='72' c='25' s='2'/>
+</Attr>
+<Value>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='72' c='28' s='1'/>
+</Attr>
+</Integer_Literal>
+</Value>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='73' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='73' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='73' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='73' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='73' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='73' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='73' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='73' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='73' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Choices>
+<Else>
+<Choice>
+<Attr>
+<Pos l='74' c='25' s='4'/>
+</Attr>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='75' c='34' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='75' c='29' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='75' c='37' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='75' c='46' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='75' c='41' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='75' c='49' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='75' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='75' c='53' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='zz' typref='2701647786'>
+<Attr>
+<Pos l='75' c='61' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Else>
+</If_Sub>
+</Then>
+</Choice>
+</Else>
+</Case_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>

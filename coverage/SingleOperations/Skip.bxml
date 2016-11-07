@@ -1,0 +1,21 @@
+<Machine name='Skip' type='abstraction'>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opskip'>
+<Attr>
+<Pos l='9' c='5' s='6'/>
+</Attr>
+<Body>
+<Skip>
+<Attr>
+<Pos l='9' c='14' s='4'/>
+</Attr>
+</Skip>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos/>
+
+</Machine>

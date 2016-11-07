@@ -5,7 +5,7 @@ import random
 import shutil
 import time
 
-import functions_tests as f
+#import functions_tests as f
 
 
 # aux functions
@@ -180,8 +180,8 @@ def print_Operations(depth, seq_cmds, base_instructions,isImplementation):
 
 #Printing the file IMPLEMENTATION
 
-f.print_example_title("Printing the component with nested instructions")
-depth = 5
+#f.print_example_title("Printing the component with nested instructions")
+depth = 1
 seq_cmds = 1 # default 10
 name_mch ="COMP_"+str(depth)+"seq"+str(seq_cmds)+"_OPS"
 name_imp ="COMP_"+str(depth)+"seq"+str(seq_cmds)+"_OPS_IMP"
@@ -210,13 +210,13 @@ myfile = open("B0_grammar_TestSet/"+name_mch+".mch","w")
 myfile.write(mch)
 myfile.close()
 
-shutil.copyfile("B0_grammar_TestSet/"+name_mch+".mch","/Users/valerio/Dropbox/B_Resources/ExamplesB0/"+name_mch+".mch")
-shutil.copyfile("B0_grammar_TestSet/"+name_imp+".imp","/Users/valerio/Dropbox/B_Resources/ExamplesB0/"+name_imp+".imp")
+shutil.copyfile("B0_grammar_TestSet/"+name_mch+".mch","/Users/Diego Oliveira/Documents/binstall_projects/B0_TestSet/"+name_mch+".mch")
+shutil.copyfile("B0_grammar_TestSet/"+name_imp+".imp","/Users/Diego Oliveira/Documents/binstall_projects/B0_TestSet/"+name_imp+".imp")
 
-
-pProject = "/Users/valerio/Dropbox/B_Resources/ExamplesB0/"
-pBXML = "/Applications/AtelierB_4.3/AtelierB.app/AB/bbin/macosx/bxml"
-pOut ="/Users/valerio/Dropbox/B_Resources/ExamplesB0/"
+'''
+pProject = "/Users/Diego Oliveira/Documents/binstall_projects/B0_TestSet/"
+pBXML = "/Users/Diego Oliveira/AtelierB/installatelierb/bbin/win32/bxml"
+pOut ="/Users/Diego Oliveira/Documents/binstall_projects/B0_TestSet/"
 command = pBXML+' -a  -i4 -I '+ pProject + ' -O'+pOut+' '+pProject+name_imp+".imp"
 
 f.print_example_title("BXML working")
@@ -224,7 +224,7 @@ start_time = time.time()
 res = f.execute(command,"B0Check "+name_imp+".imp",name_imp+".imp")
 if res==0: print("Ok - BXML")
 print("Time: %.2f s"%(time.time() - start_time))
-
+'''
 
 #f.print_example_title("Generating C code using b2c")
 #TODO:Medir o tempo

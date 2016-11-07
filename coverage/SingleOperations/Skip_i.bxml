@@ -1,0 +1,22 @@
+<Machine name='Skip_i' type='implementation'>
+<Abstraction>Skip</Abstraction>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opskip'>
+<Attr>
+<Pos l='10' c='2' s='6'/>
+</Attr>
+<Body>
+<Skip>
+<Attr>
+<Pos l='10' c='11' s='4'/>
+</Attr>
+</Skip>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos/>
+
+</Machine>

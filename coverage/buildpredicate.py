@@ -3,6 +3,7 @@ from xml.dom import minidom
 import callprob
 import solveroc
 import nodescreator
+import instgen
 import re
 '''
 buildpaths: module responsible of building the paths, branchStatus, branchesPaths
@@ -38,7 +39,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, docXML, posMut, oper
         condWhile = path[len(way)] #The node that contain the type ConditionWhile
         if predicateXML.getElementsByTagName('Quantified_Pred') == []:
             predicateXML, posMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML, way, path, inputs,
-                                              startWhile, condWhile, condWhile, posMut, docXML.createElement('Body'), impName)
+                                              startWhile, condWhile, posMut, docXML.createElement('Body'), impName)
         else:
             saveQuant = docXML.createElement("Save_Quantified_Pred")
             if predicateXML.firstChild.nextSibling == "Quantified_Pred":
@@ -51,7 +52,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, docXML, posMut, oper
                             child.parentNode.replaceChild(docXML.createTextNode('\n'), child)
             predicateXML = solveRemainingPred(predicateXML, docXML)
             predicateXML, newPosMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML, way, path, inputs,
-                                                 startWhile, condWhile, condWhile, [], docXML.createElement('Body'), impName)
+                                                 startWhile, condWhile, [], docXML.createElement('Body'), impName)
             for child in saveQuant.childNodes:
                 predicateXML.firstChild.nextSibling.appendChild(child.cloneNode(10))
                 predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
@@ -160,7 +161,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         quantPredNodeFG.appendChild(predicateXML)
         quantPredNodeFG.appendChild(docXML.createTextNode('\n'))
         naryPredNode = nodescreator.createNaryPred(quantPredNode, quantPredNodeFG, '&', docXML)
-        pred = getDOMImplementation()
+        pred = minidom.getDOMImplementation()
         newDocXML = pred.createDocument(None, "Condition", None)
         newPredicateXML = newDocXML.documentElement
         newPredicateXML.appendChild(docXML.createTextNode('\n'))
