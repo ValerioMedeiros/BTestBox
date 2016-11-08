@@ -1,9 +1,9 @@
-<Machine name='nested_while_while' type='abstraction'>
+<Machine name='triseq_while_else_while' type='abstraction'>
 <Initialisation>
 <Skip/>
 </Initialisation>
 <Operations>
-<Operation name='opnested_while_while'>
+<Operation name='optriseq_while_else_while'>
 <Attr>
 <Pos l='9' c='5' s='4' endLine='18'/>
 </Attr>
@@ -18,21 +18,20 @@
 <Pos l='9' c='11' s='4'/>
 </Attr>
 </Id>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='9' c='17' s='4'/>
+</Attr>
+</Id>
 </Output_Parameters>
 <Input_Parameters>
 <Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='9' c='41' s='2'/>
-</Attr>
-</Id>
-<Id value='yy' typref='2701647786'>
-<Attr>
-<Pos l='9' c='45' s='2'/>
+<Pos l='9' c='52' s='2'/>
 </Attr>
 </Id>
 </Input_Parameters>
 <Precondition>
-<Nary_Pred op='&amp;'>
 <Exp_Comparison op=':'>
 <Attr>
 <Pos l='10' c='12' s='1'/>
@@ -48,22 +47,6 @@
 </Attr>
 </Id>
 </Exp_Comparison>
-<Exp_Comparison op=':'>
-<Attr>
-<Pos l='10' c='23' s='1'/>
-</Attr>
-<Id value='yy' typref='2701647786'>
-<Attr>
-<Pos l='10' c='20' s='2'/>
-</Attr>
-</Id>
-<Id value='NAT' typref='3603043417'>
-<Attr>
-<Pos l='10' c='25' s='3'/>
-</Attr>
-</Id>
-</Exp_Comparison>
-</Nary_Pred>
 </Precondition>
 <Body>
 <Nary_Sub op='||'>
@@ -86,12 +69,31 @@
 </Id>
 </Values>
 </Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='12' c='28' s='2'/>
+</Attr>
+<Variables>
+<Id value='res3' typref='2701647786'>
+<Attr>
+<Pos l='12' c='23' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='12' c='31' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
 <If_Sub elseif='no'>
 <Attr>
 <Pos l='13' c='9' s='2'/>
 </Attr>
 <Condition>
-<Exp_Comparison op='&gt;'>
+<Exp_Comparison op='&lt;'>
 <Attr>
 <Pos l='13' c='15' s='1'/>
 </Attr>
@@ -100,7 +102,7 @@
 <Pos l='13' c='12' s='2'/>
 </Attr>
 </Id>
-<Integer_Literal value='0' typref='2701647786'>
+<Integer_Literal value='5' typref='2701647786'>
 <Attr>
 <Pos l='13' c='17' s='1'/>
 </Attr>
@@ -120,11 +122,11 @@
 </Id>
 </Variables>
 <Values>
-<Id value='yy' typref='2701647786'>
+<Integer_Literal value='0' typref='2701647786'>
 <Attr>
-<Pos l='14' c='21' s='2'/>
+<Pos l='14' c='21' s='1'/>
 </Attr>
-</Id>
+</Integer_Literal>
 </Values>
 </Assignement_Sub>
 </Then>
@@ -141,11 +143,11 @@
 </Id>
 </Variables>
 <Values>
-<Integer_Literal value='0' typref='2701647786'>
+<Id value='xx' typref='2701647786'>
 <Attr>
-<Pos l='16' c='21' s='1'/>
+<Pos l='16' c='21' s='2'/>
 </Attr>
-</Integer_Literal>
+</Id>
 </Values>
 </Assignement_Sub>
 </Else>

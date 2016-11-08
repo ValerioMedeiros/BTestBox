@@ -21,7 +21,7 @@ importedMch: list of parses, with all implementation imported.
 operationsimp: An node with all the operations of the implementation
 operationsmch: An node with all the operations of the machine
 '''
-impName = "nested_while_else_i"
+impName = "OC_NDet_While_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine

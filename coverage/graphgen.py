@@ -84,6 +84,7 @@ def mapIf(node, opmch):
     opmch: The node of the operation in the machine (to get the Precondition)
     node: The node of the If
     '''
+    thenNodeList = list()
     #If Condition
     condition = node.childNodes.item(3)
     condition = condition.childNodes.item(1)
@@ -97,6 +98,7 @@ def mapIf(node, opmch):
     then = node.childNodes.item(5)
     makeMap(then, opmch)
     thenNode = str(len(nodemap)-1) #To add in the END*
+    thenNodeList = nodemap[str(len(nodemap))] #To add in the END*
     nodecond[str(int(thenNode) + 1)] = "True and False"
     #Else
     if node.lastChild.previousSibling.tagName == "Else": #Check if the ELSE exists
@@ -105,8 +107,10 @@ def mapIf(node, opmch):
         elseNode = str(len(nodemap)-1) #To add in the END*
     #Connecting the END node
     if node.lastChild.previousSibling.tagName == "Else":
-        nodemap[str(len(nodemap))].append(thenNode) #Adding in the END
-        aux = nodemap[str(int(thenNode) + 1)]
+        for thennode in thenNodeList:
+            if thennode not in nodemap[str(len(nodemap))]:
+                nodemap[str(len(nodemap))].append(thennode) #Adding in the END
+        aux = nodemap[str(int(elseNode) + 1)]
         nodemap[str(int(thenNode) + 1)] = [conditionNode]
         for key in aux:
             if key not in nodemap[str(len(nodemap))]:
@@ -156,9 +160,8 @@ def mapCase(node, opmch):
             thenNode = str(len(nodemap) - 1) #To add in the END*
             nodecond[str(int(thenNode) + 1)] = "False"
             #Conecting an condition in the other (nested if's)
-            allThenNodes.append(thenNode)
             for thennode in nodemap[str(int(thenNode)+1)]:
-                if thennode not in allThenNodes:
+                if thennode not in allThenNodes: 
                     allThenNodes.append(thennode)
             nodemap[str(int(thenNode)+1)] = [conditionNode]
     if node.lastChild.previousSibling.tagName == "Else":
@@ -167,7 +170,6 @@ def mapCase(node, opmch):
         nodecond[str(int(thenNode)+1)] = "False"
         makeMap(body, opmch)
         elseNode = str(len(nodemap)-1) #To add in the END*
-        allThenNodes.append(str(len(nodemap) - 1))
     else:
         allThenNodes.append(conditionNode)
     #Conecting the END
@@ -433,7 +435,7 @@ def clearGraphs():
 
 #To test, uncomment the next comment.
 '''
-impName = "nested_case_case_i"
+impName = "triple_while_while_while_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine

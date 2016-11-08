@@ -1,1 +1,0 @@
-C:\Users\Diego Oliveira\Documents\ProB>probcli.exe -assertions "C:\Users\Diego Oliveira\Documents\BTestBox\coverage\PredicatesMachines\MCH_PRE_BC_OPERATION_operation1_PATH9.mch"
