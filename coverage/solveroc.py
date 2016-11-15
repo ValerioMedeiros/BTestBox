@@ -5,8 +5,9 @@ import codecs
 import nodescreator
 import subprocess
 import buildpaths
+import instgen
 
-def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut):
+def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs, isTheOutput, universalOutputs, changedVariables):
     '''
     Return the predicate of a called operation
 
@@ -25,12 +26,12 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
     '''
     calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(operationImp, buildpaths.graphgen.nodedata[node],
                                                                                                          importedMch)
-    if not(testDeterminism(calledOperation)):
+    if isTheOutput:
         hasWhile = False
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
                                                                              operationImp, operationInputs, operationOutputs)
         calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName)
-        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))): #This while is useless
+        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
             solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
         if calledOperationImp.getElementsByTagName("While") != []:
             hasWhile = True
@@ -42,6 +43,7 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
             for out in output:
                 if out.getAttribute('goalTag') == "End of loop":
                     output = out.getElementsByTagName('Body')[0]
+                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, changedVariables)
                     naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
                                                                output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
                     predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
@@ -51,18 +53,49 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
     else:
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
                                                                              operationImp, operationInputs, operationOutputs)
-        auxXML = modifyPredicateXML(predicateXML, operationIBXML)
+        auxXML = modifyPredicateXML(predicateXML, operationIBXML, posMut)
         output = make_Sub_Calculus(operationIBXML, auxXML)
         predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
                               predicateXML.firstChild.nextSibling)
     os.remove("encodeddocumentinput.xml")
     os.remove("encodeddocumentoutput.xml")
     os.remove(impName+".ibxml")
-    return predicateXML
+    return predicateXML, changedVariables
+
+def changeVariablesNames(predicate, inputs, outputs, previousChangedId, posMut = []):
+    '''
+    '''
+    allId = predicate.getElementsByTagName('Id')
+    changedId = []
+    auxlist = []
+    changeMutablePos = []
+    for Id in allId:
+        if Id.getAttribute('value') not in inputs:
+            if Id.getAttribute('value') not in outputs:
+                if Id.getAttribute('value') not in previousChangedId:
+                    if Id.getAttribute('value') in posMut:
+                        for mutposition in range(len(posMut)):
+                            if posMut[mutposition] == Id.getAttribute('value'):
+                                changeMutablePos.append(mutposition)                                
+                    Id.setAttribute('value', Id.getAttribute('value')+'1')
+                    while (Id.getAttribute('value') in previousChangedId):
+                        Id.setAttribute('value', Id.getAttribute('value')+'1')
+                    changedId.append(Id.getAttribute('value'))
+                    for position in changeMutablePos:
+                        posMut[position] = Id.getAttribute('value')
+    for Id in changedId:
+        if Id not in auxlist:
+            auxlist.append(Id)
+    return previousChangedId + auxlist
 
 def solveInsideOperationCall(calledImp, calledOperationImp):
     '''
-    
+    This function deal with the different calling of a machine (deterministic and non-deterministic) and implementation (with operation call or without)
+    Only enters here if the called operation is non-deterministic.
+
+    Inputs:
+    calledImp: The called implementation
+    calledOperationImp: The called operation TREE in the implementation
     '''
     importedMch = list()
     for childnode in calledImp.getElementsByTagName("Machine")[0].childNodes:
@@ -91,7 +124,17 @@ def solveInsideOperationCall(calledImp, calledOperationImp):
 
 def changeOperationCallWithOperationMachine(operationCall, calledOperationMachine, mchOperationInputs, mchOperationOutputs):
     '''
-    
+    This function change the operation call in the implementation for the body of the operation in the machine.
+    Only enters here if the called operation is deterministic after the previous is non-deterministic (nested operation calls).
+
+    Inputs:
+    operationCall: The operation call branch in the implementation
+    calledOperationMachine: The called machine
+    mchOperationInputs: The inputs of the operation in the implementation
+    mchOperationOutputs: The outputs of the operation in the implementation
+
+    Return:
+    substitution: The predicate with the swaped operations
     '''
     for child in calledOperationMachine.childNodes:
         if child.nodeType != child.TEXT_NODE:
@@ -171,7 +214,7 @@ def getImpWithCalledOperation(calledOperation, calledMachineName):
                             return importedImplementationOperation
     return None
 
-def modifyPredicateXML(predicateXML, operationIBXML):
+def modifyPredicateXML(predicateXML, operationIBXML, posMut = []):
     '''
     Return the predicate of a called operation
 
@@ -188,7 +231,8 @@ def modifyPredicateXML(predicateXML, operationIBXML):
     for ID in IDsInPredicate:
         for IDibxml in IDsInIBXML:
             if ID.getAttribute('value') == IDibxml.getAttribute('value'):
-                ID.parentNode.replaceChild(IDibxml.cloneNode(10), ID)
+                if ID.getAttribute('value') not in posMut:
+                    ID.parentNode.replaceChild(IDibxml.cloneNode(10), ID)
     return predicateXML
 
 def getMchWithTheCalledOperation(operationImp, calledop, importedMch):
@@ -261,11 +305,11 @@ def checkPuts(Parameters, ImpParameters):
     ImpParameters: The outputs or the inputs of the implementation
     
     Return:
-    ans: True means that the parameters are equal, False that are different (this is used to know if the same)
+    ans: True means that the parameters are equal, False that are different (this is used to know if is the same Operation)
     '''
     ans = True
-    IDs = Parameters.getElementsByTagName('Id')
-    ImpIDs = ImpParameters.getElementsByTagName('Id')
+    IDs = Parameters.getElementsByTagName('Id') + Parameters.getElementsByTagName('Integer_Literal')
+    ImpIDs = ImpParameters.getElementsByTagName('Id') + ImpParameters.getElementsByTagName('Integer_Literal')
     for i in range(len(IDs)):
         if IDs[i].getAttribute('value') != ImpIDs[i].getAttribute('value'):
             ans = False

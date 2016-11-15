@@ -52,20 +52,26 @@ def make_binaryexp(node):
         text += callmake(node, node.childNodes.item(3).tagName) #First operand of a binary evaluation
         if node.childNodes.item(3).tagName == "Binary_Exp":
             text += ")"
-        text += " " + node.getAttribute("op") + " " 
+        if node.getAttribute("op") == "(":
+            text += node.getAttribute("op") 
+        else:
+            text += " " + node.getAttribute("op") + " " 
         text += selfcaller(node.childNodes.item(5)) #Second operand of a binary evaluation
         if node.getAttribute("op") == '(': #If it is a '(', then we need to close with ')'
-            text += ' )'
+            text += ')'
     else:
         if node.childNodes.item(1).tagName == "Binary_Exp":
             text = "("
         text += callmake(node, node.childNodes.item(1).tagName) #First operand of a binary evaluation
         if node.childNodes.item(1).tagName == "Binary_Exp":
             text += ")"
-        text += " " + node.getAttribute("op") + " " 
+        if node.getAttribute("op") == "(":
+            text += node.getAttribute("op") 
+        else:
+            text += " " + node.getAttribute("op") + " " 
         text += selfcaller(node.childNodes.item(3)) #Second operand of a binary evaluation
         if node.getAttribute("op") == '(': #If it is a '(', then we need to close with ')'
-            text += ' )'
+            text += ')'
     return text
 
 def make_variables(node):
@@ -145,7 +151,9 @@ def selfcaller(node):
     elif tag == "Precondition":
         text += make_precondition(node)
     elif tag == "Condition":
-        text += make_inst(node)  
+        text += make_inst(node)
+    elif tag == "Quantified_Exp":
+        text += make_quantifiedexp(node)
     return text
 
 def make_if_sub(node):
@@ -265,12 +273,39 @@ def make_invariant(node):
     text += make_inst(node)
     return text
 
-def make_quantifiedpred(node):
-    """Build a quantified precondition"""
-    if(node.getAttribute("type")) == '!':
-        text = "#("
+def make_quantifiedexp(node):
+    '''Build a quantified exp'''
+    text = node.getAttribute('type')+'('
+    count = 1
+    if node.childNodes.item(1).tagName == "Attr":
+        for childnode in node.childNodes.item(3).childNodes: #Variables Node
+            if childnode.nodeType != childnode.TEXT_NODE:
+                text += make_id(childnode)
+                count += 2
+                if count < node.childNodes.item(3).childNodes.length:
+                    text += ", "
+        text += ").("
+        text += make_inst(node.childNodes.item(5)) #Pred
+        text += " | "
+        text += make_inst(node.childNodes.item(7)) #Body
+        text += ")"
     else:
-        text = "Quantified unknown, need to define in instgen make_quantifiedpred function"
+        for childnode in node.childNodes.item(1).childNodes: #Variables Node
+            if childnode.nodeType != childnode.TEXT_NODE:
+                text += make_id(childnode)
+                count += 2
+                if count < node.childNodes.item(1).childNodes.length:
+                    text += ", "
+        text += ").("
+        text += make_inst(node.childNodes.item(3)) #Pred
+        text += " | "
+        text += make_inst(node.childNodes.item(5)) #Body
+        text += ")"
+    return text
+        
+def make_quantifiedpred(node):
+    """Build a quantified predicate"""
+    text = node.getAttribute('type')+'('
     count = 1
     if node.childNodes.item(1).tagName == "Attr":
         for childnode in node.childNodes.item(3).childNodes: #Variables Node
@@ -377,6 +412,10 @@ def callmake(node, tag):
         text += make_unaryexp(childnode)
     elif tag == "Unary_Pred":
         text += make_unarypred(childnode)
+    elif tag == "Quantified_Exp":
+        text += make_quantifiedexp(childnode)
+    elif tag == "Nary_Exp":
+        text += make_naryexp(childnode)
     return text
 
 def make_inst(node):

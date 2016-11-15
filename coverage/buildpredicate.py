@@ -13,7 +13,7 @@ callprob: module responsible of calling ProB to evaluate a predicate
 solveroc: module to solve the operation call
 '''
 
-def makePredicateXML(node, predicateXML, way, path, inputs, docXML, posMut, operationImp, importedMch, operationName, impName):
+def makePredicateXML(node, predicateXML, way, path, inputs, outputs, docXML, posMut, operationImp, importedMch, operationName, impName, isTheOutput, changedVariablesWhile, changedVariablesOC = []):
     '''
     Make the predicate in a XML
 
@@ -37,28 +37,22 @@ def makePredicateXML(node, predicateXML, way, path, inputs, docXML, posMut, oper
     if " ENDWHILE" in buildpaths.graphgen.nodecond[node]:
         startWhile = node #The node that start the while 
         condWhile = path[len(way)] #The node that contain the type ConditionWhile
-        if predicateXML.getElementsByTagName('Quantified_Pred') == []:
-            predicateXML, posMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML, way, path, inputs,
-                                              startWhile, condWhile, posMut, docXML.createElement('Body'), impName)
-        else:
-            saveQuant = docXML.createElement("Save_Quantified_Pred")
-            if predicateXML.firstChild.nextSibling == "Quantified_Pred":
-                saveQuant.appendChild(predicateXML.firstChild.nextSibling)
-            else:
-                for child in predicateXML.firstChild.nextSibling.childNodes:
-                    if child.nodeType != child.TEXT_NODE:
-                        if child.tagName == "Quantified_Pred":
-                            saveQuant.appendChild(child.cloneNode(10))
-                            child.parentNode.replaceChild(docXML.createTextNode('\n'), child)
-            predicateXML = solveRemainingPred(predicateXML, docXML)
-            predicateXML, newPosMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML, way, path, inputs,
-                                                 startWhile, condWhile, [], docXML.createElement('Body'), impName)
-            for child in saveQuant.childNodes:
-                predicateXML.firstChild.nextSibling.appendChild(child.cloneNode(10))
-                predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
-            for mut in newPosMut:
-                if mut not in posMut:
-                    posMut.append(mut)
+        '''if posMut != []:
+            clone = predicateXML.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10)
+            predicateXML.firstChild.nextSibling.removeChild(predicateXML.firstChild.nextSibling.lastChild)
+            predicateXML.firstChild.nextSibling.removeChild(predicateXML.firstChild.nextSibling.lastChild)
+            changedVariablesWhile = solveroc.changeVariablesNames(predicateXML, inputs, outputs, changedVariablesWhile, posMut)
+            predicateXML.firstChild.nextSibling.appendChild(clone)
+            predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+        '''
+        predicateXML, newPosMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML, way, path, inputs,
+                                                 startWhile, condWhile, posMut, docXML.createElement('Body'), impName)
+        changedVariablesWhile = solveroc.changeVariablesNames(predicateXML, inputs, outputs, changedVariablesWhile, posMut)
+        for mut in newPosMut:
+            if mut not in posMut:
+                posMut.append(mut)
+        del way[len(way) - 1]
+        node = way[len(way) - 1]
     elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile"
                                                                and int(way[len(way)-1]) < int(way[len(way)-2])):
         predicateXML = buildCondition(node, predicateXML, way, path, docXML)
@@ -68,8 +62,12 @@ def makePredicateXML(node, predicateXML, way, path, inputs, docXML, posMut, oper
         predicateXML = buildInstruction(node, predicateXML, docXML, posMut)
     elif buildpaths.graphgen.nodetype[node] == "Call":
         if predicateXML.hasChildNodes():
-            predicateXML = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML, operationImp, importedMch, operationName, impName, posMut)
-    return predicateXML, posMut
+            predicateXML, changedVariablesOC = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML, operationImp,
+                                                       importedMch, operationName, impName, posMut, inputs, isTheOutput, outputs, changedVariablesOC)
+    if isTheOutput:
+        return predicateXML, posMut, changedVariablesWhile, changedVariablesOC
+    else:
+        return predicateXML, posMut, changedVariablesWhile
 
 def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs, startWhile, condWhile, posMut, whilePredicateXML, impName):
     '''
@@ -112,12 +110,14 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
+        del way[len(way) - 1]
+        node = way[len(way) - 1]
         return newPredicateXML, posMut
     elif buildpaths.graphgen.nodetype[node] == "ConditionWhile" and node == condWhile: #Stop the while and return predicate
         #InsideWhile
         quantPredVariables, posMut = getMutables(node, inputs, path, condWhile, posMut, docXML)
         quantPredNode = docXML.createElement('Quantified_Pred')
-        quantPredNode.setAttribute('type', '!')
+        quantPredNode.setAttribute('type', '#')
         if whilePredicateXML.hasChildNodes():
             if whilePredicateXML.firstChild.nextSibling.tagName == "Nary_Pred":
                 whilePredicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodedata[node].cloneNode(10))
@@ -145,7 +145,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         #FalseGuard
         quantPredVariablesFG = quantPredVariables.cloneNode(5)
         quantPredNodeFG = docXML.createElement(('Quantified_Pred'))
-        quantPredNodeFG.setAttribute('type', '!')
+        quantPredNodeFG.setAttribute('type', '#')
         predicateXML = clonePredicateXML
         if predicateXML.firstChild.nextSibling.tagName == "Nary_Pred":
             predicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodeinva[node].cloneNode(10))
@@ -388,6 +388,56 @@ def checkPredicate(predicate, message, inputs):
     for variable in variables:
               entry += variable+" "
     return ans, entry
+
+def getOutput(path, pathToCover, inputs, outputs, docXML, operationImp, importedMch, operationName, impName, predicateInputs):
+    '''
+    Get the output for a given input and operation
+    '''
+    pred = minidom.getDOMImplementation()
+    docXML = pred.createDocument(None, "Condition", None)
+    predicateXML = docXML.documentElement
+    predicateInputs.replace(" = ", "=")
+    inputsPredicateString = ""
+    wordList = re.sub("[^\w]", " ",  predicateInputs).split()
+    for i in range(len(wordList)):
+        if i % 2 == 0:
+            if inputsPredicateString == "":
+                inputsPredicateString = wordList[i]+"="+wordList[i+1]
+            else:
+                inputsPredicateString = inputsPredicateString+" & "+wordList[i]+"="+wordList[i+1]
+    predicateXML.appendChild(docXML.createTextNode('\n'))
+    predicateXML.appendChild(buildpaths.graphgen.nodedata[str(len(buildpaths.graphgen.nodemap))].cloneNode(10))
+    predicateXML.appendChild(docXML.createTextNode('\n'))
+    way = list()
+    posMut = list()
+    changedVariablesOC = list()
+    changedVariablesWhile = list()
+    outputList = list()
+    for out in outputs:
+        outputList.append(out)
+    for i in range(len(outputs)):
+        outputList.append("output"+outputs[i])
+    for key in path:
+        way.append(key)
+    while(len(way) != 0): #While there is nodes in the way, get the predicate
+        node = way[len(way) - 1]
+        predicateXML, posmut, changedVariablesWhile, changedVariablesOC = makePredicateXML(node, predicateXML, way, path, inputs, outputList,
+                                                docXML, posMut, operationImp, importedMch,
+                                                operationName, impName, True, changedVariablesWhile, changedVariablesOC)
+        del way[len(way) - 1]
+    predicate = instgen.make_inst(predicateXML)
+    predicate = predicate[:len(predicate)-1:]+" & "+inputsPredicateString+")"
+    outputList = []
+    for i in range(len(outputs)):
+        outputList.append("output"+outputs[i])
+    ExistValues, OutputVariables = checkPredicate(predicate, "Branch Coverage - Getting the outputs for path "+str(pathToCover), outputList)
+    for i in range(len(outputList)):
+        usingRegex = r"\b" + re.escape(outputList[i]) + r"\b" #Using regex to change the string
+        outputList[i] = outputList[i][6::]
+        OutputVariables = re.sub(usingRegex, outputList[i], OutputVariables) #Replacing using regex
+    print("Output(s) were found for the predicate: "+predicate)
+    print("The output(s) for the input(s) "+ predicateInputs +" is/are "+OutputVariables)
+    return OutputVariables
 
 #For testing purpose uncomment this block
 '''

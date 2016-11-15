@@ -1,0 +1,123 @@
+<Machine name='OC_WHILEINSIDE' type='abstraction'>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opOC_WHILEINSIDE'>
+<Attr>
+<Pos l='9' c='5' s='4' endLine='13'/>
+</Attr>
+<Output_Parameters>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='9' c='5' s='4'/>
+</Attr>
+</Id>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='9' c='11' s='4'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='9' c='37' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='9' c='40' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='10' c='12' s='1'/>
+</Attr>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='10' c='9' s='2'/>
+</Attr>
+</Id>
+<Id value='NAT' typref='3603043417'>
+<Attr>
+<Pos l='10' c='14' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='10' c='23' s='1'/>
+</Attr>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='10' c='20' s='2'/>
+</Attr>
+</Id>
+<Id value='NAT' typref='3603043417'>
+<Attr>
+<Pos l='10' c='25' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Nary_Sub op='||'>
+<Assignement_Sub>
+<Attr>
+<Pos l='12' c='14' s='2'/>
+</Attr>
+<Variables>
+<Id value='res1' typref='2701647786'>
+<Attr>
+<Pos l='12' c='9' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='12' c='17' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='12' c='28' s='2'/>
+</Attr>
+<Variables>
+<Id value='res2' typref='2701647786'>
+<Attr>
+<Pos l='12' c='23' s='4'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='12' c='31' s='2'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='3603043417'>
+<Unary_Exp op='POW'>
+<Id value='INTEGER'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

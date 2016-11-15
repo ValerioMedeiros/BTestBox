@@ -160,7 +160,7 @@ def clearGraphs():
 #Uncomment the next lines to test    
 """Finding all paths"""
 '''
-impName = "triple_while_while_while_i"
+impName = "nested_while_else_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -172,7 +172,7 @@ for operationImp in operationsimp.childNodes:
             operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
             while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
                 operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
-            graphgen.mapOperations(operationImp, operationMch)
+            graphgen.mapOperations(operationImp, operationMch, [])
             makepaths(graphgen.nodemap)
             makebranches(paths)
 for key in sorted(graphgen.nodemap.keys()):
@@ -182,4 +182,5 @@ for key in sorted(paths.keys()):
 #for key in sorted(branchesPath.keys()):
 #    print(key, branchesPath[key])
 #print(branchesStatus)
+
 '''

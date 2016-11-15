@@ -21,7 +21,7 @@ importedMch: list of parses, with all implementation imported.
 operationsimp: An node with all the operations of the implementation
 operationsmch: An node with all the operations of the machine
 '''
-impName = "OC_NDet_While_i"
+impName = "factorial_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -60,7 +60,7 @@ def DoBranchCoverage():
             operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
             while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
                 operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
-            graphgen.mapOperations(operationImp, operationMch)
+            graphgen.mapOperations(operationImp, operationMch, importedMch)
             buildpaths.makepaths(graphgen.nodemap) #Building paths
             buildpaths.makebranches(buildpaths.paths) #Building branches
             for key in buildpaths.paths: #Printing the paths (for control)
@@ -68,7 +68,7 @@ def DoBranchCoverage():
             for key in sorted(buildpaths.graphgen.nodemap.keys()):
                 print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                       buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
-            covered = coverage.BranchCoverage(imp, buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths, inputs, operationname, importedMch, impName)
+            covered = coverage.BranchCoverage(operationImp, operationMch, buildpaths.branchesPath, buildpaths.branchesStatus, buildpaths.paths, inputs, operationname, importedMch, impName)
             if covered == True:
                 print("The operation "+operationname+" is covered by Branch Coverage\n")
             else:
@@ -121,7 +121,7 @@ def DoPathCoverage():
                 operationname = operationImp.getAttribute("name")
                 graphgen.mapOperations(operationImp, operationMch)
                 buildpaths.makepaths(graphgen.nodemap) #Building paths
-                covered = coverage.PathCoverage(imp, buildpaths.paths, inputs, operationname, importedMch, impName)
+                covered = coverage.PathCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname, importedMch, impName)
                 if covered == True:
                     print("The operation: "+operationname+" is covered by Path Coverage\n")
                 else:
@@ -166,7 +166,7 @@ def DoCodeCoverage():
             buildpaths.makenodes(graphgen.nodemap) #Building node, setting them to False (uncovered).
             for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
-            covered = coverage.CodeCoverage(operationImp, buildpaths.paths, inputs, operationname, buildpaths.nodeStatus, importedMch, impName)
+            covered = coverage.CodeCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname, buildpaths.nodeStatus, importedMch, impName)
             if covered == True:
                 print("The operation "+operationname+" is covered by Code Coverage\n")
             else:
