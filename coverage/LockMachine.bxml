@@ -1,0 +1,155 @@
+<Machine name='LockMachine' type='abstraction'>
+<Abstract_Variables>
+<Attr>
+<Pos l='8' c='1' s='18'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='9' c='5' s='6'/>
+</Attr>
+</Id>
+</Abstract_Variables>
+<Invariant>
+<Attr>
+<Pos l='11' c='1' s='9'/>
+</Attr>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='12' c='12' s='1'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='12' c='5' s='6'/>
+</Attr>
+</Id>
+<Id value='BOOL' typref='4282494527'>
+<Attr>
+<Pos l='12' c='14' s='4'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='14' c='1' s='14'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='15' c='11' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='15' c='5' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='15' c='14' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Initialisation>
+<Operations>
+<Operation name='openVault'>
+<Attr>
+<Pos l='18' c='5' s='9' endLine='22'/>
+</Attr>
+<Precondition>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='19' c='15' s='1'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='19' c='9' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='19' c='17' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+</Precondition>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='15' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='21' c='9' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='21' c='18' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+<Operation name='closeVault'>
+<Attr>
+<Pos l='24' c='5' s='10' endLine='28'/>
+</Attr>
+<Precondition>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='25' c='15' s='1'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='25' c='9' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='25' c='17' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+</Precondition>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='15' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='27' c='9' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='27' c='18' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='4282494527'>
+<Unary_Exp op='POW'>
+<Id value='BOOL'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

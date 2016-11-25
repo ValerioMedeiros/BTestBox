@@ -1,0 +1,38 @@
+/* LockMachine_i
+ * Author: Diego Oliveira
+ * Creation date: 23/11/2016
+ */
+
+IMPLEMENTATION copyLockMachine_i
+REFINES copyLockMachine
+
+CONCRETE_VARIABLES
+    isOpenIMP
+    
+INVARIANT
+    isOpenIMP : BOOL & isOpenIMP = isOpen
+    
+INITIALISATION
+    isOpenIMP := FALSE
+
+OPERATIONS
+    GetisOpenIMPForTest <-- OperationForTestGetisOpenIMP = 
+        GetisOpenIMPForTest := isOpenIMP;
+        
+    SetVariablesForTestSEES(nn1) = 
+    BEGIN
+        isOpenIMP := nn1
+    END;
+    
+    openVault =
+    BEGIN
+        isOpenIMP:= TRUE
+    END;
+
+    
+    closeVault = 
+    BEGIN
+        isOpenIMP:= FALSE
+    END
+
+ END

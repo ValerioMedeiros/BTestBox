@@ -154,6 +154,48 @@ def selfcaller(node):
         text += make_inst(node)
     elif tag == "Quantified_Exp":
         text += make_quantifiedexp(node)
+    elif tag == "Valuation":
+        text += make_valuation(node)
+    elif tag == "Set":
+        text += make_set(node)
+    elif tag == "Properties":
+        text += make_properties(node)
+    return text
+
+def make_properties(node):
+    text = ""
+    if node.childNodes.item(1).tagName == 'Attr':
+        text += selfcaller(node.childNodes.item(3))
+    else:
+        text += selfcaller(node.childNodes.item(1))
+    return text
+
+def make_set(node):
+    '''Build an set into a string'''
+    text = ""
+    text += selfcaller(node.childNodes.item(1))
+    text += " = {"
+    count = 1
+    for childnode in node.childNodes.item(3).childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            text += make_id(childnode)
+            count += 2
+            if count < node.childNodes.item(3).childNodes.length:
+                text += ", "
+    text += "}"
+    return text
+
+def make_valuation(node):
+    '''Build an Valuation into a string'''
+    text = ""
+    if node.childNodes.item(1).tagName == 'Attr':
+        text += node.getAttribute('ident')
+        text += " = "
+        text += selfcaller(node.childNodes.item(3))
+    else:
+        text += node.getAttribute('ident')
+        text += " = "
+        text += selfcaller(node.childNodes.item(1))
     return text
 
 def make_if_sub(node):
@@ -416,6 +458,10 @@ def callmake(node, tag):
         text += make_quantifiedexp(childnode)
     elif tag == "Nary_Exp":
         text += make_naryexp(childnode)
+    elif tag == "Valuation":
+        text += make_valuation(node)
+    elif tag == "Properties":
+        text += make_properties(childnode)
     return text
 
 def make_inst(node):

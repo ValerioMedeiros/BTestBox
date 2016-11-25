@@ -1,0 +1,18 @@
+<Machine name='MchWithExtends' type='abstraction'>
+<Extends>
+<Attr>
+<Pos l='8' c='1' s='7'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='9' c='5' s='11'/>
+</Attr>
+<Name>MchToExtend</Name>
+</Referenced_Machine>
+</Extends>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<TypeInfos/>
+
+</Machine>

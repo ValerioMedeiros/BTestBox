@@ -1,0 +1,24 @@
+/* IMP_NONDET_MCH_WHILE
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION IMP_NONDET_MCH_WHILE
+REFINES NONDET_MCH_WHILE
+
+OPERATIONS
+    res <-- opNONDET_MCH_WHILE(xx) =
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            res := 0;
+            WHILE ii < xx DO
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx
+            VARIANT xx - ii
+            END;
+            res := ii
+        END
+    END
+
+ END

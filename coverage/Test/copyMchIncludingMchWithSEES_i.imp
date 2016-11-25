@@ -1,0 +1,40 @@
+IMPLEMENTATION copyMchIncludingMchWithSEES_i
+REFINE
+
+REFINES copyMchIncludingMchWithSEES
+
+SEES
+
+IMPORTS
+    copyMchWithSEES
+
+SEES
+    copyLockMachine
+
+OPERATIONS
+        GetlightsForTest <-- OperationForTestGetlightsMchIncludingMchWithSEES = 
+        GetlightsForTest := lights;
+
+    GetinsideIMPForTest <-- OperationForTestGetinsideIMPMchIncludingMchWithSEES = 
+        GetinsideIMPForTest := insideIMP;
+
+    SetVariablesForTestMchIncludingMchWithSEES(nn1, nn2) = 
+    BEGIN
+        lights := nn1;
+        insideIMP := nn2
+    END;
+
+leavingTheHouse(nn)=
+    BEGIN
+        leaveHouse(nn); insideIMP := insideIMP - nn;
+        IF insideIMP = 0 THEN lights := FALSE END 
+    END;
+
+    
+    enteringTheHouse(nn)=
+    BEGIN
+        enterHouse(nn); insideIMP := insideIMP + nn;
+        IF insideIMP > 0 THEN lights := TRUE END
+    END
+
+ END

@@ -1,0 +1,46 @@
+/* MchWithVariables_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithVariables_i
+REFINES MchWithVariables
+
+VALUES
+    max_count = 10
+
+CONCRETE_VARIABLES
+    countImp //Just a comment to see if I appear
+    
+INVARIANT
+    countImp : NAT & countImp <= max_count & countImp = count
+    
+INITIALISATION
+    countImp := 0
+
+OPERATIONS
+    res <-- opIncCount(nn) =
+    BEGIN
+        VAR aux IN
+            aux := countImp + nn;
+            IF aux < max_count THEN
+                res := 1;
+                countImp := countImp + nn
+            ELSE
+                res := 0
+            END
+        END
+    END
+    ;
+    res <-- opRelease(nn) =
+    BEGIN
+        VAR aux IN
+            aux := countImp - nn;
+            IF aux < 0 THEN
+                res := 0
+            ELSE
+                res := 1; countImp := countImp - nn
+            END
+        END
+    END
+ END

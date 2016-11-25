@@ -3,6 +3,7 @@ import os
 import codecs
 import subprocess
 import string
+import re
 
 def executeSubWithReturn(cmd, n="" , out=True):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -33,22 +34,18 @@ def evaluate(stringexpression, message, entries): #Use this function to evaluate
             solutionposition = stringoutput.find("Solution:")
             stringoutput = stringoutput[solutionposition::]
             aux = list()
-            count = 0
+            lenvar = list()
             for entry in entries:
-                aux.append(" "+entry+" = ")
-                inputs.append(aux[count])
-                positions.append(stringoutput.find(aux[count]))
-                count+=1
-            positions.sort()
-            count = 0
-            for position in positions:
-                j = position + len(aux[count])
-                count += 1
-                while(j < len(stringoutput)):
-                    if(stringoutput[j] == " " or stringoutput[j] == '&'):
-                        end.append(j)
+                aux = (entry+" = ")
+                positions.append(re.search(r'\b%s\b' % aux, stringoutput).start())
+                lenvar.append(len(aux))
+            for i in range(len(positions)):
+                endstring = positions[i] + lenvar[i]
+                while(endstring < len(stringoutput)):
+                    if(stringoutput[endstring] == " " or stringoutput[endstring] == '&'):
+                        end.append(endstring)
                         break
-                    j += 1
+                    endstring += 1
             for i in range(len(positions)):
                 variables.append(stringoutput[positions[i]:end[i]:])
             print(errors)

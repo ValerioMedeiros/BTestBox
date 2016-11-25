@@ -182,18 +182,13 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
             posMut.append(buildpaths.graphgen.nodeinva[node])
     elif buildpaths.graphgen.nodetype[node] == "Call":
         if whilePredicateXML.hasChildNodes():
-            whilePredicateXML, changedVariablesOC = solveroc.buildOperationCallInsideWhile(node, whilePredicateXML.cloneNode(10), docXML, operationImp,
-                                                                                importedMch, operationName, impName, [], inputs,
+            whilePredicateXML, changedVariablesOC = solveroc.buildOperationCall(node, whilePredicateXML.cloneNode(10), docXML, operationImp,
+                                                                                importedMch, operationName, impName, posMut, inputs,
                                                                                 isTheOutput, fixedNames, outputs, changedVariablesOC)
         if predicateXML.hasChildNodes():
-            predicateXML, changedVariablesOC = solveroc.buildOperationCallInsideWhile(node, predicateXML.cloneNode(10), docXML, operationImp,
-                                                                           importedMch, operationName, impName, [], inputs,
+            predicateXML, changedVariablesOC = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML, operationImp,
+                                                                           importedMch, operationName, impName, posMut, inputs,
                                                                            isTheOutput, fixedNames, outputs, changedVariablesOC)
-        mystr = buildpaths.graphgen.nodeinva[node]
-        wordList = re.sub("[^\w]", " ",  mystr).split()
-        for word in wordList:
-            if word not in posMut:
-                posMut.append(word)
     del way[len(way) - 1]
     node = way[len(way) - 1]
     predicateXML, posMut = buildWhile(node, predicateXML, predicateXML.cloneNode(10), docXML, way, path, inputs,
@@ -453,7 +448,6 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
         print("Output(s) were found for the predicate: "+predicate)
         print("The output(s) for the input(s) "+ predicateInputs +"is/are "+OutputVariables)
     else:
-        print("Output(s) were NOT found for the predicate: "+predicate)
         print('Outputs not found, this operation cannot be covered')
     return OutputVariables, ExistValues
 

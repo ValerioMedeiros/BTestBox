@@ -1,0 +1,139 @@
+<Machine name='LockMachine_i' type='implementation'>
+<Abstraction>LockMachine</Abstraction>
+<Concrete_Variables>
+<Attr>
+<Pos l='9' c='1' s='18'/>
+</Attr>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='10' c='5' s='9'/>
+</Attr>
+</Id>
+</Concrete_Variables>
+<Invariant>
+<Attr>
+<Pos l='12' c='1' s='9'/>
+</Attr>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='13' c='15' s='1'/>
+</Attr>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='13' c='5' s='9'/>
+</Attr>
+</Id>
+<Id value='BOOL' typref='4282494527'>
+<Attr>
+<Pos l='13' c='17' s='4'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='13' c='34' s='1'/>
+</Attr>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='13' c='24' s='9'/>
+</Attr>
+</Id>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='13' c='36' s='6'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='15' c='1' s='14'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='16' c='15' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='16' c='5' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='16' c='18' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Initialisation>
+<Operations>
+<Operation name='openVault'>
+<Attr>
+<Pos l='19' c='5' s='9' endLine='22'/>
+</Attr>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='18' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='21' c='9' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='21' c='21' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+<Operation name='closeVault'>
+<Attr>
+<Pos l='25' c='5' s='10' endLine='28'/>
+</Attr>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='18' s='2'/>
+</Attr>
+<Variables>
+<Id value='isOpenIMP' typref='2043437594'>
+<Attr>
+<Pos l='27' c='9' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='27' c='21' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='4282494527'>
+<Unary_Exp op='POW'>
+<Id value='BOOL'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

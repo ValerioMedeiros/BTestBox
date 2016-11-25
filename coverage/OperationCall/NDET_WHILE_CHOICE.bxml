@@ -1,0 +1,70 @@
+<Machine name='NDET_WHILE_CHOICE' type='abstraction'>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opNDET_WHILE_CHOICE'>
+<Attr>
+<Pos l='9' c='6' s='3' endLine='9'/>
+</Attr>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='9' c='6' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Body>
+<Nary_Sub op='CHOICE'>
+<Attr>
+<Pos l='9' c='36' s='6'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='9' c='47' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='9' c='43' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='5' typref='2701647786'>
+<Attr>
+<Pos l='9' c='50' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='9' c='59' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='9' c='55' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='10' typref='2701647786'>
+<Attr>
+<Pos l='9' c='62' s='2'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>

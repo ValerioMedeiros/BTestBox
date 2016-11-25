@@ -1,0 +1,30 @@
+/* LockMachine_i
+ * Author: Diego Oliveira
+ * Creation date: 23/11/2016
+ */
+
+IMPLEMENTATION LockMachine_i
+REFINES LockMachine
+
+CONCRETE_VARIABLES
+    isOpenIMP
+    
+INVARIANT
+    isOpenIMP : BOOL & isOpenIMP = isOpen
+    
+INITIALISATION
+    isOpenIMP := FALSE
+
+OPERATIONS
+    openVault =
+    BEGIN
+        isOpenIMP:= TRUE
+    END;
+
+    
+    closeVault = 
+    BEGIN
+        isOpenIMP:= FALSE
+    END
+
+ END

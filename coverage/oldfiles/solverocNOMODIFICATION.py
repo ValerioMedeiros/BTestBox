@@ -7,78 +7,6 @@ import subprocess
 import buildpaths
 import instgen
 
-def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs, isTheOutput, fixedNames, universalOutputs, changedVariables):
-    '''
-    Return the predicate of a called operation
-
-    Input:
-    operationImp: The operation of the implementation (the one being evaluated)
-    node: The node with the type "Call"
-    importedMch: All imported machines
-    operationName: The name of the operation of the implementation (the one being evaluated)
-    predicateXML: The predicate until now in form of a XML tree
-    docXML: The XML document
-    posMut: All variables quantified inside the while
-    impName: The name of the implementation
-
-    Return:
-    predicateXML: The predicate until now in form of a XML tree
-    '''
-    calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(operationImp, buildpaths.graphgen.nodedata[node],
-                                                                                                         importedMch)
-    if calledOperation == None:
-        calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp, buildpaths.graphgen.nodedata[node])
-        hasWhile = False
-        operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                                                             operationImp, operationInputs, operationOutputs)
-        for childnode in operationImp.parentNode.childNodes:
-            if childnode.nodeType != childnode.TEXT_NODE:
-                if childnode.getAttribute('name') == calledOperation.getAttribute('name'):
-                    calledOperationImp = childnode
-        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
-            solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
-        if calledOperationImp.getElementsByTagName("While") != []:
-            hasWhile = True
-        operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
-        auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML)
-        if hasWhile == True:
-            output = output.getElementsByTagName('Tag')
-            for out in output:
-                if out.getAttribute('goalTag') == "End of loop":
-                    output = out.firstChild.nextSibling
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    predicateXML.replaceChild(output, predicateXML.firstChild.nextSibling)
-        else:
-            predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
-    else:
-        hasWhile = False
-        operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                                                             operationImp, operationInputs, operationOutputs)
-        calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName)
-        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
-            solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
-        if calledOperationImp.getElementsByTagName("While") != []:
-            hasWhile = True
-        operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
-        auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML)
-        if hasWhile == True:
-            output = output.getElementsByTagName('Tag')
-            for out in output:
-                if out.getAttribute('goalTag') == "End of loop":
-                    output = out.firstChild.nextSibling
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    predicateXML.replaceChild(output, predicateXML.firstChild.nextSibling)
-        else:
-            predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
-    os.remove("encodeddocumentinput.xml")
-    os.remove("encodeddocumentoutput.xml")
-    os.remove(impName+".ibxml")
-    return predicateXML, changedVariables
-
 def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs, isTheOutput, fixedNames, universalOutputs, changedVariables):
     '''
     Return the predicate of a called operation
@@ -100,80 +28,76 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
                                                                                                          importedMch)
     if calledOperation == None:
         calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp, buildpaths.graphgen.nodedata[node])
-        hasWhile = False
-        operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                                                             operationImp, operationInputs, operationOutputs)
-        for childnode in operationImp.parentNode.childNodes:
-            if childnode.nodeType != childnode.TEXT_NODE:
-                if childnode.getAttribute('name') == calledOperation.getAttribute('name'):
-                    calledOperationImp = childnode
-        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
-            solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
-        if calledOperationImp.getElementsByTagName("While") != []:
-            hasWhile = True
-        operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
-        auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML)
-        if hasWhile == True:
-            output = output.getElementsByTagName('Tag')
-            for out in output:
-                if out.getAttribute('goalTag') == "End of loop":
-                    output = out.getElementsByTagName('Body')[0]
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                                                               output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
-                    predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
+        if isTheOutput:
+            hasWhile = False
+            operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
+                                                                                 operationImp, operationInputs, operationOutputs)
+            for childnode in operationImp.parentNode.childNodes:
+                if childnode.nodeType != childnode.TEXT_NODE:
+                    if childnode.getAttribute('name') == calledOperation.getAttribute('name'):
+                        calledOperationImp = childnode
+            for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
+                solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
+            if calledOperationImp.getElementsByTagName("While") != []:
+                hasWhile = True
+            operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
+            auxXML = modifyPredicateXML(predicateXML, operationIBXML)
+            output = make_Sub_Calculus(operationIBXML, auxXML)
+            if hasWhile == True:
+                output = output.getElementsByTagName('Tag')
+                for out in output:
+                    if out.getAttribute('goalTag') == "End of loop":
+                        output = out.getElementsByTagName('Body')[0]
+                        changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
+                        naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                                                                   output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
+                        predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
+            else:
+                predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                                  predicateXML.firstChild.nextSibling)
         else:
+            operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
+                                                                                 operationImp, operationInputs, operationOutputs)
+            auxXML = modifyPredicateXML(predicateXML, operationIBXML, posMut)
+            output = make_Sub_Calculus(operationIBXML, auxXML)
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
+                                  predicateXML.firstChild.nextSibling)
     else:
-        hasWhile = False
-        operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                                                             operationImp, operationInputs, operationOutputs)
-        calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName)
-        for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
-            solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
-        if calledOperationImp.getElementsByTagName("While") != []:
-            hasWhile = True
-        operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
-        auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML)
-        if hasWhile == True:
-            output = output.getElementsByTagName('Tag')
-            for out in output:
-                if out.getAttribute('goalTag') == "End of loop":
-                    output = out.getElementsByTagName('Body')[0]
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                                                               output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
-                    predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
+        if isTheOutput:
+            hasWhile = False
+            operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
+                                                                                 operationImp, operationInputs, operationOutputs)
+            calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName)
+            for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
+                solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp)
+            if calledOperationImp.getElementsByTagName("While") != []:
+                hasWhile = True
+            operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
+            auxXML = modifyPredicateXML(predicateXML, operationIBXML)
+            output = make_Sub_Calculus(operationIBXML, auxXML)
+            if hasWhile == True:
+                output = output.getElementsByTagName('Tag')
+                for out in output:
+                    if out.getAttribute('goalTag') == "End of loop":
+                        output = out.getElementsByTagName('Body')[0]
+                        changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
+                        naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                                                                   output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
+                        predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
+            else:
+                predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                                  predicateXML.firstChild.nextSibling)
         else:
-            if output.firstChild.firstChild.nextSibling.lastChild.previousSibling.getElementsByTagName('Quantified_Pred') != []:
-                checkQuantifiedVariables(output.firstChild.firstChild.nextSibling.lastChild.previousSibling, inputs)
+            operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
+                                                                                 operationImp, operationInputs, operationOutputs)
+            auxXML = modifyPredicateXML(predicateXML, operationIBXML, posMut)
+            output = make_Sub_Calculus(operationIBXML, auxXML)
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
+                                  predicateXML.firstChild.nextSibling)
     os.remove("encodeddocumentinput.xml")
     os.remove("encodeddocumentoutput.xml")
     os.remove(impName+".ibxml")
     return predicateXML, changedVariables
-
-def checkQuantifiedVariables(predicate, inputs):
-    allQuantified = predicate.getElementsByTagName('Quantified_Pred')
-    for quantified in allQuantified:
-        for childnode in quantified.childNodes:
-            if childnode.nodeType != childnode.TEXT_NODE:
-                if childnode.tagName == 'Variables':
-                    allId = childnode.getElementsByTagName('Id')
-                    for Id in allId:
-                        for inp in inputs:
-                            if Id.getAttribute('value') == inp:
-                                if Id.parentNode.childNodes.length == 3:
-                                    condition = Id.parentNode.parentNode.getElementsByTagName('Condition')[0]
-                                    condition = condition.firstChild.nextSibling
-                                    Id.parentNode.parentNode.replaceChild(condition, Id.parentNode.parentNode)
-                                else:
-                                    Id.parentNode.removeChild(Id.nextSibling)
-                                    Id.parentNode.removeChild(Id)
 
 def getCalledLocalOperation(operationImp, calledop):
     opname = calledop.getElementsByTagName("Name")[0].firstChild.nextSibling.getAttribute("value")
@@ -361,11 +285,8 @@ def modifyPredicateXML(predicateXML, operationIBXML, posMut = []):
     predicateXML: The predicate until now in form of a XML tree
     '''
     IDsInPredicate = predicateXML.getElementsByTagName('Id')
-    if operationIBXML.getElementsByTagName('Output_Parameters') != []:
-        IDsInIBXML = operationIBXML.getElementsByTagName('Output_Parameters')[0]
-        IDsInIBXML = IDsInIBXML.getElementsByTagName('Id')
-    else:
-        IDsInIBXML = []
+    IDsInIBXML = operationIBXML.getElementsByTagName('Output_Parameters')[0]
+    IDsInIBXML = IDsInIBXML.getElementsByTagName('Id')
     for ID in IDsInPredicate:
         for IDibxml in IDsInIBXML:
             if ID.getAttribute('value') == IDibxml.getAttribute('value'):
@@ -398,10 +319,10 @@ def getMchWithTheCalledOperation(operationImp, calledop, importedMch):
                 else:
                     calledOperationInputsInTheImp = []
                 if calledop.getElementsByTagName("Output_Parameters") != []:
-                    calledOperationOutputsInTheImp = calledop.getElementsByTagName("Output_Parameters")[0]
+                    calledOperationOutputsIntheImp = calledop.getElementsByTagName("Output_Parameters")[0]
                 else:
-                    calledOperationOutputsInTheImp = []
-                return operation, calledOperationInputsInTheImp, calledOperationOutputsInTheImp, calledMachineName
+                    calledOperationInputsInTheImp = []
+                return operation, calledOperationInputsInTheImp, calledOperationOutputsIntheImp, calledMachineName
     return None, None, None, None
 
 def testDeterminism(operation):

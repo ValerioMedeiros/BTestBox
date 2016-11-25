@@ -2,6 +2,7 @@ from xml.dom import minidom
 import instgen
 from collections import defaultdict
 import nodescreator
+import os
 '''
 minidom: Module responsible of manipulating a xml file in a tree.
 instgen: Module to generate every instruction.
@@ -33,7 +34,7 @@ nodedata = dict() #Dict of the data of the nodes
 nodecond = dict() #Dict of the previous condition of the node. If the parent is a Condition node we know if the path comes from the True or the False condition.
 nodeinva = dict() #Dict with the invariant of the while and where it end.
 
-def startMap(node, opmch, importedMch = []):
+def startMap(node, opmch, importedMch, seesMch):
     '''
     Function responsible for the initialisation of the map.
     
@@ -42,13 +43,13 @@ def startMap(node, opmch, importedMch = []):
     '''
     #Initialisation of the Graph, the first node is always the Call
     nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
-    solveFirstNodeData(node, opmch, importedMch)
+    solveFirstNodeData(node, opmch, importedMch, seesMch)
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
     nodecond[str(len(nodecond) + 1)] = "True"
 
-def solveFirstNodeData(node, opmch, importedMch = []):
+def solveFirstNodeData(node, opmch, importedMch, seesMch):
     if opmch.getElementsByTagName("Precondition") != []:
         nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
         nodetype[str(len(nodetype) + 1)] = "Condition"
@@ -57,16 +58,24 @@ def solveFirstNodeData(node, opmch, importedMch = []):
         nodedata[str(len(nodedata) + 1)] = None
     for child in opmch.parentNode.parentNode.childNodes: #In the machine of the Implementation
         if child.nodeType != child.TEXT_NODE:
-            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Sets' or child.tagName == 'Constraints':
+            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
                 if nodetype[str(len(nodetype))] == "Condition":
                     doc = minidom.getDOMImplementation()
                     docXML = doc.createDocument(None, "Scapegoat", None)
                     if child.firstChild.nextSibling.tagName == "Attr":
-                        nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
-                                                                               nodedata[str(len(nodedata))], '&', docXML)
+                        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                            nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10))
+                            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                        else:
+                            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
+                                                                                       nodedata[str(len(nodedata))], '&', docXML)
                     else:
-                        nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
-                                                                               nodedata[str(len(nodedata))], '&', docXML)
+                        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                            nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.cloneNode(10))
+                            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                        else:
+                            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
+                                                                                       nodedata[str(len(nodedata))], '&', docXML)
                 else:
                     nodedata[str(len(nodedata))] = child
                     nodetype[str(len(nodetype))] = "Condition"
@@ -80,26 +89,85 @@ def solveFirstNodeData(node, opmch, importedMch = []):
                         count = 1
                     for i in range(len(child.childNodes)):
                         if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
-                            if i > count:
-                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
-                                                                               nodedata[str(len(nodedata))], '&', docXML)
+                            if i >= count:
+                                if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                    nodedata[str(len(nodedata))].appendChild(child.childNodes.item(count).cloneNode(10))
+                                    nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                else:
+                                    nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.childNodes.item(count).cloneNode(10),
+                                                                                               nodedata[str(len(nodedata))], '&', docXML)
                 else:
                     nodedata[str(len(nodedata))] = child
                     nodetype[str(len(nodetype))] = "Condition"
-    for dcmt in importedMch: #In the other imported machines
+    SolveFirstNodeImportedAndSees(node, importedMch)
+    SolveFirstNodeImportedAndSees(node, seesMch)
+    for child in node.parentNode.parentNode.childNodes: #In the Implementation
+        if child.nodeType != child.TEXT_NODE:
+            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
+                if nodetype[str(len(nodetype))] == "Condition":
+                    doc = minidom.getDOMImplementation()
+                    docXML = doc.createDocument(None, "Scapegoat", None)
+                    if child.firstChild.nextSibling.tagName == "Attr":
+                        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                            nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10))
+                            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                        else:
+                            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
+                                                                                       nodedata[str(len(nodedata))], '&', docXML)
+                    else:
+                        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                            nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.cloneNode(10))
+                            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                        else:
+                            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
+                                                                                       nodedata[str(len(nodedata))], '&', docXML)
+                else:
+                    nodedata[str(len(nodedata))] = child
+                    nodetype[str(len(nodetype))] = "Condition"
+            elif child.tagName == 'Assertions':
+                if nodetype[str(len(nodetype))] == "Condition":
+                    doc = minidom.getDOMImplementation()
+                    docXML = doc.createDocument(None, "Scapegoat", None)
+                    if child.firstChild.nextSibling.tagName == "Attr":
+                        count = 3
+                    else:
+                        count = 1
+                    for i in range(len(child.childNodes)):
+                        if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
+                            if i >= count:
+                                if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                    nodedata[str(len(nodedata))].appendChild(child.childNodes.item(count).cloneNode(10))
+                                    nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                else:
+                                    nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.childNodes.item(count).cloneNode(10),
+                                                                                               nodedata[str(len(nodedata))], '&', docXML)
+                else:
+                    nodedata[str(len(nodedata))] = child
+                    nodetype[str(len(nodetype))] = "Condition"
+
+def SolveFirstNodeImportedAndSees(node, machines):
+    for dcmt in machines: #In the other imported machines
         for mch in dcmt.childNodes:
             for child in mch.childNodes:
                 if child.nodeType != child.TEXT_NODE:
-                    if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Sets' or child.tagName == 'Constraints':
+                    if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
                         if nodetype[str(len(nodetype))] == "Condition":
                             doc = minidom.getDOMImplementation()
                             docXML = doc.createDocument(None, "Scapegoat", None)
                             if child.firstChild.nextSibling.tagName == "Attr":
-                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
-                                                                                       nodedata[str(len(nodedata))], '&', docXML)
+                                if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                    nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10))
+                                    nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                else:
+                                    nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
+                                                                                               nodedata[str(len(nodedata))], '&', docXML)
                             else:
-                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
-                                                                                       nodedata[str(len(nodedata))], '&', docXML)
+                                if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                    nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.cloneNode(10))
+                                    nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                else:
+                                    nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
+                                                                                               nodedata[str(len(nodedata))], '&', docXML)
                         else:
                             nodedata[str(len(nodedata))] = child
                             nodetype[str(len(nodetype))] = "Condition"
@@ -113,39 +181,72 @@ def solveFirstNodeData(node, opmch, importedMch = []):
                                 count = 1
                             for i in range(len(child.childNodes)):
                                 if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
-                                    if i > count:
-                                        nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
-                                                                                       nodedata[str(len(nodedata))], '&', docXML)
+                                    if i >= count:
+                                        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                            nodedata[str(len(nodedata))].appendChild(child.childNodes.item(count).cloneNode(10))
+                                            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                        else:
+                                            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.childNodes.item(count).cloneNode(10),
+                                                                                                       nodedata[str(len(nodedata))], '&', docXML)
                         else:
                             nodedata[str(len(nodedata))] = child
                             nodetype[str(len(nodetype))] = "Condition"
-    for child in node.parentNode.parentNode.childNodes: #In the Implementation
-        if child.nodeType != child.TEXT_NODE:
-            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Sets' or child.tagName == 'Constraints' or child.tagName == 'Assertions':
-                if nodetype[str(len(nodetype))] == "Condition":
-                    doc = minidom.getDOMImplementation()
-                    docXML = doc.createDocument(None, "Scapegoat", None)
-                    nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10), nodedata[str(len(nodedata))], '&', docXML) 
-                else:
-                    nodedata[str(len(nodedata))] = child
-                    nodetype[str(len(nodetype))] = "Condition"
-            elif child.tagName == 'Assertions':
-                if nodetype[str(len(nodetype))] == "Condition":
-                    doc = minidom.getDOMImplementation()
-                    docXML = doc.createDocument(None, "Scapegoat", None)
-                    if child.firstChild.nextSibling.tagName == "Attr":
-                        count = 3
-                    else:
-                        count = 1
-                    for i in range(len(child.childNodes)):
-                        if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
-                            if i > count:
+        imp = getImpWithImportedMch(dcmt)
+        for child in imp.firstChild.childNodes:
+            if child.nodeType != child.TEXT_NODE:
+                if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
+                    if nodetype[str(len(nodetype))] == "Condition":
+                        doc = minidom.getDOMImplementation()
+                        docXML = doc.createDocument(None, "Scapegoat", None)
+                        if child.firstChild.nextSibling.tagName == "Attr":
+                            if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10))
+                                nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                            else:
                                 nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
-                                                                               nodedata[str(len(nodedata))], '&', docXML)
-                else:
-                    nodedata[str(len(nodedata))] = child
-                    nodetype[str(len(nodetype))] = "Condition"
-                    
+                                                                                           nodedata[str(len(nodedata))], '&', docXML)
+                        else:
+                            if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.cloneNode(10))
+                                nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                            else:
+                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.firstChild.nextSibling.cloneNode(10),
+                                                                                           nodedata[str(len(nodedata))], '&', docXML)
+                    else:
+                        nodedata[str(len(nodedata))] = child
+                        nodetype[str(len(nodetype))] = "Condition"
+                elif child.tagName == 'Assertions':
+                    if nodetype[str(len(nodetype))] == "Condition":
+                        doc = minidom.getDOMImplementation()
+                        docXML = doc.createDocument(None, "Scapegoat", None)
+                        if child.firstChild.nextSibling.tagName == "Attr":
+                            count = 3
+                        else:
+                            count = 1
+                        for i in range(len(child.childNodes)):
+                            if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
+                                if i >= count:
+                                    if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                        nodedata[str(len(nodedata))].appendChild(child.childNodes.item(count).cloneNode(10))
+                                        nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                    else:
+                                        nodedata[str(len(nodedata))] = nodescreator.createNaryPred(child.childNodes.item(count).cloneNode(10),
+                                                                                                   nodedata[str(len(nodedata))], '&', docXML)
+                    else:
+                        nodedata[str(len(nodedata))] = child
+                        nodetype[str(len(nodetype))] = "Condition"
+
+def getImpWithImportedMch(importedMch): 
+    for file in os.listdir('/Users/Diego Oliveira/Documents/BTestBox/coverage/'):
+        if file.endswith(".bxml"):
+            bxmlfile = minidom.parse(file)
+            root = bxmlfile.firstChild
+            if root.getAttribute('type') == 'implementation':
+                abstraction = root.getElementsByTagName('Abstraction')[0]
+                if abstraction.firstChild.data == importedMch.firstChild.getAttribute('name'):
+                    return bxmlfile
+    return None
+     
 def mapAssig(node, opmch):
     '''
     Adding an Instruction node to the Graph.
@@ -359,7 +460,7 @@ def makeMapNary(node, opmch):
     if tag == "Case_Sub":
         mapCase(node, opmch)
 
-def makeMap(node, opmch, importedMch = []):
+def makeMap(node, opmch, importedMch = [], seesMch = []):
     '''
     Surfing the tree and adding every child to the Graph
 
@@ -373,7 +474,7 @@ def makeMap(node, opmch, importedMch = []):
             tag = childnode.tagName
             if tag == "Body":
                 if node.tagName == "Operation":
-                    startMap(node, opmch, importedMch) #Initialisation of the Graph
+                    startMap(node, opmch, importedMch, seesMch) #Initialisation of the Graph
                     makeMap(childnode, opmch)
                 else:
                     makeMap(childnode, opmch)
@@ -394,7 +495,7 @@ def makeMap(node, opmch, importedMch = []):
             if tag == "Case_Sub":
                 mapCase(childnode, opmch)
 
-def mapOperations(operationimp, operationmch, importedMch):
+def mapOperations(operationimp, operationmch, importedMch = [], seesMch = []):
     '''
     Start function, where we start the mapping.
     
@@ -402,7 +503,7 @@ def mapOperations(operationimp, operationmch, importedMch):
     operationmch: The node of the operation in the machine (to get the Precondition)
     operationimp: The node of the operation in the implementation
     '''
-    makeMap(operationimp, operationmch, importedMch)
+    makeMap(operationimp, operationmch, importedMch, seesMch)
     nodetype[str(len(nodetype)+ 1)] = "END" #Adding a type for the END node
     outputs = None
     for childNode in operationimp.childNodes:
@@ -412,99 +513,45 @@ def mapOperations(operationimp, operationmch, importedMch):
     doc = minidom.getDOMImplementation()
     docXML = doc.createDocument(None, "Scapegoat", None)
     finalOutputXML = docXML.createElement('Output')
-    for child in outputs.childNodes:
-        if child.nodeType != child.TEXT_NODE:
-            outputNode = docXML.createElement('Id')
-            outputNode.setAttribute('value', 'output'+child.getAttribute('value'))
-            outputNode.appendChild(docXML.createTextNode('\n'))
-            outputNode.appendChild(docXML.createElement('Attr'))
-            outputNode.appendChild(docXML.createTextNode('\n'))
-            outputs.replaceChild(nodescreator.createExpComparison(outputNode, child.cloneNode(10), '=', docXML), child)
-    for output in outputs.childNodes:
-        if output.nodeType != output.TEXT_NODE:
-            if finalOutputXML.hasChildNodes():
-                if finalOutputXML.firstChild.nextSibling.tagName == 'Nary_Pred':
-                    finalOutputXML.firstChild.nextSibling.appendChild(output)
-                    finalOutputXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+    if outputs != None:
+        for child in outputs.childNodes:
+            if child.nodeType != child.TEXT_NODE:
+                outputNode = docXML.createElement('Id')
+                outputNode.setAttribute('value', 'output'+child.getAttribute('value'))
+                outputNode.appendChild(docXML.createTextNode('\n'))
+                outputNode.appendChild(docXML.createElement('Attr'))
+                outputNode.appendChild(docXML.createTextNode('\n'))
+                outputs.replaceChild(nodescreator.createExpComparison(outputNode, child.cloneNode(10), '=', docXML), child)
+        for output in outputs.childNodes:
+            if output.nodeType != output.TEXT_NODE:
+                if finalOutputXML.hasChildNodes():
+                    if finalOutputXML.firstChild.nextSibling.tagName == 'Nary_Pred':
+                        finalOutputXML.firstChild.nextSibling.appendChild(output)
+                        finalOutputXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+                    else:
+                        naryPredNode = nodescreator.createNaryPred(finalOutputXML.firstChild.nextSibling, output, '&', docXML)
+                        finalOutputXML.replaceChild(naryPredNode, finalOutputXML.firstChild.nextSibling)
                 else:
-                    naryPredNode = nodescreator.createNaryPred(finalOutputXML.firstChild.nextSibling, output, '&', docXML)
-                    finalOutputXML.replaceChild(naryPredNode, finalOutputXML.firstChild.nextSibling)
-            else:
-                finalOutputXML.appendChild(docXML.createTextNode('\n'))
-                finalOutputXML.appendChild(output)
-                finalOutputXML.appendChild(docXML.createTextNode('\n'))
+                    finalOutputXML.appendChild(docXML.createTextNode('\n'))
+                    finalOutputXML.appendChild(output)
+                    finalOutputXML.appendChild(docXML.createTextNode('\n'))
+    else:
+        firstTrue = docXML.createElement('Id')
+        firstTrue.setAttribute('value', 'TRUE')
+        firstTrue.appendChild(docXML.createTextNode('\n'))
+        firstTrue.appendChild(docXML.createElement('Attr'))
+        firstTrue.appendChild(docXML.createTextNode('\n'))
+        secondTrue = docXML.createElement('Id')
+        secondTrue.setAttribute('value', 'TRUE')
+        secondTrue.appendChild(docXML.createTextNode('\n'))
+        secondTrue.appendChild(docXML.createElement('Attr'))
+        secondTrue.appendChild(docXML.createTextNode('\n'))
+        finalOutputXML.appendChild(docXML.createTextNode('\n'))
+        finalOutputXML.appendChild(nodescreator.createExpComparison(firstTrue, secondTrue, '=', docXML))
+        finalOutputXML.appendChild(docXML.createTextNode('\n'))
     nodedata[str(len(nodedata) + 1)] = finalOutputXML.firstChild.nextSibling #Adding data for the END node
     nodeinva[str(len(nodeinva) + 1)] = ""
-
-def startMapOperation(node):
-    '''
-    Start the map for called operations. It works a little bit different from the principal operation being evaluated.
-
-    Input:
-    node: A node in the tree of the implementation
-    '''
-    nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
-    nodetype[str(len(nodetype) + 1)] = "Inputs"
-    inputs = None
-    for childNode in node.childNodes:
-        if childNode.nodeType != childNode.TEXT_NODE:
-            if childNode.tagName == "Input_Parameters":
-                inputs = childNode
-    nodedata[str(len(nodedata) + 1)] = inputs
-    nodecond[str(len(nodecond) + 1)] = "True"
-    nodeinva[str(len(nodeinva) + 1)] = ""
-    nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
-    nodecond[str(len(nodecond) + 1)] = "True"
-
-def makeMapOperation(node, opmch = ""):
-    '''
-    Surfing the tree and adding every child to the graph
-
-    Inputs:
-    node: A node in the tree of the implementation
-    opmch: As it use ALMOST the same functions of the principal operation and we need to pass a opmch in these operations, we set it to "".
-    '''
-    for childnode in node.childNodes:
-        if childnode.nodeType != childnode.TEXT_NODE:
-            tag = childnode.tagName
-            if tag == "Body":
-                if node.tagName == "Operation":
-                    startMapOperation(node) #Initialisation of the Graph #The only different thing
-                    makeMap(childnode, opmch)
-                else:
-                    makeMap(childnode, opmch)
-            if tag == "Assignement_Sub":
-                mapAssig(childnode, opmch)
-            if tag == "If_Sub":
-                mapIf(childnode, opmch)
-            if tag == "Nary_Sub":
-                mapNary(childnode, opmch)
-            if tag == "VAR_IN":
-                makeMap(childnode, opmch)
-            if tag == "While":
-                mapWhile(childnode, opmch)
-            if tag == "Skip":
-                mapSkip(childnode, opmch)
-            if tag == "Operation_Call":
-                mapOperationcall(childnode, opmch)
-
-def mapImplementationOperationCall(operation):
-    '''
-    Start function to OperationCalls
-
-    Input:
-    operation: The node Operation_Call in the implementation tree
-    '''
-    makeMapOperation(operation)
-    nodetype[str(len(nodetype) + 1)] = "END" #Adding a type for the END node
-    outputs = None
-    for childNode in operation.childNodes:
-        if childNode.nodeType != childNode.TEXT_NODE:
-            if childNode.tagName == "Output_Parameters":
-                outputs = childNode
-    nodedata[str(len(nodedata) + 1)] = outputs.cloneNode(10)
-    nodeinva[str(len(nodeinva) + 1)] = ""
-
+    
 def clearGraphs():
     '''
     Function to clear all graphs (Used to implementations with more then one operation.

@@ -1,0 +1,445 @@
+<Machine name='MchIncludingMchWithSEES' type='abstraction'>
+<Includes>
+<Attr>
+<Pos l='8' c='1' s='8'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='9' c='5' s='11'/>
+</Attr>
+<Name>MchWithSEES</Name>
+</Referenced_Machine>
+</Includes>
+<Sees>
+<Attr>
+<Pos l='11' c='1' s='4'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='12' c='5' s='11'/>
+</Attr>
+<Name>LockMachine</Name>
+</Referenced_Machine>
+</Sees>
+<Abstract_Variables>
+<Attr>
+<Pos l='14' c='1' s='18'/>
+</Attr>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='15' c='5' s='6'/>
+</Attr>
+</Id>
+</Abstract_Variables>
+<Invariant>
+<Attr>
+<Pos l='17' c='1' s='9'/>
+</Attr>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='18' c='12' s='1'/>
+</Attr>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='18' c='5' s='6'/>
+</Attr>
+</Id>
+<Id value='BOOL' typref='4282494527'>
+<Attr>
+<Pos l='18' c='14' s='4'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Binary_Pred op='=&gt;'>
+<Attr>
+<Pos l='18' c='33' s='2'/>
+</Attr>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='18' c='29' s='1'/>
+</Attr>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='18' c='22' s='6'/>
+</Attr>
+</Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='18' c='31' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='18' c='43' s='1'/>
+</Attr>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='18' c='36' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='18' c='45' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+</Binary_Pred>
+<Binary_Pred op='=&gt;'>
+<Attr>
+<Pos l='18' c='66' s='2'/>
+</Attr>
+<Exp_Comparison op='&gt;'>
+<Attr>
+<Pos l='18' c='62' s='1'/>
+</Attr>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='18' c='55' s='6'/>
+</Attr>
+</Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='18' c='64' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='18' c='76' s='1'/>
+</Attr>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='18' c='69' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='18' c='78' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+</Binary_Pred>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='20' c='1' s='14'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='21' c='12' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='21' c='5' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='21' c='15' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Initialisation>
+<Operations>
+<Operation name='leavingTheHouse'>
+<Attr>
+<Pos l='24' c='5' s='15' endLine='28'/>
+</Attr>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='24' c='21' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='25' c='16' s='1'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='25' c='9' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='25' c='18' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='25' c='28' s='1'/>
+</Attr>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='25' c='25' s='2'/>
+</Attr>
+</Id>
+<Id value='NAT' typref='3603043417'>
+<Attr>
+<Pos l='25' c='30' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;='>
+<Attr>
+<Pos l='25' c='39' s='2'/>
+</Attr>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='25' c='36' s='2'/>
+</Attr>
+</Id>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='25' c='42' s='6'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Nary_Sub op='||'>
+<Operation_Call>
+<Attr>
+<Pos l='27' c='19' s='0'/>
+</Attr>
+<Name>
+<Id value='leaveHouse'>
+<Attr>
+<Pos l='27' c='9' s='10'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='27' c='20' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+</Operation_Call>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='27' c='27' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='27' c='42' s='1'/>
+</Attr>
+<Binary_Exp op='-' typref='2701647786'>
+<Attr>
+<Pos l='27' c='37' s='1'/>
+</Attr>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='27' c='30' s='6'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='27' c='39' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='27' c='44' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='27' c='51' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='27' c='61' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+<Operation name='enteringTheHouse'>
+<Attr>
+<Pos l='30' c='5' s='16' endLine='34'/>
+</Attr>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='30' c='22' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='31' c='16' s='1'/>
+</Attr>
+<Id value='isOpen' typref='2043437594'>
+<Attr>
+<Pos l='31' c='9' s='6'/>
+</Attr>
+</Id>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='31' c='18' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='31' c='28' s='1'/>
+</Attr>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='31' c='25' s='2'/>
+</Attr>
+</Id>
+<Id value='NAT' typref='3603043417'>
+<Attr>
+<Pos l='31' c='30' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;='>
+<Attr>
+<Pos l='31' c='39' s='2'/>
+</Attr>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='31' c='36' s='2'/>
+</Attr>
+</Id>
+<Id value='outside' typref='2701647786'>
+<Attr>
+<Pos l='31' c='42' s='7'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Nary_Sub op='||'>
+<Operation_Call>
+<Attr>
+<Pos l='33' c='19' s='0'/>
+</Attr>
+<Name>
+<Id value='enterHouse'>
+<Attr>
+<Pos l='33' c='9' s='10'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='33' c='20' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+</Operation_Call>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='33' c='27' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&gt;'>
+<Attr>
+<Pos l='33' c='42' s='1'/>
+</Attr>
+<Binary_Exp op='+' typref='2701647786'>
+<Attr>
+<Pos l='33' c='37' s='1'/>
+</Attr>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='33' c='30' s='6'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='33' c='39' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='33' c='44' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='33' c='58' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='33' c='51' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='33' c='61' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='4282494527'>
+<Unary_Exp op='POW'>
+<Id value='BOOL'/>
+</Unary_Exp>
+</Type>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='3603043417'>
+<Unary_Exp op='POW'>
+<Id value='INTEGER'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

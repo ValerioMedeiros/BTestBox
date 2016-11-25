@@ -1,0 +1,82 @@
+IMPLEMENTATION
+    TestSet_MchWithSEES_i
+
+REFINES
+    TestSet_MchWithSEES
+
+IMPORTS
+    copyMchWithSEES, copyLockMachine
+
+OPERATIONS
+    verdict <-- TEST_0_guestArrived =
+    BEGIN
+        SetVariablesForTest(0, 0, 0);
+        SetVariablesForTestSEES(TRUE);
+        VAR aux1,aux2,aux3,aux4 IN
+            guestArrived(0);
+            aux1 <-- OperationForTestGetinsideIMP;
+            aux2 <-- OperationForTestGetoutsideIMP;
+            aux3 <-- OperationForTestGettotalIMP;
+            aux4 <-- OperationForTestGetisOpenIMP;
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 & aux4 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_guestLeaved =
+    BEGIN
+        SetVariablesForTest(0, 0, 0);
+        SetVariablesForTestSEES(TRUE);
+        VAR aux1,aux2,aux3,aux4 IN
+            guestLeaved(0);
+            aux1 <-- OperationForTestGetinsideIMP;
+            aux2 <-- OperationForTestGetoutsideIMP;
+            aux3 <-- OperationForTestGettotalIMP;
+            aux4 <-- OperationForTestGetisOpenIMP;
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 & aux4 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_enterHouse =
+    BEGIN
+        SetVariablesForTest(0, 0, 0);
+        SetVariablesForTestSEES(TRUE);        
+        VAR aux1,aux2,aux3,aux4 IN
+            enterHouse(0);
+            aux1 <-- OperationForTestGetinsideIMP;
+            aux2 <-- OperationForTestGetoutsideIMP;
+            aux3 <-- OperationForTestGettotalIMP;
+            aux4 <-- OperationForTestGetisOpenIMP;
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 & aux4 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_leaveHouse =
+    BEGIN
+        SetVariablesForTest(0, 0, 0);
+        SetVariablesForTestSEES(TRUE);
+        VAR aux1,aux2,aux3,aux4 IN
+            leaveHouse(0);
+            aux1 <-- OperationForTestGetinsideIMP;
+            aux2 <-- OperationForTestGetoutsideIMP;
+            aux3 <-- OperationForTestGettotalIMP;
+            aux4 <-- OperationForTestGetisOpenIMP;
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 & aux4 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

@@ -1,12 +1,13 @@
 import buildpredicate
 import instgen
+import os
 from xml.dom import minidom
 '''
 predicate: module responsible for making the predicate that walk through a path.
 minidom: module responsible for making a tree from a xml file.
 '''
 
-def CodeCoverage(operationImp, operationMch, paths, inputs, operationname, nodeStatus, importedMch, impName):
+def CodeCoverage(operationImp, operationMch, paths, inputs, operationname, nodeStatus, importedMch, seesMch, impName):
     '''
     Code Coverage, function responsible of making the Code Coverage, in CC we need to exercise every instruction of the code at least once.
 
@@ -61,7 +62,7 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationname, nodeS
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
 
-def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, paths, inputs, operationname, importedMch, impName):
+def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, paths, inputs, operationname, importedMch, seesMch, impName):
     '''
     Branch Coverage, function responsible of making the Branch Coverage, in BC we need to exercise every branch of the code at least once.
 
@@ -86,6 +87,9 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
     '''
     #Initialisation
     count = dict()
+    allInVariables = list()
+    allOutVariables = list()
+    allUserVariables = list()
     pathToCover = 1
     aux = paths
     covered = False
@@ -99,7 +103,13 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                     count[p] += 1
             if count[p] > count[pathToCover]:
                     pathToCover = p
-        makePredicateBranchCoverage(operationImp, operationMch, aux[pathToCover], branchStatus, branchesPaths, pathToCover, inputs, operationname, importedMch, impName) #Finding the predicate
+        ExistValues, inVariables, outVariables, userVariables = makePredicateBranchCoverage(operationImp, operationMch, aux[pathToCover],
+                                                                                            branchStatus, branchesPaths, pathToCover, inputs,
+                                                                                            operationname, importedMch, seesMch, impName)
+        if ExistValues:
+            allInVariables.append(inVariables)
+            allOutVariables.append(outVariables)
+            allUserVariables.append(userVariables)
         for branch in branchStatus: #Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch] == True:
                 countcover += 1
@@ -114,10 +124,10 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
             if count[p] == 0: #If all branches of this path are covered, delete this path from aux
                 del aux[p]
         if len(aux) != 0: #If still existing a path, pathToCover receives the lowest number
-            pathToCover = min(aux.keys()) #Passing the lowest number
-    return covered
+            pathToCover = min(aux.keys()) #Passing the lowest number        
+    return covered, allInVariables, allOutVariables, allUserVariables
 
-def PathCoverage(operationImp, operationMch, paths, inputs, operationname, importedMch, impName):
+def PathCoverage(operationImp, operationMch, paths, inputs, operationname, importedMch, seesMch, impName):
     '''
     Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at least once.
 
@@ -151,7 +161,7 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationname, impor
             pathToCover = min(aux.keys()) #Passing the lowest number
     return covered
 
-def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, branchesPaths, pathToCover, inputs, operationName, importedMch, impName):
+def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, branchesPaths, pathToCover, inputs, operationName, importedMch, seesMch, impName):
     '''
     Make the predicate for Branch Coverage
 
@@ -179,26 +189,38 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
     way = list()
     posMut = list()
     changedVariablesWhile = list()
+    variablesList = list()
     outputs = getOutputsVariables(operationImp)
+    sizeinputs = len(inputs)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList)
+    fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs,
-                                                                          docXML, posMut, operationImp, importedMch,
-                                                                          operationName, impName, False, changedVariablesWhile)
+        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
+                                                                                      docXML, posMut, operationImp, importedMch, operationName,
+                                                                                      impName, False, changedVariablesWhile)
         del way[len(way) - 1]
     predicate = instgen.make_inst(predicateXML)
     ExistValues, variables = buildpredicate.checkPredicate(predicate, "Branch Coverage - trying to get inputs for path "+str(pathToCover), inputs)
     if ExistValues == True:
-        for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered)
-            branchStatus[branch] = True
         print("Input(s) were found for the predicate: "+predicate)
         print("An input option is "+variables+"\n")
-        output = buildpredicate.getOutput(path, pathToCover, inputs, outputs, docXML, operationImp, importedMch, operationName, impName, variables)
+        output, ExistOutput = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML,
+                                                       operationImp, importedMch, operationName, impName, variables, variablesList)
+        if ExistOutput:
+            for branch in branchesPaths[pathToCover]: #Setting all branches of the path to True (Covered)
+                branchStatus[branch] = True
     else:
         print("Inputs were NOT found for the predicate: "+predicate)
         print("The branches of this path were NOT covered\n")
+        output = []
+    if len(inputs) > sizeinputs:
+        for i in range(len(inputs)):
+            if i > sizeinputs - 1:
+                inputs.pop()
+    return ExistValues, variables, output, variablesList
 
 def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inputs, operationName, importedMch, impName):
     '''
@@ -228,24 +250,28 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
     posMut = list()
     changedVariablesWhile = list()
     outputs = getOutputVariables(operationImp)
+    fixedNames = getFixedNames(operationImp, importedMch)
     for key in path:
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs,
-                                                                          docXML, posMut, operationImp, importedMch,
-                                                                          operationName, impName, False, changedVariablesWhile)
+        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
+                                                                                      docXML, posMut, operationImp, importedMch, operationName,
+                                                                                      impName, False, changedVariablesWhile)
         del way[len(way) - 1]
     predicate = instgen.make_inst(predicateXML)
     ExistValues, variables = buildpredicate.checkPredicate(predicate, "Path Coverage - trying to get inputs for path "+str(pathToCover), inputs)
-    if ExistValues == True:
+    if ExistValues:
         print("Input(s) were found for the predicate: "+predicate)
         print("An option is "+variables+"\n")
-        output = buildpredicate.getOutput(path, pathToCover, inputs, outputs, docXML, operationImp, importedMch, operationName, impName, variables)
+        output = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML,
+                                          operationImp, importedMch, operationName, impName, variables)
+        
     else:
         print("Inputs were NOT found for the predicate: "+predicate)
         print("This path can NOT be covered\n")
-    return ExistValues
+        output = []
+    return ExistValues, variables, output
 
 def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inputs, operationName, nodeStatus, importedMch, impName):
     '''
@@ -277,26 +303,82 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
     posMut = list()
     changedVariablesWhile = list()
     outputs = getOutputsVariables(operationImp)
+    fixedNames = getFixedNames(operationImp, importedMch, operationMch)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs,
-                                                                          docXML, posMut, operationImp, importedMch,
-                                                                          operationName, impName, False, changedVariablesWhile)
+        predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
+                                                                                      docXML, posMut, operationImp, importedMch, operationName,
+                                                                                      impName, False, changedVariablesWhile)
         del way[len(way) - 1]
     predicate = instgen.make_inst(predicateXML)
     ExistValues, variables = buildpredicate.checkPredicate(predicate, "Code Coverage - trying to get inputs for path "+str(pathToCover), inputs)
-    if ExistValues == True:
-        for node in path: #Setting all branches of the path to True (Covered)
-            nodeStatus[node] = True
+    if ExistValues:
         print("Input(s) were found for the predicate: "+predicate)
         print("An input option is "+variables+"\n")
-        output = buildpredicate.getOutput(path, pathToCover, inputs, outputs, docXML, operationImp, importedMch, operationName, impName, variables)
+        output, outputExists = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML,
+                                          operationImp, importedMch, operationName, impName, variables)
+        if outputExists:
+            for node in path: #Setting all branches of the path to True (Covered)
+                nodeStatus[node] = True
     else:
         print("Inputs were NOT found for the predicate: "+predicate)
         print("The nodes of this path were NOT covered yet\n")
 
-def getUnchangeableNames(operationImp, importedMch):
-    None
+def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList):
+    for childnode in operationImp.parentNode.parentNode.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            if (childnode.tagName == "Parameters" or childnode.tagName == "Variables" or
+                childnode.tagName == 'Concrete_Variables' or childnode.tagName == 'Abstract_Variables'):
+                allId = childnode.getElementsByTagName('Id')
+                for Id in allId:
+                    if Id.getAttribute not in inputs:
+                        inputs.append(Id.getAttribute('value'))
+                        variablesList.append(Id.getAttribute('value'))
+    solveAddVariablesToInputImportsAndSees(operationImp, importedMch, operationMch, inputs, variablesList)
+    solveAddVariablesToInputImportsAndSees(operationImp, seesMch, operationMch, inputs, variablesList, True)
+    
+def solveAddVariablesToInputImportsAndSees(operationImp, machines, operationMch, inputs, variablesList, isSees = False):
+    for mch in machines:
+        importedImplementation = buildpredicate.buildpaths.graphgen.getImpWithImportedMch(mch)
+        if importedImplementation == None and isSees == False:
+            print('There is a machine that don\'t have implementation, this may break the algorithm')
+        else:
+            for childnode in importedImplementation.firstChild.childNodes:
+                if childnode.nodeType != childnode.TEXT_NODE:
+                    if (childnode.tagName == "Parameters" or childnode.tagName == "Variables" or
+                        childnode.tagName == 'Concrete_Variables' or childnode.tagName == 'Abstract_Variables'):
+                        allId = childnode.getElementsByTagName('Id')
+                        for Id in allId:
+                            if Id.getAttribute not in inputs:
+                                inputs.append(Id.getAttribute('value'))
+                                variablesList.append(Id.getAttribute('value'))
+
+def getFixedNames(operationImp, importedMch, seesMch, operationMch):
+    fixedNames = list()
+    solveFixedNames(operationImp.parentNode.parentNode.childNodes, fixedNames) #Implementation
+    for mch in importedMch: #Imported machines
+        solveFixedNames(mch.firstChild.childNodes, fixedNames)
+    solveFixedNames(operationMch.parentNode.parentNode.childNodes, fixedNames) #Machine of the implementation
+    for mch in seesMch:
+        solveFixedNames(mch.firstChild.childNodes, fixedNames)
+    return fixedNames
+
+def solveFixedNames(clauses, fixedNames):
+    for childnode in clauses:
+            if childnode.nodeType != childnode.TEXT_NODE:
+                tag = childnode.tagName
+                if tag == "Parameters" or tag == "Concrete_Constants" or tag == "Constants" or tag == "Abstract_Constants":
+                    allId = childnode.getElementsByTagName('Id')
+                    for Id in allId:
+                        if Id.getAttribute not in fixedNames:
+                            fixedNames.append(Id.getAttribute('value'))
+                if childnode.tagName == "Sets":
+                    for setTree in childnode.childNodes:
+                        if setTree.nodeType != setTree.TEXT_NODE:
+                            allId = childnode.getElementsByTagName('Id')
+                            for Id in allId:
+                                if Id.getAttribute not in fixedNames:
+                                    fixedNames.append(Id.getAttribute('value'))
 
 def getOutputsVariables(operationImp):
     '''
@@ -307,13 +389,11 @@ def getOutputsVariables(operationImp):
     Output:
     entries: A list with all the inputs
     '''
-    inputs = instgen.make_inputs(operationImp.getElementsByTagName("Output_Parameters")[0])
-    inputs = inputs.replace(" ", "") #Eliminating blank spaces
-    entries = list()
-    commas = list()
-    if len(inputs) == 0:
-        None
-    else:
+    if operationImp.getElementsByTagName("Output_Parameters") != []:
+        inputs = instgen.make_inputs(operationImp.getElementsByTagName("Output_Parameters")[0])
+        inputs = inputs.replace(" ", "") #Eliminating blank spaces
+        entries = list()
+        commas = list()
         for i in range(len(inputs)-1):
             if inputs[i] == ',':
                 commas.append(i)
@@ -334,6 +414,8 @@ def getOutputsVariables(operationImp):
                     else:
                         entries.append(inputs[commas[i]+1:commas[i+1]:])
             return entries
+    else:
+        return []
         
 #For testing uncomment the next lines
 '''

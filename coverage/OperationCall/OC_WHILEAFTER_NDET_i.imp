@@ -1,0 +1,27 @@
+/* OC_WHILEAFTER_NDET_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION OC_WHILEAFTER_NDET_i
+REFINES OC_WHILEAFTER
+
+IMPORTS NONDET_MCH_WHILE
+
+OPERATIONS
+    res1, res2 <-- opOC_WHILEAFTER(xx,yy)=
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            res1 := ii;
+            WHILE ii < xx DO
+                res1 := ii + 1;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & res1 = ii
+            VARIANT xx - ii
+            END;
+            res1 <-- opNONDET_MCH_WHILE(xx);
+            res2 <-- opNONDET_MCH_WHILE(yy)
+        END
+    END
+ END
