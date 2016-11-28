@@ -444,7 +444,7 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
         outputList.append("output"+outputs[i])
     for i in range(len(variablesList)):
         outputList.append('output'+variablesList[i])
-    ExistValues, OutputVariables = checkPredicate(predicate, "Branch Coverage - Getting the outputs for path "+str(pathToCover), outputList)
+    ExistValues, OutputVariables = checkPredicate(predicate, "Getting the outputs for path "+str(pathToCover), outputList)
     if ExistValues:
         for i in range(len(outputList)):
             usingRegex = r"\b" + re.escape(outputList[i]) + r"\b" #Using regex to change the string

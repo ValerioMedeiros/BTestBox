@@ -2,23 +2,26 @@ import os
 import shutil
 import re
 import instgen
+from xml.dom import minidom
 
 def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames):
     directory = '/Users/Diego Oliveira/Documents/BTestBox/coverage/Test'
     mch = impBXML.getElementsByTagName('Abstraction')[0]
-    controlList = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML, impBXML, includedMch, seesMch, importedMch, directory)
+    controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML, impBXML, includedMch, seesMch, importedMch, directory)
     for machineBXML in importedMch:
         importedImpBXML = getImpWithImportedMch(machineBXML)
-        controlList = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
-                                   machineBXML, importedImpBXML, includedMch, seesMch, importedMch, directory, controlList)
+        controlList, controlListNames = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
+                                   machineBXML, importedImpBXML, includedMch, seesMch, importedMch, directory, controlList, controlListNames)
     controlListSEES = list()
     for machineBXML in seesMch:
         seesImpBXML = getImpWithImportedMch(machineBXML)
-        variablesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
-                                   machineBXML, seesImpBXML, includedMch, seesMch, importedMch, directory, [])
+        variablesSEES, variablesMchNamesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
+                                   machineBXML, seesImpBXML, includedMch, seesMch, importedMch, directory, [], [])
         controlListSEES.append(variablesSEES)
     inputsOrder, outputsOrder = getOrder(impBXML, operationsNames)
-    createTestFile(mch.firstChild.data, inputs, output, seesMch, operationsNames, directory, inputsOrder, outputsOrder, controlList, controlListSEES)
+    testOperationNames = createTestFile(mch.firstChild.data, impBXML, inputs, output, seesMch, importedMch, operationsNames,
+                                        directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES)
+    return testOperationNames
 
 def getImpWithImportedMch(importedMch): #THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
                                         #THE ONE FOR THE SOLVEROC IS DIFFERENT BECAUSE NEED TO CHECK THE OPERATION
@@ -55,7 +58,7 @@ def getOrder(impBXML, operationsNames):
                 outputOrderForOperation.append(outputOrder)
     return inputOrderForOperation, outputOrderForOperation
                                 
-def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMch, importedMch, directory, controlList = []):
+def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMch, importedMch, directory, controlList = [], controlListNames = []):
     if not os.path.isdir(directory):
         os.mkdir(directory)
     copiedImp = open(directory+'/copy'+impNameFile+'.imp', 'w')
@@ -67,188 +70,141 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
     with open(directory+'/copy'+mchNameFile+'.mch', 'r+') as mch:
         old = mch.read()
         mch.seek(0)
-        operationsposition = re.search(r'\bOPERATIONS\b', old).end()
         variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
-        getOperation, setOperation, controlList = createFunctions(variablesAndConstraints, mch, typeOfVariablesAndConstraints, impBXML, 'mch', mchNameFile, controlList)
-        nameposition = re.search(r'\bMACHINE\b', old).end()
-        while old[nameposition+1] == ' ':
-            nameposition += 1
-        if re.search(r'\bINCLUDES\b', old) != None:
-            includeposition = re.search(r'\bINCLUDES\b', old).end()
-            while old[includeposition+1] == ' ':
-                includeposition += 1
-            promotesposition = includeposition + 1
-            while old[promotesposition+1] != ' ':
-                promotesposition += 1
-        if re.search(r'\bPROMOTES\b', old) != None:
-            promotesposition = re.search(r'\bPROMOTES\b', old).end()
-            while old[promotesposition+1] == ' ':
-                promotesposition += 1
-        if re.search(r'\bSEES\b', old) != None:
-            seesposition = re.search(r'\bSEES\b', old).end()
-            while old[seesposition+1] == ' ':
-                seesposition += 1
-        if re.search(r'\bINCLUDES\b', old) != None: #The operation has includes
-            if re.search(r'\bSEES\b', old) != None: #The operation has includes and sees
-                if re.search(r'\bPROMOTES\b', old) != None: #The operation has includes, sees and promotes
-                    if promotesposition < includesposition:
-                        if promotesposition < seesposition:
-                            None
-                        else:
-                            None
-                    else:
-                        if promotesposition < seesposition:
-                            None
-                        else:
-                            None
-                else: #The operation has includes and sees but don't has promotes
-                    if seesposition < includeposition:
-                        beforeOperations = 'copy'+old[seesposition+1:includeposition+1:]+'copy'+old[includeposition+1:promotesposition]+'\n\n'
-                        aux = includeposition
-                        importposition = seesposition
-                        seesposition = aux
+        getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints, typeOfVariablesAndConstraints, impBXML, 'mch', mchNameFile, controlList, controlListNames)
+        text = 'MACHINE\n    copy'+mchBXML.firstChild.getAttribute('name')
+        if mchBXML.getElementsByTagName('Parameters') != []:
+            parametersnode = mchBXML.getElementsByTagName('Parameters')[0]
+            text += instgen.transformBXML(parametersnode)
+        text += '\n\n'
+        for clauses in mchBXML.firstChild.childNodes:
+            if clauses.nodeType != clauses.TEXT_NODE:
+                if clauses.tagName == 'Imports':
+                    text += instgen.transformBXML(clauses)
+                    if impBXML.getElementsByTagName('Promotes') == []:
                         promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-                        if promotedOperations != "":
-                            beforeOperations += 'PROMOTES\n '+promotedOperations+'\n\n'
-                    else:
-                        beforeOperations = 'copy'+old[includeposition+1:promotesposition:]+'\n\n'
+                        text += '\n\nPROMOTES\n'
+                        text += '    '+promotedOperations
+                    text +='\n\n'
+                if clauses.tagName == 'Sees':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Promotes':
+                    promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
+                    text += instgen.transformBXML(clauses)
+                    text += ', '+promotedOperations+'\n\n'
+                if clauses.tagName == 'Concrete_Variables' or clauses.tagName == 'Abstract_Variables':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Concrete_Constants' or clauses.tagName == 'Abstract_Constants':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Abstraction':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Invariant':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Initialisation':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Sets':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Assertions':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Properties':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Constraints':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Values':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Includes':
+                    text += instgen.transformBXML(clauses)
+                    if impBXML.getElementsByTagName('Promotes') == []:
                         promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-                        if promotedOperations != "":
-                            beforeOperations += 'PROMOTES\n '+promotedOperations
-                        beforeOperations += old[promotesposition:seesposition+1]+'copy'
-                    mch.write(old[:nameposition+1:]+'copy'+old[nameposition+1:includeposition+1]+beforeOperations+
-                             old[seesposition+1:operationsposition+1:]+getOperation+setOperation+old[operationsposition+1::])
-            else: #The operation has includes but don't has sees
-                None#STILL WORK TO DO HERE
-        else: #The operation dont has includes
-            if re.search(r'\bSEES\b', old) != None: #The operation don't has includes but has sees
-                mch.write(old[:nameposition+1:]+'copy'+old[nameposition+1:seesposition+1:]+'copy'+
-                      old[seesposition+1:operationsposition+1:]+getOperation+setOperation+old[operationsposition+1::])
-            else: #The operation don't has includes or sees
-                mch.write(old[:nameposition+1:]+'copy'+old[nameposition+1:operationsposition+1:] + getOperation + setOperation + old[operationsposition+1::])
+                        text += '\n\nPROMOTES\n'
+                        text += '    '+promotedOperations
+                    text += '\n\n'
+                if clauses.tagName == 'Operations':
+                    text += 'OPERATIONS\n'
+                    text += getOperation+setOperation
+                    operationsposition = re.search(r'\bOPERATIONS\b', old).end()
+                    if clauses.nextSibling.nextSibling.tagName != 'TypeInfos':
+                        tag = clauses.nextSibling.nextSibling.tagName.upper()
+                        endoperations = re.search(r'\b%s\b' % tag, old).start()
+                    else:
+                        endoperations = len(old)
+                    text += old[operationsposition+1:endoperations:]
+                if clauses.tagName == 'Local_Operations':
+                    operationsposition = re.search(r'\bLOCAL_OPERATIONS\b', old).start()
+                    if clauses.nextSibling.nextSibling.tagName != 'TypeInfos':
+                        tag = clauses.nextSibling.nextSibling.tagName.upper()
+                        endoperations = re.search(r'\b%s\b' % tag, old).start()
+                    else:
+                        endoperations = len(old)
+                    text += old[operationsposition:endoperations:]
+        mch.write(text)
         mch.close()
     with open(directory+'/copy'+impNameFile+'.imp', 'r+') as imp:
         old = imp.read()
         imp.seek(0)
-        startSEES = 0
-        startIMPORTS = 0
-        startOPERATIONS = 0
-        startPROMOTES = 0
-        implementationclause, startIMPLEMENTATION, endIMPLEMENTATION = getPhrase('IMPLEMENTATION', old, impBXML, '')
-        alreadycopied = list()
-        refinesclause, startREFINES, endREFINES = getPhrase('REFINES', old, impBXML, '')
-        if re.search(r'\bIMPORTS\b', old) != None:
-            importsclause, startIMPORTS, endIMPORTS = getPhrase('IMPORTS', old, impBXML, 'Imports',importedMch)
-        if re.search(r'\bSEES\b', old) != None:
-            seesclause, startSEES, endSEES = getPhrase('SEES', old, impBXML, 'Sees', seesMch)
-        if re.search(r'\bPROMOTES\b', old) != None:
-            promotesclause, startPROMOTES, endPROMOTES = getPhrase('PROMOTES', old, impBXML, '')
         variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
-        getOperation, setOperation, controlList = createFunctions(variablesAndConstraints, imp, typeOfVariablesAndConstraints, impBXML, 'imp', mchNameFile, controlList)
-        if re.search(r'\bOPERATIONS\b', old) != None:
-            operationclause, startOPERATIONS, endOPERATIONS = getPhrase('OPERATIONS', old, impBXML, '')
-        finalIMP = implementationclause+'\n\n'+refinesclause+'\n\n'
-        for i in range(startIMPLEMENTATION, endIMPLEMENTATION):
-            alreadycopied.append(i)
-        for i in range(startREFINES, endREFINES):
-            alreadycopied.append(i)
-        if re.search(r'\bIMPORTS\b', old) != None:
-            for i in range(startIMPORTS, endIMPORTS):
-                alreadycopied.append(i)
-            finalIMP += importsclause+'\n\n'
-        if re.search(r'\bSEES\b', old) != None:
-            for i in range(startSEES, endSEES):
-                alreadycopied.append(i)
-            finalIMP += seesclause+'\n\n'
-        if re.search(r'\bPROMOTES\b', old) != None:
-            promotesOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-            arranje = [startIMPLEMENTATION, startREFINES, startSEES, startOPERATIONS]
-            inserted = False
-            copypos = re.search(r'\bPROMOTES\b', old).end()
-            while old[copypos+1] == ' ':
-                copypos += 1
-            for startvalue in sorted(arranje):
-                if startPROMOTES < startvalue and inserted == False:
-                    inserted = True
-                    finalIMP += old[startPROMOTES:copypos+1:]+promotesOperations+', '+old[copypos+1:startvalue:]
-                    for i in range(startPROMOTES, startvalue):
-                        alreadycopied.append(i)
-                    endPROMOTES = startvalue - 1
-                elif startvalue == max(arranje) and inserted == False:
-                    finalIMP += old[startPROMOTES:copypos+1:]+promotesOperations+', '+old[copypos+1::]
-                    for i in range(startPROMOTES, len(old)):
-                        alreadycopied.append(i)
-        if re.search(r'\bOPERATIONS\b', old) != None:
-            copypos = re.search(r'\bOPERATIONS\b', old).end()
-            arranje = [startIMPLEMENTATION, startREFINES, startSEES, startPROMOTES]
-            while old[copypos + 1] == ' ':
-                copypos += 1
-            inserted = False
-            for startvalue in sorted(arranje):
-                if startOPERATIONS < startvalue and inserted == False:
-                    inserted == True
-                    finalIMP += old[startoperations:copypos+1]+getOperation+setOperation+old[copypos+1:startvalue:]
-                    for i in range(startOPERATIONS, startvalue):
-                        alreadycopied.append(i)
-                elif startvalue == max(arranje) and inserted == False:
-                    finalIMP += old[startOPERATIONS:copypos+1:]+getOperation+setOperation+old[copypos+1::]
-                    for i in range(startPROMOTES, len(old)):
-                        alreadycopied.append(i)
-        elif getOperation != "":
-            finalIMP += 'OPERATIONS\n    '+setOperation+getOperation
-        for i in range(len(old)):
-            if i not in alreadycopied:
-                if len(old)-1 in alreadycopied:
-                    endRef = re.search(r'\bREFINES\b', finalImp).end()
-                    while endRef + 1 == ' ':
-                        endRef += 1
-                    endRef += 1
-                    while endRef + 1 != ' ':
-                        endRef += 1
-                    leftover = ""
-                    for i in range(len(old)):
-                        if i not in alreadycopied:
-                            leftover += old[i]
-                            alreadycopied.append(i)
-                    finalIMP = finalImp[:endRef:]+leftover+finalImp[endRef::]
-                else:
-                    finalIMP += old[i]
-                    alreadycopied.append(i)
-        imp.write(finalIMP)
+        getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints, typeOfVariablesAndConstraints, impBXML, 'imp', mchNameFile, controlList, controlListNames)
+        text = 'IMPLEMENTATION\n    copy'+impBXML.firstChild.getAttribute('name')
+        if impBXML.getElementsByTagName('Parameters') != []:
+            parametersnode = impBXML.getElementsByTagName('Parameters')[0]
+            text += instgen.transformBXML(parametersnode)
+        text += '\n\n'
+        for clauses in impBXML.firstChild.childNodes:
+            if clauses.nodeType != clauses.TEXT_NODE:
+                if clauses.tagName == 'Imports':
+                    text += instgen.transformBXML(clauses)
+                    if impBXML.getElementsByTagName('Promotes') == []:
+                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
+                        text += '\n\nPROMOTES\n'
+                        text += '    '+promotedOperations
+                    text +='\n\n'
+                if clauses.tagName == 'Sees':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Promotes':
+                    promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
+                    text += instgen.transformBXML(clauses)
+                    text += ', '+promotedOperations+'\n\n'
+                if clauses.tagName == 'Concrete_Variables' or clauses.tagName == 'Abstract_Variables':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Concrete_Constants' or clauses.tagName == 'Abstract_Constants':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Abstraction':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Invariant':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Initialisation':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Values':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Sets':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Assertions':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Properties':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Constraints':
+                    text += instgen.transformBXML(clauses)+'\n\n'
+                if clauses.tagName == 'Operations':
+                    text += 'OPERATIONS\n'
+                    text += getOperation+setOperation
+                    operationsposition = re.search(r'\bOPERATIONS\b', old).end()
+                    if clauses.nextSibling.nextSibling.tagName != 'TypeInfos':
+                        tag = clauses.nextSibling.nextSibling.tagName.upper()
+                        endoperations = re.search(r'\b%s\b' % tag, old).start()
+                    else:
+                        endoperations = len(old)
+                    text += old[operationsposition+1:endoperations:]
+                if clauses.tagName == 'Local_Operations':
+                    operationsposition = re.search(r'\bLOCAL_OPERATIONS\b', old).start()
+                    if clauses.nextSibling.nextSibling.tagName != 'TypeInfos':
+                        tag = clauses.nextSibling.nextSibling.tagName.upper()
+                        endoperations = re.search(r'\b%s\b' % tag, old).start()
+                    else:
+                        endoperations = len(old)
+                    text += old[operationsposition:endoperations:]
+        imp.write(text)
         imp.close()
-    return controlList
-
-def getPhrase(word, text, BXML, maintag, aux = []):
-    start = re.search(r'\b%s\b' % word, text).start()
-    copypos = re.search(r'\b%s\b' % word, text).end()
-    while text[copypos+1] == ' ':
-        copypos+=1
-    end = copypos + 1
-    while text[end+1] != ' ':
-        end += 1
-    if word == 'IMPORTS' or word == 'SEES' or word == 'INCLUDES':
-        phrase = text[start:copypos+1:]
-        for childnode in BXML.firstChild.childNodes:
-            if childnode.nodeType != childnode.TEXT_NODE:
-                tag = childnode.tagName
-                if tag == maintag:
-                    allRef = childnode.getElementsByTagName('Name')
-                    for j in range(len(allRef)):
-                        for i in range(len(aux)):
-                            if aux[i].firstChild.getAttribute('name') == allRef[j].firstChild.data:
-                                phrase += 'copy'+aux[i].firstChild.getAttribute('name')
-                                end += len(aux[i].firstChild.getAttribute('name'))
-                        if j != max(range(len(aux))):
-                                phrase += ', '
-    if word == 'IMPLEMENTATION' or word == 'REFINES' or word == 'MACHINE':
-        phrase = text[start:copypos+1:]+'copy'+text[copypos+1:end:]
-    if word == 'PROMOTES':
-        phrase = text[start::]
-        end = len(text)-1
-    if word == 'OPERATIONS':
-        phrase = text[start::]
-        end = len(text)-1
-    return phrase, start, end
+    return controlList, controlListNames
 
 def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
     variablesOperation = ""
@@ -262,7 +218,6 @@ def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
                             if child.tagName == 'Name':
                                 for included in includedMch:
                                     if child.firstChild.data == included.firstChild.getAttribute('name'):
-                                        #GET THE VARIABLES OPERATIONS AND THE PROMOTED OPERATIONS THAT ARE GET AND SET
                                         var, vartype = getVariablesAndConstraints(included)
                                         for i in range(len(var)):
                                             variablesOperation += 'OperationForTestGet'+var[i]+'IMP'+included.firstChild.getAttribute('name')
@@ -293,7 +248,7 @@ def getVariablesAndConstraints(BXML):
                                             typeOfVariablesAndConstraints.append(instgen.selfcaller(typeinfo.firstChild.nextSibling))
     return variablesAndConstraints, typeOfVariablesAndConstraints
 
-def createFunctions(var, myfile, typeOfVariablesAndConstraints, BXML, tipo, name, controlList):
+def createFunctions(var, typeOfVariablesAndConstraints, BXML, tipo, name, controlList, controlListNames):
     setOperation = ""
     getOperation = ""
     if tipo == 'mch' and var != []:
@@ -309,6 +264,7 @@ def createFunctions(var, myfile, typeOfVariablesAndConstraints, BXML, tipo, name
         setOperation += '    PRE '
         for i in range(len(var)):
             controlList.append(var[i])
+            controlListNames.append(name)
             itIsOkay = False
             for childnode in BXML.firstChild.childNodes:
                 if childnode.nodeType != childnode.TEXT_NODE:
@@ -346,14 +302,16 @@ def createFunctions(var, myfile, typeOfVariablesAndConstraints, BXML, tipo, name
                 setOperation += ';'
             setOperation += '\n'
         setOperation += '    END;\n\n'
-    return getOperation, setOperation, controlList
+    return getOperation, setOperation, controlList, controlListNames
 
-def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory, inputsOrder, outputsOrder, controlList, controlListSEES):
+def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, operationsNames, directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES):
+    testOperationsNames = list()
     machine = 'MACHINE\n    TestSet_'+mchName+'\n\n'
     machine += 'OPERATIONS\n'
     for operation in sorted(inputs.keys()):
         for i in range(len(inputs[operation])):
             machine += 'verdict <-- TEST_'+str(i)+'_'+operationsNames[operation-1]+' =\n'
+            testOperationsNames.append('TEST_'+str(i)+'_'+operationsNames[operation-1])
             machine += '    ANY kk WHERE kk : BOOL THEN verdict := kk END'
             if i != max(range(len(inputs[operation]))):
                 machine += ';\n\n'
@@ -390,16 +348,47 @@ def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory
                     outputVarName.append(wordListOut[j])
                     outputVarValue.append(wordListOut[j + 1])
             if controlList != []:
-                implementation += '        SetVariablesForTest'+mchName+'('
-                count = 0
-                for var in controlList:
-                    for j in range(len(varInput)):
-                        if str(var) == str(varInput[j]):
-                            implementation += str(varOutput[j])
-                    count += 1
-                    if len(controlList) != count:
-                        implementation += ', '
-                implementation += ');\n'
+                #For the machine/implementation
+                for clause in impBXML.firstChild.childNodes:
+                    if clause.nodeType != clause.TEXT_NODE:
+                        if clause.tagName == 'Variables' or clause.tagName == 'Concrete_Variables':
+                            implementation += '        SetVariablesForTest'+mchName+'('
+                            allVariables = clause.getElementsByTagName('Id')
+                            count = 0
+                            for variable in allVariables:
+                                alreadyWriteVariable = list()
+                                for j in range(len(varInput)):
+                                    if variable.getAttribute('value') == str(varInput[j]):
+                                        if variable.getAttribute('value') not in alreadyWriteVariable:
+                                            implementation += str(varOutput[j])
+                                            alreadyWriteVariable.append(variable.getAttribute('value'))
+                                            count += 1
+                                            if allVariables.length > count:
+                                                implementation += ', '
+                            implementation += ');\n'
+                        if clause.tagName == 'Imports' or clause.tagName == 'Extends':
+                            allImportedMachines = clause.getElementsByTagName('Name')
+                            for importedmachine in importedMch:
+                                for machineimported in allImportedMachines:
+                                    if importedmachine.firstChild.getAttribute('name') == machineimported.firstChild.data:
+                                        importedmachineimp = getImpWithImportedMch(importedmachine)
+                                        for importedmachineclauses in importedmachineimp.firstChild.childNodes:
+                                            if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
+                                                if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
+                                                    implementation += '        SetVariablesForTest'+machineimported.firstChild.data+'('
+                                                    allVariables = importedmachineclauses.getElementsByTagName('Id')
+                                                    count = 0
+                                                    for variable in allVariables:
+                                                        alreadyWriteVariable = list()
+                                                        for j in range(len(varInput)):
+                                                            if variable.getAttribute('value') == str(varInput[j]):
+                                                                if variable.getAttribute('value') not in alreadyWriteVariable:
+                                                                    implementation += str(varOutput[j])
+                                                                    alreadyWriteVariable.append(variable.getAttribute('value'))
+                                                                    count += 1
+                                                                    if allVariables.length > count:
+                                                                        implementation += ', '
+                                                    implementation += ');\n'
             for j in range(len(seesMch)):
                 if controlListSEES[j] != []:
                     implementation += '        SetVariablesForTest'+seesMch[j].firstChild.getAttribute('name')+'('
@@ -412,6 +401,31 @@ def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory
                         if len(controlListSEES[j]) != count:
                             implementation += ', '
                     implementation += ');\n'
+                for clause in seesMch[j].childNodes:
+                    if clause.nodeType != clause.TEXT_NODE:
+                        if clause.tagName == 'Includes' or clause.tagName == 'Extends' or clause.tagName == 'Imports':
+                            allImportedMachines = clause.getElementsByTagName('Name')
+                            for importedmachine in importedMch:
+                                for machineimported in allImportedMachines:
+                                    if importedmachine.firstChild.getAttribute('name') == machineimported.firstChild.data:
+                                        importedmachineimp = getImpWithImportedMch(importedmachine)
+                                        for importedmachineclauses in importedmachineimp.firstChild.childNodes:
+                                            if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
+                                                if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
+                                                    implementation += '        SetVariablesForTest'+machineimported.firstChild.data+'('
+                                                    allVariables = importedmachineclauses.getElementsByTagName('Id')
+                                                    count = 0
+                                                    for variable in allVariables:
+                                                        alreadyWriteVariable = list()
+                                                        for j in range(len(varInput)):
+                                                            if variable.getAttribute('value') == str(varInput[j]):
+                                                                if variable.getAttribute('value') not in alreadyWriteVariable:
+                                                                    implementation += str(varOutput[j])
+                                                                    alreadyWriteVariable.append(variable.getAttribute('value'))
+                                                                    count += 1
+                                                                    if allVariables.length > count:
+                                                                        implementation += ', '
+                                                    implementation += ');\n'
             implementation += '        VAR '
             for j in range(len(outputVarName)):
                 implementation += 'aux'+str(j+1)
@@ -450,10 +464,10 @@ def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory
                 implementation += ';\n'
             for j in range(len(controlList)): #Gets
                 if outputsOrder[operation - 1] != []:
-                    implementation += '            aux'+str(j+1+max(range(len(outputsOrder[operation - 1])))+1)+' <-- OperationForTestGet'+controlList[j]+mchName+';\n'
+                    implementation += '            aux'+str(j+1+max(range(len(outputsOrder[operation - 1])))+1)+' <-- OperationForTestGet'+controlList[j]+controlListNames[j]+';\n'
                     countsaver = j+1
                 else:
-                    implementation += '            aux'+str(j+1)+' <-- OperationForTestGet'+controlList[j]+mchName+';\n'
+                    implementation += '            aux'+str(j+1)+' <-- OperationForTestGet'+controlList[j]+controlListNames[j]+';\n'
                     countsaver = j+1
             startcount = countsaver
             for j in range(len(seesMch)):
@@ -477,20 +491,26 @@ def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory
                     implementation += 'aux'+str(j+1+max(range(len(outputsOrder[operation - 1])))+1)+' = '
                 else:
                     implementation += 'aux'+str(j+1)+' = '
+                alreadyWriteVariables = []
                 for k in range(len(outputVarName)):
                     if str(controlList[j]) == str(outputVarName[k]):
-                        implementation += str(outputVarValue[k])
+                        if str(controlList[j]) not in alreadyWriteVariables:
+                            implementation += str(outputVarValue[k])
+                            alreadyWriteVariables.append(str(controlList[j]))
                 if j != max(range(len(controlList))):
                     implementation += ' & '
             countsaver = startcount
             for j in range(len(seesMch)):
                 if controlListSEES[j] != []:
                     implementation += ' & '
+                alreadyWriteVariables = []
                 for k in range(len(controlListSEES[j])):
                     implementation += 'aux'+str(countsaver+k+j+1)+' = '
                     for w in range(len(outputVarName)):
                         if str(controlListSEES[j][k]) == str(outputVarName[w]):
-                            implementation += str(outputVarValue[w])
+                            if str(controlListSEES[j][k]) not in alreadyWriteVariables:
+                                alreadyWriteVariables.append(str(controlListSEES[j][k]))
+                                implementation += str(outputVarValue[w])
                     if k != max(range(len(controlListSEES[j]))):
                         implementation += ' & '
             implementation += ' THEN\n'
@@ -514,76 +534,5 @@ def createTestFile(mchName, inputs, outputs, seesMch, operationsNames, directory
     testmachine = open(directory+'/'+'TestSet_'+mchName+'.mch', 'w')
     testmachine.write(machine)
     testmachine.close()
-
-##        if re.search(r'\bIMPORTS\b', old) != None:
-##            if re.search(r'\bSEES\b', old) != None:
-##                if re.search(r'\bPROMOTES\b', old) != None:
-##                    if promotesposition < seesposition:
-##                        if promotesposition < importposition:
-##                            if seesposition < importposition:
-##                                promotedOperation = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-##                                if promotedOperations != "":
-##                                    beforeOperations = (promotedOperations+', '+old[promotesposition+1:seesposition+1:]+'copy'
-##                                                        +old[seesposition+1:importposition+1:]+'copy'+old[importposition+1:operationsposition+1]+'\n\n')
-##                                else:
-##                                    beforeOperations = (old[promotesposition+1:seesposition+1:]+'copy'+old[seesposition+1:importposition+1:]
-##                                                        +'copy'+old[importposition+1:operationsposition+1]+'\n\n')
-##                            else:
-##                                promotedOperation = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-##                                aux = seesposition
-##                                seesposition = importposition
-##                                importposition = aux
-##                                if promotedOperations != "":
-##                                    beforeOperations = (promotedOperations+', '+old[promotesposition+1:seesposition+1:]+'copy'
-##                                                        +old[seesposition+1:importposition+1:]+'copy'+old[importposition+1:operationsposition+1]+'\n\n')
-##                                else:
-##                                    beforeOperations = (old[promotesposition+1:seesposition+1:]+'copy'+old[seesposition+1:importposition+1:]
-##                                                        +'copy'+old[importposition+1:operationsposition+1]+'\n\n')
-##                            imp.write(old[:nameposition+1:]+'copy'+old[namesposition+1:refinesposition+1:]+'copy'+
-##                                      old[refinesposition+1:promotesposition+1:]+beforeOperations+setOperation+getOperation+old[operationsposition+1::])
-##                        else:
-##                            if seesposition < importposition:
-##                                promotedOperation = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-##                                if promotedOperations != "":
-##                                    beforeOperations = old[
-##                                else:
-##                                    beforeOperations = (old[promotesposition+1:seesposition+1:]+'copy'+old[seesposition+1:importposition+1:]
-##                                                        +'copy'+old[importposition+1:operationsposition+1]+'\n\n')
-##                            else:
-##                    else:
-##                        if promotesposition < importposition:
-##                            if seesposition < importposition:
-##                            else:
-##                        else:
-##                            if seesposition < importposition:
-##                            else:
-##                else:
-##                    if seesposition < importposition:
-##                        beforeOperations = 'copy'+old[seesposition+1:importposition+1:]+'copy'+old[importposition+1:promotesposition]+'\n\n'
-##                        aux = importposition
-##                        importposition = seesposition
-##                        seesposition = aux
-##                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-##                        if promotedOperations != "":
-##                            beforeOperations += 'PROMOTES\n '+promotedOperations+'\n\n'
-##                    else:
-##                        beforeOperations = 'copy'+old[importposition+1:promotesposition:]+'\n\n'
-##                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-##                        if promotedOperations != "":
-##                            beforeOperations += 'PROMOTES\n '+promotedOperations
-##                        beforeOperations += old[promotesposition:seesposition+1]+'copy'
-##                    imp.write(old[:nameposition+1:]+'copy'+old[nameposition+1:refinesposition+1:]+'copy'+
-##                              old[refinesposition+1:importposition+1:]+beforeOperations+old[promotesposition+1:operationsposition+1:]+
-##                              getOperation + setOperation + old[operationsposition+1::])
-##            else:
-##                imp.write(old[:nameposition+1:]+'copy'+old[nameposition+1:refinesposition+1:]+'copy'+
-##                          old[refinesposition+1:importposition+1:]+'copy'+old[importposition+1:operationsposition+1:]+
-##                          getOperation + setOperation + old[operationsposition+1::])
-##        else:
-##            if re.search(r'\bSEES\b', old) != None:
-##                imp.write(old[:nameposition+1:]+'copy'+old[nameposition+1:refinesposition+1:]+'copy'+
-##                          old[refinesposition+1:seesposition+1:]+'copy'+old[seesposition+1:operationsposition+1:]+
-##                          getOperation + setOperation + old[operationsposition+1::])
-##            else:
-##                imp.write(old[:nameposition+1:]+'copy'+old[nameposition+1:refinesposition+1:]+'copy'+
-##                          old[refinesposition+1:operationsposition+1:]+ getOperation + setOperation + old[operationsposition+1::])
+    return testOperationsNames
+    

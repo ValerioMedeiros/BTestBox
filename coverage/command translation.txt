@@ -1,0 +1,1 @@
+C:\Users\Diego Oliveira\Documents\binstall_projects\GeneratedTests\lang\c>"C:\Users\Diego Oliveira\AtelierB\installatelierb\bbin\win32\b2c.exe" -p C9X -r "..\..\bdp\AtelierB" -I "C:\Users\Diego Oliveira\Documents\BTestBox\coverage\Test" "C:\Users\Diego Oliveira\Documents\BTestBox\coverage\Test\copycountMch_i.imp"

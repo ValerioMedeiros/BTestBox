@@ -162,8 +162,11 @@ def selfcaller(node):
         text += make_properties(node)
     return text
 
-def make_properties(node):
-    text = ""
+def make_properties(node, inLine = False):
+    if inLine:
+        text = node.tagName.upper()+'\n'
+    else:
+        text = ""
     if node.childNodes.item(1).tagName == 'Attr':
         text += selfcaller(node.childNodes.item(3))
     else:
@@ -246,7 +249,7 @@ def make_operationcall(node):
     count = 0
     text += callmake(node, node.childNodes.item(3).tagName) #Make the operation
     text += "("
-    for i in range(node.childNodes.item(5).childNodes.length): #Making the parameters of the call
+    for i in range(node.childNodes.item(5).childNodes.length):
         count += 1
         if node.childNodes.item(5).childNodes.item(i).nodeType != node.childNodes.item(5).childNodes.item(i).TEXT_NODE:
             text += selfcaller(node.childNodes.item(5).childNodes.item(i))
@@ -309,9 +312,12 @@ def make_precondition(node):
     text +=""
     return text
 
-def make_invariant(node):
+def make_invariant(node, inLine = False):
     """Build the INVARIANT in a string"""
-    text = ""
+    if inLine:
+        text = node.tagName.upper()+"\n"
+    else:
+        text = ""
     text += make_inst(node)
     return text
 
@@ -471,6 +477,129 @@ def make_inst(node):
         if node.childNodes.item(i).nodeType != node.childNodes.item(i).TEXT_NODE:
             tag = node.childNodes.item(i).tagName
             text += callmake(node, tag)
+    return text
+
+def make_parameters(node):
+    text = node.tagName.upper()+'\n    '
+    allId = node.getElementsByTagName('Id')
+    count = 0
+    for Id in allId:
+        text += Id.getAttribute('value')
+        count += 1
+        if count < allId.length:
+            text += ', '
+    return text
+
+def make_othermachines(node):
+    text = node.tagName.upper()+'\n    '
+    allNames = node.getElementsByTagName('Name')
+    count = 0
+    for name in allNames:
+        text += 'copy'+name.firstChild.data
+        count += 1
+        if count < allNames.length:
+            text += ', '
+    return text
+
+def make_promotes(node):
+    text = node.tagName.upper()+'\n    '
+    allNames = node.getElementsByTagName('Promoted_Operation')
+    count = 0
+    thereIsAttr = False
+    if allNames[0].firstChild.nextSibling.tagName == 'Attr':
+        thereIsAttr = True
+    for name in allNames:
+        if thereIsAttr:
+            text += name.firstChild.nextSibling.nextSibling.data
+        else:
+            text += name.firstChild.data
+        count += 1
+        if count < allNames.length:
+            text += ', '
+    return text
+
+def make_variables_text(node):
+    text = node.tagName.upper()+'\n    '
+    allId = node.getElementsByTagName('Id')
+    count = 0
+    for Id in allId:
+        text += Id.getAttribute('value')
+        count += 1
+        if count < allId.length:
+            text += ', '
+    return text
+
+def make_abstraction(node):
+    text = 'REFINES\n    '
+    text += 'copy'+node.firstChild.data
+    return text
+
+def make_sets(node):
+    text = 'SETS\n    '
+    allSet = node.getElementsByTagName('Set')
+    count = 0
+    for Set in allSet:
+        text += make_set(node)
+        count += 1
+        if count < allSet.length:
+            text += ', '
+    return text
+
+def make_constraints(node):
+    text = node.tagName.upper()+'\n    '
+    if node.childNodes.item(1).tagName == 'Attr':
+        count = 3
+    else:
+        count = 1
+    for childnode in node.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            if childnode.tagName != 'Attr':
+                text += selfcaller(childnode)
+                count += 2
+                if count < node.childNodes.length:
+                    text += ', '           
+    return text
+
+def make_values(node):
+    text = node.tagName.upper()+'\n    '
+    allId = node.getElementsByTagName('Valuation')
+    count = 0
+    for Id in allId:
+        text += selfcaller(Id)
+        count += 1
+        if count < allId.length:
+            text += ', '
+    return text
+    
+def transformBXML(node):
+    text = ''
+    tag = node.tagName
+    if tag == "Properties":
+        text += make_properties(node, True)
+    elif tag == 'Parameters':
+        text += make_parameters
+    elif tag == 'Sees' or tag == 'Includes' or tag == 'Imports' or tag == 'Extends':
+        text += make_othermachines(node)
+    elif tag == 'Promotes':
+        text += make_promotes(node)
+    elif tag == 'Concrete_Variables' or tag == 'Abstract_Variables':
+        text += make_variables_text(node)
+    elif tag == 'Concrete_Constants' or tag == 'Abstract_Constants':
+        text += make_variables_text(node)
+    elif tag == 'Abstraction':
+        text += make_abstraction(node)
+    elif tag == 'Invariant':
+        text += make_invariant(node, True)
+    elif tag == 'Initialisation':
+        text += make_invariant(node, True)
+    elif tag == 'Sets':
+        text += make_sets(node)
+    elif tag == 'Assertions':
+        text += make_invariant(node, True)
+    elif tag == 'Constraints':
+        text += make_constraints(node)
+    elif tag == 'Values':
+        text += make_values(node)
     return text
 
 """

@@ -1,35 +1,25 @@
-/* LockMachine_i
- * Author: Diego Oliveira
- * Creation date: 23/11/2016
- */
+IMPLEMENTATION
+    copyLockMachine_i
 
-IMPLEMENTATION copyLockMachine_i
-REFINES copyLockMachine
+REFINES
+copyLockMachine
 
 CONCRETE_VARIABLES
-    isOpenIMP
-    
+isOpenIMP
+
 INVARIANT
-    isOpenIMP : BOOL & isOpenIMP = isOpen
-    
+(isOpenIMP : BOOL & isOpenIMP = isOpen)
+
 INITIALISATION
-    isOpenIMP := FALSE
+isOpenIMP := FALSE
 
 OPERATIONS
-    GetinsideIMPForTest <-- OperationForTestGetinsideIMP = 
-        GetinsideIMPForTest := insideIMP;
+    GetisOpenIMPForTest <-- OperationForTestGetisOpenIMPLockMachine = 
+        GetisOpenIMPForTest := isOpenIMP;
 
-    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMP = 
-        GetoutsideIMPForTest := outsideIMP;
-
-    GettotalIMPForTest <-- OperationForTestGettotalIMP = 
-        GettotalIMPForTest := totalIMP;
-
-    SetVariablesForTest(nn1, nn2, nn3) = 
+    SetVariablesForTestLockMachine(nn1) = 
     BEGIN
-        insideIMP := nn1;
-        outsideIMP := nn2;
-        totalIMP := nn3
+        isOpenIMP := nn1
     END;
 
     openVault =

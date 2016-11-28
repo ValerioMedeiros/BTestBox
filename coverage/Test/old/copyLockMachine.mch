@@ -1,31 +1,21 @@
-/* LockMachine
- * Author: Diego Oliveira
- * Creation date: 23/11/2016
- */
 MACHINE
     copyLockMachine
 
-VARIABLES
-    isOpen
-    
+ABSTRACT_VARIABLES
+isOpen
+
 INVARIANT
-    isOpen : BOOL
-    
+isOpen : BOOL
+
 INITIALISATION
-    isOpen:= FALSE
+isOpen := FALSE
 
 OPERATIONS
-    GetinsideIMPForTest <-- OperationForTestGetinsideIMP = 
-        ANY aux WHERE aux : INTEGER THEN GetinsideIMPForTest := aux END;
+    GetisOpenIMPForTest <-- OperationForTestGetisOpenIMPLockMachine = 
+        ANY aux WHERE aux : BOOL THEN GetisOpenIMPForTest := aux END;
 
-    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMP = 
-        ANY aux WHERE aux : INTEGER THEN GetoutsideIMPForTest := aux END;
-
-    GettotalIMPForTest <-- OperationForTestGettotalIMP = 
-        ANY aux WHERE aux : INTEGER THEN GettotalIMPForTest := aux END;
-
-    SetVariablesForTest(nn1, nn2, nn3) = 
-    PRE nn1 : NAT & nn2 : NAT & nn3 : NAT
+    SetVariablesForTestLockMachine(nn1) = 
+    PRE nn1 : BOOL
     THEN
         skip
     END;

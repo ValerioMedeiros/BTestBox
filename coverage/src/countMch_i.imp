@@ -1,0 +1,48 @@
+﻿/* countMch_i
+ * Author: Diego Oliveira
+ * Creation date: 28/11/2016
+ */
+
+IMPLEMENTATION countMch_i
+REFINES countMch
+
+VALUES
+    max_count = 10
+
+CONCRETE_VARIABLES
+    count
+
+INVARIANT
+    count : NAT & count <= max_count
+
+INITIALISATION
+    count := 0
+
+
+OPERATIONS
+    res <-- Inc ( nn ) =
+    BEGIN
+        VAR aux IN
+            aux := count + nn ;
+            IF aux <= max_count THEN
+                res := TRUE ; count := count + nn
+            ELSE
+                res := FALSE
+            END
+        END
+    END ;
+
+
+    res <-- Dec ( nn ) =
+    BEGIN
+        VAR aux IN
+            aux := count - nn ;
+            IF aux >= 0 THEN
+                res := TRUE ; count := count - nn
+            ELSE
+                res := FALSE
+            END
+        END
+    END
+
+ END

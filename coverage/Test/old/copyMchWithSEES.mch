@@ -1,39 +1,37 @@
-/* MchWithSEES
- * Author: Diego Oliveira
- * Creation date: 23/11/2016
- */
 MACHINE
     copyMchWithSEES
 
-CONSTANTS
-    MAX
-    
-PROPERTIES
-    MAX = 5
-
 SEES
-    LockMachine
-    
-VARIABLES
-    inside, outside, total
-    
+copyLockMachine
+
+CONCRETE_CONSTANTS
+MAX
+
+ABSTRACT_VARIABLES
+inside, outside, total
+
+PROPERTIES
+MAX = 5
+
 INVARIANT
-    inside : NAT & inside >= 0 & outside : NAT & outside >= 0 & total : NAT & total = inside + outside & total <= MAX
-    
+(inside : NAT & inside >= 0 & outside : NAT & outside >= 0 & total : NAT & total = inside + outside & total <= MAX)
+
 INITIALISATION
-    total := 0 || inside := 0 || outside := 0
-    
+total := 0||
+inside := 0||
+outside := 0
+
 OPERATIONS
-    GetinsideIMPForTest <-- OperationForTestGetinsideIMP = 
+    GetinsideIMPForTest <-- OperationForTestGetinsideIMPMchWithSEES = 
         ANY aux WHERE aux : INTEGER THEN GetinsideIMPForTest := aux END;
 
-    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMP = 
+    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMPMchWithSEES = 
         ANY aux WHERE aux : INTEGER THEN GetoutsideIMPForTest := aux END;
 
-    GettotalIMPForTest <-- OperationForTestGettotalIMP = 
+    GettotalIMPForTest <-- OperationForTestGettotalIMPMchWithSEES = 
         ANY aux WHERE aux : INTEGER THEN GettotalIMPForTest := aux END;
 
-    SetVariablesForTest(nn1, nn2, nn3) = 
+    SetVariablesForTestMchWithSEES(nn1, nn2, nn3) = 
     PRE nn1 : NAT & nn2 : NAT & nn3 : NAT
     THEN
         skip

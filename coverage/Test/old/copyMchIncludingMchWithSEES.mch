@@ -1,27 +1,23 @@
-/* MchIncludingMchWithSEES
- * Author: Diego Oliveira
- * Creation date: 24/11/2016
- */
 MACHINE
     copyMchIncludingMchWithSEES
 
 INCLUDES
-    copyMchWithSEES
+copyMchWithSEES
 
 PROMOTES
- OperationForTestGetinsideIMPMchWithSEES, OperationForTestGetoutsideIMPMchWithSEES, OperationForTestGettotalIMPMchWithSEES, SetVariablesForTestMchWithSEES
-    
+    OperationForTestGetinsideIMPMchWithSEES, OperationForTestGetoutsideIMPMchWithSEES, OperationForTestGettotalIMPMchWithSEES, SetVariablesForTestMchWithSEES
+
 SEES
-    copyLockMachine
-    
-VARIABLES
-    lights
-    
+copyLockMachine
+
+ABSTRACT_VARIABLES
+lights
+
 INVARIANT
-    lights : BOOL & (inside = 0 => lights = FALSE) & (inside > 0 => lights = TRUE)
-    
+(lights : BOOL & (inside = 0 => lights = FALSE) & (inside > 0 => lights = TRUE))
+
 INITIALISATION
-    lights := FALSE
+lights := FALSE
 
 OPERATIONS
     GetlightsForTest <-- OperationForTestGetlightsMchIncludingMchWithSEES = 

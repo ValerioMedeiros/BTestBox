@@ -1,18 +1,30 @@
-IMPLEMENTATION copyMchIncludingMchWithSEES_i
-REFINE
+IMPLEMENTATION
+    copyMchIncludingMchWithSEES_i
 
-REFINES copyMchIncludingMchWithSEES
-
-SEES
+REFINES
+copyMchIncludingMchWithSEES
 
 IMPORTS
-    copyMchWithSEES
+copyMchWithSEES
+
+PROMOTES
+    OperationForTestGetinsideIMPMchWithSEES, OperationForTestGetoutsideIMPMchWithSEES, OperationForTestGettotalIMPMchWithSEES, SetVariablesForTestMchWithSEES
 
 SEES
-    copyLockMachine
+copyLockMachine
+
+CONCRETE_VARIABLES
+lights, insideIMP
+
+INVARIANT
+(insideIMP : INT & insideIMP = inside)
+
+INITIALISATION
+lights := FALSE;
+insideIMP := 0
 
 OPERATIONS
-        GetlightsForTest <-- OperationForTestGetlightsMchIncludingMchWithSEES = 
+    GetlightsForTest <-- OperationForTestGetlightsMchIncludingMchWithSEES = 
         GetlightsForTest := lights;
 
     GetinsideIMPForTest <-- OperationForTestGetinsideIMPMchIncludingMchWithSEES = 
@@ -24,7 +36,7 @@ OPERATIONS
         insideIMP := nn2
     END;
 
-leavingTheHouse(nn)=
+    leavingTheHouse(nn)=
     BEGIN
         leaveHouse(nn); insideIMP := insideIMP - nn;
         IF insideIMP = 0 THEN lights := FALSE END 

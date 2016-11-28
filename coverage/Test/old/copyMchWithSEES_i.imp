@@ -1,34 +1,37 @@
-IMPLEMENTATION copyMchWithSEES_i
+IMPLEMENTATION
+    copyMchWithSEES_i
 
-REFINES copyMchWithSEES
+REFINES
+copyMchWithSEES
 
 SEES
-    LockMachine
-
+copyLockMachine
 
 VALUES
-    MAX = 5
+MAX = 5
 
 CONCRETE_VARIABLES
-    insideIMP, outsideIMP, totalIMP
+insideIMP, outsideIMP, totalIMP
 
 INVARIANT
-    insideIMP : NAT & insideIMP = inside & outsideIMP : NAT & outsideIMP = outside & totalIMP : NAT & totalIMP = total
+(insideIMP : NAT & insideIMP = inside & outsideIMP : NAT & outsideIMP = outside & totalIMP : NAT & totalIMP = total)
 
 INITIALISATION
-    totalIMP := 0; insideIMP := 0; outsideIMP := 0
-    
+totalIMP := 0;
+insideIMP := 0;
+outsideIMP := 0
+
 OPERATIONS
-    GetinsideIMPForTest <-- OperationForTestGetinsideIMP = 
+    GetinsideIMPForTest <-- OperationForTestGetinsideIMPMchWithSEES = 
         GetinsideIMPForTest := insideIMP;
 
-    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMP = 
+    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMPMchWithSEES = 
         GetoutsideIMPForTest := outsideIMP;
 
-    GettotalIMPForTest <-- OperationForTestGettotalIMP = 
+    GettotalIMPForTest <-- OperationForTestGettotalIMPMchWithSEES = 
         GettotalIMPForTest := totalIMP;
 
-    SetVariablesForTest(nn1, nn2, nn3) = 
+    SetVariablesForTestMchWithSEES(nn1, nn2, nn3) = 
     BEGIN
         insideIMP := nn1;
         outsideIMP := nn2;

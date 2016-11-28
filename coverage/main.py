@@ -4,6 +4,8 @@ import coverage
 import instgen
 from xml.dom import minidom
 import createBTestSet
+import testTranslation
+
 '''
 buildpaths: buildpaths is the module responsible to create the paths and the branches, it depends of the graphgen.
 graphgen: graphgen is the module responsible to create every graph used in the coverage.
@@ -137,7 +139,10 @@ def DoBranchCoverage():
         print("All operations of "+impName+" are covered by Branch Coverage!")
         print("Now they translation will be tested.")
         print("Creating TestSet!")
-        createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch, includedMch, operationsNames)
+        testOperationNames = createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch, includedMch, operationsNames)
+        print('Testing the Translation')
+        testTranslation.runTest(imp, mch, importedMch, seesMch, testOperationNames, 'Branch Coverage')
+        print('Test file generated')
     else:
         print(impName+" is NOT covered by Branch Coverage.")
     print('\n')
@@ -155,32 +160,58 @@ def DoPathCoverage():
     '''
     #Initialisation
     allcovered = True
+    allInVariablesForTest = dict()
+    allOutVariablesForTest = dict()
+    operationsNames = list()
+    count = 0
     print("Checking if the implementation "+impName+" is Path Covered\n")
     #Process
     for operationImp in operationsimp.childNodes:
         if allcovered == True:
             if operationImp.nodeType != operationImp.TEXT_NODE:
-                inputs = getInputs(operationImp)
-                operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
-                while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
-                    operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
-                operationname = operationImp.getAttribute("name")
-                graphgen.mapOperations(operationImp, operationMch)
-                buildpaths.makepaths(graphgen.nodemap) #Building paths
-                covered = coverage.PathCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname, importedMch, impName)
-                if covered == True:
-                    print("The operation: "+operationname+" is covered by Path Coverage\n")
-                else:
-                    print("The operation: "+operationname+" is NOT covered by Path Coverage\n")
-                    allcovered = False
-            graphgen.clearGraphs()
-            buildpaths.clearGraphs()
+                if operationImp.tagName == 'Operation':
+                    count += 1
+                    operationname = operationImp.getAttribute("name")
+                    print("Checking if the operation "+operationname+" is Path Covered")
+                    if operationImp.getElementsByTagName('Input_Parameters') != []:
+                        inputs = getInputs(operationImp)
+                    else:
+                        inputs = []
+                    operationMch = operationsmch.firstChild.nextSibling
+                    if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (operationMch.getAttribute('name') !=
+                                                                                                              operationImp.getAttribute('name')):
+                        localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[0].getElementsByTagName('Operation')
+                        for operation in localOperations:
+                            if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                                operationMch = operation
+                    while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
+                        operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
+                    graphgen.mapOperations(operationImp, operationMch)
+                    buildpaths.makepaths(graphgen.nodemap) #Building paths
+                    covered, allInVariables, allOutVariables, allUserVariables = coverage.PathCoverage(operationImp, operationMch, buildpaths.paths, inputs,
+                                                                                                       operationname, importedMch, seesMch, impName)
+                    if covered == True:
+                        print("The operation: "+operationname+" is covered by Path Coverage\n")
+                        operationsNames.append(operationname)
+                        allInVariablesForTest[count] = allInVariables
+                        allOutVariablesForTest[count] = allOutVariables
+                    else:
+                        print("The operation: "+operationname+" is NOT covered by Path Coverage\n")
+                        allcovered = False
+                graphgen.clearGraphs()
+                buildpaths.clearGraphs()
         else:
             if operationImp.nodeType != operationImp.TEXT_NODE:
                 operationname = operationImp.getAttribute("name")
                 print("One operation could NOT be covered, skipping trying to cover "+operationname+"\n")
     if allcovered == True:
         print("All operations of "+impName+" are covered by Path Coverage!\n")
+        print("Now they translation will be tested.")
+        print("Creating TestSet!")
+        testOperationNames = createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch, includedMch, operationsNames)
+        print('Testing the Translation')
+        testTranslation.runTest(imp, mch, importedMch, seesMch, testOperationNames, 'Path Coverage')
+        print('Test file generated')
     else:
         print(impName+" is NOT covered by Path Coverage.\n")
 
@@ -197,38 +228,63 @@ def DoCodeCoverage():
     '''
     #Initialisation
     allcovered = True
+    allInVariablesForTest = dict()
+    allOutVariablesForTest = dict()
+    operationsNames = list()
+    count = 0
     print("Checking if the implementation "+impName+" is Code Covered\n")
     #Process
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
-            operationname = operationImp.getAttribute("name")
-            print("Checking if the operation "+operationname+" is Code Covered")
-            inputs = getInputs(operationImp)
-            operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
-            while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
-                operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
-            graphgen.mapOperations(operationImp, operationMch)
-            buildpaths.makepaths(graphgen.nodemap) #Building paths
-            buildpaths.makenodes(graphgen.nodemap) #Building node, setting them to False (uncovered).
-            for key in buildpaths.paths:
+            if operationImp.tagName == 'Operation':
+                count += 1
+                operationname = operationImp.getAttribute("name")
+                print("Checking if the operation "+operationname+" is Code Covered")
+                if operationImp.getElementsByTagName('Input_Parameters') != []:
+                    inputs = getInputs(operationImp)
+                else:
+                    inputs = []
+                operationMch = operationsmch.firstChild.nextSibling
+                if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (operationMch.getAttribute('name') !=
+                                                                                                          operationImp.getAttribute('name')):
+                    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[0].getElementsByTagName('Operation')
+                    for operation in localOperations:
+                        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                            operationMch = operation
+                while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
+                    operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
+                graphgen.mapOperations(operationImp, operationMch)
+                buildpaths.makepaths(graphgen.nodemap) #Building paths
+                buildpaths.makenodes(graphgen.nodemap) #Building node, setting them to False (uncovered).
+                for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
-            covered = coverage.CodeCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname, buildpaths.nodeStatus, importedMch, impName)
-            if covered == True:
-                print("The operation "+operationname+" is covered by Code Coverage\n")
-            else:
-                for node in buildpaths.nodeStatus: #Priting where it failed to reach
-                    if buildpaths.nodeStatus[node] == False:
-                        if graphgen.nodedata[node] != "END":
-                            inode = instgen.graphgen.nodedata[node]
-                        else:
-                            inode = "END"
-                        print("There is no way to reach the instruction "+inode)
-                print("The operation "+operationname+" is NOT covered by Code Coverage\n")
-                allcovered = False
-            graphgen.clearGraphs()
-            buildpaths.clearGraphs()
+                covered, allInVariables, allOutVariables, allUserVariables = coverage.CodeCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname,
+                                                                                                   buildpaths.nodeStatus, importedMch, seesMch, impName)
+                if covered == True:
+                    print("The operation "+operationname+" is covered by Code Coverage\n")
+                    operationsNames.append(operationname)
+                    allInVariablesForTest[count] = allInVariables
+                    allOutVariablesForTest[count] = allOutVariables
+                else:
+                    for node in buildpaths.nodeStatus: #Priting where it failed to reach
+                        if buildpaths.nodeStatus[node] == False:
+                            if graphgen.nodedata[node] != "END":
+                                inode = instgen.graphgen.nodedata[node]
+                            else:
+                                inode = "END"
+                            print("There is no way to reach the instruction "+inode)
+                    print("The operation "+operationname+" is NOT covered by Code Coverage\n")
+                    allcovered = False
+                graphgen.clearGraphs()
+                buildpaths.clearGraphs()
     if allcovered == True:
         print("All operations of "+impName+" are covered by Code Coverage!\n")
+        print("Now they translation will be tested.")
+        print("Creating TestSet!")
+        testOperationNames = createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch, includedMch, operationsNames)
+        print('Testing the Translation')
+        testTranslation.runTest(imp, mch, importedMch, seesMch, testOperationNames, 'Code Coverage')
+        print('Test file generated')
     else:
         print(impName+" is NOT covered by Code Coverage.\n")
 
@@ -269,7 +325,7 @@ def getInputs(operationImp): #NOW THAT I PASS THE OPERATIONIMP TO THE OTHER PROG
                         entries.append(inputs[commas[i]+1:commas[i+1]:])
             return entries
     
-impName = "MchIncludingMchWithSEES_i"
+impName = "countMch_i"
 imp = minidom.parse(impName+".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0] #Getting the Machine name
 mch = minidom.parse(mch.firstChild.data+".bxml") #Getting the machine
@@ -284,6 +340,6 @@ for childnode in imp.firstChild.childNodes:
             noOperations = False
             operationsimp = childnode #Surfing until Operations
             operationsmch = mch.getElementsByTagName("Operations")[0] #Surfing until Operations in the machine
-            DoBranchCoverage()
+            DoPathCoverage()
 if noOperations:
     print('This machine has no operations')
