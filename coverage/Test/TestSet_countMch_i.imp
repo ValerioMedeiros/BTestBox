@@ -12,9 +12,9 @@ OPERATIONS
     BEGIN
         SetVariablesForTestcountMch(0);
         VAR aux1, aux2 IN
-            aux1 <-- Inc(11);
+            aux1 <-- Inc(1);
             aux2 <-- OperationForTestGetcountcountMch;
-            IF aux1 = FALSE & aux2 = 0 THEN
+            IF aux1 = TRUE & aux2 = 1 THEN
                 verdict := TRUE
             ELSE
                 verdict := FALSE
@@ -26,21 +26,7 @@ OPERATIONS
     BEGIN
         SetVariablesForTestcountMch(0);
         VAR aux1, aux2 IN
-            aux1 <-- Inc(1);
-            aux2 <-- OperationForTestGetcountcountMch;
-            IF aux1 = TRUE & aux2 = 1 THEN
-                verdict := TRUE
-            ELSE
-                verdict := FALSE
-            END
-        END
-    END;
-
-    verdict <-- TEST_0_Dec =
-    BEGIN
-        SetVariablesForTestcountMch(0);
-        VAR aux1, aux2 IN
-            aux1 <-- Dec(1);
+            aux1 <-- Inc(11);
             aux2 <-- OperationForTestGetcountcountMch;
             IF aux1 = FALSE & aux2 = 0 THEN
                 verdict := TRUE
@@ -50,13 +36,27 @@ OPERATIONS
         END
     END;
 
-    verdict <-- TEST_1_Dec =
+    verdict <-- TEST_0_Dec =
     BEGIN
         SetVariablesForTestcountMch(1);
         VAR aux1, aux2 IN
             aux1 <-- Dec(1);
             aux2 <-- OperationForTestGetcountcountMch;
             IF aux1 = TRUE & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_Dec =
+    BEGIN
+        SetVariablesForTestcountMch(0);
+        VAR aux1, aux2 IN
+            aux1 <-- Dec(1);
+            aux2 <-- OperationForTestGetcountcountMch;
+            IF aux1 = FALSE & aux2 = 0 THEN
                 verdict := TRUE
             ELSE
                 verdict := FALSE

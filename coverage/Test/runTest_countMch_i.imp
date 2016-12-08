@@ -1,0 +1,56 @@
+IMPLEMENTATION
+    runTest_countMch_i
+
+REFINES
+    runTest_countMch
+
+IMPORTS
+    TestSet_countMch
+
+LOCAL_OPERATIONS
+    verdict <-- testInc =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testDec =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testInc =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_Inc;
+            v1 <-- TEST_1_Inc;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testDec =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_Dec;
+            v1 <-- TEST_1_Dec;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- testInc;
+            v1 <-- testDec;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

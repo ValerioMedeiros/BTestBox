@@ -4,28 +4,27 @@ import re
 import instgen
 from xml.dom import minidom
 
-def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames):
-    directory = '/Users/Diego Oliveira/Documents/BTestBox/coverage/Test'
+def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames, directory):
     mch = impBXML.getElementsByTagName('Abstraction')[0]
     controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML, impBXML, includedMch, seesMch, importedMch, directory)
     for machineBXML in importedMch:
-        importedImpBXML = getImpWithImportedMch(machineBXML)
+        importedImpBXML = getImpWithImportedMch(machineBXML, directory)
         controlList, controlListNames = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
                                    machineBXML, importedImpBXML, includedMch, seesMch, importedMch, directory, controlList, controlListNames)
     controlListSEES = list()
     for machineBXML in seesMch:
-        seesImpBXML = getImpWithImportedMch(machineBXML)
+        seesImpBXML = getImpWithImportedMch(machineBXML, directory)
         variablesSEES, variablesMchNamesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
                                    machineBXML, seesImpBXML, includedMch, seesMch, importedMch, directory, [], [])
         controlListSEES.append(variablesSEES)
     inputsOrder, outputsOrder = getOrder(impBXML, operationsNames)
     testOperationNames = createTestFile(mch.firstChild.data, impBXML, inputs, output, seesMch, importedMch, operationsNames,
                                         directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES)
-    return testOperationNames
+    createTestInB(mch.firstChild.data, testOperationNames, directory, operationsNames, inputs)
 
-def getImpWithImportedMch(importedMch): #THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
+def getImpWithImportedMch(importedMch, directory): #THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
                                         #THE ONE FOR THE SOLVEROC IS DIFFERENT BECAUSE NEED TO CHECK THE OPERATION
-    for file in os.listdir('/Users/Diego Oliveira/Documents/BTestBox/coverage/'):
+    for file in os.listdir(directory):
         if file.endswith(".bxml"):
             bxmlfile = instgen.minidom.parse(file)
             root = bxmlfile.firstChild
@@ -310,9 +309,9 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
     machine += 'OPERATIONS\n'
     for operation in sorted(inputs.keys()):
         for i in range(len(inputs[operation])):
-            machine += 'verdict <-- TEST_'+str(i)+'_'+operationsNames[operation-1]+' =\n'
+            machine += '    verdict <-- TEST_'+str(i)+'_'+operationsNames[operation-1]+' =\n'
             testOperationsNames.append('TEST_'+str(i)+'_'+operationsNames[operation-1])
-            machine += '    ANY kk WHERE kk : BOOL THEN verdict := kk END'
+            machine += '        ANY kk WHERE kk : BOOL THEN verdict := kk END'
             if i != max(range(len(inputs[operation]))):
                 machine += ';\n\n'
             else:
@@ -371,7 +370,7 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
                             for importedmachine in importedMch:
                                 for machineimported in allImportedMachines:
                                     if importedmachine.firstChild.getAttribute('name') == machineimported.firstChild.data:
-                                        importedmachineimp = getImpWithImportedMch(importedmachine)
+                                        importedmachineimp = getImpWithImportedMch(importedmachine, directory)
                                         for importedmachineclauses in importedmachineimp.firstChild.childNodes:
                                             if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
                                                 if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
@@ -408,7 +407,7 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
                             for importedmachine in importedMch:
                                 for machineimported in allImportedMachines:
                                     if importedmachine.firstChild.getAttribute('name') == machineimported.firstChild.data:
-                                        importedmachineimp = getImpWithImportedMch(importedmachine)
+                                        importedmachineimp = getImpWithImportedMch(importedmachine, directory)
                                         for importedmachineclauses in importedmachineimp.firstChild.childNodes:
                                             if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
                                                 if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
@@ -536,3 +535,72 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
     testmachine.close()
     return testOperationsNames
     
+def createTestInB(mchName, testOperationNames, directory, operationsNames, inputs):
+    machine = 'MACHINE\n    runTest_'+mchName+'\n\n'
+    machine += 'OPERATIONS\n'
+    machine += '    verdict <-- testAll =\n'
+    machine += '        ANY kk WHERE kk : BOOL THEN verdict := kk END\n'
+    machine += 'END'
+    implementation = 'IMPLEMENTATION\n    runTest_'+mchName+'_i\n\n'
+    implementation += 'REFINES\n    runTest_'+mchName+'\n\n'
+    implementation += 'IMPORTS\n    TestSet_'+mchName+'\n\n'
+    implementation += 'LOCAL_OPERATIONS\n'
+    for i in range(len(operationsNames)):
+        implementation += '    verdict <-- test'+operationsNames[i]+' =\n'
+        implementation += '        ANY kk WHERE kk : BOOL THEN verdict := kk END'
+        if i < len(operationsNames)-1:
+            implementation += ';\n\n'
+    implementation += '\n\n'
+    implementation += 'OPERATIONS\n'
+    for i in range(len(operationsNames)):
+        implementation += '    verdict <-- test'+operationsNames[i]+' =\n'
+        implementation += '    BEGIN\n'
+        implementation += '        VAR '
+        for j in range(len(inputs[i+1])):
+            implementation += 'v'+str(j)
+            if j < len(inputs[i+1])-1:
+                implementation += ', '
+        implementation += ' IN\n'
+        for j in range(len(inputs[i+1])):
+            implementation += '            v'+str(j)+' <-- TEST_'+str(j)+'_'+operationsNames[i]+';\n'
+        implementation += '            IF '
+        for j in range(len(inputs[i+1])):
+            implementation += 'v'+str(j)+' = TRUE ' 
+            if j < len(inputs[i+1])-1:
+                implementation += '& '
+        implementation += 'THEN\n'
+        implementation += '                verdict := TRUE\n'
+        implementation += '            ELSE\n'
+        implementation += '                verdict := FALSE\n'
+        implementation += '            END\n'
+        implementation += '        END\n'
+        implementation += '    END;\n\n'
+    implementation += '    verdict <-- testAll =\n'
+    implementation += '    BEGIN\n'
+    implementation += '        VAR '
+    for i in range(len(operationsNames)):
+        implementation += 'v'+str(i)
+        if i < len(operationsNames)-1:
+            implementation += ', '
+    implementation += ' IN\n'
+    for i in range(len(operationsNames)):
+        implementation += '            v'+str(i)+' <-- test'+operationsNames[i]+';\n'
+    implementation += '            IF '
+    for i in range(len(operationsNames)):
+        implementation += 'v'+str(i)+' = TRUE '
+        if i < len(operationsNames)-1:
+            implementation += '& '
+    implementation += 'THEN\n'
+    implementation += '                verdict := TRUE\n'
+    implementation += '            ELSE\n'
+    implementation += '                verdict := FALSE\n'
+    implementation += '            END\n'
+    implementation += '        END\n'
+    implementation += '    END\n'
+    implementation += 'END'
+    testmachine = open(directory+'/'+'runTest_'+mchName+'.mch', 'w')
+    testmachine.write(machine)
+    testmachine.close()
+    testimplementation = open(directory+'/'+'runTest_'+mchName+'_i.imp', 'w')
+    testimplementation.write(implementation)
+    testimplementation.close()

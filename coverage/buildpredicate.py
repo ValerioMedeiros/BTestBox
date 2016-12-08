@@ -15,7 +15,7 @@ solveroc: module to solve the operation call
 
 def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
                      docXML, posMut, operationImp, importedMch, operationName,
-                     impName, isTheOutput, changedVariablesWhile, changedVariablesOC = []):
+                     impName, isTheOutput, changedVariablesWhile, directory, atelierBDir, changedVariablesOC = []):
     '''
     Make the predicate in a XML
 
@@ -42,8 +42,8 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
         predicateXML, newPosMut = buildWhile(node, predicateXML, predicateXML.cloneNode(20), docXML,
                                              way, path, inputs, startWhile, condWhile, posMut, operationImp,
                                              docXML.createElement('Body'), impName, isTheOutput,
-                                             operationName, outputs, fixedNames, changedVariablesOC, importedMch)
-        changedVariablesWhile = solveroc.changeVariablesNames(predicateXML, inputs, outputs, fixedNames, changedVariablesWhile, posMut)
+                                             operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir)
+        changedVariablesWhile = solveroc.changeVariablesNames(predicateXML, inputs, outputs, fixedNames, changedVariablesWhile, posMut) #MAYBE HERE YOU SHOLD ADD A RESTRICTION
         for mut in newPosMut:
             if mut not in posMut:
                 posMut.append(mut)
@@ -60,15 +60,15 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
         if predicateXML.hasChildNodes():
             predicateXML, changedVariablesOC = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML, operationImp,
                                                                            importedMch, operationName, impName, posMut,
-                                                                           inputs, isTheOutput, fixedNames, outputs, changedVariablesOC)
+                                                                           inputs, isTheOutput, fixedNames, outputs, changedVariablesOC, directory, atelierBDir)
     if isTheOutput:
-        return predicateXML, posMut, changedVariablesWhile, changedVariablesOC
+        return predicateXML, posMut, changedVariablesWhile
     else:
         return predicateXML, posMut, changedVariablesWhile
 
 def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs, startWhile,
                condWhile, posMut, operationImp, whilePredicateXML, impName, isTheOutput,
-               operationName, outputs, fixedNames, changedVariablesOC, importedMch):
+               operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir):
     '''
     Make the predicate in a XML
 
@@ -99,7 +99,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         condWhileIN = path[len(way)]
         newPredicateXML, newposMut = buildWhile(node, whilePredicateXML, whilePredicateXML.cloneNode(20), docXML, way, path, inputs,
                                              startWhileIN, condWhileIN, [], operationImp, docXML.createElement('Body'), impName, isTheOutput,
-                                                operationName, outputs, fixedNames, changedVariablesOC, importedMch)
+                                                operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir)
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
@@ -107,7 +107,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         #Doing the False Guard (Continuing the previous while)
         newPredicateXML, newposMut = buildWhile(path[len(way) - 2], predicateXML, clonePredicateXML, docXML, way, path, inputs,
                                              startWhile, condWhile, posMut, operationImp, whilePredicateXML.cloneNode(20), impName, isTheOutput,
-                                                operationName, outputs, fixedNames, changedVariablesOC, importedMch)
+                                                operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir)
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
@@ -184,11 +184,11 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         if whilePredicateXML.hasChildNodes():
             whilePredicateXML, changedVariablesOC = solveroc.buildOperationCallInsideWhile(node, whilePredicateXML.cloneNode(10), docXML, operationImp,
                                                                                 importedMch, operationName, impName, [], inputs,
-                                                                                isTheOutput, fixedNames, outputs, changedVariablesOC)
+                                                                                isTheOutput, fixedNames, outputs, changedVariablesOC, directory, atelierBDir)
         if predicateXML.hasChildNodes():
             predicateXML, changedVariablesOC = solveroc.buildOperationCallInsideWhile(node, predicateXML.cloneNode(10), docXML, operationImp,
                                                                            importedMch, operationName, impName, [], inputs,
-                                                                           isTheOutput, fixedNames, outputs, changedVariablesOC)
+                                                                           isTheOutput, fixedNames, outputs, changedVariablesOC, directory, atelierBDir)
         mystr = buildpaths.graphgen.nodeinva[node]
         wordList = re.sub("[^\w]", " ",  mystr).split()
         for word in wordList:
@@ -198,7 +198,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
     node = way[len(way) - 1]
     predicateXML, posMut = buildWhile(node, predicateXML, predicateXML.cloneNode(10), docXML, way, path, inputs,
                                       startWhile, condWhile, posMut, operationImp, whilePredicateXML, impName, isTheOutput,
-                                      operationName, outputs, fixedNames, changedVariablesOC, importedMch)
+                                      operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir)
     return predicateXML, posMut
 
 def solveRemainingPred(predicateXML, docXML):
@@ -399,7 +399,7 @@ def checkPredicate(predicate, message, inputs):
               entry += variable+" "
     return ans, entry
 
-def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationImp, importedMch, operationName, impName, predicateInputs, variablesList):
+def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationImp, importedMch, operationName, impName, predicateInputs, variablesList, directory, atelierBDir):
     '''
     Get the output for a given input and operation
     '''
@@ -421,7 +421,6 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
     addVariablesToThePredicate(variablesList, predicateXML, docXML)
     way = list()
     posMut = list()
-    changedVariablesOC = list()
     changedVariablesWhile = list()
     outputList = list()
     for out in outputs:
@@ -432,10 +431,10 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
         way.append(key)
     while(len(way) != 0): #While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
-        predicateXML, posmut, changedVariablesWhile, changedVariablesOC = makePredicateXML(node, predicateXML, way, path, inputs, outputList,
-                                                                                           fixedNames, docXML, posMut, operationImp, importedMch,
-                                                                                           operationName, impName, True, changedVariablesWhile,
-                                                                                           changedVariablesOC)
+        predicateXML, posmut, changedVariablesWhile = makePredicateXML(node, predicateXML, way, path, inputs, outputList,
+                                                                       fixedNames, docXML, posMut, operationImp, importedMch,
+                                                                       operationName, impName, True, changedVariablesWhile,
+                                                                       directory, atelierBDir)
         del way[len(way) - 1]
     predicate = instgen.make_inst(predicateXML)
     predicate = predicate[:len(predicate)-1:]+" & "+inputsPredicateString+")"
@@ -444,7 +443,7 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
         outputList.append("output"+outputs[i])
     for i in range(len(variablesList)):
         outputList.append('output'+variablesList[i])
-    ExistValues, OutputVariables = checkPredicate(predicate, "Getting the outputs for path "+str(pathToCover), outputList)
+    ExistValues, OutputVariables = checkPredicate(predicate, "Getting the outputs for guide "+str(pathToCover), outputList)
     if ExistValues:
         for i in range(len(outputList)):
             usingRegex = r"\b" + re.escape(outputList[i]) + r"\b" #Using regex to change the string

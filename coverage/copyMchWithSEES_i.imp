@@ -1,0 +1,64 @@
+IMPLEMENTATION
+    copyMchWithSEES_i
+
+REFINES
+    copyMchWithSEES
+
+SEES
+    copyLockMachine
+
+VALUES
+    MAX = 5
+
+CONCRETE_VARIABLES
+    insideIMP, outsideIMP, totalIMP
+
+INVARIANT
+(insideIMP : NAT & insideIMP = inside & outsideIMP : NAT & outsideIMP = outside & totalIMP : NAT & totalIMP = total)
+
+INITIALISATION
+totalIMP := 0;
+insideIMP := 0;
+outsideIMP := 0
+
+OPERATIONS
+    GetinsideIMPForTest <-- OperationForTestGetinsideIMPMchWithSEES = 
+        GetinsideIMPForTest := insideIMP;
+
+    GetoutsideIMPForTest <-- OperationForTestGetoutsideIMPMchWithSEES = 
+        GetoutsideIMPForTest := outsideIMP;
+
+    GettotalIMPForTest <-- OperationForTestGettotalIMPMchWithSEES = 
+        GettotalIMPForTest := totalIMP;
+
+    SetVariablesForTestMchWithSEES(nn1, nn2, nn3) = 
+    BEGIN
+        insideIMP := nn1;
+        outsideIMP := nn2;
+        totalIMP := nn3
+    END;
+
+    guestArrived(nn) =
+    BEGIN
+        totalIMP := totalIMP + nn; outsideIMP := outsideIMP + nn
+    END;
+
+    
+    guestLeaved(nn) =
+    BEGIN
+        totalIMP := totalIMP - nn; outsideIMP := outsideIMP - nn
+    END;
+
+    
+    enterHouse(nn) =
+    BEGIN
+        insideIMP := insideIMP + nn; outsideIMP := outsideIMP - nn
+    END;
+
+    
+    leaveHouse(nn) =
+    BEGIN
+        insideIMP := insideIMP - nn; outsideIMP := outsideIMP + nn
+    END
+
+ END

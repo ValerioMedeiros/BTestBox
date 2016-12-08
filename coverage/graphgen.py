@@ -34,7 +34,7 @@ nodedata = dict() #Dict of the data of the nodes
 nodecond = dict() #Dict of the previous condition of the node. If the parent is a Condition node we know if the path comes from the True or the False condition.
 nodeinva = dict() #Dict with the invariant of the while and where it end.
 
-def startMap(node, opmch, importedMch, seesMch):
+def startMap(node, opmch, importedMch, seesMch, directory):
     '''
     Function responsible for the initialisation of the map.
     
@@ -43,13 +43,13 @@ def startMap(node, opmch, importedMch, seesMch):
     '''
     #Initialisation of the Graph, the first node is always the Call
     nodemap[str(len(nodemap) + 1)].append('0') #Initialisation with 0, None.
-    solveFirstNodeData(node, opmch, importedMch, seesMch)
+    solveFirstNodeData(node, opmch, importedMch, seesMch, directory)
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap)-1))
     nodecond[str(len(nodecond) + 1)] = "True"
 
-def solveFirstNodeData(node, opmch, importedMch, seesMch):
+def solveFirstNodeData(node, opmch, importedMch, seesMch, directory):
     if opmch.getElementsByTagName("Precondition") != []:
         nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
         nodetype[str(len(nodetype) + 1)] = "Condition"
@@ -99,8 +99,8 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch):
                 else:
                     nodedata[str(len(nodedata))] = child
                     nodetype[str(len(nodetype))] = "Condition"
-    SolveFirstNodeImportedAndSees(node, importedMch)
-    SolveFirstNodeImportedAndSees(node, seesMch)
+    SolveFirstNodeImportedAndSees(node, importedMch, directory)
+    SolveFirstNodeImportedAndSees(node, seesMch, directory)
     for child in node.parentNode.parentNode.childNodes: #In the Implementation
         if child.nodeType != child.TEXT_NODE:
             if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
@@ -145,7 +145,7 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch):
                     nodedata[str(len(nodedata))] = child
                     nodetype[str(len(nodetype))] = "Condition"
 
-def SolveFirstNodeImportedAndSees(node, machines):
+def SolveFirstNodeImportedAndSees(node, machines, directory):
     for dcmt in machines: #In the other imported machines
         for mch in dcmt.childNodes:
             for child in mch.childNodes:
@@ -191,7 +191,7 @@ def SolveFirstNodeImportedAndSees(node, machines):
                         else:
                             nodedata[str(len(nodedata))] = child
                             nodetype[str(len(nodetype))] = "Condition"
-        imp = getImpWithImportedMch(dcmt)
+        imp = getImpWithImportedMch(dcmt, directory)
         for child in imp.firstChild.childNodes:
             if child.nodeType != child.TEXT_NODE:
                 if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
@@ -236,8 +236,8 @@ def SolveFirstNodeImportedAndSees(node, machines):
                         nodedata[str(len(nodedata))] = child
                         nodetype[str(len(nodetype))] = "Condition"
 
-def getImpWithImportedMch(importedMch): 
-    for file in os.listdir('/Users/Diego Oliveira/Documents/BTestBox/coverage/'):
+def getImpWithImportedMch(importedMch, directory):
+    for file in os.listdir(directory):
         if file.endswith(".bxml"):
             bxmlfile = minidom.parse(file)
             root = bxmlfile.firstChild
@@ -460,7 +460,7 @@ def makeMapNary(node, opmch):
     if tag == "Case_Sub":
         mapCase(node, opmch)
 
-def makeMap(node, opmch, importedMch = [], seesMch = []):
+def makeMap(node, opmch, importedMch = [], seesMch = [], directory = []):
     '''
     Surfing the tree and adding every child to the Graph
 
@@ -474,7 +474,7 @@ def makeMap(node, opmch, importedMch = [], seesMch = []):
             tag = childnode.tagName
             if tag == "Body":
                 if node.tagName == "Operation":
-                    startMap(node, opmch, importedMch, seesMch) #Initialisation of the Graph
+                    startMap(node, opmch, importedMch, seesMch, directory) #Initialisation of the Graph
                     makeMap(childnode, opmch)
                 else:
                     makeMap(childnode, opmch)
@@ -495,7 +495,7 @@ def makeMap(node, opmch, importedMch = [], seesMch = []):
             if tag == "Case_Sub":
                 mapCase(childnode, opmch)
 
-def mapOperations(operationimp, operationmch, importedMch = [], seesMch = []):
+def mapOperations(operationimp, operationmch, directory, importedMch = [], seesMch = []):
     '''
     Start function, where we start the mapping.
     
@@ -503,7 +503,7 @@ def mapOperations(operationimp, operationmch, importedMch = [], seesMch = []):
     operationmch: The node of the operation in the machine (to get the Precondition)
     operationimp: The node of the operation in the implementation
     '''
-    makeMap(operationimp, operationmch, importedMch, seesMch)
+    makeMap(operationimp, operationmch, importedMch, seesMch, directory)
     nodetype[str(len(nodetype)+ 1)] = "END" #Adding a type for the END node
     outputs = None
     for childNode in operationimp.childNodes:
