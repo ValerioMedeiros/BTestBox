@@ -380,7 +380,7 @@ def getMutables(node, inputs, path, condWhile, posMut, docXML):
         variablesNode.appendChild(docXML.createTextNode('\n'))
     return variablesNode, mutables
     
-def checkPredicate(predicate, message, inputs):
+def checkPredicate(predicate, message, inputs, proBPath):
     '''
     Check if the generated predicate can hold true
 
@@ -394,12 +394,14 @@ def checkPredicate(predicate, message, inputs):
     entry: A possible entry to the predicate be true (if exists)
     '''
     entry = ""
-    ans, variables = callprob.evaluate(predicate, message, inputs)
+    ans, variables = callprob.evaluate(predicate, message, inputs, proBPath)
     for variable in variables:
               entry += variable+" "
     return ans, entry
 
-def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationImp, importedMch, operationName, impName, predicateInputs, variablesList, directory, atelierBDir):
+def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationImp,
+              importedMch, operationName, impName, predicateInputs, variablesList,
+              directory, atelierBDir, proBPath):
     '''
     Get the output for a given input and operation
     '''
@@ -443,7 +445,7 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, docXML, operationI
         outputList.append("output"+outputs[i])
     for i in range(len(variablesList)):
         outputList.append('output'+variablesList[i])
-    ExistValues, OutputVariables = checkPredicate(predicate, "Getting the outputs for guide "+str(pathToCover), outputList)
+    ExistValues, OutputVariables = checkPredicate(predicate, "Getting the outputs for guide "+str(pathToCover), outputList, proBPath)
     if ExistValues:
         for i in range(len(outputList)):
             usingRegex = r"\b" + re.escape(outputList[i]) + r"\b" #Using regex to change the string

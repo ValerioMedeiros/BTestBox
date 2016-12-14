@@ -16,6 +16,7 @@ branchesStatus: Dict of all branches status, initially everything is set to fals
 nodeStatus: Dict of all nodes status, initially everthing is set to false
 '''
 paths = dict() #Initialisation of the dict of paths
+partialPaths = dict()
 branchesPath = dict() #Initialisation of the dict of branches paths
 branchesStatus = dict() #Initialisation of the dict of the status of each branch, used in branch coverage
 nodeStatus = dict() #Initialisation of the dict of the status of each node, used in code coverage
@@ -82,11 +83,25 @@ def makepaths(graph):
     Input:
     graph: The graph of the operation (nodemap)
     '''
-    pt = find_all_paths(graph, str(len(graph)), '1') #Find all paths from a graph to a point to other
+    pt = find_all_paths(graph, str(len(graph)), '1') #Find all paths from a graph from a point to other
     for p in range(len(pt)):
         paths[p+1] = pt[p]
         paths[p+1] = list(reversed(paths[p+1]))
         identifyWhileEnd(paths[p+1])
+
+def makePartialPaths(graph, start):
+    '''
+    Function responsible to find every path inside an operation and add the path to paths dict.
+
+    Input:
+    graph: The graph of the operation (nodemap)
+    '''
+    pt = find_all_paths(graph, start, '1') #Find all paths from a graph from a point to the start
+    already = len(partialPaths.keys())
+    for p in range(len(pt)):
+        partialPaths[p+1+already] = pt[p]
+        partialPaths[p+1+already] = list(reversed(partialPaths[p+1+already]))
+        identifyWhileEnd(partialPaths[p+1+already])
 
 def makepathsOperationCall(graph, finish):
     '''
@@ -98,7 +113,7 @@ def makepathsOperationCall(graph, finish):
     finish: For the total operation, the finish is the first node, for a operation call it is the first node after graph of the total operation.
     '''
     #Finding all paths of a operation
-    pt = find_all_paths(graph, str(len(graph)), str(finish)) #Find all paths from a graph to a point to other
+    pt = find_all_paths(graph, str(len(graph)), str(finish)) #Find all paths from a graph from a point to other
     pmax = (max(paths.keys()))
     #p = 0,1,2... *range of the dict paths*
     #pmax = max value of the dict paths

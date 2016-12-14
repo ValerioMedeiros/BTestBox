@@ -531,7 +531,7 @@ def make_variables_text(node):
 
 def make_abstraction(node):
     text = 'REFINES\n    '
-    text += 'copy'+node.firstChild.data
+    text += node.firstChild.data
     return text
 
 def make_sets(node):

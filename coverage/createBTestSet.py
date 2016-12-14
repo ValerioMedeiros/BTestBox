@@ -4,27 +4,27 @@ import re
 import instgen
 from xml.dom import minidom
 
-def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames, directory):
+def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames, directory, copy_directory):
     mch = impBXML.getElementsByTagName('Abstraction')[0]
-    controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML, impBXML, includedMch, seesMch, importedMch, directory)
+    controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML, impBXML, includedMch, seesMch, importedMch, directory, copy_directory)
     for machineBXML in importedMch:
         importedImpBXML = getImpWithImportedMch(machineBXML, directory)
         controlList, controlListNames = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
-                                   machineBXML, importedImpBXML, includedMch, seesMch, importedMch, directory, controlList, controlListNames)
+                                   machineBXML, importedImpBXML, includedMch, seesMch, importedMch, directory, copy_directory, controlList, controlListNames)
     controlListSEES = list()
     for machineBXML in seesMch:
         seesImpBXML = getImpWithImportedMch(machineBXML, directory)
         variablesSEES, variablesMchNamesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'), machineBXML.firstChild.getAttribute('name'),
-                                   machineBXML, seesImpBXML, includedMch, seesMch, importedMch, directory, [], [])
+                                   machineBXML, seesImpBXML, includedMch, seesMch, importedMch, directory, copy_directory, [], [])
         controlListSEES.append(variablesSEES)
     inputsOrder, outputsOrder = getOrder(impBXML, operationsNames)
     testOperationNames = createTestFile(mch.firstChild.data, impBXML, inputs, output, seesMch, importedMch, operationsNames,
-                                        directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES)
-    createTestInB(mch.firstChild.data, testOperationNames, directory, operationsNames, inputs)
+                                        directory, copy_directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES)
+    createTestInB(mch.firstChild.data, testOperationNames, directory, copy_directory, operationsNames, inputs)
 
 def getImpWithImportedMch(importedMch, directory): #THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
                                         #THE ONE FOR THE SOLVEROC IS DIFFERENT BECAUSE NEED TO CHECK THE OPERATION
-    for file in os.listdir(directory):
+    for file in os.listdir(directory+'\\bpd'):
         if file.endswith(".bxml"):
             bxmlfile = instgen.minidom.parse(file)
             root = bxmlfile.firstChild
@@ -57,21 +57,21 @@ def getOrder(impBXML, operationsNames):
                 outputOrderForOperation.append(outputOrder)
     return inputOrderForOperation, outputOrderForOperation
                                 
-def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMch, importedMch, directory, controlList = [], controlListNames = []):
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
-    copiedImp = open(directory+'/copy'+impNameFile+'.imp', 'w')
-    copiedMch = open(directory+'/copy'+mchNameFile+'.mch', 'w')
-    shutil.copyfile(str(mchNameFile+'.mch'), str(directory+'/copy'+mchNameFile+'.mch'))
-    shutil.copyfile(str(impNameFile+'.imp'), str(directory+'/copy'+impNameFile+'.imp'))
+def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMch, importedMch, directory, copy_directory, controlList = [], controlListNames = []):
+    if not os.path.isdir(copy_directory):
+        os.mkdir(copy_directory)
+    copiedImp = open(copy_directory+'/'+impNameFile+'.imp', 'w')
+    copiedMch = open(copy_directory+'/'+mchNameFile+'.mch', 'w')
+    shutil.copyfile(str(directory+'/'+mchNameFile+'.mch'), str(copy_directory+'/'+mchNameFile+'.mch'))
+    shutil.copyfile(str(directory+'/'+impNameFile+'.imp'), str(copy_directory+'/'+impNameFile+'.imp'))
     copiedImp.close()
     copiedMch.close()
-    with open(directory+'/copy'+mchNameFile+'.mch', 'r+') as mch:
+    with open(copy_directory+'/'+mchNameFile+'.mch', 'r+') as mch:
         old = mch.read()
         mch.seek(0)
         variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
         getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints, typeOfVariablesAndConstraints, impBXML, 'mch', mchNameFile, controlList, controlListNames)
-        text = 'MACHINE\n    copy'+mchBXML.firstChild.getAttribute('name')
+        text = 'MACHINE\n    '+mchBXML.firstChild.getAttribute('name')
         if mchBXML.getElementsByTagName('Parameters') != []:
             parametersnode = mchBXML.getElementsByTagName('Parameters')[0]
             text += instgen.transformBXML(parametersnode)
@@ -138,12 +138,12 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                     text += old[operationsposition:endoperations:]
         mch.write(text)
         mch.close()
-    with open(directory+'/copy'+impNameFile+'.imp', 'r+') as imp:
+    with open(copy_directory+'/'+impNameFile+'.imp', 'r+') as imp:
         old = imp.read()
         imp.seek(0)
         variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
         getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints, typeOfVariablesAndConstraints, impBXML, 'imp', mchNameFile, controlList, controlListNames)
-        text = 'IMPLEMENTATION\n    copy'+impBXML.firstChild.getAttribute('name')
+        text = 'IMPLEMENTATION\n    '+impBXML.firstChild.getAttribute('name')
         if impBXML.getElementsByTagName('Parameters') != []:
             parametersnode = impBXML.getElementsByTagName('Parameters')[0]
             text += instgen.transformBXML(parametersnode)
@@ -303,7 +303,7 @@ def createFunctions(var, typeOfVariablesAndConstraints, BXML, tipo, name, contro
         setOperation += '    END;\n\n'
     return getOperation, setOperation, controlList, controlListNames
 
-def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, operationsNames, directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES):
+def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, operationsNames, directory, copy_directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES):
     testOperationsNames = list()
     machine = 'MACHINE\n    TestSet_'+mchName+'\n\n'
     machine += 'OPERATIONS\n'
@@ -322,10 +322,10 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
     machine += 'END'
     implementation = 'IMPLEMENTATION\n    TestSet_'+mchName+'_i\n\n'
     implementation += 'REFINES\n    TestSet_'+mchName+'\n\n'
-    implementation += 'IMPORTS\n    copy'+mchName
+    implementation += 'IMPORTS\n    '+mchName
     for mch in seesMch:
         implementation += ', '
-        implementation += 'copy'+mch.firstChild.getAttribute('name')
+        implementation += mch.firstChild.getAttribute('name')
     implementation += '\n\n'
     implementation += 'OPERATIONS\n'
     for operation in sorted(inputs.keys()):
@@ -527,15 +527,15 @@ def createTestFile(mchName, impBXML, inputs, outputs, seesMch, importedMch, oper
                 else:
                     implementation += '\n'
     implementation += 'END'
-    testimplementation = open(directory+'/'+'TestSet_'+mchName+'_i.imp', 'w')
+    testimplementation = open(copy_directory+'/'+'TestSet_'+mchName+'_i.imp', 'w')
     testimplementation.write(implementation)
     testimplementation.close()
-    testmachine = open(directory+'/'+'TestSet_'+mchName+'.mch', 'w')
+    testmachine = open(copy_directory+'/'+'TestSet_'+mchName+'.mch', 'w')
     testmachine.write(machine)
     testmachine.close()
     return testOperationsNames
     
-def createTestInB(mchName, testOperationNames, directory, operationsNames, inputs):
+def createTestInB(mchName, testOperationNames, directory, copy_directory, operationsNames, inputs):
     machine = 'MACHINE\n    runTest_'+mchName+'\n\n'
     machine += 'OPERATIONS\n'
     machine += '    verdict <-- testAll =\n'
@@ -598,9 +598,9 @@ def createTestInB(mchName, testOperationNames, directory, operationsNames, input
     implementation += '        END\n'
     implementation += '    END\n'
     implementation += 'END'
-    testmachine = open(directory+'/'+'runTest_'+mchName+'.mch', 'w')
+    testmachine = open(copy_directory+'/'+'runTest_'+mchName+'.mch', 'w')
     testmachine.write(machine)
     testmachine.close()
-    testimplementation = open(directory+'/'+'runTest_'+mchName+'_i.imp', 'w')
+    testimplementation = open(copy_directory+'/'+'runTest_'+mchName+'_i.imp', 'w')
     testimplementation.write(implementation)
     testimplementation.close()
