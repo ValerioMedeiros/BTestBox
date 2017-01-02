@@ -1,5 +1,5 @@
 import graphgen
-from xml.dom import minidom
+
 '''
 graphgen: module responsible of generating the graphs
 minidom: module responsible of making a tree from a xml file

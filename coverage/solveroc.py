@@ -1,14 +1,14 @@
 from xml.dom import minidom
-import sys
 import os
-import codecs
 import nodescreator
 import subprocess
 import buildpaths
-import instgen
 
-def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs, isTheOutput, fixedNames, universalOutputs, changedVariables, directory, atelierBDir):
-    '''
+
+def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut,
+                                  inputs, fixedNames, universalOutputs, changedVariables, directory,
+                                  atelierBDir):
+    """
     Return the predicate of a called operation
 
     Input:
@@ -23,14 +23,17 @@ def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, impo
 
     Return:
     predicateXML: The predicate until now in form of a XML tree
-    '''
-    calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(operationImp, buildpaths.graphgen.nodedata[node],
+    """
+    calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(buildpaths.graphgen.nodedata[
+                                                                                                             node],
                                                                                                          importedMch)
-    if calledOperation == None:
-        calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp, buildpaths.graphgen.nodedata[node])
+    if calledOperation is None:
+        calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp,
+                                                                                                        buildpaths.graphgen.nodedata[
+                                                                                                            node])
         hasWhile = False
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                           operationImp, operationInputs, operationOutputs, aterlierBDir)
+                                           operationInputs, operationOutputs, atelierBDir, directory)
         for childnode in operationImp.parentNode.childNodes:
             if childnode.nodeType != childnode.TEXT_NODE:
                 if childnode.getAttribute('name') == calledOperation.getAttribute('name'):
@@ -41,21 +44,22 @@ def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, impo
             hasWhile = True
         operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
         auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML, directory, aterlierBDir)
-        if hasWhile == True:
+        output = make_Sub_Calculus(operationIBXML, auxXML, directory, atelierBDir)
+        if hasWhile:
             output = output.getElementsByTagName('Tag')
             for out in output:
                 if out.getAttribute('goalTag') == "End of loop":
                     output = out.firstChild.nextSibling
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
+                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames,
+                                                            changedVariables, posMut)
                     predicateXML.replaceChild(output, predicateXML.firstChild.nextSibling)
         else:
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
+                                      predicateXML.firstChild.nextSibling)
     else:
         hasWhile = False
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                           operationImp, operationInputs, operationOutputs, aterlierBDir)
+                                           operationInputs, operationOutputs, atelierBDir, directory)
         calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName, directory)
         for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
             solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp, directory)
@@ -63,24 +67,27 @@ def buildOperationCallInsideWhile(node, predicateXML, docXML, operationImp, impo
             hasWhile = True
         operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
         auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML, directory, aterlierBDir)
+        output = make_Sub_Calculus(operationIBXML, auxXML, directory, atelierBDir)
         if hasWhile == True:
             output = output.getElementsByTagName('Tag')
             for out in output:
                 if out.getAttribute('goalTag') == "End of loop":
                     output = out.firstChild.nextSibling
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
+                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames,
+                                                            changedVariables, posMut)
                     predicateXML.replaceChild(output, predicateXML.firstChild.nextSibling)
         else:
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
-    os.remove("encodeddocumentinput.xml")
-    os.remove("encodeddocumentoutput.xml")
-    os.remove(impName+".ibxml")
+                                      predicateXML.firstChild.nextSibling)
+    os.remove(directory+"\\encodeddocumentinput.xml")
+    os.remove(directory+"\\encodeddocumentoutput.xml")
+    os.remove(directory+"\\"+impName + ".ibxml")
     return predicateXML, changedVariables
 
-def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs, isTheOutput, fixedNames, universalOutputs, changedVariables, directory, aterlierBDir):
-    '''
+
+def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, operationName, impName, posMut, inputs,
+                       fixedNames, universalOutputs, changedVariables, directory, atelierBDir):
+    """
     Return the predicate of a called operation
 
     Input:
@@ -95,14 +102,17 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
 
     Return:
     predicateXML: The predicate until now in form of a XML tree
-    '''
-    calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(operationImp, buildpaths.graphgen.nodedata[node],
+    """
+    calledOperation, operationInputs, operationOutputs, calledMachineName = getMchWithTheCalledOperation(buildpaths.graphgen.nodedata[
+                                                                                                             node],
                                                                                                          importedMch)
-    if calledOperation == None:
-        calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp, buildpaths.graphgen.nodedata[node])
+    if calledOperation is None:
+        calledOperation, operationInputs, operationOutputs, calledMachineName = getCalledLocalOperation(operationImp,
+                                                                                                        buildpaths.graphgen.nodedata[
+                                                                                                            node])
         hasWhile = False
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                           operationImp, operationInputs, operationOutputs, aterlierBDir)
+                                           operationInputs, operationOutputs, atelierBDir, directory)
         for childnode in operationImp.parentNode.childNodes:
             if childnode.nodeType != childnode.TEXT_NODE:
                 if childnode.getAttribute('name') == calledOperation.getAttribute('name'):
@@ -113,23 +123,25 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
             hasWhile = True
         operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
         auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML, directory, aterlierBDir)
-        if hasWhile == True:
+        output = make_Sub_Calculus(operationIBXML, auxXML, directory, atelierBDir)
+        if hasWhile:
             output = output.getElementsByTagName('Tag')
             for out in output:
                 if out.getAttribute('goalTag') == "End of loop":
                     output = out.getElementsByTagName('Body')[0]
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                                                               output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
+                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames,
+                                                            changedVariables, posMut)
+                    naryPredNode = nodescreator.createNaryPred(
+                        output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                        output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
                     predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
         else:
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
+                                      predicateXML.firstChild.nextSibling)
     else:
         hasWhile = False
         operationIBXML = getOperationIBXML(impName, operationName, calledOperation,
-                                           operationImp, operationInputs, operationOutputs, aterlierBDir)
+                                           operationInputs, operationOutputs, atelierBDir, directory)
         calledOperationImp = getImpWithCalledOperation(calledOperation, calledMachineName, directory)
         for i in range(len(calledOperationImp.getElementsByTagName('Operation_Call'))):
             solveInsideOperationCall(calledOperationImp.parentNode.parentNode.parentNode, calledOperationImp, directory)
@@ -137,25 +149,29 @@ def buildOperationCall(node, predicateXML, docXML, operationImp, importedMch, op
             hasWhile = True
         operationIBXML = changeMachineWithImplementation(calledOperationImp, operationIBXML, docXML)
         auxXML = modifyPredicateXML(predicateXML, operationIBXML)
-        output = make_Sub_Calculus(operationIBXML, auxXML, directory, aterlierBDir)
-        if hasWhile == True:
+        output = make_Sub_Calculus(operationIBXML, auxXML, directory, atelierBDir)
+        if hasWhile:
             output = output.getElementsByTagName('Tag')
             for out in output:
                 if out.getAttribute('goalTag') == "End of loop":
                     output = out.getElementsByTagName('Body')[0]
-                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames, changedVariables, posMut)
-                    naryPredNode = nodescreator.createNaryPred(output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                                                               output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
+                    changedVariables = changeVariablesNames(output, inputs, universalOutputs, fixedNames,
+                                                            changedVariables, posMut)
+                    naryPredNode = nodescreator.createNaryPred(
+                        output.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
+                        output.firstChild.nextSibling.firstChild.nextSibling.cloneNode(10), '&', docXML)
                     predicateXML.replaceChild(naryPredNode, predicateXML.firstChild.nextSibling)
         else:
-            if output.firstChild.firstChild.nextSibling.lastChild.previousSibling.getElementsByTagName('Quantified_Pred') != []:
+            if output.firstChild.firstChild.nextSibling.lastChild.previousSibling.getElementsByTagName(
+                    'Quantified_Pred') != []:
                 checkQuantifiedVariables(output.firstChild.firstChild.nextSibling.lastChild.previousSibling, inputs)
             predicateXML.replaceChild(output.firstChild.firstChild.nextSibling.lastChild.previousSibling.cloneNode(10),
-                              predicateXML.firstChild.nextSibling)
-    os.remove("encodeddocumentinput.xml")
-    os.remove("encodeddocumentoutput.xml")
-    os.remove(impName+".ibxml")
+                                      predicateXML.firstChild.nextSibling)
+    os.remove(directory+"\\encodeddocumentinput.xml")
+    os.remove(directory+"\\encodeddocumentoutput.xml")
+    os.remove(directory+"\\"+impName + ".ibxml")
     return predicateXML, changedVariables
+
 
 def checkQuantifiedVariables(predicate, inputs):
     allQuantified = predicate.getElementsByTagName('Quantified_Pred')
@@ -175,6 +191,7 @@ def checkQuantifiedVariables(predicate, inputs):
                                     Id.parentNode.removeChild(Id.nextSibling)
                                     Id.parentNode.removeChild(Id)
 
+
 def getCalledLocalOperation(operationImp, calledop):
     opname = calledop.getElementsByTagName("Name")[0].firstChild.nextSibling.getAttribute("value")
     for childClauses in operationImp.parentNode.parentNode.childNodes:
@@ -190,15 +207,17 @@ def getCalledLocalOperation(operationImp, calledop):
                                 else:
                                     calledOperationInputsInTheImp = []
                                 if calledop.getElementsByTagName("Output_Parameters") != []:
-                                    calledOperationOutputsIntheImp = calledop.getElementsByTagName("Output_Parameters")[0]
+                                    calledOperationOutputsIntheImp = calledop.getElementsByTagName("Output_Parameters")[
+                                        0]
                                 else:
                                     calledOperationInputsInTheImp = []
                                 return operation, calledOperationInputsInTheImp, calledOperationOutputsIntheImp, calledMachineName
     return None, None, None, None
 
+
 def changeVariablesNames(predicate, inputs, outputs, fixedNames, previousChangedId, posMut):
-    '''
-    '''
+    """
+    """
     allId = predicate.getElementsByTagName('Id')
     changedId = []
     auxlist = []
@@ -212,9 +231,9 @@ def changeVariablesNames(predicate, inputs, outputs, fixedNames, previousChanged
                             for mutposition in range(len(posMut)):
                                 if posMut[mutposition] == Id.getAttribute('value'):
                                     changeMutablePos.append(mutposition)
-                        Id.setAttribute('value', Id.getAttribute('value')+'1')
+                        Id.setAttribute('value', Id.getAttribute('value') + '1')
                         while (Id.getAttribute('value') in previousChangedId):
-                            Id.setAttribute('value', Id.getAttribute('value')+'1')
+                            Id.setAttribute('value', Id.getAttribute('value') + '1')
                             changedId.append(Id.getAttribute('value'))
                     for position in changeMutablePos:
                         posMut[position] = Id.getAttribute('value')
@@ -223,42 +242,49 @@ def changeVariablesNames(predicate, inputs, outputs, fixedNames, previousChanged
             auxlist.append(Id)
     return previousChangedId + auxlist
 
+
 def solveInsideOperationCall(calledImp, calledOperationImp, directory):
-    '''
+    """
     This function deal with the different calling of a machine (deterministic and non-deterministic) and implementation (with operation call or without)
     Only enters here if the called operation is non-deterministic.
 
     Inputs:
     calledImp: The called implementation
     calledOperationImp: The called operation TREE in the implementation
-    '''
+    """
     importedMch = list()
     for childnode in calledImp.getElementsByTagName("Machine")[0].childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             if childnode.tagName == "Imports":
-                importedMchTree = calledImp.getElementsByTagName("Imports")[0] #Getting all Imports branch
-                importedMchTree = importedMchTree.getElementsByTagName("Referenced_Machine")[0] #Getting all referenced machine
-                importedMchTree = importedMchTree.getElementsByTagName("Name")#Getting all names of imported machines
+                importedMchTree = calledImp.getElementsByTagName("Imports")[0]  # Getting all Imports branch
+                importedMchTree = importedMchTree.getElementsByTagName("Referenced_Machine")[
+                    0]  # Getting all referenced machine
+                importedMchTree = importedMchTree.getElementsByTagName("Name")  # Getting all names of imported machines
                 for name in importedMchTree:
-                    importedMch.append(minidom.parse(name.firstChild.data+".bxml")) #Getting the imported machine
+                    importedMch.append(minidom.parse(name.firstChild.data + ".bxml"))  # Getting the imported machine
     operationCall = calledOperationImp.getElementsByTagName('Operation_Call')[0]
-    mchInsideCalledOperation, mchInsideOperationInputs, mchInsideOperationOutputs, mchInsideCalledMachineName = getMchWithTheCalledOperation(calledImp, operationCall,
-                                                                                                                     importedMch)
-    if not(testDeterminism(mchInsideCalledOperation)):
+    mchInsideCalledOperation, mchInsideOperationInputs, mchInsideOperationOutputs, mchInsideCalledMachineName = getMchWithTheCalledOperation(
+        calledImp, operationCall, importedMch)
+    if not (testDeterminism(mchInsideCalledOperation)):
         impCalledOperation = getImpWithCalledOperation(mchInsideCalledOperation, mchInsideCalledMachineName, directory)
         if impCalledOperation.getElementsByTagName('Operation_Call') != []:
             solveInsideOperationCall(impCalledOperation.parentNode.parentNode.parentNode, impCalledOperation, directory)
-            calledOperationImp = changeOperationCallWithOperationMachine(operationCall, impCalledOperation,
-                                                                         mchInsideOperationInputs, mchInsideOperationOutputs)
+            changeOperationCallWithOperationMachine(operationCall, impCalledOperation,
+                                                                         mchInsideOperationInputs,
+                                                                         mchInsideOperationOutputs)
         else:
-            calledOperationImp = changeOperationCallWithOperationMachine(operationCall, impCalledOperation,
-                                                                         mchInsideOperationInputs, mchInsideOperationOutputs)        
+            changeOperationCallWithOperationMachine(operationCall, impCalledOperation,
+                                                                         mchInsideOperationInputs,
+                                                                         mchInsideOperationOutputs)
     else:
-        calledOperationImp = changeOperationCallWithOperationMachine(operationCall, mchInsideCalledOperation,
-                                                                     mchInsideOperationInputs, mchInsideOperationOutputs)        
+        changeOperationCallWithOperationMachine(operationCall, mchInsideCalledOperation,
+                                                                     mchInsideOperationInputs,
+                                                                     mchInsideOperationOutputs)
 
-def changeOperationCallWithOperationMachine(operationCall, calledOperationMachine, mchOperationInputs, mchOperationOutputs):
-    '''
+
+def changeOperationCallWithOperationMachine(operationCall, calledOperationMachine, mchOperationInputs,
+                                            mchOperationOutputs):
+    """
     This function change the operation call in the implementation for the body of the operation in the machine.
     Only enters here if the called operation is deterministic after the previous is non-deterministic (nested operation calls).
 
@@ -270,7 +296,7 @@ def changeOperationCallWithOperationMachine(operationCall, calledOperationMachin
 
     Return:
     substitution: The predicate with the swaped operations
-    '''
+    """
     for child in calledOperationMachine.childNodes:
         if child.nodeType != child.TEXT_NODE:
             if child.tagName == "Output_Parameters":
@@ -292,11 +318,13 @@ def changeOperationCallWithOperationMachine(operationCall, calledOperationMachin
                         if Id.getAttribute('value') == calledOperationMachineInputs[i].getAttribute('value'):
                             Id.parentNode.replaceChild(operationInputs[i].cloneNode(10), Id)
     substitution = operationCall.parentNode
-    substitution.replaceChild(calledOperationMachine.getElementsByTagName('Body')[0].firstChild.nextSibling.cloneNode(10), operationCall)
+    substitution.replaceChild(
+        calledOperationMachine.getElementsByTagName('Body')[0].firstChild.nextSibling.cloneNode(10), operationCall)
     return substitution
-    
+
+
 def changeMachineWithImplementation(calledOperation, operationIBXML, docXML):
-    '''
+    """
     This function change the operation call in the machine for the body of the operation in the implementation.
     Only enters here if the called operation is non-deterministic.
 
@@ -307,7 +335,7 @@ def changeMachineWithImplementation(calledOperation, operationIBXML, docXML):
 
     Return:
     operationIBXML: The IBXML with the implementation instead of the operation call
-    '''
+    """
     operation = operationIBXML.getElementsByTagName('Operation')[0]
     for operationchild in operation.childNodes:
         if operationchild.nodeType != operationchild.TEXT_NODE:
@@ -324,8 +352,9 @@ def changeMachineWithImplementation(calledOperation, operationIBXML, docXML):
         assig.parentNode.replaceChild(newAssig, assig)
     return operationIBXML
 
+
 def getImpWithCalledOperation(calledOperation, calledMachineName, directory):
-    '''
+    """
     Function to return the operation in the implementation of a given machine.
     Only enters here if a non-deterministic operation was found then the algorithm get the implementation (that is deterministic).
 
@@ -335,10 +364,10 @@ def getImpWithCalledOperation(calledOperation, calledMachineName, directory):
     
     Return:
     If the algorithm found an implementation version of the non-deterministic operation it returns the operation, otherwise return None.
-    '''
+    """
     for file in os.listdir(directory):
         if file.endswith(".bxml"):
-            bxmlfile = minidom.parse(file)
+            bxmlfile = minidom.parse(directory+'\\'+file)
             root = bxmlfile.firstChild
             if root.getAttribute('type') == 'implementation':
                 abstraction = root.getElementsByTagName('Abstraction')[0]
@@ -349,8 +378,9 @@ def getImpWithCalledOperation(calledOperation, calledMachineName, directory):
                             return importedImplementationOperation
     return None
 
-def modifyPredicateXML(predicateXML, operationIBXML, posMut = []):
-    '''
+
+def modifyPredicateXML(predicateXML, operationIBXML, posMut=[]):
+    """
     Return the predicate of a called operation
 
     Input:
@@ -359,7 +389,7 @@ def modifyPredicateXML(predicateXML, operationIBXML, posMut = []):
 
     Return:
     predicateXML: The predicate until now in form of a XML tree
-    '''
+    """
     IDsInPredicate = predicateXML.getElementsByTagName('Id')
     if operationIBXML.getElementsByTagName('Output_Parameters') != []:
         IDsInIBXML = operationIBXML.getElementsByTagName('Output_Parameters')[0]
@@ -373,8 +403,9 @@ def modifyPredicateXML(predicateXML, operationIBXML, posMut = []):
                     ID.parentNode.replaceChild(IDibxml.cloneNode(10), ID)
     return predicateXML
 
-def getMchWithTheCalledOperation(operationImp, calledop, importedMch):
-    '''
+
+def getMchWithTheCalledOperation(calledop, importedMch):
+    """
     Return properties of the called operation.
 
     Input:
@@ -386,7 +417,7 @@ def getMchWithTheCalledOperation(operationImp, calledop, importedMch):
     calledOperationName : The name of the called operation
     calledOperationInputsInTheImp : The inputs of the called operation in the implementation
     calledOperationOutputsInTheImp : The outputs of the called operation in the implementation
-    '''
+    """
     opname = calledop.getElementsByTagName("Name")[0].firstChild.nextSibling.getAttribute("value")
     for mch in importedMch:
         operations = mch.getElementsByTagName("Operation")
@@ -404,8 +435,9 @@ def getMchWithTheCalledOperation(operationImp, calledop, importedMch):
                 return operation, calledOperationInputsInTheImp, calledOperationOutputsInTheImp, calledMachineName
     return None, None, None, None
 
+
 def testDeterminism(operation):
-    '''
+    """
     Fuction to check if a machine is deterministic or not, if it is return True, if not, return False
 
     Inputs:
@@ -413,7 +445,7 @@ def testDeterminism(operation):
 
     Return:
     Returns False if the machine is non deterministic, otherwise return True
-    '''
+    """
     if operation.getElementsByTagName('Select') != [] or operation.tagName == 'Select':
         return False
     if operation.getElementsByTagName('Nary_Sub') != []:
@@ -424,7 +456,7 @@ def testDeterminism(operation):
         else:
             if operation.getElementsByTagName('Nary_Sub')[0].getAttribute('op') == "CHOICE":
                 return False
-    if (operation.tagName == 'Nary_Sub' and operation.getAttribute('op') == "CHOICE"):
+    if operation.tagName == 'Nary_Sub' and operation.getAttribute('op') == "CHOICE":
         return False
     if operation.getElementsByTagName('ANY_Sub') != [] or operation.tagName == 'ANY_Sub':
         return False
@@ -434,8 +466,9 @@ def testDeterminism(operation):
         return False
     return True
 
+
 def checkPuts(Parameters, ImpParameters):
-    '''
+    """
     Return if the operation is the same (check only the inputs or the outputs)
 
     Input:
@@ -444,7 +477,7 @@ def checkPuts(Parameters, ImpParameters):
     
     Return:
     ans: True means that the parameters are equal, False that are different (this is used to know if is the same Operation)
-    '''
+    """
     ans = True
     IDs = Parameters.getElementsByTagName('Id') + Parameters.getElementsByTagName('Integer_Literal')
     ImpIDs = ImpParameters.getElementsByTagName('Id') + ImpParameters.getElementsByTagName('Integer_Literal')
@@ -453,8 +486,9 @@ def checkPuts(Parameters, ImpParameters):
             ans = False
     return ans
 
-def checkOperationCall(operationCalls, operationImp, calledOperation, operationInputs, operationOutputs):
-    '''
+
+def checkOperationCall(operationCalls, calledOperation, operationInputs, operationOutputs):
+    """
     Check if exist the operation called in the operation call, if true, return the called operation, else return None
 
     Input:
@@ -466,7 +500,7 @@ def checkOperationCall(operationCalls, operationImp, calledOperation, operationI
 
     Return:
     operationCall if the called operation is found, otherwise return None and an error is raised
-    '''
+    """
     for operationCall in operationCalls:
         for child in operationCall.childNodes:
             if child.nodeType != child.TEXT_NODE:
@@ -479,17 +513,18 @@ def checkOperationCall(operationCalls, operationImp, calledOperation, operationI
                 if child.tagName == 'Output_Parameters':
                     outputsIDs = child
                     okayOutputs = checkPuts(outputsIDs, operationOutputs)
-                    outputsIDsCalledOperation = child.parentNode.getElementsByTagName('Output_Parameters')[1].cloneNode(10)
         if operationInputs == []:
             okayInputs = True
         if operationOutputs == []:
             okayOutputs = True
-        if okayOperation == True & okayInputs == True & okayOutputs == True:
+        if okayOperation & okayInputs & okayOutputs:
             return operationCall
     return None
 
-def getOperationIBXML(impName, operationName, calledOperation, operationImp, operationInputs, operationOutputs, aterlierBDir):
-    '''
+
+def getOperationIBXML(impName, operationName, calledOperation, operationInputs, operationOutputs,
+                      atelierBDir, directory):
+    """
     Return the IBXML tree of the implementation operation. The IBXML is a XML file that contains the substitution of the Operation Call.
 
     Input:
@@ -503,12 +538,12 @@ def getOperationIBXML(impName, operationName, calledOperation, operationImp, ope
     Return:
     operationIBXML: The IBXML of the implementation.
     The IBXML is a XML file that contains the substitution of the Operation Call.
-    '''
-    args = [aterlierBDir+'\\pog.exe']
+    """
+    args = [atelierBDir+'\\pog.exe']
     args.append("-i")
-    args.append(impName+".bxml")
-    p = subprocess.call(args)
-    ibxml = minidom.parse(impName+".ibxml")
+    args.append(directory+'\\'+impName+".bxml")
+    subprocess.call(args)
+    ibxml = minidom.parse(directory+'\\'+impName+".ibxml")
     for child in ibxml.firstChild.childNodes:
         if child.nodeType != child.TEXT_NODE:
             if child.tagName == "Operations":
@@ -516,13 +551,15 @@ def getOperationIBXML(impName, operationName, calledOperation, operationImp, ope
                     if operation.nodeType != operation.TEXT_NODE:
                         if operation.getAttribute('name') == operationName:
                             operationCalls = operation.getElementsByTagName('Operation_Call')
-                            operationIBXML = checkOperationCall(operationCalls, operationImp, calledOperation, operationInputs, operationOutputs)
+                            operationIBXML = checkOperationCall(operationCalls, calledOperation,
+                                                                operationInputs, operationOutputs)
                             if operationIBXML != None:
                                 return operationIBXML
     return None
 
-def make_Sub_Calculus(calledOperation, predicateXML, directory, aterlierBDir):
-    '''
+
+def make_Sub_Calculus(calledOperation, predicateXML, directory, atelierBDir):
+    """
     Call the exe that make the substitution of the predicate, and return a predicate XML as output
 
     Input:
@@ -531,7 +568,8 @@ def make_Sub_Calculus(calledOperation, predicateXML, directory, aterlierBDir):
 
     Return:
     outputXML: The output in a XML tree
-    '''
+    """
+    args = []
     impl = minidom.getDOMImplementation()
     subCalcXML = impl.createDocument(None, "Sub_Calculus_Father", None)
     root = subCalcXML.documentElement
@@ -543,19 +581,19 @@ def make_Sub_Calculus(calledOperation, predicateXML, directory, aterlierBDir):
     f = open(directory+'\\encodeddocumentinput.xml', 'bw')
     f.write(encodeddocument)
     f.close()
-    args = aterlierBDir+'\\substitution_calculus_pred.exe'
+    args.append(atelierBDir+'\\substitution_calculus_pred.exe')
+    args.append(directory+'\\encodeddocumentinput.xml')
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
     output, errors = p.communicate()
-    if p.returncode==0:
+    if p.returncode == 0:
         print("Calculus_pred executed successfully")
-        #print(output)
+        # print(output)
     else:
-        print("Calculus_pred - error reported and the return code is "+str(p.returncode))
-        #print(output)
+        print("Calculus_pred - error reported and the return code is " + str(p.returncode))
+        # print(output)
         print(errors)
-    f = open(directory+'\\encodeddocumentoutput.xml', 'bw')
+    f = open(directory +'\\encodeddocumentoutput.xml', 'bw')
     f.write(output)
     f.close()
-    outputXML = minidom.parse("encodeddocumentoutput.xml")
+    outputXML = minidom.parse(directory+"\\encodeddocumentoutput.xml")
     return outputXML
-    

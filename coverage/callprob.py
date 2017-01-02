@@ -23,7 +23,6 @@ def executeSubWithReturn(cmd, n="" , out=True):
 def evaluate(stringexpression, message, entries, proBPath): #Use this function to evaluate
     variables = list()
     positions = list()
-    inputs = list()
     end = list()
     rcode, output, errors = executeSubWithReturn(proBPath+" -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p EXPAND_FORALL_UPTO 0 -eval "+'"'+stringexpression+'"', message, True)
     if (rcode==0): #evaluate the return code
@@ -32,9 +31,9 @@ def evaluate(stringexpression, message, entries, proBPath): #Use this function t
             stringoutput = stringoutput.replace("\\"," ")
             solutionposition = stringoutput.find("Solution:")
             stringoutput = stringoutput[solutionposition::]
-            aux = list()
             lenvar = list()
             for entry in entries:
+                print(entry)
                 aux = (entry+" = ")
                 positions.append(re.search(r'\b%s\b' % aux, stringoutput).start())
                 lenvar.append(len(aux))
