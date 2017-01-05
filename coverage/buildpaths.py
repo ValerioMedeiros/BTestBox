@@ -101,7 +101,6 @@ def makePartialPaths(graph, start):
     for p in range(len(pt)):
         partialPaths[p+1+already] = pt[p]
         partialPaths[p+1+already] = list(reversed(partialPaths[p+1+already]))
-        identifyWhileEnd(partialPaths[p+1+already])
 
 def makepathsOperationCall(graph, finish):
     '''

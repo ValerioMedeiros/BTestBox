@@ -1,8 +1,5 @@
-import sys
 import os
-import codecs
 import subprocess
-import string
 import re
 
 def executeSubWithReturn(cmd, n="" , out=True):
@@ -20,11 +17,24 @@ def executeSubWithReturn(cmd, n="" , out=True):
 
     return p.returncode, output, errors
 
-def evaluate(stringexpression, message, entries, proBPath): #Use this function to evaluate
+def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use this function to evaluate
     variables = list()
     positions = list()
     end = list()
-    rcode, output, errors = executeSubWithReturn(proBPath+" -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p EXPAND_FORALL_UPTO 0 -eval "+'"'+stringexpression+'"', message, True)
+    if len(stringexpression) > 10:
+        if not os.path.isdir(copy_directory):
+            os.mkdir(copy_directory)
+        predicateFile = open(copy_directory + '/predicateFile.eval', 'w')
+        predicateFile.write(stringexpression)
+        predicateFile.close()
+        rcode, output, errors = executeSubWithReturn(proBPath + " -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p "
+                                                                "EXPAND_FORALL_UPTO 0 -eval_file " + '"' + copy_directory + '/predicateFile.eval"',
+                                                     message, True)
+        os.remove(copy_directory + "/predicateFile.eval")
+    else:
+        rcode, output, errors = executeSubWithReturn(proBPath+" -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p "
+                                                              "EXPAND_FORALL_UPTO 0 -eval "+'"'+stringexpression+'"',
+                                                     message, True)
     if (rcode==0): #evaluate the return code
         if "TRUE/1" in str(output):
             stringoutput = str(output)
@@ -32,6 +42,7 @@ def evaluate(stringexpression, message, entries, proBPath): #Use this function t
             solutionposition = stringoutput.find("Solution:")
             stringoutput = stringoutput[solutionposition::]
             lenvar = list()
+            print(stringexpression)
             for entry in entries:
                 print(entry)
                 aux = (entry+" = ")

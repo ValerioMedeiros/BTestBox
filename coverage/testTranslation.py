@@ -24,6 +24,7 @@ def makeTranslation(impBXML, importedMch, seesMch, directory, aterlierBDir, copy
     args.append(copy_directory)
     args.append(copy_directory+"\\TestSet_"+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+".imp")
     cFiles.append("TestSet_"+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+'.c')
+    print(args)
     subprocess.call(args)
     args.pop()
     args.append(copy_directory+"\\runTest_"+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+".imp")

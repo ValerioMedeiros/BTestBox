@@ -81,8 +81,8 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
     with open(copy_directory + '/' + mchNameFile + '.mch', 'r+') as mch:
         old = mch.read()
         mch.seek(0)
-        variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
-        mchVariablesAndConstraints, mchTypeOfVariablesAndConstraints = getVariablesAndConstraints(mchBXML)
+        variablesAndConstraints, typeOfVariablesAndConstraints, scapegoat = getVariablesAndConstraints(impBXML)
+        mchVariablesAndConstraints, mchTypeOfVariablesAndConstraints, scapegoat = getVariablesAndConstraints(mchBXML)
         for i in range(len(mchVariablesAndConstraints)):
             if not mchVariablesAndConstraints[i] in variablesAndConstraints:
                 variablesAndConstraints.append(mchVariablesAndConstraints[i])
@@ -163,8 +163,8 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
     with open(copy_directory + '/' + impNameFile + '.imp', 'r+') as imp:
         old = imp.read()
         imp.seek(0)
-        variablesAndConstraints, typeOfVariablesAndConstraints = getVariablesAndConstraints(impBXML)
-        mchVariablesAndConstraints, mchTypeOfVariablesAndConstraints = getVariablesAndConstraints(mchBXML)
+        variablesAndConstraints, typeOfVariablesAndConstraints, scapegoat = getVariablesAndConstraints(impBXML)
+        mchVariablesAndConstraints, mchTypeOfVariablesAndConstraints, constraintsList = getVariablesAndConstraints(mchBXML)
         for i in range(len(mchVariablesAndConstraints)):
             if not mchVariablesAndConstraints[i] in variablesAndConstraints:
                 variablesAndConstraints.append(mchVariablesAndConstraints[i])
@@ -179,6 +179,9 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                 parametersnode = impBXML.getElementsByTagName('Parameters')[0]
                 text += instgen.transformBXML(parametersnode)
             text += '\n\n'
+            createVariables = False
+            if impBXML.getElementsByTagName("Concrete_Variables") == [] and constraintsList != []:
+                createVariables = True
             for clauses in impBXML.firstChild.childNodes:
                 if clauses.nodeType != clauses.TEXT_NODE:
                     if clauses.tagName == 'Imports':
@@ -195,15 +198,42 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                         text += instgen.transformBXML(clauses)
                         text += ', ' + promotedOperations + '\n\n'
                     if clauses.tagName == 'Concrete_Variables' or clauses.tagName == 'Abstract_Variables':
-                        text += instgen.transformBXML(clauses) + '\n\n'
+                        text += instgen.transformBXML(clauses)
+                        for constraint in constraintsList:
+                            text += " & "+constraint
+                        text += '\n\n'
                     if clauses.tagName == 'Concrete_Constants' or clauses.tagName == 'Abstract_Constants':
                         text += instgen.transformBXML(clauses) + '\n\n'
                     if clauses.tagName == 'Abstraction':
                         text += instgen.transformBXML(clauses) + '\n\n'
+                        if createVariables:
+                            text += 'CONCRETE_VARIABLES\n    '
+                            for j in range(len(constraintsList)):
+                                for k in range(len(constraintsList[j])):
+                                    if constraintsList[j][k] == ":":
+                                        textToAdd = 'CONSTRAINTVAR_'+constraintsList[j][:k-1:]
+                                text += textToAdd
+                                if j != max(range(len(constraintsList))):
+                                    text += ', '
+                                    text += ' //Variable created to test\n'  # TODO: WRITE A BETTER COMMENT
+                                else:
+                                    text += ' //Variable created to test\n'
+                            text += '\n\nINVARIANT\n    '
+                            for j in range(len(constraintsList)):
+                                text += 'CONSTRAINTVAR_'+constraintsList[j]
+                                if j != max(range(len(constraintsList))):
+                                    text += ' & '
+                            text += '\n\n'
                     if clauses.tagName == 'Invariant':
                         text += instgen.transformBXML(clauses) + '\n\n'
                     if clauses.tagName == 'Initialisation':
-                        text += instgen.transformBXML(clauses) + '\n\n'
+                        text += instgen.transformBXML(clauses)
+                        for constraint in constraintsList:
+                            for k in range(len(constraint)):
+                                if constraint[k] == ":":
+                                    textToAdd = constraint[:k-1:]
+                            text += "; CONSTRAINTVAR_"+textToAdd+" := "+'0'  # TODO: GET THE RIGHT TYPE, ACTUALLY IS NAT
+                        text += '\n\n'
                     if clauses.tagName == 'Values':
                         text += instgen.transformBXML(clauses) + '\n\n'
                     if clauses.tagName == 'Sets':
@@ -232,6 +262,14 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                         else:
                             endoperations = len(old)
                         text += old[operationsposition:endoperations:]
+            if constraintsList != []:
+                for constraint in constraintsList:
+                    for j in range(len(constraint)):
+                        if constraint[j] == ":":
+                            constraintVar = constraint[:j-1:]
+                    operationsposition = re.search(r'\bOPERATIONS\b', text).end()
+                    text = text[:operationsposition:] +\
+                           re.sub(r'\b%s\b' % constraintVar, "CONSTRAINTVAR_"+constraintVar, text[operationsposition::])
             imp.write(text)
         imp.close()
     return controlList, controlListNames
@@ -249,7 +287,7 @@ def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
                             if child.tagName == 'Name':
                                 for included in includedMch:
                                     if child.firstChild.data == included.firstChild.getAttribute('name'):
-                                        var, vartype = getVariablesAndConstraints(included)
+                                        var, vartype, scapegoat = getVariablesAndConstraints(included)
                                         for i in range(len(var)):
                                             variablesOperation += 'OperationForTestGet' + var[
                                                 i] + 'IMP' + included.firstChild.getAttribute('name')
@@ -262,25 +300,46 @@ def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
 
 def getVariablesAndConstraints(BXML):
     variablesAndConstraints = list()
+    constraintsTypeList = []
     typeOfVariablesAndConstraints = list()
     for childnode in BXML.firstChild.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             tag = childnode.tagName
-            if tag == "Abstract_Variables" or tag == "Concrete_Variables" or tag == "Variables" or tag == "Constraints":
+            if tag == "Concrete_Variables":
                 allId = childnode.getElementsByTagName('Id')
                 for Id in allId:
                     variablesAndConstraints.append(Id.getAttribute('value'))
                     typref = Id.getAttribute('typref')
-                    for childnode in BXML.firstChild.childNodes:
-                        if childnode.nodeType != childnode.TEXT_NODE:
-                            tag = childnode.tagName
+                    for childnodeTypeRef in BXML.firstChild.childNodes:
+                        if childnodeTypeRef.nodeType != childnodeTypeRef.TEXT_NODE:
+                            tag = childnodeTypeRef.tagName
                             if tag == 'TypeInfos':
-                                for typeinfo in childnode.childNodes:
+                                for typeinfo in childnodeTypeRef.childNodes:
                                     if typeinfo.nodeType != typeinfo.TEXT_NODE:
                                         if typeinfo.getAttribute('id') == typref:
                                             typeOfVariablesAndConstraints.append(
                                                 instgen.selfcaller(typeinfo.firstChild.nextSibling))
-    return variablesAndConstraints, typeOfVariablesAndConstraints
+            if tag == "Constraints":
+                allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
+                for expComparison in allExpComparison:
+                    if expComparison.firstChild.nextSibling.tagName == "Attr":
+                        count = 3
+                    else:
+                        count = 1
+                    variablesAndConstraints.append('CONSTRAINTVAR_'+
+                                                   expComparison.childNodes.item(count).getAttribute('value'))
+                    constraintsTypeList.append(instgen.selfcaller(expComparison))
+                    typref = expComparison.childNodes.item(count).getAttribute('typref')
+                    for childnodeTypeRef in BXML.firstChild.childNodes:
+                        if childnodeTypeRef.nodeType != childnodeTypeRef.TEXT_NODE:
+                            tag = childnodeTypeRef.tagName
+                            if tag == 'TypeInfos':
+                                for typeinfo in childnodeTypeRef.childNodes:
+                                    if typeinfo.nodeType != typeinfo.TEXT_NODE:
+                                        if typeinfo.getAttribute('id') == typref:
+                                            typeOfVariablesAndConstraints.append(
+                                                instgen.selfcaller(typeinfo.firstChild.nextSibling))
+    return variablesAndConstraints, typeOfVariablesAndConstraints, constraintsTypeList
 
 
 def createFunctions(var, typeOfVariablesAndConstraints, BXML, mchBXML, tipo, name, controlList, controlListNames):
@@ -329,13 +388,29 @@ def createFunctions(var, typeOfVariablesAndConstraints, BXML, mchBXML, tipo, nam
                             allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
                             for expComparison in allExpComparison:
                                 if expComparison.getAttribute('op') == ':':
-                                    if expComparison.childNodes.item(3).getAttribute('value') == var[i]:
+                                    if expComparison.firstChild.nextSibling.tagName == "Attr":
+                                        count = 5
+                                    else:
+                                        count = 3
+                                    if expComparison.childNodes.item(count).getAttribute('value') == var[i]:
                                         itIsOkay = True
                                         precondition = instgen.selfcaller(expComparison)
                                         setOperation += re.sub(r'\b%s\b' % var[i], 'nn' + str(i + 1), precondition)
                             if not itIsOkay:
                                 itIsOkay = True
                                 setOperation += 'nn' + str(i + 1) + ' : ' + typeOfVariablesAndConstraints[i]
+                        if childnode.tagName == 'Constraints':
+                            allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
+                            for expComparison in allExpComparison:
+                                if expComparison.getAttribute('op') == ':':
+                                    if expComparison.firstChild.nextSibling.tagName == "Attr":
+                                        count = 3
+                                    else:
+                                        count = 1
+                                    if 'CONSTRAINTVAR_'+expComparison.childNodes.item(count).getAttribute('value') == var[i]:
+                                        itIsOkay = True
+                                        precondition = instgen.selfcaller(expComparison)
+                                        setOperation += re.sub(r'\b%s\b' % expComparison.childNodes.item(count).getAttribute('value'), 'nn' + str(i + 1), precondition)
             if i != max(range(len(var))):
                 setOperation += ' & '
             else:
@@ -389,6 +464,14 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
     implementation = 'IMPLEMENTATION\n    TestSet_' + coverage.upper() + "_" + impName +'\n\n'
     implementation += 'REFINES\n    TestSet_' + coverage.upper() + "_" + mchName + '\n\n'
     implementation += 'IMPORTS\n    ' + mchName
+    if mchBXML.getElementsByTagName('Parameters') != []:
+        implementation += '('
+        parametersId = mchBXML.getElementsByTagName('Parameters')[0].getElementsByTagName('Id')
+        for j in range(len(parametersId)):
+            implementation += '0'  # TODO: HERE SHOULD LOOK THE TYPE OF THE PARAMETER
+            if j != max(range(len(parametersId))):
+                implementation += ', '
+        implementation += ')'
     for mch in seesMch:
         implementation += ', '
         implementation += mch.firstChild.getAttribute('name')
@@ -444,8 +527,11 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                                 if allVariables.length > count:
                                                     variablesForTest += ', '
                     for clause in impBXML.firstChild.childNodes:
+                        alreadyEntered = False
                         if clause.nodeType != clause.TEXT_NODE:
-                            if clause.tagName == 'Variables' or clause.tagName == 'Concrete_Variables':
+                            if (clause.tagName == 'Variables' or clause.tagName == 'Concrete_Variables'
+                                or clause.tagName == 'Parameters') and not alreadyEntered:
+                                alreadyEntered = True
                                 implementation += '        SetVariablesForTest' + mchName + '('
                                 allVariables = clause.getElementsByTagName('Id')
                                 for variable in allVariables:
@@ -600,7 +686,7 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                         implementation += 'aux' + str(j + 1) + ' = '
                     alreadyWriteVariables = []
                     for k in range(len(outputVarName)):
-                        if str(controlList[j]) == str(outputVarName[k]):
+                        if str(controlList[j]).replace("CONSTRAINTVAR_", "") == str(outputVarName[k]):
                             if str(controlList[j]) not in alreadyWriteVariables:
                                 implementation += str(outputVarValue[k])
                                 alreadyWriteVariables.append(str(controlList[j]))

@@ -37,7 +37,7 @@ nodecond = dict()  # Dict of the previous condition of the node. If the parent i
 nodeinva = dict()  # Dict with the invariant of the while and where it end.
 
 
-def startMap(node, opmch, importedMch, seesMch, directory):
+def startMap(node, opmch, importedMch, seesMch, refinementMch, directory):
     '''
     Function responsible for the initialisation of the map.
     
@@ -46,18 +46,18 @@ def startMap(node, opmch, importedMch, seesMch, directory):
     '''
     # Initialisation of the Graph, the first node is always the Call
     nodemap[str(len(nodemap) + 1)].append('0')  # Initialisation with 0, None.
-    solveFirstNodeData(node, opmch, importedMch, seesMch, directory)
+    solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directory)
     nodecond[str(len(nodecond) + 1)] = "True"
     nodeinva[str(len(nodeinva) + 1)] = ""
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
     nodecond[str(len(nodecond) + 1)] = "True"
 
 
-def solveFirstNodeData(node, opmch, importedMch, seesMch, directory):
+def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directory):
     doc = minidom.getDOMImplementation()
     docXML = doc.createDocument(None, "Scapegoat", None)
     if opmch.getElementsByTagName("Precondition") != []:
-        nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0]
+        nodedata[str(len(nodedata) + 1)] = opmch.getElementsByTagName("Precondition")[0].cloneNode(20)
         nodetype[str(len(nodetype) + 1)] = "Condition"
     else:
         nodetype[str(len(nodetype) + 1)] = "PreconditionTrue"
@@ -84,7 +84,7 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, directory):
                                 child.firstChild.nextSibling.cloneNode(10),
                                 nodedata[str(len(nodedata))], '&', docXML)
                 else:
-                    nodedata[str(len(nodedata))] = child
+                    nodedata[str(len(nodedata))] = child.cloneNode(20)
                     nodetype[str(len(nodetype))] = "Condition"
             elif child.tagName == 'Assertions':
                 if nodetype[str(len(nodetype))] == "Condition":
@@ -129,7 +129,7 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, directory):
                                 child.firstChild.nextSibling.cloneNode(10),
                                 nodedata[str(len(nodedata))], '&', docXML)
                 else:
-                    nodedata[str(len(nodedata))] = child
+                    nodedata[str(len(nodedata))] = child.cloneNode(20)
                     nodetype[str(len(nodetype))] = "Condition"
             elif child.tagName == 'Assertions':
                 if nodetype[str(len(nodetype))] == "Condition":
@@ -148,8 +148,53 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, directory):
                                         child.childNodes.item(count).cloneNode(10),
                                         nodedata[str(len(nodedata))], '&', docXML)
                 else:
-                    nodedata[str(len(nodedata))] = child
+                    nodedata[str(len(nodedata))] = child.cloneNode(20)
                     nodetype[str(len(nodetype))] = "Condition"
+    for ref in refinementMch: #For the refinement
+        for child in ref.firstChild.childNodes:
+            if child.nodeType != child.TEXT_NODE:
+                if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
+                    if nodetype[str(len(nodetype))] == "Condition":
+                        if child.firstChild.nextSibling.tagName == "Attr":
+                            if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                nodedata[str(len(nodedata))].appendChild(
+                                    child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10))
+                                nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                            else:
+                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(
+                                    child.firstChild.nextSibling.nextSibling.nextSibling.cloneNode(10),
+                                    nodedata[str(len(nodedata))], '&', docXML)
+                        else:
+                            if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                nodedata[str(len(nodedata))].appendChild(child.firstChild.nextSibling.cloneNode(10))
+                                nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                            else:
+                                nodedata[str(len(nodedata))] = nodescreator.createNaryPred(
+                                    child.firstChild.nextSibling.cloneNode(10),
+                                    nodedata[str(len(nodedata))], '&', docXML)
+                    else:
+                        nodedata[str(len(nodedata))] = child.cloneNode(20)
+                        nodetype[str(len(nodetype))] = "Condition"
+                elif child.tagName == 'Assertions':
+                    if nodetype[str(len(nodetype))] == "Condition":
+                        if child.firstChild.nextSibling.tagName == "Attr":
+                            count = 3
+                        else:
+                            count = 1
+                        for i in range(len(child.childNodes)):
+                            if child.childNodes.item(i).nodeType != child.childNodes.item(i).TEXT_NODE:
+                                if i >= count:
+                                    if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+                                        nodedata[str(len(nodedata))].appendChild(
+                                            child.childNodes.item(count).cloneNode(10))
+                                        nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+                                    else:
+                                        nodedata[str(len(nodedata))] = nodescreator.createNaryPred(
+                                            child.childNodes.item(count).cloneNode(10),
+                                            nodedata[str(len(nodedata))], '&', docXML)
+                    else:
+                        nodedata[str(len(nodedata))] = child.cloneNode(20)
+                        nodetype[str(len(nodetype))] = "Condition"
     if nodedata['1'] is None:
         firstTrue = docXML.createElement('Id')
         firstTrue.setAttribute('value', 'TRUE')
@@ -190,7 +235,7 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                                         child.firstChild.nextSibling.cloneNode(10),
                                         nodedata[str(len(nodedata))], '&', docXML)
                         else:
-                            nodedata[str(len(nodedata))] = child
+                            nodedata[str(len(nodedata))] = child.cloneNode(20)
                             nodetype[str(len(nodetype))] = "Condition"
                     elif child.tagName == 'Assertions':
                         if nodetype[str(len(nodetype))] == "Condition":
@@ -212,7 +257,7 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                                                 child.childNodes.item(count).cloneNode(10),
                                                 nodedata[str(len(nodedata))], '&', docXML)
                         else:
-                            nodedata[str(len(nodedata))] = child
+                            nodedata[str(len(nodedata))] = child.cloneNode(20)
                             nodetype[str(len(nodetype))] = "Condition"
         imp = getImpWithImportedMch(dcmt, directory)
         for child in imp.firstChild.childNodes:
@@ -239,7 +284,7 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                                     child.firstChild.nextSibling.cloneNode(10),
                                     nodedata[str(len(nodedata))], '&', docXML)
                     else:
-                        nodedata[str(len(nodedata))] = child
+                        nodedata[str(len(nodedata))] = child.cloneNode(20)
                         nodetype[str(len(nodetype))] = "Condition"
                 elif child.tagName == 'Assertions':
                     if nodetype[str(len(nodetype))] == "Condition":
@@ -261,7 +306,7 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                                             child.childNodes.item(count).cloneNode(10),
                                             nodedata[str(len(nodedata))], '&', docXML)
                     else:
-                        nodedata[str(len(nodedata))] = child
+                        nodedata[str(len(nodedata))] = child.cloneNode(20)
                         nodetype[str(len(nodetype))] = "Condition"
 
 
@@ -278,13 +323,13 @@ def getImpWithImportedMch(importedMch, directory):
 
 
 def mapAssig(node, opmch):
-    '''
+    """
     Adding an Instruction node to the Graph.
 
     Input:
     opmch: The node of the operation in the machine (to get the Precondition)
     node: The node of the assignement
-    '''
+    """
     nodetype[str(len(nodetype) + 1)] = "Instruction"
     nodedata[str(len(nodedata) + 1)] = node
     nodemap[str(len(nodemap) + 1)].append(str(len(nodemap) - 1))
@@ -501,7 +546,7 @@ def makeMapNary(node, opmch):
         mapCase(node, opmch)
 
 
-def makeMap(node, opmch, importedMch=[], seesMch=[], directory=[]):
+def makeMap(node, opmch, importedMch=[], seesMch=[], refinementMch = [], directory=[]):
     """
     Surfing the tree and adding every child to the Graph
 
@@ -516,7 +561,7 @@ def makeMap(node, opmch, importedMch=[], seesMch=[], directory=[]):
             tag = childnode.tagName
             if tag == "Body":
                 if node.tagName == "Operation":
-                    startMap(node, opmch, importedMch, seesMch, directory)  # Initialisation of the Graph
+                    startMap(node, opmch, importedMch, seesMch, refinementMch, directory)  # Initialisation of the Graph
                     makeMap(childnode, opmch)
                 else:
                     makeMap(childnode, opmch)
@@ -538,7 +583,7 @@ def makeMap(node, opmch, importedMch=[], seesMch=[], directory=[]):
                 mapCase(childnode, opmch)
 
 
-def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch=[]):
+def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch=[], refinementMch = []):
     """
     Start function, where we start the mapping.
 
@@ -546,7 +591,7 @@ def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch
     operationmch: The node of the operation in the machine (to get the Precondition)
     operationimp: The node of the operation in the implementation
     """
-    makeMap(operationimp, operationmch, importedMch, seesMch, directory)
+    makeMap(operationimp, operationmch, importedMch, seesMch, refinementMch, directory)
     nodetype[str(len(nodetype) + 1)] = "END"  # Adding a type for the END node
     outputs = None
     for childNode in operationimp.childNodes:

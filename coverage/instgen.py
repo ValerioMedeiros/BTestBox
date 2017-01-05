@@ -173,6 +173,20 @@ def selfcaller(node):
         text += make_properties(node)
     elif tag == "Quantified_Set":
         text += make_quantified_set(node)
+    elif tag == "EmptySet":
+        text += '{}'
+    elif tag == "Boolean_Exp":
+        text += make_booleanexp(node)
+    return text
+
+
+def make_booleanexp(node):
+    text = "bool("
+    if node.firstChild.nextSibling.tagName == "Attr":
+        text += selfcaller(node.childNodes.item(3))
+    else:
+        text += selfcaller(node.childNodes.item(1))
+    text += ')'
     return text
 
 
@@ -349,7 +363,7 @@ def make_precondition(node):
 def make_invariant(node, inLine=False):
     """Build the INVARIANT in a string"""
     if inLine:
-        text = node.tagName.upper() + "\n"
+        text = node.tagName.upper() + "\n    "
     else:
         text = ""
     text += make_inst(node)
@@ -468,7 +482,7 @@ def make_naryexp(node):
             count += 2  # Position of childnodes non TEXT_NODE are always 1 + 2 * (n - 1), where n is the number of
             # the child non TEXT_NODE
             if count < node.childNodes.length:
-                text += ","
+                text += ", "
     else:
         count = 1  # Position of childnodes non TEXT_NODE is always 1 + 2 * (n - 1), where n is the number of the
         # child non TEXT_NODE
@@ -477,9 +491,13 @@ def make_naryexp(node):
             count += 2  # Position of childnodes non TEXT_NODE is always 1 + 2 * (n - 1), where n is the number of
             # the child non TEXT_NODE
             if count < node.childNodes.length:
-                text += ","
+                text += ", "
     if node.getAttribute("op") == '{':
         text += "}"
+    elif node.getAttribute("op") == '[':
+        text += "]"
+    elif node.getAttribute("op") == '(':
+        text += ")"
     return text
 
 
@@ -537,6 +555,10 @@ def callmake(node, tag):
         text += make_properties(childnode)
     elif tag == "Quantified_Set":
         text += make_quantified_set(childnode)
+    elif tag == "EmptySet":
+        text += '{}'
+    elif tag == "Boolean_Exp":
+        text += make_booleanexp(node)
     return text
 
 
@@ -551,7 +573,7 @@ def make_inst(node):
 
 
 def make_parameters(node):
-    text = node.tagName.upper() + '\n    '
+    text = '('
     allId = node.getElementsByTagName('Id')
     count = 0
     for Id in allId:
@@ -559,6 +581,7 @@ def make_parameters(node):
         count += 1
         if count < allId.length:
             text += ', '
+    text += ")"
     return text
 
 
@@ -656,7 +679,7 @@ def transformBXML(node):
     if tag == "Properties":
         text += make_properties(node, True)
     elif tag == 'Parameters':
-        text += make_parameters
+        text += make_parameters(node)
     elif tag == 'Sees' or tag == 'Includes' or tag == 'Imports' or tag == 'Extends':
         text += make_othermachines(node)
     elif tag == 'Promotes':

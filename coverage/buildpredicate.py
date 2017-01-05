@@ -56,12 +56,15 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
                 posMut.append(mut)
         if predicateXML.getElementsByTagName('Quantified_Pred') != []:
             changedVariablesWhile = solveroc.changeVariablesNames(predicateXML, inputs, outputs, fixedNames, changedVariablesWhile, posMut)
-        del way[len(way) - 1]
     elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile"
                                                                and int(way[len(way) - 1]) < int(way[len(way) - 2])):
         predicateXML = buildCondition(node, predicateXML, way, path, docXML)
     elif buildpaths.graphgen.nodetype[node] == "ConditionWhile":
-        predicateXML = buildConditionWhileNotWhile(node, predicateXML, docXML)
+        if int(path[len(way)]) > int(node) + 1:
+            predicateXML = buildConditionWhileNotWhile(node, predicateXML, docXML)
+        else:
+            predicateXML = addConditionToPredicate(buildpaths.graphgen.nodedata[node].cloneNode(10), predicateXML, docXML)
+            predicateXML = addConditionToPredicate(buildpaths.graphgen.nodeinva[node].cloneNode(10), predicateXML, docXML)
     elif buildpaths.graphgen.nodetype[node] == "Instruction":
         predicateXML = buildInstruction(node, predicateXML, posMut)
     elif buildpaths.graphgen.nodetype[node] == "Call":
@@ -77,7 +80,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
 def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs, startWhile,
                condWhile, posMut, operationImp, whilePredicateXML, impName,
                operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir):
-    '''
+    """
     Make the predicate in a XML
 
     Inputs:
@@ -100,7 +103,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
     Return:
     predicateXML: The predicate in the form of XML tree after evaluating the node(s)
     posMut: The variables that are quantified inside a while
-    '''
+    """
     if " ENDWHILE" in buildpaths.graphgen.nodecond[
         node] and node != condWhile and node != startWhile:  # Found a while inside a while
         # Building the inside
@@ -275,6 +278,32 @@ def solveNewPred(newPred, child, docXML):
     return newPred
 
 
+def addConditionToPredicate(instNode, predicateXML, docXML):
+    """
+    Function to build the Condition While when is not entering the While (The guard is false in the first try)
+
+    Inputs:
+    node: The node being evaluated
+    predicateXML: The predicate in the form of a XML tree
+    docXML: The XML document
+
+    Return:
+    predicateXML: The predicate in the form of a XML tree
+    """
+    if predicateXML.hasChildNodes():
+        if predicateXML.firstChild.nextSibling.tagName != 'Nary_Pred':
+            naryPredNode = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling, instNode, '&', docXML)
+            predicateXML.insertBefore(naryPredNode, predicateXML.firstChild.nextSibling)
+        else:
+            predicateXML.firstChild.nextSibling.appendChild(instNode)
+            predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+    else:
+        predicateXML.appendChild(docXML.createTextNode('\n'))
+        predicateXML.appendChild(instNode)
+        predicateXML.appendChild(docXML.createTextNode('\n'))
+    return predicateXML
+
+
 def buildConditionWhileNotWhile(node, predicateXML, docXML):
     """
     Function to build the Condition While when is not entering the While (The guard is false in the first try)
@@ -422,7 +451,7 @@ def getMutables(inputs, condWhile, posMut, docXML):
 
 def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
               importedMch, operationName, impName, predicateInputs, variablesList,
-              directory, atelierBDir, proBPath):
+              directory, atelierBDir, proBPath, copy_directory):
     """
     Get the output for a given input and operation
     """
@@ -466,8 +495,9 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
     for i in range(len(variablesList)):
         outputList.append('output' + variablesList[i])
     ExistValues, OutputVariables, predicate = checkPredicate(predicateXML, "Getting the outputs for guide " + str(pathToCover),
-                                                             outputList, proBPath, inputsPredicateString)
+                                                             outputList, proBPath, copy_directory, inputsPredicateString)
     if ExistValues:
+        print(predicate)
         reSwapSets(predicateXML, operationImp.parentNode.parentNode)
         OutputVariables = insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, inputsPredicateString,
                                                       outputList)
@@ -535,7 +565,7 @@ def addVariablesToThePredicate(variablesList, predicateXML, docXML):
             predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
 
 
-def checkPredicate(predicateXML, message, inputs, proBPath, inputsString = ""):
+def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, inputsString = ""):
     """
     Check if the generated predicate can hold true
 
@@ -552,7 +582,7 @@ def checkPredicate(predicateXML, message, inputs, proBPath, inputsString = ""):
     predicate = instgen.make_inst(predicateXML)
     if inputsString != "":
         predicate = predicate[:len(predicate) - 1:] + " & " + inputsString + ")"
-    ans, variables = callprob.evaluate(predicate, message, inputs, proBPath)
+    ans, variables = callprob.evaluate(predicate, message, inputs, proBPath, copy_directory)
     for variable in variables:
         entry += variable + " "
     return ans, entry, predicate
@@ -573,6 +603,10 @@ def reSwapSets(predicateXML, imp):
 def setsSolver(imp, mch, importedMch, seesMch):
     setsSwapNames(imp, imp, mch, importedMch, seesMch)
     setsSwapNames(mch, imp, mch, importedMch, seesMch)
+    for imporMch in importedMch:
+        setsSwapNames(imporMch.firstChild, imp, mch, importedMch, seesMch)
+    for imporMch in seesMch:
+        setsSwapNames(imporMch.firstChild, imp, mch, importedMch, seesMch)
 
 
 def setsSwapNames(principal, imp, mch, importedMch, seesMch):
@@ -603,14 +637,14 @@ def setsSwapNames(principal, imp, mch, importedMch, seesMch):
                                             idInTheProgram.setAttribute('value',
                                                                         str(numberOfEnumeratedSetComponents))
                                     for impmch in importedMch:
-                                        allIdInTheProgram = impmch.getElementsByTagName('Id')
+                                        allIdInTheProgram = impmch.firstChild.getElementsByTagName('Id')
                                         for idInTheProgram in allIdInTheProgram:
                                             if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
                                                 idInTheProgram.setAttribute('value',
                                                                             str(
                                                                                 numberOfEnumeratedSetComponents))
                                     for impmch in seesMch:
-                                        allIdInTheProgram = impmch.getElementsByTagName('Id')
+                                        allIdInTheProgram = impmch.firstChild.getElementsByTagName('Id')
                                         for idInTheProgram in allIdInTheProgram:
                                             if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
                                                 idInTheProgram.setAttribute('value',

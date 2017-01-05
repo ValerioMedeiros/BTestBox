@@ -24,12 +24,9 @@ operationsimp: An node with all the operations of the implementation
 operationsmch: An node with all the operations of the machine
 '''
 
-def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: object, includedMch: object,
-                     operationsmch: object, operationsimp: object, impName: object,
-                     directory: object,
-                     atelierBDir: object,
-                     copy_directory: object,
-                     proBPath: object) -> object:
+
+def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
+                     directory, atelierBDir, copy_directory, proBPath, refinementMch):
     """
     Function responsible of doing the Branch Coverage, it has no inputs or return.
 
@@ -52,7 +49,7 @@ def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: obj
     # Process
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
-            if operationImp.tagName == "Operation":
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
                 count += 1
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Branch Covered")
@@ -61,18 +58,18 @@ def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: obj
                 else:
                     inputs = []
                 operationMch = operationsmch.firstChild.nextSibling
-                if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-                    operationMch.getAttribute('name') !=
-                    operationImp.getAttribute('name')):
-                    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-                        0].getElementsByTagName('Operation')
-                    for operation in localOperations:
-                        if operation.getAttribute('name') == operationImp.getAttribute('name'):
-                            operationMch = operation
+                # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                #    operationMch.getAttribute('name') !=
+                #    operationImp.getAttribute('name')):
+                #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                #        0].getElementsByTagName('Operation')
+                #    for operation in localOperations:
+                #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                #            operationMch = operation
                 while operationMch.getAttribute("name") != operationImp.getAttribute(
                         "name"):  # Surfing to the machine operation equal the imp operation
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
-                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch, refinementMch)
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
                 buildpaths.makebranches(buildpaths.paths)  # Building branches
                 for key in buildpaths.paths:  # Printing the paths (for control)
@@ -81,18 +78,18 @@ def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: obj
                 #    print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                 #          buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
                 covered, allInVariables, allOutVariables = makecoverage.BranchCoverage(operationImp,
-                                                                                                         operationMch,
-                                                                                                         buildpaths.branchesPath,
-                                                                                                         buildpaths.branchesStatus,
-                                                                                                         buildpaths.paths,
-                                                                                                         inputs,
-                                                                                                         operationname,
-                                                                                                         importedMch,
-                                                                                                         seesMch,
-                                                                                                         impName,
-                                                                                                         directory + '\\bdp',
-                                                                                                         atelierBDir,
-                                                                                                         proBPath)
+                                                                                       operationMch,
+                                                                                       buildpaths.branchesPath,
+                                                                                       buildpaths.branchesStatus,
+                                                                                       buildpaths.paths,
+                                                                                       inputs,
+                                                                                       operationname,
+                                                                                       importedMch,
+                                                                                       seesMch,
+                                                                                       impName,
+                                                                                       directory + '\\bdp',
+                                                                                       atelierBDir,
+                                                                                       proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
@@ -120,7 +117,8 @@ def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: obj
                             notCovered[count].append([inode1, inode2])
                             print(
                                 "There is no way to reach the instruction " + inode2 + " passing through the instruction " + inode1)
-                    coveredPercentage.append(100*(len(buildpaths.branchesStatus) - countFails)/len(buildpaths.branchesStatus))
+                    coveredPercentage.append(
+                        100 * (len(buildpaths.branchesStatus) - countFails) / len(buildpaths.branchesStatus))
                     print("The operation " + operationname + " is NOT covered by Branch Coverage\n")
                     allcovered = False
                 graphgen.clearGraphs()
@@ -149,7 +147,7 @@ def DoBranchCoverage(imp: object, mch: object, importedMch: object, seesMch: obj
 
 
 def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                   atelierBDir, copy_directory, proBPath):
+                   atelierBDir, copy_directory, proBPath, refinementMch):
     '''
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
@@ -172,7 +170,7 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     # Process
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
-            if operationImp.tagName == 'Operation':
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
                 count += 1
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Path Covered")
@@ -181,18 +179,18 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                 else:
                     inputs = []
                 operationMch = operationsmch.firstChild.nextSibling
-                if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-                    operationMch.getAttribute('name') !=
-                    operationImp.getAttribute('name')):
-                    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-                        0].getElementsByTagName('Operation')
-                    for operation in localOperations:
-                        if operation.getAttribute('name') == operationImp.getAttribute('name'):
-                            operationMch = operation
+                # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                #    operationMch.getAttribute('name') !=
+                #    operationImp.getAttribute('name')):
+                #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                #        0].getElementsByTagName('Operation')
+                #    for operation in localOperations:
+                #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                #            operationMch = operation
                 while operationMch.getAttribute("name") != operationImp.getAttribute(
                         "name"):  # Surfing to the machine operation equal the imp operation
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
-                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch, refinementMch)
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
                 covered, allInVariables, allOutVariables, uncoveredPaths = makecoverage.PathCoverage(operationImp,
                                                                                                      operationMch,
@@ -204,7 +202,7 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                                                                                                      impName,
                                                                                                      directory + '\\bdp',
                                                                                                      atelierBDir,
-                                                                                                     proBPath)
+                                                                                                     proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
@@ -225,7 +223,8 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                             else:
                                 pathNodes.append(instgen.selfcaller(graphgen.nodedata[node]))
                         notCovered[count].append([path, pathNodes])
-                    coveredPercentage.append(100*(len(buildpaths.paths.keys())-len(uncoveredPaths))/len(buildpaths.paths.keys()))
+                    coveredPercentage.append(
+                        100 * (len(buildpaths.paths.keys()) - len(uncoveredPaths)) / len(buildpaths.paths.keys()))
             graphgen.clearGraphs()
             buildpaths.clearGraphs()
     if allCovered:
@@ -235,7 +234,8 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
                                   includedMch, operationsNames, directory, copy_directory, "path")
         print('Testing the Translation')
-        testTranslation.runTest(imp, importedMch, seesMch, 'Path Coverage', directory, atelierBDir, copy_directory, "path")
+        testTranslation.runTest(imp, importedMch, seesMch, 'Path Coverage', directory, atelierBDir, copy_directory,
+                                "path")
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Path Coverage.\n")
@@ -251,8 +251,8 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
 
 
 def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                   atelierBDir, copy_directory, proBPath):
-    '''
+                   atelierBDir, copy_directory, proBPath, refinementMch):
+    """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
     Variables:
@@ -261,7 +261,7 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     operationname: The name of the operation
     inputs: The inputs of the operation
     operationMch: The machine version of the implementation operation
-    '''
+    """
     # Initialisation
     allcovered = True
     allInVariablesForTest = dict()
@@ -274,7 +274,7 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     # Process
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
-            if operationImp.tagName == 'Operation':
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
                 count += 1
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Code Covered")
@@ -283,33 +283,33 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                 else:
                     inputs = []
                 operationMch = operationsmch.firstChild.nextSibling
-                if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-                    operationMch.getAttribute('name') !=
-                    operationImp.getAttribute('name')):
-                    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-                        0].getElementsByTagName('Operation')
-                    for operation in localOperations:
-                        if operation.getAttribute('name') == operationImp.getAttribute('name'):
-                            operationMch = operation
+                # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                #    operationMch.getAttribute('name') !=
+                #    operationImp.getAttribute('name')):
+                #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                #        0].getElementsByTagName('Operation')
+                #    for operation in localOperations:
+                #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                #            operationMch = operation
                 while operationMch.getAttribute("name") != operationImp.getAttribute(
                         "name"):  # Surfing to the machine operation equal the imp operation
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
-                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch, refinementMch)
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
                 buildpaths.makenodes(graphgen.nodemap)  # Building node, setting them to False (uncovered).
                 for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
                 covered, allInVariables, allOutVariables = makecoverage.CodeCoverage(operationImp,
-                                                                                                       operationMch,
-                                                                                                       buildpaths.paths,
-                                                                                                       inputs,
-                                                                                                       operationname,
-                                                                                                       buildpaths.nodeStatus,
-                                                                                                       importedMch,
-                                                                                                       seesMch, impName,
-                                                                                                       directory + '\\bdp',
-                                                                                                       atelierBDir,
-                                                                                                       proBPath)
+                                                                                     operationMch,
+                                                                                     buildpaths.paths,
+                                                                                     inputs,
+                                                                                     operationname,
+                                                                                     buildpaths.nodeStatus,
+                                                                                     importedMch,
+                                                                                     seesMch, impName,
+                                                                                     directory + '\\bdp',
+                                                                                     atelierBDir,
+                                                                                     proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
@@ -329,7 +329,8 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                             notCovered[count].append(inode)
                             print("There is no way to reach the instruction " + inode)
                     print("The operation " + operationname + " is NOT covered by Code Coverage\n")
-                    coveredPercentage.append(100*(len(buildpaths.nodeStatus.keys()) - countNonCoveredNodes)/len(buildpaths.nodeStatus.keys()))
+                    coveredPercentage.append(100 * (len(buildpaths.nodeStatus.keys()) - countNonCoveredNodes) / len(
+                        buildpaths.nodeStatus.keys()))
                     allcovered = False
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
@@ -341,7 +342,7 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                                   includedMch, operationsNames, directory, copy_directory, "code")
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Code Coverage', directory, atelierBDir,
-                                    copy_directory, "code")
+                                copy_directory, "code")
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Code Coverage.\n")
@@ -377,7 +378,7 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     # Process
     for operationImp in operationsimp.childNodes:
         if allcovered == True:
-            if operationImp.nodeType != operationImp.TEXT_NODE:
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
                 if operationImp.tagName == 'Operation':
                     count += 1
                     operationname = operationImp.getAttribute("name")
@@ -387,14 +388,14 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                     else:
                         inputs = []
                     operationMch = operationsmch.firstChild.nextSibling
-                    if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-                        operationMch.getAttribute('name') !=
-                        operationImp.getAttribute('name')):
-                        localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-                            0].getElementsByTagName('Operation')
-                        for operation in localOperations:
-                            if operation.getAttribute('name') == operationImp.getAttribute('name'):
-                                operationMch = operation
+                    # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                    #    operationMch.getAttribute('name') !=
+                    #    operationImp.getAttribute('name')):
+                    #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                    #        0].getElementsByTagName('Operation')
+                    #    for operation in localOperations:
+                    #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                    #            operationMch = operation
                     while operationMch.getAttribute("name") != operationImp.getAttribute(
                             "name"):  # Surfing to the machine operation equal the imp operation
                         operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
@@ -412,7 +413,7 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                                                                                                            impName,
                                                                                                            directory + '\\bdp',
                                                                                                            atelierBDir,
-                                                                                                           proBPath)
+                                                                                                           proBPath, copy_directory)
     '''
                         if covered == True:
                         print("The operation: "+operationname+" is covered by Line Coverage\n")
@@ -445,7 +446,7 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
 
 
 def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                     atelierBDir, copy_directory, proBPath):
+                     atelierBDir, copy_directory, proBPath, refinementMch):
     """
     Function responsible of doing the Clause Coverage, it has no inputs or return.
 
@@ -468,7 +469,7 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     # Process
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
-            if operationImp.tagName == 'Operation':
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
                 count += 1
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Clause Covered")
@@ -477,18 +478,18 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                 else:
                     inputs = []
                 operationMch = operationsmch.firstChild.nextSibling
-                if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-                    operationMch.getAttribute('name') !=
-                    operationImp.getAttribute('name')):
-                    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-                        0].getElementsByTagName('Operation')
-                    for operation in localOperations:
-                        if operation.getAttribute('name') == operationImp.getAttribute('name'):
-                            operationMch = operation
+                # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                #    operationMch.getAttribute('name') !=
+                #    operationImp.getAttribute('name')):
+                #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                #        0].getElementsByTagName('Operation')
+                #    for operation in localOperations:
+                #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                #            operationMch = operation
                 while operationMch.getAttribute("name") != operationImp.getAttribute(
                         "name"):  # Surfing to the machine operation equal the imp operation
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
-                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch, refinementMch)
                 buildpaths.makepaths(graphgen.nodemap)
                 for key in sorted(buildpaths.graphgen.nodemap.keys()):
                     print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
@@ -497,7 +498,7 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                 covered, allInVariables, allOutVariables, uncoveredPredicates, coveredClauses = makecoverage.ClauseCoverage(
                     operationImp, operationMch, inputs, buildpaths.paths,
                     operationname, importedMch, seesMch, impName,
-                    directory + '\\bdp', atelierBDir, proBPath)
+                    directory + '\\bdp', atelierBDir, proBPath, copy_directory)
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
                 operationsNames.append(operationname)
@@ -516,7 +517,8 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     for clause in coveredClauses.keys():
                         if not coveredClauses[clause]:
                             countUncovered += 1
-                    coveredPercentage.append(100*(len(coveredClauses.keys())-countUncovered)/len(coveredClauses.keys()))
+                    coveredPercentage.append(
+                        100 * (len(coveredClauses.keys()) - countUncovered) / len(coveredClauses.keys()))
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
     if allcovered:
@@ -579,3 +581,9 @@ def getInputs(operationImp):  # NOW THAT I PASS THE OPERATIONIMP TO THE OTHER PR
                         entries.append(inputs[commas[i] + 1:commas[i + 1]:])
             return entries
 
+def checkIfItIsLocal(operationImp):
+    if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != []:
+        for localoperation in operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[0].getElementsByTagName('Operation'):
+            if localoperation.getAttribute('name') == operationImp.getAttribute('name'):
+                return True
+    return False
