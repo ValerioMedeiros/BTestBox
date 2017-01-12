@@ -20,9 +20,9 @@ SETSComponentsId = dict()
 numberOfEnumeratedSetComponents = 0
 
 
-def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
-                     docXML, posMut, operationImp, importedMch, operationName,
-                     impName, changedVariablesWhile, directory, atelierBDir, changedVariablesOC=[]):
+def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames, docXML, posMut,
+                     operationImp, importedMch, operationName, impName, variablesList, variablesTypesList,
+                     changedVariablesWhile, directory, atelierBDir, arrayModification, changedVariablesOC=[]):
     """
     Make the predicate in a XML
 
@@ -66,7 +66,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
             predicateXML = addConditionToPredicate(buildpaths.graphgen.nodedata[node].cloneNode(10), predicateXML, docXML)
             predicateXML = addConditionToPredicate(buildpaths.graphgen.nodeinva[node].cloneNode(10), predicateXML, docXML)
     elif buildpaths.graphgen.nodetype[node] == "Instruction":
-        predicateXML = buildInstruction(node, predicateXML, posMut)
+        predicateXML = buildInstruction(node, predicateXML, posMut, variablesList, variablesTypesList, arrayModification)
     elif buildpaths.graphgen.nodetype[node] == "Call":
         if predicateXML.hasChildNodes():
             predicateXML, changedVariablesOC = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML,
@@ -130,7 +130,6 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
             if mutable not in posMut:
                 posMut.append(mutable)
         del way[len(way) - 1]
-        node = way[len(way) - 1]
         return newPredicateXML, posMut
     elif buildpaths.graphgen.nodetype[
         node] == "ConditionWhile" and node == condWhile:  # Stop the while and return predicate
@@ -236,7 +235,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
 
 
 def solveRemainingPred(predicateXML, docXML):
-    '''
+    """
     Function to repair the predicateXML after saving the quantified predicates
 
     predicateXML: The predicate in the form of a XML tree (not well formed)
@@ -244,7 +243,7 @@ def solveRemainingPred(predicateXML, docXML):
 
     Return:
     newPred: The predicate well formed and prepared to be inserted in the new while
-    '''
+    """
     newPred = docXML.createElement("Predicate")
     for child in predicateXML.firstChild.nextSibling.childNodes:
         if child.nodeType != child.TEXT_NODE:
@@ -253,7 +252,7 @@ def solveRemainingPred(predicateXML, docXML):
 
 
 def solveNewPred(newPred, child, docXML):
-    '''
+    """
     Function to solve the NewPred
 
     Inputs:
@@ -263,7 +262,7 @@ def solveNewPred(newPred, child, docXML):
 
     Return:
     newPred: The predicate solved
-    '''
+    """
     if newPred.hasChildNodes():
         if newPred.firstChild.nextSibling.tagName != "Nary_Pred":
             naryPredNode = nodescreator.createNaryPred(newPred.firstChild.nextSibling, child, '&', docXML)
@@ -333,7 +332,7 @@ def buildConditionWhileNotWhile(node, predicateXML, docXML):
 
 
 def buildCondition(node, predicateXML, way, path, docXML):
-    '''
+    """
     Function to build the Condition of a If or a While
 
     Inputs:
@@ -345,7 +344,7 @@ def buildCondition(node, predicateXML, way, path, docXML):
 
     Return:
     predicateXML: The predicate in the form of a XML tree
-    '''
+    """
     instNode = buildpaths.graphgen.nodedata[node].cloneNode(10)
     if predicateXML.hasChildNodes():
         if predicateXML.firstChild.nextSibling.tagName != "Nary_Pred":
@@ -373,7 +372,7 @@ def buildCondition(node, predicateXML, way, path, docXML):
     return predicateXML
 
 
-def buildInstruction(node, predicateXML, posMut):
+def buildInstruction(node, predicateXML, posMut, variablesList, variablesTypeList, arrayModification):
     """
     Function to change the predicate with the instruction
 
@@ -390,6 +389,14 @@ def buildInstruction(node, predicateXML, posMut):
     if predicateXML.hasChildNodes():
         variablesId = buildpaths.graphgen.nodedata[node].getElementsByTagName("Variables")[0]
         variablesId = variablesId.getElementsByTagName("Id")[0].getAttribute("value")
+        if variablesId in variablesList:
+            for i in range(len(variablesList)):
+                if variablesList[i] == variablesId:
+                    arrayIndex = []
+                    allId = buildpaths.graphgen.nodedata[node].getElementsByTagName("Variables")[0].getElementsByTagName('Id')
+                    for i in range(len(allId)):
+                        if i > 0:
+                            arrayIndex.append(allId[i].cloneNode(20))
         values = buildpaths.graphgen.nodedata[node].getElementsByTagName("Values")[0]
         values = values.firstChild.nextSibling
         allId = predicateXML.getElementsByTagName("Id")
@@ -398,7 +405,7 @@ def buildInstruction(node, predicateXML, posMut):
                 if Id.getAttribute("value") in posMut:
                     parent = Id.parentNode
                     isInQuant = False
-                    while not parent.parentNode is None: #ESSE WHILE PODE TAH ERRADO é while parent.parentNode != None
+                    while not parent.parentNode is None:  # ESSE WHILE PODE TAH ERRADO é while parent.parentNode != None
                         if parent.tagName == "Quantified_Pred":
                             isInQuant = True
                         parent = parent.parentNode
@@ -408,7 +415,42 @@ def buildInstruction(node, predicateXML, posMut):
                 else:
                     cloneValues = values.cloneNode(5)
                     Id.parentNode.replaceChild(cloneValues, Id)
+                for i in range(len(arrayModification)):
+                    arrayName, indexList, value = arrayModification[i]
+                    for index in indexList:
+                        allIdInsideTheArray = index.getElementsByTagName('Id')
+                        for idInsideTheArray in allIdInsideTheArray:
+                            if idInsideTheArray.getAttribute('value') == variablesId:
+                                idInsideTheArray.parentNode.replaceChild(values.cloneNode(20), idInsideTheArray)
+        if variablesId in variablesList: # IF THE VARIABLE IS AN ARRAY
+            for i in range(len(variablesList)):  # FOR THE OUTPUTS
+                if variablesList[i] == variablesId:
+                    if variablesTypeList[i][0] == 'Array':
+                        for Id in allId:
+                            if Id.getAttribute('value') == 'output'+variablesId:
+                                arrayModification.append(['output'+variablesId, arrayIndex, values.cloneNode(20)])
+            for i in range(len(variablesList)):  # FOR ALL THE OTHER VARIABLES
+                if variablesList[i] == variablesId:
+                    if variablesTypeList[i][0] == 'Array':
+                        for Id in allId:
+                            if Id.getAttribute('value') == variablesId:
+                                arrayModification.append([variablesId, arrayIndex, values.cloneNode(20)])
     return predicateXML
+
+
+def getArrayIndexNumber(arrayIndex, predicateXML):
+    indexChanges = list()
+    for index in arrayIndex:
+            allExpComparison = predicateXML.getElementsByTagName('Exp_Comparison')
+            for expComparison in allExpComparison:
+                if expComparison.firstChild.nextSibling.tagName == 'Attr':
+                    count = 3
+                else:
+                    count = 1
+                if expComparison.childNodes.item(count).tagName == 'Id':
+                    if expComparison.childNodes.item(count).getAttribute('value') == index:
+                        indexChanges.append(expComparison.childNodes.item(count+2).getAttribute('value'))
+    return indexChanges
 
 
 def getMutables(inputs, condWhile, posMut, docXML):
@@ -449,8 +491,8 @@ def getMutables(inputs, condWhile, posMut, docXML):
     return variablesNode, mutables
 
 
-def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
-              importedMch, operationName, impName, predicateInputs, variablesList,
+def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, operationMch,
+              importedMch, seesMch, operationName, impName, predicateInputs, variablesList, variablesTypeList,
               directory, atelierBDir, proBPath, copy_directory):
     """
     Get the output for a given input and operation
@@ -458,23 +500,15 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
     pred = minidom.getDOMImplementation()
     docXML = pred.createDocument(None, "Condition", None)
     predicateXML = docXML.documentElement
-    predicateInputs.replace(" = ", "=")
-    inputsPredicateString = ""
-    wordList = re.sub("[^\w]", " ", predicateInputs).split()
-    for i in range(len(wordList)):
-        if i % 2 == 0:
-            if inputsPredicateString == "":
-                inputsPredicateString = wordList[i] + "=" + wordList[i + 1]
-            else:
-                inputsPredicateString = inputsPredicateString + " & " + wordList[i] + "=" + wordList[i + 1]
     predicateXML.appendChild(docXML.createTextNode('\n'))
     predicateXML.appendChild(buildpaths.graphgen.nodedata[str(len(buildpaths.graphgen.nodemap))].cloneNode(10))
     predicateXML.appendChild(docXML.createTextNode('\n'))
-    addVariablesToThePredicate(variablesList, predicateXML, docXML)
+    sizeList = addVariablesToThePredicate(variablesList, predicateXML, docXML, variablesTypeList, predicateInputs)
     way = list()
     posMut = list()
     changedVariablesWhile = list()
     outputList = list()
+    arrayModification = list()
     for out in outputs:
         outputList.append(out)
     for i in range(len(outputs)):
@@ -485,40 +519,135 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
         node = way[len(way) - 1]
         predicateXML, posmut, changedVariablesWhile = makePredicateXML(node, predicateXML, way, path, inputs,
                                                                        outputList, fixedNames, docXML, posMut,
-                                                                       operationImp, importedMch,operationName,
-                                                                       impName, changedVariablesWhile,
-                                                                       directory, atelierBDir)
+                                                                       operationImp, importedMch, operationName,
+                                                                       impName, variablesList, variablesTypeList,
+                                                                       changedVariablesWhile, directory, atelierBDir,
+                                                                       arrayModification)
         del way[len(way) - 1]
     outputList = []
+    auxList = list()
+    auxTypeList = list()
+    for i in range(len(variablesList)):
+        if i < sizeList:
+            auxList.append(variablesList[i])
+            auxTypeList.append(variablesTypeList[i])
+    variablesList = auxList
+    variablesTypeList = auxTypeList
     for i in range(len(outputs)):
         outputList.append("output" + outputs[i])
     for i in range(len(variablesList)):
         outputList.append('output' + variablesList[i])
+    for inp in inputs:
+        if inp not in variablesList:
+            variablesList.append(inp)
+            variablesTypeList.append(['Normal', ''])
+    addTheInputsToThePredicateXML(predicateXML, predicateInputs, docXML, variablesList, variablesTypeList)
+    if arrayModification != []:
+        solveArrayModification(predicateXML, arrayModification)
     ExistValues, OutputVariables, predicate = checkPredicate(predicateXML, "Getting the outputs for guide " + str(pathToCover),
-                                                             outputList, proBPath, copy_directory, inputsPredicateString)
+                                                                                   outputList, proBPath, copy_directory, operationImp,
+                                                                                   operationMch, importedMch, seesMch, predicateInputs)
     if ExistValues:
-        print(predicate)
-        reSwapSets(predicateXML, operationImp.parentNode.parentNode)
-        OutputVariables = insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, inputsPredicateString,
+        OutputVariables = insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, predicateInputs,
                                                       outputList)
         for i in range(len(outputList)):
             usingRegex = r"\b" + re.escape(outputList[i]) + r"\b"  # Using regex to change the string
-            outputList[i] = outputList[i][6::]
-            OutputVariables = re.sub(usingRegex, outputList[i], OutputVariables)  # Replacing using regex
+            for j in range(len(OutputVariables)):
+                if outputList[i] in OutputVariables[j]:
+                    outputList[i] = outputList[i][6::]
+                    OutputVariables[j] = re.sub(usingRegex, outputList[i], OutputVariables[j])  # Replacing using regex
         print("Output(s) were found for the predicate: " + predicate)
-        print("The output(s) for the input(s) " + predicateInputs + "is/are " + OutputVariables)
+        print("The output(s) for the input(s) ", predicateInputs, " is/are ", OutputVariables)
     else:
         print("Output(s) were NOT found for the predicate: " + predicate)
         print('Outputs not found, this operation cannot be covered')
     return OutputVariables, ExistValues
 
 
+def addTheInputsToThePredicateXML(predicateXML, predicateInputs, docXML, variablesList, variablesTypeList):
+    inputsPredicateXML = docXML.createElement('Condition')
+    for i in range(len(predicateInputs)):
+        for j in range(len(predicateInputs[i])):
+            if predicateInputs[i][j] == '=':
+                variable = predicateInputs[i][:j-1:]
+                value = predicateInputs[i][j+1::]
+                variableXML = docXML.createElement('Id')
+                variableXML.setAttribute('value', variable)
+                for k in range(len(variablesList)):
+                    if variablesList[k] == variable:
+                        variableXML.setAttribute('typref', variablesTypeList[k][1])
+                        if variablesTypeList[k][0] == 'Array':
+                            valuesXML = transformArrayInXML(value[1::], docXML)
+                        else:
+                            valuesXML = docXML.createElement('Id')
+                            valuesXML.setAttribute('value', value)
+                        expComparison = nodescreator.createExpComparison(variableXML, valuesXML, '=', docXML)
+        addXMLtoXML(inputsPredicateXML, expComparison, docXML)
+    addXMLtoXML(predicateXML, inputsPredicateXML, docXML)
+
+
+def addXMLtoXML(principalXML, addedXLM, docXML):
+    if principalXML.hasChildNodes():
+        if principalXML.firstChild.nextSibling.tagName == 'Nary_Exp':
+            principalXML.firstChild.nextSibling.appendChild(addedXLM)
+            principalXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+        else:
+            naryPred = nodescreator.createNaryPred(principalXML.firstChild.nextSibling, addedXLM, '&', docXML)
+            principalXML.insertBefore(naryPred, principalXML.firstChild.nextSibling)
+    else:
+        principalXML.appendChild(docXML.createTextNode('\n'))
+        principalXML.appendChild(addedXLM)
+        principalXML.appendChild(docXML.createTextNode('\n'))
+
+
+def solveArrayModification(predicateXML, arrayModification):
+    allExpComparison = predicateXML.getElementsByTagName('Exp_Comparison')
+    print(instgen.selfcaller(predicateXML))
+    for i in range(len(arrayModification)):
+        arrayName, indexList, value = arrayModification[i]
+        for j in range(len(indexList)):
+            while not is_number(indexList[j].getAttribute('value')):
+                for expComparison in allExpComparison:
+                    if expComparison.firstChild.nextSibling.tagName == 'Attr':
+                        count = 3
+                    else:
+                        count = 1
+                    if expComparison.childNodes.item(count).tagName == 'Id' and expComparison.getAttribute('op') == '=':
+                        if expComparison.childNodes.item(count).getAttribute('value') == indexList[j].getAttribute('value'):
+                            parent = expComparison.childNodes.item(count)
+                            isInQuant = False
+                            while not parent.parentNode is None:
+                                if parent.tagName == "Quantified_Pred":
+                                    isInQuant = True
+                                parent = parent.parentNode
+                            if not isInQuant:
+                                indexList[j] = expComparison.childNodes.item(count+2).cloneNode(20)
+    for i in range(len(arrayModification)):
+        arrayName, indexList, value = arrayModification[i]
+        for expComparison in allExpComparison:
+            if expComparison.firstChild.nextSibling.tagName == 'Attr':
+                count = 3
+            else:
+                count = 1
+            if expComparison.childNodes.item(count).tagName == 'Id' and expComparison.getAttribute('op') == '=':
+                if expComparison.childNodes.item(count).getAttribute('value') == arrayName:
+                    allArrayCouple = expComparison.childNodes.item(count+2).getElementsByTagName('Binary_Exp')
+                    for arrayCouple in allArrayCouple:
+                        if arrayCouple.firstChild.nextSibling.tagName == 'Attr':
+                            countCouple = 3
+                        else:
+                            countCouple = 1
+                        if arrayCouple.childNodes.item(countCouple).getAttribute('value') == indexList[0].getAttribute('value').replace(' ', ''):
+                            arrayCouple.replaceChild(value.cloneNode(20), arrayCouple.childNodes.item(countCouple+2))
+
+
 def insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, inputsString, outputList):
     predicateWithSets = instgen.make_inst(predicateXML)
-    predicateWithSets = predicateWithSets[:len(predicateWithSets) - 1:] + " & " + inputsString + ")"
+    for inputs in inputsString:
+        predicateWithSets = predicateWithSets[:len(predicateWithSets) - 1:] + " & " + inputs + ")"
     print(predicateWithSets)
     print(predicate)
-    if predicateWithSets != predicate:
+    if str(predicateWithSets) != str(predicate):
         for i in range(len(predicateWithSets)):
             if predicate[i] != predicateWithSets[i]:
                 saver = i
@@ -535,27 +664,39 @@ def insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, inputs
                         countSpaces += 1
                     k -= 1
                 if (predicate[k+1:saver-3:]) in outputList:
-                    startOfTheChange = re.search(r'\b%s\b' % predicate[k+1:saver-3:], OutputVariables).end() + 3
-                    endOfTheChange = startOfTheChange
-                    while OutputVariables[endOfTheChange] != " " and  endOfTheChange != len(OutputVariables):
-                        endOfTheChange += 1
-                    OutputVariables = OutputVariables[:startOfTheChange:] + predicateWithSets[saver:i:] +\
-                                      OutputVariables[endOfTheChange::]
+                    for w in range(len(OutputVariables)):
+                        if (predicate[k+1:saver-3:]) in OutputVariables[w]:
+                            startOfTheChange = re.search(r'\b%s\b' % predicate[k+1:saver-3:], OutputVariables[w]).end() + 3
+                            OutputVariables[w] = OutputVariables[w][:startOfTheChange:] + predicateWithSets[saver:i:]
     return OutputVariables
 
 
-def addVariablesToThePredicate(variablesList, predicateXML, docXML):
-    for variable in variablesList:
+def addVariablesToThePredicate(variablesList, predicateXML, docXML, variablesTypeList, inputs):
+    outputVariables = list()
+    outputVariablesType = list()
+    sizeList = len(variablesList)
+    for i in range(len(variablesList)):
         variableOutputNode = docXML.createElement('Id')
-        variableOutputNode.setAttribute('value', 'output' + variable)
+        variableOutputNode.setAttribute('value', 'output' + variablesList[i])
+        outputVariables.append('output' + str(variablesList[i]))
+        outputVariablesType.append(variablesTypeList[i])
         variableOutputNode.appendChild(docXML.createTextNode('\n'))
         variableOutputNode.appendChild(docXML.createElement('Attr'))
         variableOutputNode.appendChild(docXML.createTextNode('\n'))
-        variableNode = docXML.createElement('Id')
-        variableNode.setAttribute('value', variable)
-        variableNode.appendChild(docXML.createTextNode('\n'))
-        variableNode.appendChild(docXML.createElement('Attr'))
-        variableNode.appendChild(docXML.createTextNode('\n'))
+        if variablesTypeList[i][0] == "Array":
+            for entry in inputs:
+                for j in range(len(entry)):
+                    if entry[j] == '=':
+                        pos = j
+                        break
+                if entry[:pos-1:] == variablesList[i]:
+                    variableNode = transformArrayInXML(entry[pos+2::], docXML)
+        else:
+            variableNode = docXML.createElement('Id')
+            variableNode.setAttribute('value', variablesList[i])
+            variableNode.appendChild(docXML.createTextNode('\n'))
+            variableNode.appendChild(docXML.createElement('Attr'))
+            variableNode.appendChild(docXML.createTextNode('\n'))
         expComparisonNode = nodescreator.createExpComparison(variableOutputNode, variableNode, '=', docXML)
         if predicateXML.firstChild.nextSibling.tagName != 'Nary_Pred':
             naryPred = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling, expComparisonNode, '&', docXML)
@@ -563,9 +704,64 @@ def addVariablesToThePredicate(variablesList, predicateXML, docXML):
         else:
             predicateXML.firstChild.nextSibling.appendChild(expComparisonNode)
             predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
+    for i in range(len(outputVariables)):
+        variablesList.append(outputVariables[i])
+        variablesTypeList.append(outputVariablesType[i])
+    return sizeList
 
 
-def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, inputsString = ""):
+def transformArrayInXML(valuesString, docXML):
+    naryExp = docXML.createElement('Nary_Exp')
+    naryExp.setAttribute('op', '{')
+    naryExp.appendChild(docXML.createTextNode('\n'))
+    naryExp.appendChild(docXML.createElement('Attr'))
+    naryExp.appendChild(docXML.createTextNode('\n'))
+    positions = list()
+    for i in range(len(valuesString)):
+        if valuesString[i] == ',':
+            positions.append(i)
+    for i in range(len(positions)):
+        if i == 0:
+            for j in range(len(valuesString[:positions[i]:])):
+                if valuesString[:positions[i]:][j] == '|':
+                    bar = j
+                if valuesString[:positions[i]:][j] == '>':
+                    arrow = j
+            firstChild = docXML.createElement('Id')
+            firstChild.setAttribute('value', valuesString[2:bar:])
+            secondChild = docXML.createElement('Id')
+            secondChild.setAttribute('value', valuesString[arrow+1:positions[i]-1])
+            exp = nodescreator.createBinaryExp(firstChild, secondChild, '|->', docXML)
+        else:
+            for j in range(len(valuesString[positions[i-1]+1:positions[i]:])):
+                if valuesString[positions[i-1]+1:positions[i]:][j] == '|':
+                    bar = j
+                if valuesString[positions[i-1]+1:positions[i]:][j] == '>':
+                    arrow = j
+            firstChild = docXML.createElement('Id')
+            firstChild.setAttribute('value', valuesString[positions[i-1]+1:positions[i]:][1:bar:])
+            secondChild = docXML.createElement('Id')
+            secondChild.setAttribute('value', valuesString[positions[i-1]+1:positions[i]:][arrow+1:len(valuesString[positions[i-1]+1:positions[i]:])-1:])
+            exp = nodescreator.createBinaryExp(firstChild, secondChild, '|->', docXML)
+        naryExp.appendChild(exp)
+        naryExp.appendChild(docXML.createTextNode('\n'))
+        if i == max(range(len(positions))):
+            for j in range(len(valuesString[positions[i]+1:len(valuesString)-1:])):
+                if valuesString[positions[i]+1:len(valuesString)-1:][j] == '|':
+                    bar = j
+                if valuesString[positions[i]+1:len(valuesString)-1:][j] == '>':
+                    arrow = j
+            firstChild = docXML.createElement('Id')
+            firstChild.setAttribute('value', valuesString[positions[i]+1:len(valuesString)-1:][1:bar:])
+            secondChild = docXML.createElement('Id')
+            secondChild.setAttribute('value', valuesString[positions[i]+1:len(valuesString)-1:][arrow+1:len(valuesString[positions[i]+1:len(valuesString)-2]):])
+            exp = nodescreator.createBinaryExp(firstChild, secondChild, '|->', docXML)
+            naryExp.appendChild(exp)
+            naryExp.appendChild(docXML.createTextNode('\n'))
+    return naryExp
+
+
+def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, imp, mch, importedMch, seesMch, inputsString = []):
     """
     Check if the generated predicate can hold true
 
@@ -578,14 +774,18 @@ def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, inpu
     ans: The answer if the predicate is false or true
     entry: A possible entry to the predicate be true (if exists)
     """
-    entry = ""
+    setsSolver(predicateXML, imp.parentNode.parentNode, mch.parentNode.parentNode, importedMch, seesMch)
     predicate = instgen.make_inst(predicateXML)
-    if inputsString != "":
-        predicate = predicate[:len(predicate) - 1:] + " & " + inputsString + ")"
+    if inputsString != []:
+        for inp in inputsString:
+            predicate = predicate[:len(predicate) - 1:] + " & " + inp + ")"
     ans, variables = callprob.evaluate(predicate, message, inputs, proBPath, copy_directory)
-    for variable in variables:
-        entry += variable + " "
-    return ans, entry, predicate
+    reSwapSets(predicateXML, imp.parentNode.parentNode)
+    SETSdict.clear()
+    SETSComponentsId.clear()
+    global numberOfEnumeratedSetComponents
+    numberOfEnumeratedSetComponents = 0
+    return ans, variables, predicate
 
 
 def reSwapSets(predicateXML, imp):
@@ -597,19 +797,28 @@ def reSwapSets(predicateXML, imp):
             if tipo.getAttribute('id') == typeRef:
                 typeName = tipo.firstChild.nextSibling.getAttribute('value')
                 if typeName in SETSdict.keys():
-                    Id.setAttribute('value', SETSComponentsId[int(Id.getAttribute('value'))])
+                    if is_number(Id.getAttribute('value')):
+                        Id.setAttribute('value', SETSComponentsId[int(Id.getAttribute('value'))])
 
 
-def setsSolver(imp, mch, importedMch, seesMch):
-    setsSwapNames(imp, imp, mch, importedMch, seesMch)
-    setsSwapNames(mch, imp, mch, importedMch, seesMch)
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+def setsSolver(predicateXML, imp, mch, importedMch, seesMch):
+    setsSwapNames(imp, predicateXML)
+    setsSwapNames(mch, predicateXML)
     for imporMch in importedMch:
-        setsSwapNames(imporMch.firstChild, imp, mch, importedMch, seesMch)
+        setsSwapNames(imporMch.firstChild, predicateXML)
     for imporMch in seesMch:
-        setsSwapNames(imporMch.firstChild, imp, mch, importedMch, seesMch)
+        setsSwapNames(imporMch.firstChild, predicateXML)
 
 
-def setsSwapNames(principal, imp, mch, importedMch, seesMch):
+def setsSwapNames(principal, predicateXML):
     global numberOfEnumeratedSetComponents
     for clauses in principal.childNodes:
         if clauses.nodeType != clauses.TEXT_NODE:
@@ -620,36 +829,15 @@ def setsSwapNames(principal, imp, mch, importedMch, seesMch):
                             setName = set.firstChild.nextSibling.getAttribute("value")
                             if setName not in SETSdict:
                                 SETSdict[setName] = []
-                                enumerated_ids = set.getElementsByTagName('Enumerated_Values')[0]
-                                enumerated_ids = enumerated_ids.getElementsByTagName('Id')
-                                for id in enumerated_ids:
+                                enumerate_ids = set.getElementsByTagName('Enumerated_Values')[0]
+                                enumerate_ids = enumerate_ids.getElementsByTagName('Id')
+                                for id in enumerate_ids:
                                     SETSdict[setName].append(id.getAttribute('value'))
                                     SETSComponentsId[numberOfEnumeratedSetComponents] = id.getAttribute('value')
-                                    id.setAttribute('value', str(numberOfEnumeratedSetComponents))
-                                    allIdInTheProgram = imp.getElementsByTagName("Id")
-                                    for idInTheProgram in allIdInTheProgram:
-                                        if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
-                                            idInTheProgram.setAttribute('value',
-                                                                        str(numberOfEnumeratedSetComponents))
-                                    allIdInTheProgram = mch.getElementsByTagName("Id")
-                                    for idInTheProgram in allIdInTheProgram:
-                                        if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
-                                            idInTheProgram.setAttribute('value',
-                                                                        str(numberOfEnumeratedSetComponents))
-                                    for impmch in importedMch:
-                                        allIdInTheProgram = impmch.firstChild.getElementsByTagName('Id')
-                                        for idInTheProgram in allIdInTheProgram:
-                                            if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
-                                                idInTheProgram.setAttribute('value',
-                                                                            str(
-                                                                                numberOfEnumeratedSetComponents))
-                                    for impmch in seesMch:
-                                        allIdInTheProgram = impmch.firstChild.getElementsByTagName('Id')
-                                        for idInTheProgram in allIdInTheProgram:
-                                            if idInTheProgram.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents]:
-                                                idInTheProgram.setAttribute('value',
-                                                                            str(
-                                                                                numberOfEnumeratedSetComponents))
+                                    allIdInThePredicate = predicateXML.getElementsByTagName('Id')
+                                    for idInThePredicate in allIdInThePredicate:
+                                        if idInThePredicate.getAttribute('value') == SETSComponentsId[numberOfEnumeratedSetComponents] :
+                                            idInThePredicate.setAttribute('value', numberOfEnumeratedSetComponents)
                                     numberOfEnumeratedSetComponents += 1
 
 

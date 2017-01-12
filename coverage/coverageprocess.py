@@ -42,6 +42,8 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     allcovered = True
     allInVariablesForTest = dict()
     allOutVariablesForTest = dict()
+    variablesList = dict()
+    variablesTypeList = dict()
     operationsNames = list()
     coveredPercentage = list()
     count = 0
@@ -77,22 +79,16 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                 # for key in sorted(buildpaths.graphgen.nodemap.keys()):
                 #    print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                 #          buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
-                covered, allInVariables, allOutVariables = makecoverage.BranchCoverage(operationImp,
-                                                                                       operationMch,
-                                                                                       buildpaths.branchesPath,
-                                                                                       buildpaths.branchesStatus,
-                                                                                       buildpaths.paths,
-                                                                                       inputs,
-                                                                                       operationname,
-                                                                                       importedMch,
-                                                                                       seesMch,
-                                                                                       impName,
-                                                                                       directory + '\\bdp',
-                                                                                       atelierBDir,
-                                                                                       proBPath, copy_directory)
+                covered, allInVariables, allOutVariables, vL,\
+                vTypeL = makecoverage.BranchCoverage(operationImp, operationMch, buildpaths.branchesPath,
+                                                     buildpaths.branchesStatus, buildpaths.paths, inputs, operationname,
+                                                     importedMch, seesMch, impName, directory + '\\bdp', atelierBDir,
+                                                     proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
+                variablesList[count] = allInVariables
+                variablesList[count] = variablesTypeList
                 if covered:
                     print("The operation " + operationname + " is covered by Branch Coverage\n")
                     coveredPercentage.append(100)
@@ -117,8 +113,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                             notCovered[count].append([inode1, inode2])
                             print(
                                 "There is no way to reach the instruction " + inode2 + " passing through the instruction " + inode1)
-                    coveredPercentage.append(
-                        100 * (len(buildpaths.branchesStatus) - countFails) / len(buildpaths.branchesStatus))
+                    coveredPercentage.append(100 * (len(buildpaths.branchesStatus) - countFails) / len(buildpaths.branchesStatus))
                     print("The operation " + operationname + " is NOT covered by Branch Coverage\n")
                     allcovered = False
                 graphgen.clearGraphs()
@@ -148,7 +143,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
 
 def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
                    atelierBDir, copy_directory, proBPath, refinementMch):
-    '''
+    """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
     Variables:
@@ -157,7 +152,7 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     operationname: The name of the operation
     inputs: The inputs of the operation
     operationMch: The machine version of the implementation operation
-    '''
+    """
     # Initialisation
     allCovered = True
     allInVariablesForTest = dict()

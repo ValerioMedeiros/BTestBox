@@ -62,12 +62,14 @@ def createFileToRunTest(impBXML, coverage, copy_directory, cFiles, cov, fail):
     ctext += '    runTest_'+cov.upper()+'_'+mchName+'__testAll(&result);\n'
     ctext += '    if (result == true){\n'
     if not fail:
-        ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')+' achieved '+coverage+'");\n'
+        ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')\
+                 +' is well performed and achieved'+coverage+'");\n'
     else:
-        ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')+'did NOT achieved '+coverage+'");\n'
+        ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')\
+                 +'is well performed but did NOT achieved '+coverage+'");\n'
     ctext += '    }\n'
     ctext += '    else{\n'
-    ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')+' did NOT achieve '+coverage+'");\n'
+    ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')+' is NOT well performed");    \n'
     ctext += '    }\n'
     #ctext += '    printf("\\nPress enter to quit");\n'
     #ctext += '    scanf("%d", &aux);\n'

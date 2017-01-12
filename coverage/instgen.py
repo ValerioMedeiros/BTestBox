@@ -50,33 +50,17 @@ def make_inputs(node):
 
 def make_binaryexp(node):
     """Build a binary exp in a string"""
-    text = ""
+    text = "("
     if node.childNodes.item(1).tagName == "Attr":
-        if node.childNodes.item(3).tagName == "Binary_Exp":
-            text = "("
-        text += callmake(node, node.childNodes.item(3).tagName)  # First operand of a binary evaluation
-        if node.childNodes.item(3).tagName == "Binary_Exp":
-            text += ")"
-        if node.getAttribute("op") == "(":
-            text += node.getAttribute("op")
-        else:
-            text += " " + node.getAttribute("op") + " "
-        text += selfcaller(node.childNodes.item(5))  # Second operand of a binary evaluation
-        if node.getAttribute("op") == '(':  # If it is a '(', then we need to close with ')'
-            text += ')'
+        iterator = 3
     else:
-        if node.childNodes.item(1).tagName == "Binary_Exp":
-            text = "("
-        text += callmake(node, node.childNodes.item(1).tagName)  # First operand of a binary evaluation
-        if node.childNodes.item(1).tagName == "Binary_Exp":
-            text += ")"
-        if node.getAttribute("op") == "(":
-            text += node.getAttribute("op")
-        else:
-            text += " " + node.getAttribute("op") + " "
-        text += selfcaller(node.childNodes.item(3))  # Second operand of a binary evaluation
-        if node.getAttribute("op") == '(':  # If it is a '(', then we need to close with ')'
-            text += ')'
+        iterator = 1
+    text += callmake(node, node.childNodes.item(iterator).tagName)  # First operand of a binary evaluation
+    text += node.getAttribute("op")
+    text += selfcaller(node.childNodes.item(iterator+2))  # Second operand of a binary evaluation
+    if node.getAttribute('op') == "(":
+        text += ')'
+    text += ')'
     return text
 
 
@@ -88,7 +72,7 @@ def make_variables(node):
 
 def make_id(node):
     """Build an ID in a string"""
-    text = node.getAttribute("value")  # Get the value inside the ID
+    text = str(node.getAttribute("value"))  # Get the value inside the ID
     return text
 
 

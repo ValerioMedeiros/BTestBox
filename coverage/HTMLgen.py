@@ -107,7 +107,8 @@ def HTMLlib(directory, mchName, impName, copy_directory, importedMch, coverage):
     text += addPrincipalFiles(copy_directory + '\\lang\\c', mchName, impName, "translated", "runTest_"+coverage.upper()+"_")
     text += '<tr>\n'
     text += '<td><a href="file:///' + copy_directory.replace(" ",
-                                                             "%20") + '\\lang\\c\\main_runTest.c">main.c</a></td>\n'
+                                                             "%20") + '\\lang\\c\\main_runTest_'+\
+            coverage.upper()+'_'+impName+'.c">main.c</a></td>\n'
     text += '</tr>\n'
     text += '</table>\n'
     text += '</td>\n'
@@ -181,8 +182,14 @@ def HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entr
             text += '<p style="color:green">Tests for the Operation ' + operationNames[int(key) - 1] + '<br>\n\n'
             for i in range(len(entries[key])):
                 text += 'Test ' + str(NumberOfTests) + ':<br>\n'
-                text += 'Input(s): ' + entries[key][i] + '<br>\n'
-                text += 'Output(s): ' + outs[key][i] + '<br>\n\n'
+                text += 'Input(s): '
+                for j in range(len(entries[key][i])):
+                    text += entries[key][i][j] + ' '
+                text += '<br>\n'
+                text += 'Output(s): '
+                for j in range(len(outs[key][i])):
+                    text += outs[key][i][j] + ' '
+                text += '<br>\n'
                 NumberOfTests += 1
                 text += '<br>'
             text += '</p>'
@@ -211,8 +218,14 @@ def HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entr
             text += '<p ' + textColor + '>Tests for the Operation ' + operationNames[int(key) - 1] + '</p>\n\n'
             for i in range(len(entries[key])):
                 text += '<p ' + textColor + '>Test ' + str(NumberOfTests) + ':<br>\n'
-                text += 'Input(s): ' + entries[key][i] + '<br>\n'
-                text += 'Output(s): ' + outs[key][i] + '</p>\n\n'
+                text += 'Input(s): '
+                for j in range(len(entries[key][i])):
+                    text += entries[key][i][j] + ' '
+                text += '<br>\n'
+                text += 'Output(s): '
+                for j in range(len(outs[key][i])):
+                    text += outs[key][i][j] + ' '
+                text += '<br>\n'
                 NumberOfTests += 1
             if key in nonCovered:
                 text += '<p ' + textColor + '>The operation ' + operationNames[

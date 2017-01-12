@@ -8,19 +8,19 @@ def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedM
                copy_directory, coverage):
     mch = impBXML.getElementsByTagName('Abstraction')[0]
     controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML,
-                                                 impBXML, includedMch, seesMch, importedMch, directory, copy_directory)
+                                                 impBXML, includedMch, directory, copy_directory)
     for machineBXML in importedMch:
         importedImpBXML = getImpWithImportedMch(machineBXML, directory)
         controlList, controlListNames = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'),
                                                      machineBXML.firstChild.getAttribute('name'),
-                                                     machineBXML, importedImpBXML, includedMch, seesMch, importedMch,
+                                                     machineBXML, importedImpBXML, includedMch,
                                                      directory, copy_directory, controlList, controlListNames)
     controlListSEES = list()
     for machineBXML in seesMch:
         seesImpBXML = getImpWithImportedMch(machineBXML, directory)
         variablesSEES, variablesMchNamesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'),
                                                             machineBXML.firstChild.getAttribute('name'),
-                                                            machineBXML, seesImpBXML, includedMch, seesMch, importedMch,
+                                                            machineBXML, seesImpBXML, includedMch,
                                                             directory, copy_directory, [], [])
         controlListSEES.append(variablesSEES)
     inputsOrder, outputsOrder = getOrder(impBXML, operationsNames)
@@ -30,8 +30,8 @@ def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedM
     createTestInB(mch.firstChild.data, impBXML.firstChild.getAttribute('name'), copy_directory, operationsNames, inputs, coverage)
 
 
-def getImpWithImportedMch(importedMch,
-                          directory):  # THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
+def getImpWithImportedMch(importedMch, directory):
+    # THIS FUNCTIONS IS REPEATED IN THE COVERAGE.PY AND THERE IS ONE VERY SIMILAR IN SOLVEROC.PY
     # THE ONE FOR THE SOLVEROC IS DIFFERENT BECAUSE NEED TO CHECK THE OPERATION
     for file in os.listdir(directory + '\\bdp'):
         if file.endswith(".bxml"):
@@ -68,7 +68,7 @@ def getOrder(impBXML, operationsNames):
     return inputOrderForOperation, outputOrderForOperation
 
 
-def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMch, importedMch, directory,
+def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, directory,
                  copy_directory, controlList=[], controlListNames=[]):
     if not os.path.isdir(copy_directory):
         os.mkdir(copy_directory)
@@ -103,14 +103,15 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                     if clauses.tagName == 'Imports':
                         text += instgen.transformBXML(clauses)
                         if impBXML.getElementsByTagName('Promotes') == []:
-                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-                            text += '\n\nPROMOTES\n'
-                            text += '    ' + promotedOperations
+                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory)
+                            if promotedOperations != "":
+                                text += '\n\nPROMOTES\n'
+                                text += '    ' + promotedOperations
                         text += '\n\n'
                     if clauses.tagName == 'Sees':
                         text += instgen.transformBXML(clauses) + '\n\n'
                     if clauses.tagName == 'Promotes':
-                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
+                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory)
                         text += instgen.transformBXML(clauses)
                         text += ', ' + promotedOperations + '\n\n'
                     if clauses.tagName == 'Concrete_Variables' or clauses.tagName == 'Abstract_Variables':
@@ -136,9 +137,10 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                     if clauses.tagName == 'Includes':
                         text += instgen.transformBXML(clauses)
                         if impBXML.getElementsByTagName('Promotes') == []:
-                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-                            text += '\n\nPROMOTES\n'
-                            text += '    ' + promotedOperations
+                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory)
+                            if promotedOperations != "":
+                                text += '\n\nPROMOTES\n'
+                                text += '    ' + promotedOperations
                         text += '\n\n'
                     if clauses.tagName == 'Operations':
                         text += 'OPERATIONS\n'
@@ -187,14 +189,15 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
                     if clauses.tagName == 'Imports':
                         text += instgen.transformBXML(clauses)
                         if impBXML.getElementsByTagName('Promotes') == []:
-                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
-                            text += '\n\nPROMOTES\n'
-                            text += '    ' + promotedOperations
+                            promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory)
+                            if promotedOperations != "":
+                                text += '\n\nPROMOTES\n'
+                                text += '    ' + promotedOperations
                         text += '\n\n'
                     if clauses.tagName == 'Sees':
                         text += instgen.transformBXML(clauses) + '\n\n'
                     if clauses.tagName == 'Promotes':
-                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch)
+                        promotedOperations = accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory)
                         text += instgen.transformBXML(clauses)
                         text += ', ' + promotedOperations + '\n\n'
                     if clauses.tagName == 'Concrete_Variables' or clauses.tagName == 'Abstract_Variables':
@@ -275,7 +278,7 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, seesMc
     return controlList, controlListNames
 
 
-def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
+def accessIncludedMchAndGetItDependents(mchBXML, includedMch, directory):
     variablesOperation = ""
     for clause in mchBXML.firstChild.childNodes:
         if clause.nodeType != clause.TEXT_NODE:
@@ -287,10 +290,11 @@ def accessIncludedMchAndGetItDependents(mchBXML, includedMch):
                             if child.tagName == 'Name':
                                 for included in includedMch:
                                     if child.firstChild.data == included.firstChild.getAttribute('name'):
-                                        var, vartype, scapegoat = getVariablesAndConstraints(included)
+                                        includedImp = getImpWithImportedMch(included, directory)
+                                        var, vartype, scapegoat = getVariablesAndConstraints(includedImp)
                                         for i in range(len(var)):
                                             variablesOperation += 'OperationForTestGet' + var[
-                                                i] + 'IMP' + included.firstChild.getAttribute('name')
+                                                i] + included.firstChild.getAttribute('name')
                                             if i != max(range(len(var))):
                                                 variablesOperation += ', '
                                         if len(var) != 0:
@@ -492,20 +496,18 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
             for i in range(len(inputs[operation])):
                 implementation += '    verdict <-- TEST_' + str(i) + '_' + operationsNames[operation - 1] + ' =\n'
                 implementation += '    BEGIN\n'
-                wordList = re.sub("[^\w]", " ", inputs[operation][i]).split()
                 varInput = []
                 varOutput = []
                 outputVarName = []
                 outputVarValue = []
-                for j in range(len(wordList)):
-                    if j % 2 == 0:
-                        varInput.append(wordList[j])
-                        varOutput.append(wordList[j + 1])
-                wordListOut = re.sub("[^\w]", " ", outputs[operation][i]).split()
-                for j in range(len(wordListOut)):
-                    if j % 2 == 0:
-                        outputVarName.append(wordListOut[j])
-                        outputVarValue.append(wordListOut[j + 1])
+                for inputOption in inputs[operation][i]:
+                    wordList = re.sub("[^\w]", " ", inputOption).split()
+                    varInput.append(wordList[0])
+                    varOutput.append(wordList[1])
+                for outputOption in outputs[operation][i]:
+                    wordListOut = re.sub("[^\w]", " ", outputOption).split()
+                    outputVarName.append(wordListOut[0])
+                    outputVarValue.append(wordListOut[1])
                 countAuxQuantity = len(outputsOrder[operation - 1])
                 if controlList != []:
                     # For the machine/implementation

@@ -76,3 +76,16 @@ def createExpComparison(firstChild, secondChild, op, docXML):
     ExpNode.appendChild(secondChild)
     ExpNode.appendChild(docXML.createTextNode("\n"))
     return ExpNode
+
+
+def createBinaryExp(firstChild, secondChild, op, docXML):
+    binaryExpNode = docXML.createElement('Binary_Exp')
+    binaryExpNode.setAttribute('op', op)
+    binaryExpNode.appendChild(docXML.createTextNode('\n'))
+    binaryExpNode.appendChild(docXML.createElement('Attr'))
+    binaryExpNode.appendChild(docXML.createTextNode('\n'))
+    binaryExpNode.appendChild(firstChild)
+    binaryExpNode.appendChild(docXML.createTextNode('\n'))
+    binaryExpNode.appendChild(secondChild)
+    binaryExpNode.appendChild(docXML.createTextNode('\n'))
+    return binaryExpNode

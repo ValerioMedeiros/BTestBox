@@ -119,10 +119,12 @@ coverage = args.coverage
 atelierBDirectory = args.atelierBdirectory[:len(args.atelierBdirectory)-8:]
 bdpdirectory = directory+'\\bdp'
 
+refinementMch = list()
 imp = minidom.parse(bdpdirectory + '\\' + impName + ".bxml")
 mch = imp.getElementsByTagName("Abstraction")[0]  # Getting the Machine name
 mch = minidom.parse(bdpdirectory + '\\' + mch.firstChild.data + ".bxml")  # Getting the machine
 while mch.firstChild.getAttribute("type") == "refinement":
+    refinementMch.append(mch)
     mch = mch.getElementsByTagName("Abstraction")[0]
     mch = minidom.parse(bdpdirectory + '\\' + mch.firstChild.data + ".bxml")
 mchName = mch.firstChild.getAttribute("name")
@@ -130,6 +132,8 @@ importedMch = list()
 seesMch = list()
 includedMch = list()
 getImportedMachine(imp, importedMch, seesMch, includedMch, bdpdirectory + '\\', mch)
+for ref in refinementMch:
+    getImportedMachine(ref, importedMch, seesMch, includedMch, bdpdirectory + '\\', mch)
 noOperations = True
 
 for childnode in imp.firstChild.childNodes:
@@ -149,7 +153,8 @@ for childnode in imp.firstChild.childNodes:
                                                                                                               directory,
                                                                                                               atelierBDirectory,
                                                                                                               copy_directory,
-                                                                                                              proBPath)
+                                                                                                              proBPath,
+                                                                                                              refinementMch)
             elif coverage == "branch":
                 entries, outs, operationNames, nonCovered, coveredPercentage = coverageprocess.DoBranchCoverage(imp,
                                                                                                                 mch,
@@ -162,7 +167,8 @@ for childnode in imp.firstChild.childNodes:
                                                                                                                 directory,
                                                                                                                 atelierBDirectory,
                                                                                                                 copy_directory,
-                                                                                                                proBPath)
+                                                                                                                proBPath,
+                                                                                                                refinementMch)
             elif coverage == "path":
                 entries, outs, operationNames, nonCovered, coveredPercentage = coverageprocess.DoPathCoverage(imp, mch,
                                                                                                               importedMch,
@@ -174,7 +180,8 @@ for childnode in imp.firstChild.childNodes:
                                                                                                               directory,
                                                                                                               atelierBDirectory,
                                                                                                               copy_directory,
-                                                                                                              proBPath)
+                                                                                                              proBPath,
+                                                                                                                refinementMch)
             # elif coverage == "line":
             #    entries, outs, operationNames, nonCovered = coverageprocess.DoLineCoverage(imp, mch, importedMch,
             #                                                                               seesMch, includedMch,
@@ -194,13 +201,13 @@ for childnode in imp.firstChild.childNodes:
                                                                                                                 directory,
                                                                                                                 atelierBDirectory,
                                                                                                                 copy_directory,
-                                                                                                                proBPath)
+                                                                                                                proBPath,
+                                                                                                                refinementMch)
             else:
                 print('No valid coverage chosen')
                 break
             HTMLgen.createHTML(directory, coverage, nonCovered, copy_directory, impName, mchName, operationNames,
-                               entries, outs,
-                               coveredPercentage, importedMch)
+                               entries, outs, coveredPercentage, importedMch)
 if noOperations:
     report = open(copy_directory + '\\report_' + coverage + '_' + impName + '.txt', 'w')
     report.write('Test Completed!! The machine has no operations\n')

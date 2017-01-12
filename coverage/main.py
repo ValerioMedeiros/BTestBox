@@ -73,11 +73,20 @@ def getImportedMachine(imp, importedMch, seesMch, includedMch, directory, mch=[]
                                        seesMch, includedMch, directory)
 
 
-impName = "MchIncludinMchWithSets_i"
+'''
+impName = "external_events_queue_manager_i"
+directory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\departs'
+bdpdirectory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\departs\\bdp'
+atelierBDirectory = 'C:\\Program Files (x86)\\atelierb\\bbin\\win32'
+copy_directory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\departs_Test'
+proBPath = '"C:\ProB\\probcli.exe"'
+'''
+
+impName = "MchReturningComposed_i"
 directory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\projectsB'
 bdpdirectory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\projectsB\\bdp'
 atelierBDirectory = 'C:\\Program Files (x86)\\atelierb\\bbin\\win32'
-copy_directory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\btest'
+copy_directory = 'C:\\Users\\Diego Oliveira\\Documents\\projects\\btests'
 proBPath = '"C:\ProB\\probcli.exe"'
 
 refinementMch = list()
@@ -92,10 +101,10 @@ mchName = mch.firstChild.getAttribute("name")
 importedMch = list()
 seesMch = list()
 includedMch = list()
-cov = ["code"]
-#cov = ["code", "branch", "path"]
-#cov = ["clause"]
-#cov = ["clause", "code", "branch", "path"]
+cov = ["branch"]
+# cov = ["code", "branch", "path"]
+# cov = ["clause"]
+# cov = ["clause", "code", "branch", "path"]
 getImportedMachine(imp, importedMch, seesMch, includedMch, bdpdirectory + '\\', mch)
 for ref in refinementMch:
     getImportedMachine(ref, importedMch, seesMch, includedMch, bdpdirectory + '\\', mch)

@@ -10,7 +10,7 @@ minidom: module responsible for making a tree from a xml file.
 
 def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeStatus, importedMch, seesMch, impName,
                  directory, atelierBDir, proBPath, copy_directory):
-    '''
+    """
     Code Coverage, function responsible of making the Code Coverage, in CC we need to exercise every instruction of the code at least once.
 
     Input:
@@ -30,7 +30,7 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
 
     Return:
     covered: If the operation is covered or not
-    '''
+    """
     # Initialisation
     count = dict()
     pathToCover = 1
@@ -59,7 +59,7 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
             allInVariables.append(inVariables)
             allOutVariables.append(outVariables)
         for node in nodeStatus:  # Counting if all branches were covered, if True, the while stops.
-            if nodeStatus[node] == True:
+            if nodeStatus[node]:
                 countcover += 1
         if countcover == len(nodeStatus):
             covered = True
@@ -67,7 +67,7 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
         for p in sorted(aux.keys()):
             count[p] = 0
             for node in paths[p]:
-                if nodeStatus[node] == False:
+                if not nodeStatus[node]:
                     count[p] += 1
             if count[p] == 0:  # If all nodes of a path are covered, delete this path from aux
                 del aux[p]
@@ -78,7 +78,7 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
 
 def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inputs, operationName,
                               nodeStatus, importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory):
-    '''
+    """
     Make the predicate for Code Coverage
 
     Input:
@@ -97,7 +97,7 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
 
     Output:
     It says to the user if the path can be walked (and the inputs for this) or not
-    '''
+    """
     pred = minidom.getDOMImplementation()
     docXML = pred.createDocument(None, "Condition", None)
     predicateXML = docXML.documentElement
@@ -105,33 +105,36 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
     posMut = list()
     changedVariablesWhile = list()
     variablesList = list()
-    buildpredicate.setsSolver(operationImp.parentNode.parentNode, operationMch.parentNode.parentNode, importedMch,
-                              seesMch)
+    variablesTypeList = list()
     outputs = getOutputsVariables(operationImp)
     sizeinputs = len(inputs)
-    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
-    while (len(way) != 0):  # While there is nodes in the way, get the predicate
+    while len(way) != 0:  # While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
         predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path,
                                                                                       inputs, outputs, fixedNames,
                                                                                       docXML, posMut, operationImp,
                                                                                       importedMch, operationName,
-                                                                                      impName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
                                                                                       changedVariablesWhile, directory,
                                                                                       atelierBDir)
         del way[len(way) - 1]
     ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
-                                                           "Code Coverage - trying to get inputs for path " + str(
-                                                               pathToCover), inputs, proBPath, copy_directory)
+                                                                      "Code Coverage - trying to get inputs for path " + str(
+                                                                          pathToCover), inputs, proBPath, copy_directory,
+                                                                      operationImp, operationMch, importedMch, seesMch)
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
-        print("An input option is " + variables + "\n")
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames,
-                                                       operationImp, importedMch, operationName, impName, variables,
-                                                       variablesList, directory, atelierBDir, proBPath, copy_directory)
+        print("An input option is ", variables)
+        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+                                                       operationMch, importedMch, seesMch,
+                                                       operationName, impName, variables, variablesList,
+                                                       variablesTypeList, directory, atelierBDir, proBPath,
+                                                       copy_directory)
         if ExistValues:
             for node in path:  # Setting all branches of the path to True (Covered)
                 nodeStatus[node] = True
@@ -151,7 +154,7 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
 
 def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, paths, inputs, operationName,
                    importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory):
-    '''
+    """
     Branch Coverage, function responsible of making the Branch Coverage, in BC we need to exercise every branch of the code at least once.
 
     Input:
@@ -172,16 +175,18 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
 
     Return:
     covered: If the operation is covered or not
-    '''
+    """
     # Initialisation
     count = dict()
     allInVariables = list()
     allOutVariables = list()
+    variablesList = list()
+    variablesTypeList = list()
     pathToCover = 1
     aux = paths
     covered = False
     # Process
-    while (len(aux) != 0 and not covered):
+    while len(aux) != 0 and not covered:
         countcover = 0
         for p in sorted(aux.keys()):  # Searching for the path with the biggest number of non covered branches
             count[p] = 0
@@ -190,7 +195,7 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                     count[p] += 1
             if count[p] > count[pathToCover]:
                 pathToCover = p
-        ExistValues, inVariables, outVariables = makePredicateBranchCoverage(operationImp, operationMch,
+        ExistValues, inVariables, outVariables, vL, vTypeL = makePredicateBranchCoverage(operationImp, operationMch,
                                                                                             aux[pathToCover],
                                                                                             branchStatus, branchesPaths,
                                                                                             pathToCover, inputs,
@@ -200,6 +205,8 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
         if ExistValues:
             allInVariables.append(inVariables)
             allOutVariables.append(outVariables)
+            variablesList.append(vL)
+            variablesTypeList.append(vTypeL)
         for branch in branchStatus:  # Counting if all branches were covered, if True, the while stops.
             if branchStatus[branch]:
                 countcover += 1
@@ -215,11 +222,12 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                 del aux[p]
         if len(aux) != 0:  # If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys())  # Passing the lowest number
-    return covered, allInVariables, allOutVariables
+    return covered, allInVariables, allOutVariables, variablesList, variablesTypeList
 
 
 def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, branchesPaths, pathToCover,
-                                inputs, operationName, importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory):
+                                inputs, operationName, importedMch, seesMch, impName, directory, atelierBDir, proBPath,
+                                copy_directory):
     """
     Make the predicate for Branch Coverage
 
@@ -248,11 +256,11 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
     posMut = list()
     changedVariablesWhile = list()
     variablesList = list()
-    buildpredicate.setsSolver(operationImp.parentNode.parentNode, operationMch.parentNode.parentNode, importedMch,
-                              seesMch)
+    variablesTypeList = list()
+    arrayModification = list()
     outputs = getOutputsVariables(operationImp)
     sizeinputs = len(inputs)
-    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
@@ -262,20 +270,24 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
                                                                                       inputs, outputs, fixedNames,
                                                                                       docXML, posMut, operationImp,
                                                                                       importedMch, operationName,
-                                                                                      impName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
                                                                                       changedVariablesWhile, directory,
-                                                                                      atelierBDir)
+                                                                                      atelierBDir, arrayModification)
         del way[len(way) - 1]
     ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
                                                                       "Branch Coverage - trying to get inputs for "
                                                                       "guide " + str(
-                                                                          pathToCover), inputs, proBPath, copy_directory)
+                                                                          pathToCover), inputs, proBPath, copy_directory,
+                                                                      operationImp, operationMch, importedMch, seesMch)
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
-        print("An input option is " + variables + "\n")
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames,
-                                                       operationImp, importedMch, operationName, impName,
-                                                       variables, variablesList, directory, atelierBDir, proBPath, copy_directory)
+        print("An input option is ", variables)
+        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+                                                       operationMch, importedMch, seesMch,
+                                                       operationName, impName, variables, variablesList,
+                                                       variablesTypeList, directory, atelierBDir, proBPath,
+                                                       copy_directory)
         if ExistValues:
             for branch in branchesPaths[pathToCover]:  # Setting all branches of the path to True (Covered)
                 branchStatus[branch] = True
@@ -287,13 +299,14 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, variables, output
+    return ExistValues, variables, output, variablesList, variablesTypeList
 
 
 def PathCoverage(operationImp, operationMch, paths, inputs, operationName, importedMch, seesMch, impName, directory,
                  atelierBDir, proBPath, copy_directory):
     """
-    Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at least once.
+    Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at
+    least once.
 
     Input:
     operationImp: The node of the operation in the implementation tree.
@@ -306,7 +319,7 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
     Variables:
     count: a counter to we know which path has the more uncovered nodes
     pathToCover: the path to be covered
-    aux: A scapegoat variable, to dont erase the paths variable
+    aux: A scapegoat variable, to don't erase the paths variable
     covered: the answer if the operation is code covered or not
 
     Return:
@@ -322,13 +335,9 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
     # Process
     while len(aux) != 0:
         covered, inVariables, outVariables = makePredicatePathCoverage(operationImp, operationMch,
-                                                                                      aux[pathToCover],
-                                                                                      pathToCover, inputs,
-                                                                                      operationName,
-                                                                                      importedMch, seesMch, impName,
-                                                                                      directory,
-                                                                                      atelierBDir,
-                                                                                      proBPath, copy_directory)  # Finding the predicate
+                                                                       aux[pathToCover], pathToCover, inputs,
+                                                                       operationName, importedMch, seesMch, impName,
+                                                                       directory, atelierBDir, proBPath, copy_directory)
         if covered:
             allInVariables.append(inVariables)
             allOutVariables.append(outVariables)
@@ -371,33 +380,36 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
     posMut = list()
     changedVariablesWhile = list()
     variablesList = list()
-    buildpredicate.setsSolver(operationImp.parentNode.parentNode, operationMch.parentNode.parentNode, importedMch,
-                              seesMch)
+    variablesTypeList = list()
     outputs = getOutputsVariables(operationImp)
     sizeinputs = len(inputs)
-    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
-    while (len(way) != 0):  # While there is nodes in the way, get the predicate
+    while len(way) != 0:  # While there is nodes in the way, get the predicate
         node = way[len(way) - 1]
         predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path,
                                                                                       inputs, outputs, fixedNames,
                                                                                       docXML, posMut, operationImp,
                                                                                       importedMch, operationName,
-                                                                                      impName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
                                                                                       changedVariablesWhile, directory,
                                                                                       atelierBDir)
         del way[len(way) - 1]
     ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
                                                            "Path Coverage - trying to get inputs for path " + str(
-                                                               pathToCover), inputs, proBPath, copy_directory)
+                                                               pathToCover), inputs, proBPath, copy_directory,
+                                                                      operationImp, operationMch, importedMch, seesMch)
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
-        print("An option is " + variables + "\n")
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames,
-                                                       operationImp, importedMch, operationName, impName, variables,
-                                                       variablesList, directory, atelierBDir, proBPath, copy_directory)
+        print("An input option is ", variables)
+        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+                                                       operationMch, importedMch, seesMch,
+                                                       operationName, impName, variables, variablesList,
+                                                       variablesTypeList, directory, atelierBDir, proBPath,
+                                                       copy_directory)
     else:
         print("Inputs were NOT found for the predicate: " + predicate)
         print("This path can NOT be covered\n")
@@ -457,9 +469,10 @@ def makePredicateLineCoverage(operationImp, operationMch, node, path, inputs, op
     posMut = list()
     changedVariablesWhile = list()
     variablesList = list()
+    variablesTypeList = list()
     outputs = getOutputsVariables(operationImp)
     sizeinputs = len(inputs)
-    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
@@ -469,10 +482,10 @@ def makePredicateLineCoverage(operationImp, operationMch, node, path, inputs, op
                                                                                       inputs, outputs, fixedNames,
                                                                                       docXML, posMut, operationImp,
                                                                                       importedMch, operationName,
-                                                                                      impName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
                                                                                       changedVariablesWhile, directory,
                                                                                       atelierBDir)
-        del way[len(way) - 1]
     predicate = instgen.make_inst(predicateXML)
     ExistValues, variables = buildpredicate.checkPredicate(predicate, "Line Coverage - trying to reach line " + node,
                                                            inputs, proBPath, copy_directory)
@@ -533,23 +546,12 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
                     originalVarList.append(var)
                 if pathkey > previousPaths:
                     print(buildpredicate.buildpaths.partialPaths[pathkey])
-                    covered, fixedNames, outputs, variablesList, docXML = makePredicateClauseCoverage(operationImp,
-                                                                                                      operationMch,
-                                                                                                      str(node),
-                                                                                                      buildpredicate.buildpaths.partialPaths[
-                                                                                                          pathkey],
-                                                                                                      clauseData,
-                                                                                                      clauseMap,
-                                                                                                      predNumber,
-                                                                                                      inputs,
-                                                                                                      operationName,
-                                                                                                      importedMch,
-                                                                                                      seesMch, impName,
-                                                                                                      directory,
-                                                                                                      atelierBDir,
-                                                                                                      allInVariables,
-                                                                                                      proBPath,
-                                                                                                      coveredClauses, copy_directory)
+                    covered, fixedNames, outputs, variablesList, docXML, variablesListType =\
+                        makePredicateClauseCoverage(operationImp, operationMch, str(node),
+                                                    buildpredicate.buildpaths.partialPaths[pathkey], clauseData,
+                                                    clauseMap, predNumber, inputs, operationName, importedMch, seesMch,
+                                                    impName, directory, atelierBDir, allInVariables, proBPath,
+                                                    coveredClauses, copy_directory)
                     if covered:
                         for variable in allInVariables:
                             if variable not in originalVarList:
@@ -565,9 +567,6 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
         print(completePathsKey, completePaths[completePathsKey])
     for i in range(len(allInVariables)):
         ExistValues = False
-        if i > 0:
-            buildpredicate.setsSolver(operationImp.parentNode.parentNode, operationMch.parentNode.parentNode,
-                                      importedMch, seesMch)
         for completePathsKey in sorted(completePaths.keys()):
             countPartial = 0
             for node in buildpredicate.buildpaths.partialPaths[partialPathForInput[i]]:
@@ -576,9 +575,9 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
             if countPartial == len(buildpredicate.buildpaths.partialPaths[partialPathForInput[i]]):
                 out, ExistValues = buildpredicate.getOutput(completePaths[completePathsKey], completePathsKey,
                                                             allInVariables[i], outputs,
-                                                            fixedNames, operationImp, importedMch,
-                                                            operationName,
-                                                            impName, allInVariables[i], variablesList, directory,
+                                                            fixedNames, operationImp, operationMch, importedMch,
+                                                            seesMch, operationName, impName, allInVariables[i],
+                                                            variablesList, variablesListType, directory,
                                                             atelierBDir, proBPath, copy_directory)
             if ExistValues:
                 allOutVariables.append(out)
@@ -597,15 +596,14 @@ def makePredicateClauseCoverage(operationImp, operationMch, node, path, clauseDa
     pred = minidom.getDOMImplementation()
     docXML = pred.createDocument(None, "Condition", None)
     predicateXML = docXML.documentElement
-    buildpredicate.setsSolver(operationImp.parentNode.parentNode, operationMch.parentNode.parentNode, importedMch,
-                              seesMch)
     outputs = getOutputsVariables(operationImp)
     variablesList = list()
+    variablesTypeList = list()
     sizeinputs = len(inputs)
-    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory)
+    addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
-    testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inputs,
-                operationName, importedMch, impName, directory, atelierBDir, proBPath, allInVariables,
+    testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
+                operationName, importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList, variablesTypeList,
                 fixedNames, outputs, docXML, predicateXML, min(clauseMap[str(predNumber)]), coveredClauses, copy_directory)
     for clause in coveredClauses.keys():
         if not coveredClauses[clause]:
@@ -614,12 +612,13 @@ def makePredicateClauseCoverage(operationImp, operationMch, node, path, clauseDa
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, fixedNames, outputs, variablesList, docXML
+    return ExistValues, fixedNames, outputs, variablesList, docXML, variablesTypeList
 
 
-def testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inputs, operationName, importedMch,
-                impName, directory, atelierBDir, proBPath, allInVariables, fixedNames, outputs, docXML, predicateXML,
-                clauseToTest, coveredClauses, copy_directory, testingClauses=[]):
+def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
+                importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
+                variablesTypeList, fixedNames, outputs, docXML, predicateXML, clauseToTest, coveredClauses,
+                copy_directory, testingClauses=[]):
     needTest = False
     testingClauses.append(clauseToTest)
     enteredInPositive = False
@@ -654,27 +653,29 @@ def testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inp
         while len(way) != 0:  # While there is nodes in the way, get the predicate
             node = way[len(way) - 1]
             predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path,
-                                                                                          inputs, outputs, fixedNames,
-                                                                                          docXML, posMut, operationImp,
-                                                                                          importedMch, operationName,
-                                                                                          impName,
-                                                                                          changedVariablesWhile,
-                                                                                          directory,
-                                                                                          atelierBDir)
+                                                                                      inputs, outputs, fixedNames,
+                                                                                      docXML, posMut, operationImp,
+                                                                                      importedMch, operationName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
+                                                                                      changedVariablesWhile, directory,
+                                                                                      atelierBDir)
             del way[len(way) - 1]
         ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
                                                                           "Clause coverage - trying to reach line " + node,
-                                                                          inputs, proBPath, copy_directory)
+                                                                          inputs, proBPath, copy_directory,
+                                                                          operationImp, operationMch, importedMch, seesMch)
         if ExistValues:
             print("Found inputs for the predicate: " + predicate)
-            print("The inputs are: "+ variables)
+            print("The inputs are: ", variables)
             coveredClauses[clauseToTest] = True
             if variables not in allInVariables:
                 allInVariables.append(variables)
             if clauseToTest < max(clauseMap[str(predNumber)]):
-                testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
-                            importedMch, impName, directory, atelierBDir, proBPath, allInVariables, fixedNames, outputs,
-                            docXML, positivePredicateXML.cloneNode(20), clauseToTest + 1, coveredClauses, copy_directory, testingClauses)
+                testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
+                            importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
+                            variablesTypeList, fixedNames, outputs, docXML, positivePredicateXML.cloneNode(20),
+                            clauseToTest + 1, coveredClauses, copy_directory, testingClauses)
         else:
             print("Not found inputs for the predicate: " + predicate + " testing the negative anyway")
     del testingClauses[-1]
@@ -724,27 +725,29 @@ def testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inp
         while len(way) != 0:  # While there is nodes in the way, get the predicate
             node = way[len(way) - 1]
             predicateXML, posMut, changedVariablesWhile = buildpredicate.makePredicateXML(node, predicateXML, way, path,
-                                                                                          inputs, outputs, fixedNames,
-                                                                                          docXML, posMut, operationImp,
-                                                                                          importedMch, operationName,
-                                                                                          impName,
-                                                                                          changedVariablesWhile,
-                                                                                          directory,
-                                                                                          atelierBDir)
+                                                                                      inputs, outputs, fixedNames,
+                                                                                      docXML, posMut, operationImp,
+                                                                                      importedMch, operationName,
+                                                                                      impName, variablesList,
+                                                                                      variablesTypeList,
+                                                                                      changedVariablesWhile, directory,
+                                                                                      atelierBDir)
             del way[len(way) - 1]
         ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
                                                                           "Clause coverage - trying to reach line " + node,
-                                                                          inputs, proBPath, copy_directory)
+                                                                          inputs, proBPath, copy_directory,
+                                                                          operationImp, operationMch, importedMch, seesMch)
         if ExistValues:
             print("Found inputs for the predicate: " + predicate)
-            print("The inputs are: " + variables)
+            print("The inputs are: ", variables)
             coveredClauses[-clauseToTest] = True
             if variables not in allInVariables:
                 allInVariables.append(variables)
             if clauseToTest < max(clauseMap[str(predNumber)]):
-                testClauses(operationImp, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
-                            importedMch, impName, directory, atelierBDir, proBPath, allInVariables, fixedNames, outputs,
-                            docXML, negativePredicateXML.cloneNode(20), clauseToTest + 1, coveredClauses, copy_directory, testingClauses)
+                testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
+                            importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
+                            variablesTypeList, fixedNames, outputs, docXML, negativePredicateXML.cloneNode(20),
+                            clauseToTest + 1, coveredClauses, copy_directory, testingClauses)
         else:
             print("Not found inputs for the predicate: " + predicate + " end of test for this combination of clauses")
     del testingClauses[-1]
@@ -766,7 +769,7 @@ def getClauses(node, clauseData, clauseMap, clauseCond, predNumber, clauseNumber
     return clauseNumber
 
 
-def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, directory):
+def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList, directory):
     for childnode in operationImp.parentNode.parentNode.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             if (childnode.tagName == "Parameters" or childnode.tagName == "Variables" or
@@ -776,6 +779,8 @@ def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs
                     if Id.getAttribute('value') not in inputs:
                         inputs.append(Id.getAttribute('value'))
                         variablesList.append(Id.getAttribute('value'))
+                        getVariableType(operationImp.parentNode.parentNode, Id.getAttribute('typref'),
+                                        variablesTypeList)
     for childnode in operationMch.parentNode.parentNode.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             if (childnode.tagName == "Parameters" or childnode.tagName == "Variables" or
@@ -785,11 +790,26 @@ def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs
                     if Id.getAttribute('value') not in inputs:
                         inputs.append(Id.getAttribute('value'))
                         variablesList.append(Id.getAttribute('value'))
-    solveAddVariablesToInputImportsAndSees(importedMch, inputs, variablesList, directory)
-    solveAddVariablesToInputImportsAndSees(seesMch, inputs, variablesList, directory, True)
+                        getVariableType(operationMch.parentNode.parentNode, Id.getAttribute('typref'),
+                                        variablesTypeList)
+    solveAddVariablesToInputImportsAndSees(importedMch, inputs, variablesList, variablesTypeList, directory)
+    solveAddVariablesToInputImportsAndSees(seesMch, inputs, variablesList, variablesTypeList, directory, True)
 
 
-def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList, directory,
+def getVariableType(principal, variableType, variablesTypeList):
+    for childnode in principal.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            if childnode.tagName == 'TypeInfos':
+                allTypes = childnode.getElementsByTagName('Type')
+                for typ in allTypes:
+                    if typ.getAttribute('id') == variableType:
+                        if typ.getElementsByTagName('Binary_Exp') != []:
+                            variablesTypeList.append(['Array', typ.getAttribute('id')])
+                        else:
+                            variablesTypeList.append(['Normal', typ.getAttribute('id')])
+
+
+def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList, variablesTypeList, directory,
                                            isSees=False):
     for mch in machines:
         importedImplementation = buildpredicate.buildpaths.graphgen.getImpWithImportedMch(mch, directory)
@@ -805,6 +825,7 @@ def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList, dire
                             if not Id.getAttribute('value') in inputs:
                                 inputs.append(Id.getAttribute('value'))
                                 variablesList.append(Id.getAttribute('value'))
+                                getVariableType(childnode.parentNode, Id.getAttribute('typref'), variablesTypeList)
 
 
 def getFixedNames(operationImp, importedMch, seesMch, operationMch):

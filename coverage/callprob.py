@@ -19,15 +19,13 @@ def executeSubWithReturn(cmd, n="" , out=True):
 
 def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use this function to evaluate
     variables = list()
-    positions = list()
-    end = list()
-    if len(stringexpression) > 10:
+    if len(stringexpression) > 100:
         if not os.path.isdir(copy_directory):
             os.mkdir(copy_directory)
         predicateFile = open(copy_directory + '/predicateFile.eval', 'w')
         predicateFile.write(stringexpression)
         predicateFile.close()
-        rcode, output, errors = executeSubWithReturn(proBPath + " -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p "
+        rcode, output, errors = executeSubWithReturn(proBPath + " -disable_timeout -p MAXINT 1000 -p MININT -1000 -p SYMBOLIC TRUE -p "
                                                                 "EXPAND_FORALL_UPTO 0 -eval_file " + '"' + copy_directory + '/predicateFile.eval"',
                                                      message, True)
         os.remove(copy_directory + "/predicateFile.eval")
@@ -41,22 +39,11 @@ def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use
             stringoutput = stringoutput.replace("\\"," ")
             solutionposition = stringoutput.find("Solution:")
             stringoutput = stringoutput[solutionposition::]
-            lenvar = list()
-            print(stringexpression)
-            for entry in entries:
-                print(entry)
-                aux = (entry+" = ")
-                positions.append(re.search(r'\b%s\b' % aux, stringoutput).start())
-                lenvar.append(len(aux))
-            for i in range(len(positions)):
-                endstring = positions[i] + lenvar[i]
-                while(endstring < len(stringoutput)):
-                    if(stringoutput[endstring] == " " or stringoutput[endstring] == '&'):
-                        end.append(endstring)
-                        break
-                    endstring += 1
-            for i in range(len(positions)):
-                variables.append(stringoutput[positions[i]:end[i]:])
+            matches = re.finditer(r"([a-zA-Z0-9_.]+) = (\S+)(?: &)?", stringoutput)
+            for matchNum, match in enumerate(matches):
+                for entry in entries:
+                    if entry == match.group(1):
+                        variables.append(match.group(1)+' = '+match.group(2))
             print(errors)
             return True, variables
         elif "FALSE/1" in str(output):
