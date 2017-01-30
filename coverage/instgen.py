@@ -48,9 +48,11 @@ def make_inputs(node):
     return text
 
 
-def make_binaryexp(node):
+def make_binaryexp(node, needParathensis):
     """Build a binary exp in a string"""
-    text = "("
+    text = ""
+    if needParathensis or node.getAttribute('op') == ";":
+        text += "("
     if node.childNodes.item(1).tagName == "Attr":
         iterator = 3
     else:
@@ -60,7 +62,8 @@ def make_binaryexp(node):
     text += selfcaller(node.childNodes.item(iterator+2))  # Second operand of a binary evaluation
     if node.getAttribute('op') == "(":
         text += ')'
-    text += ')'
+    if needParathensis or node.getAttribute('op') == ";":
+        text += ")"
     return text
 
 
@@ -124,7 +127,10 @@ def selfcaller(node):
     elif tag == "Id" or tag == "Boolean_Literal" or tag == "Integer_Literal":
         text += make_id(node)
     elif tag == "Binary_Exp":
-        text += make_binaryexp(node)
+        if node.parentNode.tagName == 'Values' or node.parentNode.tagName == 'Valuation':
+            text += make_binaryexp(node, False)
+        else:
+            text += make_binaryexp(node, True)
     elif tag == "Operation_Call":
         text += make_operationcall(node)
     elif tag == "Exp_Comparison":
@@ -165,6 +171,7 @@ def selfcaller(node):
 
 
 def make_booleanexp(node):
+    #Build the Bool_Exp tag in a string.
     text = "bool("
     if node.firstChild.nextSibling.tagName == "Attr":
         text += selfcaller(node.childNodes.item(3))
@@ -175,6 +182,8 @@ def make_booleanexp(node):
 
 
 def make_properties(node, inLine=False):
+    #Build the properties clause in a string.
+    #inLine is true when printing the copy file
     if inLine:
         text = node.tagName.upper() + '\n'
     else:
@@ -297,6 +306,7 @@ def make_operationcall(node):
 
 
 def make_outputParameters(node):
+    # Build the Output Parameters in a string.
     text = ""
     for childnode in node.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
@@ -412,12 +422,18 @@ def make_quantifiedpred(node):
 
 def make_unaryexp(node):
     """Build a Unary_Exp in a string"""
-    text = "" + node.getAttribute("op") + "("
+    if node.getAttribute('op') != "~":
+        text = "" + node.getAttribute("op") + "("
+    else:
+        text = ""
     if node.childNodes.item(1).tagName == "Attr":
         text += selfcaller(node.childNodes.item(3))  # Instruction
     else:
         text += selfcaller(node.childNodes.item(1))  # Instruction
-    text += ")"
+    if node.getAttribute('op') == "~":
+        text += "~"
+    else:
+        text += ")"
     return text
 
 
@@ -433,6 +449,7 @@ def make_unarypred(node):
 
 
 def make_quantified_set(node):
+    # Build the Quantified Sets in a string.
     text = '{'
     if node.firstChild.nextSibling.tagName == "Attr":
         for childNode in node.childNodes.item(3).childNodes:
@@ -500,7 +517,10 @@ def callmake(node, tag):
     elif tag == "Values":
         text += make_values(childnode)
     elif tag == "Binary_Exp":
-        text += make_binaryexp(childnode)
+        if node.tagName == 'Values' or node.tagName == 'Valuation':
+            text += make_binaryexp(childnode, False)
+        else:
+            text += make_binaryexp(childnode, True)
     elif tag == "VAR_IN":
         text += make_var_in(childnode)
     elif tag == "Nary_Sub":
@@ -557,6 +577,7 @@ def make_inst(node):
 
 
 def make_parameters(node):
+    # Build the CONSTRAINTS in a string.
     text = '('
     allId = node.getElementsByTagName('Id')
     count = 0
@@ -570,6 +591,7 @@ def make_parameters(node):
 
 
 def make_othermachines(node):
+    # Build the SEES/INCLUDES/EXTENDS/IMPORTS clause in a string.
     text = node.tagName.upper() + '\n    '
     allNames = node.getElementsByTagName('Name')
     count = 0
@@ -582,6 +604,7 @@ def make_othermachines(node):
 
 
 def make_promotes(node):
+    # Build the PROMOTES clause in a string.
     text = node.tagName.upper() + '\n    '
     allNames = node.getElementsByTagName('Promoted_Operation')
     count = 0
@@ -600,6 +623,7 @@ def make_promotes(node):
 
 
 def make_variables_text(node):
+    # Build the VARIABLES clause in a string.
     text = node.tagName.upper() + '\n    '
     allId = node.getElementsByTagName('Id')
     count = 0
@@ -612,12 +636,14 @@ def make_variables_text(node):
 
 
 def make_abstraction(node):
+    # Build the REFINES clause in a string.
     text = 'REFINES\n    '
     text += node.firstChild.data
     return text
 
 
 def make_sets(node):
+    # Build the SETS clause in a string.
     text = 'SETS\n    '
     allSet = node.getElementsByTagName('Set')
     count = 0
@@ -630,6 +656,7 @@ def make_sets(node):
 
 
 def make_constraints(node):
+    # Build the CONSTRAINTS clause in a string.
     text = node.tagName.upper() + '\n    '
     if node.childNodes.item(1).tagName == 'Attr':
         count = 3
@@ -646,6 +673,7 @@ def make_constraints(node):
 
 
 def make_valuation_text(node):
+    # Build the VALUES clause in a string.
     text = node.tagName.upper() + '\n    '
     allId = node.getElementsByTagName('Valuation')
     count = 0
@@ -658,6 +686,7 @@ def make_valuation_text(node):
 
 
 def transformBXML(node):
+    # Takes the BXML and transform in a valid B machine
     text = ''
     tag = node.tagName
     if tag == "Properties":

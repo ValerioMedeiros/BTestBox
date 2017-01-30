@@ -5,28 +5,31 @@ import instgen
 
 
 def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames, directory,
-               copy_directory, coverage):
+               copy_directory, coverage, variablesList, variablesTypeList):
     mch = impBXML.getElementsByTagName('Abstraction')[0]
     controlList, controlListNames = makeCopyFile(impBXML.firstChild.getAttribute('name'), mch.firstChild.data, mchBXML,
-                                                 impBXML, includedMch, directory, copy_directory)
+                                                 impBXML, includedMch, directory, copy_directory, variablesList,
+                                                 variablesTypeList)
     for machineBXML in importedMch:
         importedImpBXML = getImpWithImportedMch(machineBXML, directory)
         controlList, controlListNames = makeCopyFile(importedImpBXML.firstChild.getAttribute('name'),
                                                      machineBXML.firstChild.getAttribute('name'),
                                                      machineBXML, importedImpBXML, includedMch,
-                                                     directory, copy_directory, controlList, controlListNames)
+                                                     directory, copy_directory, variablesList,
+                                                     variablesTypeList, controlList, controlListNames)
     controlListSEES = list()
     for machineBXML in seesMch:
         seesImpBXML = getImpWithImportedMch(machineBXML, directory)
         variablesSEES, variablesMchNamesSEES = makeCopyFile(seesImpBXML.firstChild.getAttribute('name'),
                                                             machineBXML.firstChild.getAttribute('name'),
                                                             machineBXML, seesImpBXML, includedMch,
-                                                            directory, copy_directory, [], [])
+                                                            directory, copy_directory, variablesList,
+                                                            variablesTypeList, [], [])
         controlListSEES.append(variablesSEES)
     inputsOrder, outputsOrder = getOrder(impBXML, operationsNames)
-    createTestFile(mch.firstChild.data, impBXML.firstChild.getAttribute('name'), impBXML, mchBXML, inputs,
-                   output, seesMch, importedMch, operationsNames, directory, copy_directory,
-                   inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES, coverage)
+    createTestFile(mch.firstChild.data, impBXML.firstChild.getAttribute('name'), impBXML, mchBXML, inputs, output,
+                   seesMch, importedMch, operationsNames, directory, copy_directory, inputsOrder, outputsOrder,
+                   controlList, controlListNames, controlListSEES, coverage, variablesList, variablesTypeList)
     createTestInB(mch.firstChild.data, impBXML.firstChild.getAttribute('name'), copy_directory, operationsNames, inputs, coverage)
 
 
@@ -69,7 +72,7 @@ def getOrder(impBXML, operationsNames):
 
 
 def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, directory,
-                 copy_directory, controlList=[], controlListNames=[]):
+                 copy_directory, variablesList, variablesTypeList, controlList=[], controlListNames=[]):
     if not os.path.isdir(copy_directory):
         os.mkdir(copy_directory)
     copiedImp = open(copy_directory + '/' + impNameFile + '.imp', 'w')
@@ -90,7 +93,8 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, direct
         getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints,
                                                                                     typeOfVariablesAndConstraints,
                                                                                     impBXML, mchBXML, 'mch', mchNameFile,
-                                                                                    controlList, controlListNames)
+                                                                                    controlList, controlListNames,
+                                                                                    variablesList, variablesTypeList)
         if getOperation != "":
             text = 'MACHINE\n    ' + mchBXML.firstChild.getAttribute('name')
             if mchBXML.getElementsByTagName('Parameters') != []:
@@ -174,7 +178,8 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, direct
         getOperation, setOperation, controlList, controlListNames = createFunctions(variablesAndConstraints,
                                                                                     typeOfVariablesAndConstraints,
                                                                                     impBXML, mchBXML, 'imp', mchNameFile,
-                                                                                    controlList, controlListNames)
+                                                                                    controlList, controlListNames,
+                                                                                    variablesList, variablesTypeList)
         if getOperation != "":
             text = 'IMPLEMENTATION\n    ' + impBXML.firstChild.getAttribute('name')
             if impBXML.getElementsByTagName('Parameters') != []:
@@ -321,8 +326,13 @@ def getVariablesAndConstraints(BXML):
                                 for typeinfo in childnodeTypeRef.childNodes:
                                     if typeinfo.nodeType != typeinfo.TEXT_NODE:
                                         if typeinfo.getAttribute('id') == typref:
-                                            typeOfVariablesAndConstraints.append(
-                                                instgen.selfcaller(typeinfo.firstChild.nextSibling))
+                                            if instgen.selfcaller(typeinfo.firstChild.nextSibling) == "INTEGER":
+                                                typeOfVariablesAndConstraints.append("INT")
+                                            elif instgen.selfcaller(typeinfo.firstChild.nextSibling) == "NATURAL":
+                                                typeOfVariablesAndConstraints.append("NAT")
+                                            else:
+                                                typeOfVariablesAndConstraints.append(
+                                                    instgen.selfcaller(typeinfo.firstChild.nextSibling))
             if tag == "Constraints":
                 allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
                 for expComparison in allExpComparison:
@@ -346,104 +356,180 @@ def getVariablesAndConstraints(BXML):
     return variablesAndConstraints, typeOfVariablesAndConstraints, constraintsTypeList
 
 
-def createFunctions(var, typeOfVariablesAndConstraints, BXML, mchBXML, tipo, name, controlList, controlListNames):
+def createFunctions(var, typeOfVariablesAndConstraints, BXML, mchBXML, tipo, name, controlList, controlListNames,
+                    variablesList, variablesTypeList):
     setOperation = ""
     getOperation = ""
+    nonArrayVariables = list()
+    arrayVariables = list()
+    for i in range(len(var)):
+        for j in range(len(variablesList[1])):
+            if variablesList[1][j] == var[i]:
+                if variablesTypeList[1][j][0] == 'Array':
+                    arrayVariables.append(var[i])
+                else:
+                    nonArrayVariables.append(var[i])
     if tipo == 'mch' and var != []:
         for i in range(len(var)):
-            getOperation += '    Get' + var[i] + 'ForTest <-- OperationForTestGet' + var[i] + name + ' = \n'
-            getOperation += '        ANY aux WHERE aux : ' + typeOfVariablesAndConstraints[i] + ' THEN Get' + var[
-                i] + 'ForTest := aux END;\n\n'
-        setOperation += '    SetVariablesForTest' + name + '('
-        for i in range(len(var)):
-            setOperation += 'nn' + str(i + 1)
-            if i != max(range(len(var))):
-                setOperation += ', '
-        setOperation += ') = \n'
-        setOperation += '    PRE '
-        for i in range(len(var)):
-            alreadyInControlList = False
-            if name in controlListNames:
-               for position in range(len(controlListNames)):
-                   if controlListNames[position] == name:
-                       if controlList[position] == var[i]:
-                           alreadyInControlList = True
-            if not alreadyInControlList:
-                controlList.append(var[i])
-                controlListNames.append(name)
-            itIsOkay = False
-            for childnode in BXML.firstChild.childNodes:
-                if childnode.nodeType != childnode.TEXT_NODE:
-                    if childnode.tagName == 'Invariant':
-                        allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
-                        for expComparison in allExpComparison:
-                            if expComparison.getAttribute('op') == ':':
-                                if expComparison.childNodes.item(3).getAttribute('value') == var[i]:
-                                    itIsOkay = True
-                                    precondition = instgen.selfcaller(expComparison)
-                                    setOperation += re.sub(r'\b%s\b' % var[i], 'nn' + str(i + 1), precondition)
-                        if not itIsOkay:
-                            itIsOkay = True
-                            setOperation += 'nn' + str(i + 1) + ' : ' + typeOfVariablesAndConstraints[i]
-            if not itIsOkay:
-                for childnode in mchBXML.firstChild.childNodes:
+            for j in range(len(variablesList[1])):
+                if variablesList[1][j] == var[i]:
+                    if variablesTypeList[1][j][0] == 'Array':
+                        tipos = variablesTypeList[1][j][2].getElementsByTagName('Id')
+                        getOperation += '    Get' + var[i] + 'ForTest <-- OperationForTestGet' + var[i] + name + '(nn) = \n'
+                        getOperation += '    PRE nn : '
+                        getOperation += tipos[0].getAttribute('value')+'\n'
+                        getOperation += '    THEN\n'
+                        getOperation += '        ANY aux WHERE aux : '+tipos[1].getAttribute('value')+' THEN Get' + var[i] + 'ForTest := aux END\n'
+                        getOperation += '    END;\n\n'
+                    else:
+                        getOperation += '    Get' + var[i] + 'ForTest <-- OperationForTestGet' + var[i] + name + ' = \n'
+                        getOperation += '        ANY aux WHERE aux : ' + typeOfVariablesAndConstraints[i] + ' THEN Get'\
+                                        + var[i] + 'ForTest := aux END;\n\n'
+        if nonArrayVariables != []:
+            setOperation += '    SetVariablesForTest' + name + '('
+            for i in range(len(nonArrayVariables)):
+                setOperation += 'nn' + str(i + 1)
+                if i != max(range(len(nonArrayVariables))):
+                    setOperation += ', '
+            if setOperation[len(setOperation)-1] == ',':
+                setOperation = setOperation[-1]
+            setOperation += ') = \n'
+            setOperation += '    PRE '
+            for i in range(len(nonArrayVariables)):
+                alreadyInControlList = False
+                if name in controlListNames:
+                   for position in range(len(controlListNames)):
+                       if controlListNames[position] == name:
+                           if controlList[position] == nonArrayVariables[i]:
+                               alreadyInControlList = True
+                if not alreadyInControlList:
+                    controlList.append(nonArrayVariables[i])
+                    controlListNames.append(name)
+                itIsOkay = False
+                for childnode in BXML.firstChild.childNodes:
                     if childnode.nodeType != childnode.TEXT_NODE:
                         if childnode.tagName == 'Invariant':
                             allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
                             for expComparison in allExpComparison:
                                 if expComparison.getAttribute('op') == ':':
-                                    if expComparison.firstChild.nextSibling.tagName == "Attr":
-                                        count = 5
-                                    else:
-                                        count = 3
-                                    if expComparison.childNodes.item(count).getAttribute('value') == var[i]:
+                                    if expComparison.childNodes.item(3).getAttribute('value') == nonArrayVariables[i]:
                                         itIsOkay = True
                                         precondition = instgen.selfcaller(expComparison)
-                                        setOperation += re.sub(r'\b%s\b' % var[i], 'nn' + str(i + 1), precondition)
+                                        setOperation += re.sub(r'\b%s\b' % nonArrayVariables[i], 'nn' + str(i + 1), precondition)
                             if not itIsOkay:
                                 itIsOkay = True
-                                setOperation += 'nn' + str(i + 1) + ' : ' + typeOfVariablesAndConstraints[i]
-                        if childnode.tagName == 'Constraints':
-                            allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
-                            for expComparison in allExpComparison:
-                                if expComparison.getAttribute('op') == ':':
-                                    if expComparison.firstChild.nextSibling.tagName == "Attr":
-                                        count = 3
-                                    else:
-                                        count = 1
-                                    if 'CONSTRAINTVAR_'+expComparison.childNodes.item(count).getAttribute('value') == var[i]:
-                                        itIsOkay = True
-                                        precondition = instgen.selfcaller(expComparison)
-                                        setOperation += re.sub(r'\b%s\b' % expComparison.childNodes.item(count).getAttribute('value'), 'nn' + str(i + 1), precondition)
-            if i != max(range(len(var))):
-                setOperation += ' & '
-            else:
-                setOperation += '\n'
-        setOperation += '    THEN\n'
-        setOperation += '        skip\n'
-        setOperation += '    END;\n\n'
+                                for j in range(len(var)):
+                                    if var[j] == nonArrayVariables[i]:
+                                        setOperation += 'nn' + str(i + 1) + ' : ' + typeOfVariablesAndConstraints[j]
+                if not itIsOkay:
+                    for childnode in mchBXML.firstChild.childNodes:
+                        if childnode.nodeType != childnode.TEXT_NODE:
+                            if childnode.tagName == 'Invariant':
+                                allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
+                                for expComparison in allExpComparison:
+                                    if expComparison.getAttribute('op') == ':':
+                                        if expComparison.firstChild.nextSibling.tagName == "Attr":
+                                            count = 5
+                                        else:
+                                            count = 3
+                                        if expComparison.childNodes.item(count).getAttribute('value') == nonArrayVariables[i]:
+                                            itIsOkay = True
+                                            precondition = instgen.selfcaller(expComparison)
+                                            setOperation += re.sub(r'\b%s\b' % nonArrayVariables[i], 'nn' + str(i + 1), precondition)
+                                if not itIsOkay:
+                                    itIsOkay = True
+                                    for j in range(len(var)):
+                                        if var[j] == nonArrayVariables[i]:
+                                            setOperation += 'nn' + str(i + 1) + ' : ' + typeOfVariablesAndConstraints[j]
+                            if childnode.tagName == 'Constraints':
+                                allExpComparison = childnode.getElementsByTagName('Exp_Comparison')
+                                for expComparison in allExpComparison:
+                                    if expComparison.getAttribute('op') == ':':
+                                        if expComparison.firstChild.nextSibling.tagName == "Attr":
+                                            count = 3
+                                        else:
+                                            count = 1
+                                        if 'CONSTRAINTVAR_'+expComparison.childNodes.item(count).getAttribute('value') == nonArrayVariables[i]:
+                                            itIsOkay = True
+                                            precondition = instgen.selfcaller(expComparison)
+                                            setOperation += re.sub(r'\b%s\b' % expComparison.childNodes.item(count).getAttribute('value'), 'nn' + str(i + 1), precondition)
+                if i != max(range(len(nonArrayVariables))):
+                    setOperation += ' & '
+                else:
+                    setOperation += '\n'
+            setOperation += '    THEN\n'
+            setOperation += '        skip\n'
+            setOperation += '    END;\n\n'
+        if arrayVariables != []:
+            for i in range(len(arrayVariables)):
+                for j in range(len(variablesList[1])):
+                    if variablesList[1][j] == arrayVariables[i]:
+                        tipos = variablesTypeList[1][j][2].getElementsByTagName('Id')
+                setOperation += '    SetVariable_'+arrayVariables[i]+'_ForTest' + name + '(nn1, nn2) =\n'
+                setOperation += '    PRE nn1 : '+tipos[0].getAttribute('value')+' & nn2 : ' \
+                                                                                ''+tipos[1].getAttribute('value')+'\n'
+                setOperation += '    THEN\n'
+                setOperation += '        skip\n'
+                setOperation += '    END;\n\n'
+                alreadyInControlList = False
+                if name in controlListNames:
+                    for position in range(len(controlListNames)):
+                        if controlListNames[position] == name:
+                            if controlList[position] == arrayVariables[i]:
+                                alreadyInControlList = True
+                if not alreadyInControlList:
+                    controlList.append(arrayVariables[i])
+                    controlListNames.append(name)
     if tipo == 'imp' and var != []:
-        for i in range(len(var)):
-            getOperation += '    Get' + var[i] + 'ForTest <-- OperationForTestGet' + var[i] + name + ' = \n'
-            getOperation += '        Get' + var[i] + 'ForTest := ' + var[i] + ';\n\n'
-        setOperation += '    SetVariablesForTest' + name + '('
-        for i in range(len(var)):
-            setOperation += 'nn' + str(i + 1)
-            if i != max(range(len(var))):
-                setOperation += ', '
-        setOperation += ') = \n'
-        setOperation += '    BEGIN\n'
-        for i in range(len(var)):
-            setOperation += '        ' + var[i] + ' := nn' + str(i + 1)
-            if i != max(range(len(var))):
-                setOperation += ';'
-            setOperation += '\n'
-        setOperation += '    END;\n\n'
+        if nonArrayVariables != []:
+            for i in range(len(nonArrayVariables)):
+                getOperation += '    Get' + nonArrayVariables[i] + 'ForTest <-- OperationForTestGet' + nonArrayVariables[i] + name + ' = \n'
+                getOperation += '        Get' + nonArrayVariables[i] + 'ForTest := ' + nonArrayVariables[i] + ';\n\n'
+            setOperation += '    SetVariablesForTest' + name + '('
+            for i in range(len(nonArrayVariables)):
+                setOperation += 'nn' + str(i + 1)
+                if i != max(range(len(nonArrayVariables))):
+                    setOperation += ', '
+            setOperation += ') = \n'
+            setOperation += '    BEGIN\n'
+            for i in range(len(nonArrayVariables)):
+                setOperation += '        ' + nonArrayVariables[i] + ' := nn' + str(i + 1)
+                if i != max(range(len(nonArrayVariables))):
+                    setOperation += ';'
+                setOperation += '\n'
+            setOperation += '    END;\n\n'
+        if arrayVariables != []:
+            for i in range(len(arrayVariables)):
+                getOperation += '    Get' + arrayVariables[i] + 'ForTest <-- OperationForTestGet' + arrayVariables[i] + name + '(nn) = \n'
+                getOperation += '        Get' + arrayVariables[i] + 'ForTest := ' + arrayVariables[i] + '(nn);\n\n'
+            for i in range(len(arrayVariables)):
+                setOperation += '    SetVariable_'+arrayVariables[i]+'_ForTest'+name+'(nn1, nn2) =\n'
+                setOperation += '    BEGIN\n'
+                setOperation += '        '+arrayVariables[i]+'(nn1) := nn2\n'
+                setOperation += '    END;\n\n'
     return getOperation, setOperation, controlList, controlListNames
 
 
-def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch, importedMch, operationsNames, directory, copy_directory,
-                   inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES, coverage):
+def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch, importedMch, operationsNames,
+                   directory, copy_directory, inputsOrder, outputsOrder, controlList, controlListNames, controlListSEES,
+                   coverage, variablesList, variablesTypeList):
+    nonArrayVariables = list()
+    arrayVariables = list()
+    for i in range(len(controlList)):
+        for j in range(len(variablesList[1])):
+            if variablesList[1][j] == controlList[i]:
+                if variablesTypeList[1][j][0] == 'Array':
+                    arrayVariables.append(controlList[i])
+                else:
+                    nonArrayVariables.append(controlList[i])
+    for i in range(len(controlListSEES)):
+        for j in range(len(controlListSEES[i])):
+            for k in range(len(variablesList[1])):
+                if variablesList[1][k] == controlListSEES[i][j]:
+                    if variablesTypeList[1][k][0] == 'Array':
+                        arrayVariables.append(controlListSEES[i][j])
+                    else:
+                        nonArrayVariables.append(controlListSEES[i][j])
     machine = 'MACHINE\n    TestSet_' + coverage.upper() + "_" + mchName + '\n\n'
     machine += 'OPERATIONS\n'
     for operation in sorted(inputs.keys()):
@@ -505,9 +591,19 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                     varInput.append(wordList[0])
                     varOutput.append(wordList[1])
                 for outputOption in outputs[operation][i]:
-                    wordListOut = re.sub("[^\w]", " ", outputOption).split()
-                    outputVarName.append(wordListOut[0])
-                    outputVarValue.append(wordListOut[1])
+                    variable = outputOption[:re.search(r"([a-zA-Z0-9\_]+) =", outputOption).end()-2:]
+                    if variable in variablesList[1]:
+                        for j in range(len(variablesList[1])):
+                            if variablesList[1][j] == variable:
+                                if variablesTypeList[1][j][0] == 'Array':
+                                    matches = re.finditer(r"\|\-\>([a-zA-Z0-9\_]+)\)[\,\}]", outputOption)
+                                    for matchNum, match in enumerate(matches):
+                                        outputVarName.append(variable)
+                                        outputVarValue.append(match.group(1))
+                                else:
+                                    wordListOut = re.sub("[^\w]", " ", outputOption).split()
+                                    outputVarName.append(wordListOut[0])
+                                    outputVarValue.append(wordListOut[1])
                 countAuxQuantity = len(outputsOrder[operation - 1])
                 if controlList != []:
                     # For the machine/implementation
@@ -529,25 +625,39 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                                 if allVariables.length > count:
                                                     variablesForTest += ', '
                     for clause in impBXML.firstChild.childNodes:
-                        alreadyEntered = False
                         if clause.nodeType != clause.TEXT_NODE:
                             if (clause.tagName == 'Variables' or clause.tagName == 'Concrete_Variables'
-                                or clause.tagName == 'Parameters') and not alreadyEntered:
-                                alreadyEntered = True
-                                implementation += '        SetVariablesForTest' + mchName + '('
+                                or clause.tagName == 'Parameters'):
+                                variablesForTest = ""
                                 allVariables = clause.getElementsByTagName('Id')
-                                for variable in allVariables:
-                                    alreadyWriteVariable = list()
-                                    for j in range(len(varInput)):
-                                        if variable.getAttribute('value') == str(varInput[j]):
-                                            if variable.getAttribute('value') not in alreadyWriteVariable:
-                                                if variablesForTest != "":
-                                                    variablesForTest += ', '
-                                                variablesForTest += str(varOutput[j])
-                                                alreadyWriteVariable.append(variable.getAttribute('value'))
-                                                countAuxQuantity += 1
-                                implementation += variablesForTest
-                                implementation += ');\n'
+                                if nonArrayVariables != []:
+                                    for variable in allVariables:
+                                        alreadyWriteVariable = list()
+                                        for j in range(len(varInput)):
+                                            if variable.getAttribute('value') == str(varInput[j]):
+                                                if variable.getAttribute('value') not in alreadyWriteVariable:
+                                                    if variable.getAttribute('value') in nonArrayVariables:
+                                                        if variablesForTest != "":
+                                                            variablesForTest += ', '
+                                                        variablesForTest += str(varOutput[j])
+                                                        alreadyWriteVariable.append(variable.getAttribute('value'))
+                                                        countAuxQuantity += 1
+                                    if variablesForTest != "":
+                                        implementation += '        SetVariablesForTest' + mchName + '('
+                                        implementation += variablesForTest
+                                        implementation += ');\n'
+                                if arrayVariables != []:
+                                        for variable in allVariables:
+                                            alreadyWriteVariable = list()
+                                            for j in range(len(varInput)):
+                                                if variable.getAttribute('value') == str(varInput[j]):
+                                                    if variable.getAttribute('value') not in alreadyWriteVariable:
+                                                        if variable.getAttribute('value') in arrayVariables:
+                                                            addtocount, text = createArraySet(variable.getAttribute('value'),
+                                                                                              inputs[operation][i], mchName)
+                                                            if text != "":
+                                                                countAuxQuantity += addtocount
+                                                                implementation += text
                             if clause.tagName == 'Imports' or clause.tagName == 'Extends':
                                 allImportedMachines = clause.getElementsByTagName('Name')
                                 for importedmachine in importedMch:
@@ -558,36 +668,69 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                             for importedmachineclauses in importedmachineimp.firstChild.childNodes:
                                                 if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
                                                     if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
-                                                        implementation += '        SetVariablesForTest' + machineimported.firstChild.data + '('
-                                                        allVariables = importedmachineclauses.getElementsByTagName('Id')
-                                                        count = 0
-                                                        for variable in allVariables:
-                                                            alreadyWriteVariable = list()
-                                                            for j in range(len(varInput)):
-                                                                if variable.getAttribute('value') == str(varInput[j]):
-                                                                    if variable.getAttribute(
-                                                                            'value') not in alreadyWriteVariable:
-                                                                        implementation += str(varOutput[j])
-                                                                        alreadyWriteVariable.append(
-                                                                            variable.getAttribute('value'))
+                                                        if nonArrayVariables != []:
+                                                            variablesForTest = ""
+                                                            allVariables = importedmachineclauses.getElementsByTagName('Id')
+                                                            count = 0
+                                                            for variable in allVariables:
+                                                                alreadyWriteVariable = list()
+                                                                for j in range(len(varInput)):
+                                                                    if variable.getAttribute('value') == str(varInput[j]):
                                                                         count += 1
-                                                                        countAuxQuantity += 1
-                                                                        if allVariables.length > count:
-                                                                            implementation += ', '
-                                                        implementation += ');\n'
+                                                                        if variable.getAttribute(
+                                                                                'value') not in alreadyWriteVariable:
+                                                                            if variable.getAttribute(
+                                                                                    'value') in nonArrayVariables:
+                                                                                variablesForTest += str(varOutput[j])
+                                                                                alreadyWriteVariable.append(
+                                                                                    variable.getAttribute('value'))
+                                                                                countAuxQuantity += 1
+                                                                                if allVariables.length > count:
+                                                                                    variablesForTest += ', '
+                                                            if variablesForTest != "":
+                                                                implementation += '        SetVariablesForTest' + machineimported.firstChild.data + '('
+                                                                implementation += variablesForTest
+                                                                implementation += ');\n'
+                                                        if arrayVariables != []:
+                                                            allVariables = importedmachineclauses.getElementsByTagName(
+                                                                'Id')
+                                                            for variable in allVariables:
+                                                                alreadyWriteVariable = list()
+                                                                for j in range(len(varInput)):
+                                                                    if variable.getAttribute('value') == str(
+                                                                            varInput[j]):
+                                                                        if variable.getAttribute(
+                                                                                'value') not in alreadyWriteVariable:
+                                                                            if variable.getAttribute(
+                                                                                    'value') in arrayVariables:
+                                                                                number, text = createArraySet(variable.getAttribute('value'), inputs[operation][i], machineimported.firstChild.data)
+                                                                                if text != "":
+                                                                                    countAuxQuantity += number
+                                                                                    implementation += text
                 for j in range(len(seesMch)):
                     if controlListSEES[j] != []:
-                        implementation += '        SetVariablesForTest' + seesMch[j].firstChild.getAttribute('name') + '('
+                        variablesForTest = ""
                         count = 0
                         for var in controlListSEES[j]:
-                            for k in range(len(varInput)):
-                                if str(var) == str(varInput[k]):
-                                    implementation += str(varOutput[k])
-                            count += 1
-                            countAuxQuantity += 1
-                            if len(controlListSEES[j]) != count:
-                                implementation += ', '
-                        implementation += ');\n'
+                            if str(var) in nonArrayVariables:
+                                for k in range(len(varInput)):
+                                    if str(var) == str(varInput[k]):
+                                        variablesForTest += str(varOutput[k])
+                                count += 1
+                                countAuxQuantity += 1
+                                if len(controlListSEES[j]) != count:
+                                    variablesForTest += ', '
+                            if str(var) in arrayVariables:
+                                for k in range(len(varInput)):
+                                    if str(var) == str(varInput[k]):
+                                        number, text = createArraySet(str(var), inputs[operation][i], seesMch[j].firstChild.getAttribute('name'))
+                                        if text != "":
+                                            implementation += text
+                                            countAuxQuantity += number
+                        if variablesForTest != "":
+                            implementation += '        SetVariablesForTest' + seesMch[j].firstChild.getAttribute('name')+'('
+                            implementation += variablesForTest
+                            implementation += ');\n'
                     for clause in seesMch[j].childNodes:
                         if clause.nodeType != clause.TEXT_NODE:
                             if clause.tagName == 'Includes' or clause.tagName == 'Extends' or clause.tagName == 'Imports':
@@ -600,23 +743,45 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                             for importedmachineclauses in importedmachineimp.firstChild.childNodes:
                                                 if importedmachineclauses.nodeType != importedmachineclauses.TEXT_NODE:
                                                     if importedmachineclauses.tagName == 'Variables' or importedmachineclauses.tagName == 'Concrete_Variables':
-                                                        implementation += '        SetVariablesForTest' + machineimported.firstChild.data + '('
-                                                        allVariables = importedmachineclauses.getElementsByTagName('Id')
-                                                        count = 0
-                                                        for variable in allVariables:
-                                                            alreadyWriteVariable = list()
-                                                            for j in range(len(varInput)):
-                                                                if variable.getAttribute('value') == str(varInput[j]):
-                                                                    if variable.getAttribute(
-                                                                            'value') not in alreadyWriteVariable:
-                                                                        implementation += str(varOutput[j])
-                                                                        alreadyWriteVariable.append(
-                                                                            variable.getAttribute('value'))
-                                                                        count += 1
-                                                                        countAuxQuantity += 1
-                                                                        if allVariables.length > count:
-                                                                            implementation += ', '
-                                                        implementation += ');\n'
+                                                        if nonArrayVariables != []:
+                                                            variablesForTest = ""
+                                                            allVariables = importedmachineclauses.getElementsByTagName('Id')
+                                                            count = 0
+                                                            for variable in allVariables:
+                                                                alreadyWriteVariable = list()
+                                                                for j in range(len(varInput)):
+                                                                    if variable.getAttribute('value') == str(varInput[j]):
+                                                                        if variable.getAttribute(
+                                                                                'value') not in alreadyWriteVariable:
+                                                                            if variable.getAttribute('value') in nonArrayVariables:
+                                                                                variablesForTest += str(varOutput[j])
+                                                                                alreadyWriteVariable.append(
+                                                                                    variable.getAttribute('value'))
+                                                                                count += 1
+                                                                                countAuxQuantity += 1
+                                                                                if allVariables.length > count:
+                                                                                    variablesForTest += ', '
+                                                            if variablesForTest != "":
+                                                                implementation += '        SetVariablesForTest' + machineimported.firstChild.data + '('
+                                                                implementation += variablesForTest
+                                                                implementation += ');\n'
+                                                        if arrayVariables != []:
+                                                            allVariables = importedmachineclauses.getElementsByTagName(
+                                                                'Id')
+                                                            text = ""
+                                                            for variable in allVariables:
+                                                                alreadyWriteVariable = list()
+                                                                for j in range(len(varInput)):
+                                                                    if variable.getAttribute('value') == str(
+                                                                            varInput[j]):
+                                                                        if variable.getAttribute(
+                                                                                'value') not in alreadyWriteVariable:
+                                                                            if variable.getAttribute(
+                                                                                    'value') in nonArrayVariables:
+                                                                                number, text = createArraySet(variable.getAttribute('value'), inputs[operation][i], machineimported.firstChild.data)
+                                                                                if text != "":
+                                                                                    implementation += text
+                                                                                    countAuxQuantity += number
                 implementation += '        VAR '
                 for j in range(countAuxQuantity):
                     implementation += 'aux' + str(j + 1)
@@ -655,14 +820,26 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                 countsaver = 0
                 for j in range(len(controlList)):  # Gets
                     if outputsOrder[operation - 1] != []:
-                        implementation += '            aux' + str(
-                            j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1) + ' <-- OperationForTestGet' + \
-                                          controlList[j] + controlListNames[j] + ';\n'
-                        countsaver = j + 1
+                        if controlList[j] in nonArrayVariables:
+                            implementation += '            aux' + str(
+                                j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1) + ' <-- OperationForTestGet' + \
+                                              controlList[j] + controlListNames[j] + ';\n'
+                            countsaver = j + 1
+                        if controlList[j] in arrayVariables:
+                            number, text = createArrayGet(controlList[j], inputs[operation][i], controlListNames[j],
+                                                          (j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1))
+                            countsaver = number - (max(range(len(outputsOrder[operation - 1]))) + 1)
+                            implementation += text
                     else:
-                        implementation += '            aux' + str(j + 1) + ' <-- OperationForTestGet' + controlList[j] + \
-                                          controlListNames[j] + ';\n'
-                        countsaver = j + 1
+                        if controlList[j] in nonArrayVariables:
+                            implementation += '            aux' + str(j + 1) + ' <-- OperationForTestGet' + controlList[j] + \
+                                              controlListNames[j] + ';\n'
+                            countsaver = j + 1
+                        if controlList[j] in arrayVariables:
+                            number, text = createArrayGet(controlList[j], inputs[operation][i], controlListNames[j],
+                                                          (j + 1))
+                            countsaver = number
+                            implementation += text
                 startcount = countsaver
                 for j in range(len(seesMch)):
                     seesName = seesMch[j].firstChild.getAttribute('name')
@@ -679,28 +856,48 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                 implementation += str(outputVarValue[k])
                         if j != max(range(len(outputsOrder[operation - 1]))):
                             implementation += ' & '
+                countArray = 0
                 for j in range(len(controlList)):
-                    if j == 0 and outputsOrder[operation - 1] != []:
-                        implementation += ' & '
-                    if outputsOrder[operation - 1] != []:
-                        implementation += 'aux' + str(j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1) + ' = '
-                    else:
-                        implementation += 'aux' + str(j + 1) + ' = '
-                    alreadyWriteVariables = []
-                    for k in range(len(outputVarName)):
-                        if str(controlList[j]).replace("CONSTRAINTVAR_", "") == str(outputVarName[k]):
-                            if str(controlList[j]) not in alreadyWriteVariables:
-                                implementation += str(outputVarValue[k])
-                                alreadyWriteVariables.append(str(controlList[j]))
-                    if j != max(range(len(controlList))):
-                        implementation += ' & '
+                    for k in range(len(variablesList[1])):
+                        if variablesList[1][k] == controlList[j]:
+                            if variablesTypeList[1][k][0] == "Array":
+                                arrayLength = outputVarName.count(str(controlList[j]).replace("CONSTRAINTVAR_", ""))
+                                timesAdded = 0
+                                for w in range(len(outputVarName)):
+                                    if str(controlList[j]).replace("CONSTRAINTVAR_", "") == str(outputVarName[k]):
+                                        if j == 0 and outputsOrder[operation - 1] != []:
+                                            implementation += ' & '
+                                        if outputsOrder[operation - 1] != []:
+                                            implementation += 'aux' + str(
+                                                j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1 + countArray) + ' = '
+                                        else:
+                                            implementation += 'aux' + str(j + 1 + countArray) + ' = ' + str(outputVarValue[w])
+                                        countArray += 1
+                                        timesAdded += 1
+                                        if timesAdded != arrayLength:
+                                            implementation += ' & '
+                            else:
+                                if j == 0 and outputsOrder[operation - 1] != []:
+                                    implementation += ' & '
+                                if outputsOrder[operation - 1] != []:
+                                    implementation += 'aux' + str(j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1 + countArray) + ' = '
+                                else:
+                                    implementation += 'aux' + str(j + 1 + countArray) + ' = '
+                                alreadyWriteVariables = []
+                                for k in range(len(outputVarName)):
+                                    if str(controlList[j]).replace("CONSTRAINTVAR_", "") == str(outputVarName[k]):
+                                        if str(controlList[j]) not in alreadyWriteVariables:
+                                            implementation += str(outputVarValue[k])
+                                            alreadyWriteVariables.append(str(controlList[j]))
+                                if j != max(range(len(controlList))):
+                                    implementation += ' & '
                 countsaver = startcount
                 for j in range(len(seesMch)):
                     if controlListSEES[j] != []:
                         implementation += ' & '
                     alreadyWriteVariables = []
                     for k in range(len(controlListSEES[j])):
-                        implementation += 'aux' + str(countsaver + k + j + 1) + ' = '
+                        implementation += 'aux' + str(countsaver + k + j + 1 + countArray) + ' = '
                         for w in range(len(outputVarName)):
                             if str(controlListSEES[j][k]) == str(outputVarName[w]):
                                 if str(controlListSEES[j][k]) not in alreadyWriteVariables:
@@ -729,6 +926,42 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
     testmachine = open(copy_directory + '/' + 'TestSet_' + coverage.upper() + "_" + mchName + '.mch', 'w')
     testmachine.write(machine)
     testmachine.close()
+
+
+def checkTheLastCharacter(implementation, char):
+    text = implementation
+    if implementation[len(implementation)-1] == char:
+        text = implementation[-1]
+    return text
+
+
+def createArrayGet(variableName, inputsOfTheTest, mchName, globalCount):
+    text = ""
+    count = globalCount
+    for i in range(len(inputsOfTheTest)):
+        inputVariable = re.search(r"([\S]+) =", inputsOfTheTest[i]).end()
+        inputVariable = inputsOfTheTest[i][:inputVariable - 2:]
+        if inputVariable == variableName:
+            matches = re.finditer(r"([0-9a-zA-Z_.]+)\|\-\>([0-9a-zA-Z_.]+)", inputsOfTheTest[i])
+            for matchNum, match in enumerate(matches):
+                text += '            aux'+str(count)+' <-- OperationForTestGet'+variableName+mchName+'('+\
+                        match.group(1)+');\n'
+                count += 1
+    return count, text
+
+def createArraySet(variableName, inputsOfTheTest, mchName):
+    text = ""
+    count = 0
+    for i in range(len(inputsOfTheTest)):
+        inputVariable = re.search(r"([\S]+) =", inputsOfTheTest[i]).end()
+        inputVariable = inputsOfTheTest[i][:inputVariable-2:]
+        if inputVariable == variableName:
+            matches = re.finditer(r"([0-9a-zA-Z_.]+)\|\-\>([0-9a-zA-Z_.]+)", inputsOfTheTest[i])
+            for matchNum, match in enumerate(matches):
+                text += '        SetVariable_'+variableName+'_ForTest'+mchName+'('\
+                        +match.group(1)+','+match.group(2)+');\n'
+                count += 1
+    return count, text
 
 
 def createTestInB(mchName, impName, copy_directory, operationsNames, inputs, coverage):

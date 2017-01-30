@@ -26,7 +26,8 @@ operationsmch: An node with all the operations of the machine
 
 
 def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
-                     directory, atelierBDir, copy_directory, proBPath, refinementMch):
+                     directory, atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler):
     """
     Function responsible of doing the Branch Coverage, it has no inputs or return.
 
@@ -87,8 +88,8 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
-                variablesList[count] = allInVariables
-                variablesList[count] = variablesTypeList
+                variablesList[count] = vL
+                variablesTypeList[count] = vTypeL
                 if covered:
                     print("The operation " + operationname + " is covered by Branch Coverage\n")
                     coveredPercentage.append(100)
@@ -123,26 +124,29 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
         print("Now they translation will be tested.")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "branch")
+                                  includedMch, operationsNames, directory, copy_directory, "branch", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Branch Coverage', directory, atelierBDir,
-                                copy_directory, "branch")
+                                copy_directory, "branch", translator, translatorProfile, compiler)
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Branch Coverage.")
         print("Now they translation will be tested. (For the possible tests)")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "branch")
+                                  includedMch, operationsNames, directory, copy_directory, "branch", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Branch Coverage', directory, atelierBDir,
-                                copy_directory, "branch", True)
+                                copy_directory, "branch", translator, translatorProfile, compiler, True)
         print('Test file generated')
     return allInVariablesForTest, allOutVariablesForTest, operationsNames, notCovered, coveredPercentage
 
 
 def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                   atelierBDir, copy_directory, proBPath, refinementMch):
+                   atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler):
     """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
@@ -157,6 +161,8 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     allCovered = True
     allInVariablesForTest = dict()
     allOutVariablesForTest = dict()
+    variablesList = dict()
+    variablesTypeList = dict()
     operationsNames = list()
     notCovered = dict()
     coveredPercentage = list()
@@ -187,20 +193,15 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
                 graphgen.mapOperations(operationImp, operationMch, directory + '\\bdp', importedMch, seesMch, refinementMch)
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
-                covered, allInVariables, allOutVariables, uncoveredPaths = makecoverage.PathCoverage(operationImp,
-                                                                                                     operationMch,
-                                                                                                     buildpaths.paths,
-                                                                                                     inputs,
-                                                                                                     operationname,
-                                                                                                     importedMch,
-                                                                                                     seesMch,
-                                                                                                     impName,
-                                                                                                     directory + '\\bdp',
-                                                                                                     atelierBDir,
-                                                                                                     proBPath, copy_directory)
+                covered, allInVariables, allOutVariables, uncoveredPaths, vL,\
+                vTypeL = makecoverage.PathCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname,
+                                                   importedMch, seesMch, impName, directory + '\\bdp', atelierBDir,
+                                                   proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
+                variablesList[count] = vL
+                variablesTypeList[count] = vTypeL
                 if covered:
                     print("The operation: " + operationname + " is covered by Path Coverage\n")
                     coveredPercentage.append(100)
@@ -227,26 +228,29 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
         print("Now they translation will be tested.")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "path")
+                                  includedMch, operationsNames, directory, copy_directory, "path", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Path Coverage', directory, atelierBDir, copy_directory,
-                                "path")
+                                "path", translator, translatorProfile, compiler)
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Path Coverage.\n")
         print("Now they translation will be tested.")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "path")
+                                  includedMch, operationsNames, directory, copy_directory, "path", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Path Coverage', directory, atelierBDir, copy_directory,
-                                "path", True)
+                                "path", translator, translatorProfile, compiler, True)
         print('Test file generated')
     return allInVariablesForTest, allOutVariablesForTest, operationsNames, notCovered, coveredPercentage
 
 
 def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                   atelierBDir, copy_directory, proBPath, refinementMch):
+                   atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler):
     """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
@@ -261,6 +265,8 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     allcovered = True
     allInVariablesForTest = dict()
     allOutVariablesForTest = dict()
+    variablesList = dict()
+    variablesTypeList = dict()
     operationsNames = list()
     notCovered = dict()
     coveredPercentage = list()
@@ -294,20 +300,15 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                 buildpaths.makenodes(graphgen.nodemap)  # Building node, setting them to False (uncovered).
                 for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
-                covered, allInVariables, allOutVariables = makecoverage.CodeCoverage(operationImp,
-                                                                                     operationMch,
-                                                                                     buildpaths.paths,
-                                                                                     inputs,
-                                                                                     operationname,
-                                                                                     buildpaths.nodeStatus,
-                                                                                     importedMch,
-                                                                                     seesMch, impName,
-                                                                                     directory + '\\bdp',
-                                                                                     atelierBDir,
-                                                                                     proBPath, copy_directory)
+                covered, allInVariables, allOutVariables, vL,\
+                vTypeL = makecoverage.CodeCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname,
+                                                   buildpaths.nodeStatus, importedMch, seesMch, impName,
+                                                   directory + '\\bdp', atelierBDir, proBPath, copy_directory)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
+                variablesList[count] = vL
+                variablesTypeList[count] = vTypeL
                 if covered:
                     print("The operation " + operationname + " is covered by Code Coverage\n")
                     coveredPercentage.append(100)
@@ -334,26 +335,29 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
         print("Now they translation will be tested.")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "code")
+                                  includedMch, operationsNames, directory, copy_directory, "code", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Code Coverage', directory, atelierBDir,
-                                copy_directory, "code")
+                                copy_directory, "code", translator, translatorProfile, compiler)
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Code Coverage.\n")
         print("Creating TestSet! (For the possible tests)")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "code")
+                                  includedMch, operationsNames, directory, copy_directory, "code", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Code Coverage', directory, atelierBDir, copy_directory,
-                                "code", True)
+                                "code", translator, translatorProfile, compiler, True)
         print('Test file generated')
     return allInVariablesForTest, allOutVariablesForTest, operationsNames, notCovered, coveredPercentage
 
 
+'''
 def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
                    atelierBDir, copy_directory, proBPath):
-    '''
+    ''''''
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
     Variables:
@@ -362,7 +366,7 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     operationname: The name of the operation
     inputs: The inputs of the operation
     operationMch: The machine version of the implementation operation
-    '''
+    ''''''
     # Initialisation
     allcovered = True
     allInVariablesForTest = dict()
@@ -409,7 +413,7 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                                                                                                            directory + '\\bdp',
                                                                                                            atelierBDir,
                                                                                                            proBPath, copy_directory)
-    '''
+
                         if covered == True:
                         print("The operation: "+operationname+" is covered by Line Coverage\n")
                         operationsNames.append(operationname)
@@ -436,12 +440,13 @@ def DoLineCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
     else:
         print(impName+" is NOT covered by Line Coverage.\n")
         return 1
-    '''
     return None, None, None, None
+'''
 
 
 def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
-                     atelierBDir, copy_directory, proBPath, refinementMch):
+                     atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler):
     """
     Function responsible of doing the Clause Coverage, it has no inputs or return.
 
@@ -456,6 +461,8 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     allcovered = True
     allInVariablesForTest = dict()
     allOutVariablesForTest = dict()
+    variablesList = dict()
+    variablesTypeList = dict()
     notCovered = dict()
     operationsNames = list()
     coveredPercentage = list()
@@ -490,15 +497,18 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                           buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key],
                           buildpaths.graphgen.nodeinva[key])
-                covered, allInVariables, allOutVariables, uncoveredPredicates, coveredClauses = makecoverage.ClauseCoverage(
-                    operationImp, operationMch, inputs, buildpaths.paths,
-                    operationname, importedMch, seesMch, impName,
-                    directory + '\\bdp', atelierBDir, proBPath, copy_directory)
+                covered, allInVariables, allOutVariables,\
+                uncoveredPredicates, coveredClauses, vL, \
+                vTypeL = makecoverage.ClauseCoverage(operationImp, operationMch, inputs, buildpaths.paths,
+                                                     operationname, importedMch, seesMch, impName,
+                                                     directory + '\\bdp', atelierBDir, proBPath, copy_directory)
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
+                variablesList[count] = vL
+                variablesTypeList[count] = vTypeL
                 if covered:
                     print("The operation: " + operationname + " is covered by Clause Coverage\n")
                     coveredPercentage.append(100)
@@ -521,20 +531,22 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
         print("Now they translation will be tested.")
         print("Creating TestSet!")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "clause")
+                                  includedMch, operationsNames, directory, copy_directory, "clause", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Clause Coverage', directory, atelierBDir,
-                                copy_directory, "clause")
+                                copy_directory, "clause", translator, translatorProfile, compiler)
         print('Test file generated')
     else:
         print(impName + " is NOT covered by Clause Coverage.\n")
         print("Now they translation will be tested.")
         print("Creating TestSet! (For the possible tests)")
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "clause")
+                                  includedMch, operationsNames, directory, copy_directory, "clause", variablesList,
+                                  variablesTypeList)
         print('Testing the Translation')
         testTranslation.runTest(imp, importedMch, seesMch, 'Clause Coverage', directory, atelierBDir,
-                                copy_directory, "clause", True)
+                                copy_directory, "clause", translator, translatorProfile, compiler, True)
         print('Test file generated')
     return allInVariablesForTest, allOutVariablesForTest, operationsNames, notCovered, coveredPercentage
 
@@ -577,6 +589,7 @@ def getInputs(operationImp):  # NOW THAT I PASS THE OPERATIONIMP TO THE OTHER PR
             return entries
 
 def checkIfItIsLocal(operationImp):
+    #Function to check is a operation belongs to local_operations clause
     if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != []:
         for localoperation in operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[0].getElementsByTagName('Operation'):
             if localoperation.getAttribute('name') == operationImp.getAttribute('name'):

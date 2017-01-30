@@ -1,0 +1,41 @@
+IMPLEMENTATION
+    runTest_PATH_OC_WHILEINSIDE_NDET_i
+
+REFINES
+    runTest_PATH_OC_WHILEINSIDE
+
+IMPORTS
+    TestSet_PATH_OC_WHILEINSIDE
+
+LOCAL_OPERATIONS
+    verdict <-- testopOC_WHILEINSIDE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopOC_WHILEINSIDE =
+    BEGIN
+        VAR v0, v1, v2, v3 IN
+            v0 <-- TEST_0_opOC_WHILEINSIDE;
+            v1 <-- TEST_1_opOC_WHILEINSIDE;
+            v2 <-- TEST_2_opOC_WHILEINSIDE;
+            v3 <-- TEST_3_opOC_WHILEINSIDE;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopOC_WHILEINSIDE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

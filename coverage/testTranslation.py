@@ -3,18 +3,24 @@ import subprocess
 import os
 
 
-def runTest(impBXML, importedMch, seesMch, coverage, directory, aterlierBDir, copy_directory, cov, fail = False):
-    cFiles = makeTranslation(impBXML, importedMch, seesMch, directory, aterlierBDir, copy_directory, cov)
+def runTest(impBXML, importedMch, seesMch, coverage, directory, aterlierBDir, copy_directory, cov, translator,
+            translatorProfile, compiler, fail = False):
+    cFiles = makeTranslation(impBXML, importedMch, seesMch, directory, aterlierBDir, copy_directory, cov, translator,
+                             translatorProfile)
     createFileToRunTest(impBXML, coverage, copy_directory, cFiles, cov, fail)
-    compileFiles(cFiles, copy_directory, cov, impBXML)
-    subprocess.call(copy_directory+'\\lang\\c\\runTest_'+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+'.exe')
+    compileFiles(cFiles, copy_directory, cov, impBXML, compiler)
+    if translator == "C":
+        subprocess.call(copy_directory+'\\lang\\c\\runTest_'+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')
+                        +'.exe')
 
-def makeTranslation(impBXML, importedMch, seesMch, directory, aterlierBDir, copy_directory, cov):
+def makeTranslation(impBXML, importedMch, seesMch, directory, aterlierBDir, copy_directory, cov, translator,
+                    translatorProfile):
     cFiles = list()
-    args = [aterlierBDir+'\\b2c.exe']
-    args.append("-p")
-    args.append("C9X")
-    args.append("-C")
+    if translator == "C":
+        args = [aterlierBDir+'\\bbin\\win32\\b2c.exe']
+        args.append("-p")
+        args.append(translatorProfile)
+        args.append("-C")
     if not os.path.isdir(copy_directory+"\\lang"):
         os.mkdir(copy_directory+"\\lang")
     if not os.path.isdir(copy_directory+"\\lang\\c"):
@@ -66,7 +72,7 @@ def createFileToRunTest(impBXML, coverage, copy_directory, cFiles, cov, fail):
                  +' is well performed and achieved'+coverage+'");\n'
     else:
         ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')\
-                 +'is well performed but did NOT achieved '+coverage+'");\n'
+                 +' is well performed but did NOT achieved '+coverage+'");\n'
     ctext += '    }\n'
     ctext += '    else{\n'
     ctext += '        printf("The translation of the implementation '+impBXML.firstChild.getAttribute('name')+' is NOT well performed");    \n'
@@ -79,8 +85,8 @@ def createFileToRunTest(impBXML, coverage, copy_directory, cFiles, cov, fail):
     cFiles.append('main_runTest_'+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+'.c')
     runFile.close()
     
-def compileFiles(cFiles, copy_directory, cov, impBXML):
-    args = ['gcc']
+def compileFiles(cFiles, copy_directory, cov, impBXML, compiler):
+    args = [compiler]
     args.append('-o')
     args.append(copy_directory+'\\lang\\c\\runTest_'+cov.upper()+'_'+impBXML.firstChild.getAttribute('name')+'.exe')
     for cfile in cFiles:

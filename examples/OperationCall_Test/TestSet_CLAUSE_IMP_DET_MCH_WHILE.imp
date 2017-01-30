@@ -1,0 +1,15 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_IMP_DET_MCH_WHILE
+
+REFINES
+    TestSet_CLAUSE_DET_MCH_WHILE
+
+IMPORTS
+    DET_MCH_WHILE
+
+OPERATIONS
+    verdict <-- TEST_0_opDET_MCH_WHILE =
+    BEGIN
+        verdict := TRUE
+    END
+END

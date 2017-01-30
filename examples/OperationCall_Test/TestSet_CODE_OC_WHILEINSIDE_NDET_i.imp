@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_CODE_OC_WHILEINSIDE_NDET_i
+
+REFINES
+    TestSet_CODE_OC_WHILEINSIDE
+
+IMPORTS
+    OC_WHILEINSIDE
+
+OPERATIONS
+    verdict <-- TEST_0_opOC_WHILEINSIDE =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opOC_WHILEINSIDE(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

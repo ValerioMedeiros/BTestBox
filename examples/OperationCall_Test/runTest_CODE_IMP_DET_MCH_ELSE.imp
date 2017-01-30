@@ -1,0 +1,39 @@
+IMPLEMENTATION
+    runTest_CODE_IMP_DET_MCH_ELSE
+
+REFINES
+    runTest_CODE_DET_MCH_ELSE
+
+IMPORTS
+    TestSet_CODE_DET_MCH_ELSE
+
+LOCAL_OPERATIONS
+    verdict <-- testopDET_MCH_ELSE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopDET_MCH_ELSE =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_opDET_MCH_ELSE;
+            v1 <-- TEST_1_opDET_MCH_ELSE;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopDET_MCH_ELSE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

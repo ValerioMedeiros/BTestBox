@@ -1,0 +1,31 @@
+IMPLEMENTATION
+    runTest_CLAUSE_IMP_DET_MCH_WHILE
+
+REFINES
+    runTest_CLAUSE_DET_MCH_WHILE
+
+IMPORTS
+    TestSet_CLAUSE_DET_MCH_WHILE
+
+LOCAL_OPERATIONS
+    verdict <-- testopDET_MCH_WHILE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopDET_MCH_WHILE =
+    BEGIN
+        verdict <-- TEST_0_opDET_MCH_WHILE
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopDET_MCH_WHILE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

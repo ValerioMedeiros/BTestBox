@@ -19,7 +19,7 @@ def executeSubWithReturn(cmd, n="" , out=True):
 
 def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use this function to evaluate
     variables = list()
-    if len(stringexpression) > 100:
+    if len(stringexpression) > 1000:
         if not os.path.isdir(copy_directory):
             os.mkdir(copy_directory)
         predicateFile = open(copy_directory + '/predicateFile.eval', 'w')
@@ -39,7 +39,7 @@ def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use
             stringoutput = stringoutput.replace("\\"," ")
             solutionposition = stringoutput.find("Solution:")
             stringoutput = stringoutput[solutionposition::]
-            matches = re.finditer(r"([a-zA-Z0-9_.]+) = (\S+)(?: &)?", stringoutput)
+            matches = re.finditer(r"([a-zA-Z0-9_.]+) = (\S+)(?: &| r)", stringoutput)
             for matchNum, match in enumerate(matches):
                 for entry in entries:
                     if entry == match.group(1):

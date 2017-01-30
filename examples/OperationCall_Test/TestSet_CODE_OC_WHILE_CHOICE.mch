@@ -1,0 +1,7 @@
+MACHINE
+    TestSet_CODE_OC_WHILE_CHOICE
+
+OPERATIONS
+    verdict <-- TEST_0_opOC_WHILE_CHOICE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+END

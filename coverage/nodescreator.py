@@ -1,16 +1,14 @@
-from xml.dom import minidom
-
 def createUnaryNode(instNode, docXML):
-    '''
-    Create and return a Unary_Pred node
+    """
+    Create and return an Unary_Pred node
 
     Input:
     instNode: The node of the instruction
     docXML: The XML document
 
     Return:
-    unaryNode: A unary node with the instNode as child
-    '''
+    unaryNode: An unary node with the instNode as child
+    """
     unaryNode = docXML.createElement('Unary_Pred')
     unaryNode.setAttribute('op','not')
     unaryNode.appendChild(docXML.createTextNode('\n'))
@@ -20,8 +18,9 @@ def createUnaryNode(instNode, docXML):
     unaryNode.appendChild(docXML.createTextNode('\n'))
     return unaryNode
 
+
 def createNaryPred(firstInst, secondInst, op, docXML):
-    '''
+    """
     Create and return a Nary_Pred node
 
     Input:
@@ -32,7 +31,7 @@ def createNaryPred(firstInst, secondInst, op, docXML):
 
     Return:
     naryPredNode: A Nary_Pred node with the firstInst and secondInst as children
-    '''
+    """
     naryPredNode = docXML.createElement('Nary_Pred')
     naryPredNode.setAttribute('op', op)
     naryPredNode.appendChild(docXML.createTextNode('\n'))
@@ -42,8 +41,9 @@ def createNaryPred(firstInst, secondInst, op, docXML):
     naryPredNode.appendChild(docXML.createTextNode('\n'))
     return naryPredNode
 
+
 def createBinaryPred(firstChild, secondChild, docXML):
-    '''
+    """
     Create and return a Binary_Pred node
 
     Input:
@@ -53,7 +53,7 @@ def createBinaryPred(firstChild, secondChild, docXML):
 
     Return:
     binaryPredNode: A Binary_Pred node with the firstChild and secondChild as children
-    '''
+    """
     binaryPredNode = docXML.createElement('Binary_Pred')
     binaryPredNode.setAttribute('op', '=>')
     binaryPredNode.appendChild(docXML.createTextNode("\n"))
@@ -65,7 +65,19 @@ def createBinaryPred(firstChild, secondChild, docXML):
     binaryPredNode.appendChild(docXML.createTextNode("\n"))
     return binaryPredNode
 
+
 def createExpComparison(firstChild, secondChild, op, docXML):
+    """
+    Create and return an Exp_Comparison node
+
+    Input:
+    firstChild: The first instruction in the Exp_Comparison
+    secondChild: The second instruction in the Exp_Comparison
+    docXML: The XML document
+
+    Return:
+    expNode: An Exp_Comparison node with the firstChild and secondChild as children
+    """
     ExpNode = docXML.createElement('Exp_Comparison')
     ExpNode.setAttribute('op', op)
     ExpNode.appendChild(docXML.createTextNode("\n"))
@@ -79,6 +91,17 @@ def createExpComparison(firstChild, secondChild, op, docXML):
 
 
 def createBinaryExp(firstChild, secondChild, op, docXML):
+    """
+    Create and return a Binary_Exp node
+
+    Input:
+    firstChild: The first instruction in the Binary_Exp
+    secondChild: The second instruction in the Binary_Exp
+    docXML: The XML document
+
+    Return:
+    expNode: A Binary_Exp node with the firstChild and secondChild as children
+    """
     binaryExpNode = docXML.createElement('Binary_Exp')
     binaryExpNode.setAttribute('op', op)
     binaryExpNode.appendChild(docXML.createTextNode('\n'))

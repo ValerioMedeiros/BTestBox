@@ -1,0 +1,7 @@
+MACHINE
+    TestSet_PATH_NDET_WHILE_CHOICE
+
+OPERATIONS
+    verdict <-- TEST_0_opNDET_WHILE_CHOICE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+END

@@ -2,10 +2,58 @@ import createBTestSet
 
 
 def createHTML(directory, coverage, nonCovered, copy_directory, impName, mchName, operationNames, entries, outs,
-               coveredPercentage, importedMch):
+               coveredPercentage, importedMch, seesMch):
     HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entries, outs)
-    HTMLlib(directory, mchName, impName, copy_directory, importedMch, coverage)
+    HTMLlib(directory, mchName, impName, copy_directory, importedMch, seesMch, coverage)
     genHTMLDoc(impName, coverage, directory, copy_directory, operationNames, nonCovered, coveredPercentage)
+
+
+def createHTMLnoOperations(coverage, copy_directory, impName):
+    HTMLDoc = open(copy_directory + '\\report_' + coverage.upper() + '_' + impName + '.html', 'w')
+    text = '<!DOCTYPE html>\n'
+    text += '<html>\n'
+    text += '<head>\n'
+    text += '<title>Test Summary for ' + coverage + ' coverage</title>\n'
+    text += '</head>\n'
+    text += '<body>\n'
+    text += '<table>\n'
+    text += '<tr>\n'
+    text += '<th>Testing ' + coverage + ' coverage for operations in the implementation ' + impName + '</th>\n'
+    text += '</tr>\n'
+    text += '<tr>\n'
+    text += '<td>\n'
+    text += '<table border="1" width="100%">\n'
+    text += '<tr>\n'
+    text += '<th>Tested Operations</th>\n'
+    text += '<th>Test Results</th>\n'
+    text += '</tr>\n'
+    text += '<tr>\n'
+    text += '<td>\n'
+    text += '<table width="100%">\n'
+    text += '<tr bgcolor="#ffff00">\n'
+    text += '<td><b><center>No operation to test</center></b></td>\n'
+    text += '</tr>\n'
+    text += '</table>\n'
+    text += '</td>\n'
+    text += '<td>\n'
+    text += '<table width="100%">\n'
+    text += '<tr bgcolor="#ffff00">\n'
+    text += '<td><b><center>-</center></b></td>\n'
+    text += '</tr>\n'
+    text += '</table>\n'
+    text += '</td>\n'
+    text += '</tr>\n'
+    text += '</table>\n'
+    text += '</td>\n'
+    text += '</tr>\n'
+    text += '<tr>\n'
+    text += '<td><center>No library for this test!</center></td>'
+    text += '</tr>\n'
+    text += '</table>\n'
+    text += '</body>\n'
+    text += '</html>\n'
+    HTMLDoc.write(text)
+    HTMLDoc.close()
 
 
 def genHTMLDoc(impName, coverage, directory, copy_directory, operationNames, nonCovered, coveredPercentage):
@@ -70,7 +118,7 @@ def genHTMLDoc(impName, coverage, directory, copy_directory, operationNames, non
     HTMLDoc.close()
 
 
-def HTMLlib(directory, mchName, impName, copy_directory, importedMch, coverage):
+def HTMLlib(directory, mchName, impName, copy_directory, importedMch, seesMch, coverage):
     HTMLDoc = open(copy_directory + '\\'+ coverage.upper() + '_' +impName + 'FilesLib.html', 'w')
     text = '<!DOCTYPE html>\n'
     text += '<html>\n'
@@ -89,12 +137,14 @@ def HTMLlib(directory, mchName, impName, copy_directory, importedMch, coverage):
     text += '<table>\n'
     text += addPrincipalFiles(directory, mchName, impName, "original")
     text += addImportedFiles(directory, importedMch, directory, "original")
+    text += addImportedFiles(directory, seesMch, directory, "original")
     text += '</table>\n'
     text += '</td>\n'
     text += '<td>\n'
     text += '<table>\n'
     text += addPrincipalFiles(copy_directory, mchName, impName, "test")
     text += addImportedFiles(copy_directory, importedMch, directory, "test")
+    text += addImportedFiles(copy_directory, seesMch, directory, "test")
     text += addPrincipalFiles(copy_directory, mchName, impName, "test", "TestSet_"+coverage.upper()+"_")
     text += addPrincipalFiles(copy_directory, mchName, impName, "test", "runTest_"+coverage.upper()+"_")
     text += '</table>\n'
@@ -103,6 +153,7 @@ def HTMLlib(directory, mchName, impName, copy_directory, importedMch, coverage):
     text += '<table>\n'
     text += addPrincipalFiles(copy_directory+'\\lang\\c', mchName, impName, "translated")
     text += addImportedFiles(copy_directory+'\\lang\\c', importedMch, directory, "translated")
+    text += addImportedFiles(copy_directory+'\\lang\\c', seesMch, directory, "translated")
     text += addPrincipalFiles(copy_directory + '\\lang\\c', mchName, impName, "translated", "TestSet_"+coverage.upper()+"_")
     text += addPrincipalFiles(copy_directory + '\\lang\\c', mchName, impName, "translated", "runTest_"+coverage.upper()+"_")
     text += '<tr>\n'

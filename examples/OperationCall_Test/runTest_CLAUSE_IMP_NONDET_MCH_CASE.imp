@@ -1,0 +1,40 @@
+IMPLEMENTATION
+    runTest_CLAUSE_IMP_NONDET_MCH_CASE
+
+REFINES
+    runTest_CLAUSE_NONDET_MCH_CASE
+
+IMPORTS
+    TestSet_CLAUSE_NONDET_MCH_CASE
+
+LOCAL_OPERATIONS
+    verdict <-- testopNONDET_MCH_CASE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopNONDET_MCH_CASE =
+    BEGIN
+        VAR v0, v1, v2 IN
+            v0 <-- TEST_0_opNONDET_MCH_CASE;
+            v1 <-- TEST_1_opNONDET_MCH_CASE;
+            v2 <-- TEST_2_opNONDET_MCH_CASE;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopNONDET_MCH_CASE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

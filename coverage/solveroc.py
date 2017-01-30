@@ -539,7 +539,7 @@ def getOperationIBXML(impName, operationName, calledOperation, operationInputs, 
     operationIBXML: The IBXML of the implementation.
     The IBXML is a XML file that contains the substitution of the Operation Call.
     """
-    args = [atelierBDir+'\\pog.exe']
+    args = [atelierBDir+'\\bbin\\win32\\pog.exe']
     args.append("-i")
     args.append(directory+'\\'+impName+".bxml")
     subprocess.call(args)
@@ -581,7 +581,7 @@ def make_Sub_Calculus(calledOperation, predicateXML, directory, atelierBDir):
     f = open(directory+'\\encodeddocumentinput.xml', 'bw')
     f.write(encodeddocument)
     f.close()
-    args.append(atelierBDir+'\\substitution_calculus_pred.exe')
+    args.append(atelierBDir+'\\bbin\\win32\\substitution_calculus_pred.exe')
     args.append(directory+'\\encodeddocumentinput.xml')
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
     output, errors = p.communicate()

@@ -64,7 +64,8 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directo
         nodedata[str(len(nodedata) + 1)] = None
     for child in opmch.parentNode.parentNode.childNodes:  # In the machine of the Implementation
         if child.nodeType != child.TEXT_NODE:
-            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or child.tagName == 'Values':
+            if child.tagName == 'Invariant' or child.tagName == 'Properties' or child.tagName == 'Constraints' or\
+                            child.tagName == 'Values':
                 if nodetype[str(len(nodetype))] == "Condition":
                     if child.firstChild.nextSibling.tagName == "Attr":
                         if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
@@ -105,6 +106,8 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directo
                 else:
                     nodedata[str(len(nodedata))] = child
                     nodetype[str(len(nodetype))] = "Condition"
+            elif child.tagName == 'Sets':
+                solveSets(child, docXML)
     SolveFirstNodeImportedAndSees(importedMch, directory)
     SolveFirstNodeImportedAndSees(seesMch, directory)
     for child in node.parentNode.parentNode.childNodes:  # In the Implementation
@@ -150,6 +153,8 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directo
                 else:
                     nodedata[str(len(nodedata))] = child.cloneNode(20)
                     nodetype[str(len(nodetype))] = "Condition"
+            elif child.tagName == 'Sets':
+                solveSets(child, docXML)
     for ref in refinementMch: #For the refinement
         for child in ref.firstChild.childNodes:
             if child.nodeType != child.TEXT_NODE:
@@ -195,6 +200,8 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directo
                     else:
                         nodedata[str(len(nodedata))] = child.cloneNode(20)
                         nodetype[str(len(nodetype))] = "Condition"
+                elif child.tagName == 'Sets':
+                    solveSets(child, docXML)
     if nodedata['1'] is None:
         firstTrue = docXML.createElement('Id')
         firstTrue.setAttribute('value', 'TRUE')
@@ -207,6 +214,18 @@ def solveFirstNodeData(node, opmch, importedMch, seesMch, refinementMch, directo
         secondTrue.appendChild(docXML.createElement('Attr'))
         secondTrue.appendChild(docXML.createTextNode('\n'))
         nodedata['1'] = nodescreator.createExpComparison(firstTrue, secondTrue, '=', docXML)
+
+
+def solveSets(setsClause, docXML):
+    allSet = setsClause.getElementsByTagName('Set')
+    for set in allSet:
+        if nodedata[str(len(nodedata))].tagName == 'Nary_Pred':
+            nodedata[str(len(nodedata))].appendChild(set.cloneNode(20))
+            nodedata[str(len(nodedata))].appendChild(docXML.createTextNode('\n'))
+        else:
+            nodedata[str(len(nodedata))] = nodescreator.createNaryPred(
+                set.cloneNode(10),
+                nodedata[str(len(nodedata))], '&', docXML)
 
 def SolveFirstNodeImportedAndSees(machines, directory):
     for dcmt in machines:  # In the other imported machines
@@ -259,6 +278,10 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                         else:
                             nodedata[str(len(nodedata))] = child.cloneNode(20)
                             nodetype[str(len(nodetype))] = "Condition"
+                    elif child.tagName == 'Sets':
+                        doc = minidom.getDOMImplementation()
+                        docXML = doc.createDocument(None, "Scapegoat", None)
+                        solveSets(child, docXML)
         imp = getImpWithImportedMch(dcmt, directory)
         for child in imp.firstChild.childNodes:
             if child.nodeType != child.TEXT_NODE:
@@ -308,6 +331,10 @@ def SolveFirstNodeImportedAndSees(machines, directory):
                     else:
                         nodedata[str(len(nodedata))] = child.cloneNode(20)
                         nodetype[str(len(nodetype))] = "Condition"
+                elif child.tagName == 'Sets':
+                    doc = minidom.getDOMImplementation()
+                    docXML = doc.createDocument(None, "Scapegoat", None)
+                    solveSets(child, docXML)
 
 
 def getImpWithImportedMch(importedMch, directory):
@@ -322,7 +349,7 @@ def getImpWithImportedMch(importedMch, directory):
     return None
 
 
-def mapAssig(node, opmch):
+def mapAssig(node):
     """
     Adding an Instruction node to the Graph.
 
@@ -473,7 +500,7 @@ def mapWhile(node, opmch):
     nodecond[str(int(bodyNode) + 1)] = "False"
 
 
-def mapSkip(node, opmch):
+def mapSkip(node):
     """
     Adding a SKIP to the Graph
 
@@ -488,7 +515,7 @@ def mapSkip(node, opmch):
     nodeinva[str(len(nodeinva) + 1)] = ""
 
 
-def mapOperationcall(node, opmch):
+def mapOperationcall(node):
     """
     Adding a Operation Call to the Graph
 
@@ -531,7 +558,7 @@ def makeMapNary(node, opmch):
     '''
     tag = node.tagName
     if tag == "Assignement_Sub":
-        mapAssig(node, opmch)
+        mapAssig(node)
     if tag == "If_Sub":
         mapIf(node, opmch)
     if tag == "While":
@@ -539,9 +566,9 @@ def makeMapNary(node, opmch):
     if tag == "VAR_IN":
         makeMap(node, opmch)
     if tag == "Skip":
-        mapSkip(node, opmch)
+        mapSkip(node)
     if tag == "Operation_Call":
-        mapOperationcall(node, opmch)
+        mapOperationcall(node)
     if tag == "Case_Sub":
         mapCase(node, opmch)
 
@@ -566,7 +593,7 @@ def makeMap(node, opmch, importedMch=[], seesMch=[], refinementMch = [], directo
                 else:
                     makeMap(childnode, opmch)
             if tag == "Assignement_Sub":
-                mapAssig(childnode, opmch)
+                mapAssig(childnode)
             if tag == "If_Sub":
                 mapIf(childnode, opmch)
             if tag == "Nary_Sub":
@@ -576,20 +603,24 @@ def makeMap(node, opmch, importedMch=[], seesMch=[], refinementMch = [], directo
             if tag == "While":
                 mapWhile(childnode, opmch)
             if tag == "Skip":
-                mapSkip(childnode, opmch)
+                mapSkip(childnode)
             if tag == "Operation_Call":
-                mapOperationcall(childnode, opmch)
+                mapOperationcall(childnode)
             if tag == "Case_Sub":
                 mapCase(childnode, opmch)
 
 
 def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch=[], refinementMch = []):
     """
-    Start function, where we start the mapping.
+    Start function, where we start mapping.
 
     Input:
     operationmch: The node of the operation in the machine (to get the Precondition)
     operationimp: The node of the operation in the implementation
+    directory: The directory with the bxml files
+    importedMch: List with the imported machines
+    seesMch: List with the seen machines
+    refinementMch: List with the refinements
     """
     makeMap(operationimp, operationmch, importedMch, seesMch, refinementMch, directory)
     nodetype[str(len(nodetype) + 1)] = "END"  # Adding a type for the END node

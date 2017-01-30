@@ -1,0 +1,46 @@
+IMPLEMENTATION
+    TestSet_PATH_OC_CASE_NDET_i
+
+REFINES
+    TestSet_PATH_OC_CASE
+
+IMPORTS
+    OC_CASE
+
+OPERATIONS
+    verdict <-- TEST_0_opOC_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opOC_CASE(2);
+            IF aux1 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opOC_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opOC_CASE(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opOC_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opOC_CASE(1);
+            IF aux1 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

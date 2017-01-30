@@ -1,0 +1,46 @@
+IMPLEMENTATION
+    TestSet_PATH_IMP_DET_MCH_CASE
+
+REFINES
+    TestSet_PATH_DET_MCH_CASE
+
+IMPORTS
+    DET_MCH_CASE
+
+OPERATIONS
+    verdict <-- TEST_0_opDET_MCH_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opDET_MCH_CASE(2);
+            IF aux1 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opDET_MCH_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opDET_MCH_CASE(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opDET_MCH_CASE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opDET_MCH_CASE(1);
+            IF aux1 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

@@ -1,0 +1,31 @@
+IMPLEMENTATION
+    runTest_BRANCH_NDET_WHILE_CHOICE_i
+
+REFINES
+    runTest_BRANCH_NDET_WHILE_CHOICE
+
+IMPORTS
+    TestSet_BRANCH_NDET_WHILE_CHOICE
+
+LOCAL_OPERATIONS
+    verdict <-- testopNDET_WHILE_CHOICE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopNDET_WHILE_CHOICE =
+    BEGIN
+        verdict <-- TEST_0_opNDET_WHILE_CHOICE
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopNDET_WHILE_CHOICE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END
