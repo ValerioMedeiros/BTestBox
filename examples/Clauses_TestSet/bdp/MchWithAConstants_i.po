@@ -1,0 +1,24 @@
+THEORY ProofList IS
+_f(1) & _f(3) & _f(4) & _f(6) & opMchWithAConstants.2,(_f(11) & _f(10) & _f(7) & _f(12) => _f(14));
+_f(1) & _f(3) & _f(4) & _f(6) & opMchWithAConstants.1,(_f(11) & _f(9) & _f(8) & _f(12) => _f(13))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((max_count) = (10));
+((max_countConcrete) = (max_count)) & ((max_countConcrete) = (10));
+((nn) : (NAT)) & ((res) = (res));
+((res$1) = (res));
+(nn +1 <= max_count);
+not((nn +1 <= max_count));
+(nn +1 <= max_countConcrete);
+not((nn +1 <= max_countConcrete));
+((nn) : (NAT));
+"Refinement is correct";
+((TRUE) = (FALSE));
+((FALSE) = (TRUE))
+END
+&
+THEORY EnumerateX
+END

@@ -1,0 +1,57 @@
+THEORY ProofList IS
+_f(1) & _f(4) & optriple_case_case_case.27,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.26,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.25,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.24,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.23,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.22,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.21,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.20,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.19,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.18,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.17,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.16,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.15,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.14,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.13,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.12,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.11,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.10,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.9,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.8,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.7,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.6,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.5,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.4,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.3,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(7) & _f(8) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.2,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & optriple_case_case_case.1,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(20) => _f(21))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT)) & ((res1) = (res1)) & ((res2) = (res2)) & ((res3) = (res3));
+((res1$1) = (res1)) & ((res2$1) = (res2)) & ((res3$1) = (res3));
+((zz) : (({0})));
+((zz) : (({1})));
+not(((zz) : (({0}))));
+not(((zz) : (({1}))));
+((yy) : (({0})));
+((yy) : (({1})));
+not(((yy) : (({0}))));
+not(((yy) : (({1}))));
+((xx) : (({0})));
+((xx) : (({1})));
+not(((xx) : (({0}))));
+not(((xx) : (({1}))));
+((xx) : (NAT));
+((yy) : (NAT));
+((zz) : (NAT));
+"Refinement is correct";
+(((xx) : (({xx}))) & (((yy) : (({yy}))) & (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz)))) or (((yy) : (({yy}))) & (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))))) or (((xx) : (({xx}))) & (((yy) : (({yy}))) & (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz)))) or (((yy) : (({yy}))) & (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz)))));
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT))
+END
+&
+THEORY EnumerateX
+END

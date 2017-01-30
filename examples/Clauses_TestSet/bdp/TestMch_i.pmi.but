@@ -1,0 +1,1 @@
+﻿Flag(FileOn("TestMch_i.pmi.res")) & Set(toto | count$1: NAT & count$1<=10 & count$1: INTEGER & 0<=count$1 & count$1<=2147483647 & count = count$1 & count$1: 0..2147483647 => count$1 = 6)

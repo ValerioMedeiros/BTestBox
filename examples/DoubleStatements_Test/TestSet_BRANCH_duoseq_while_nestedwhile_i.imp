@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_BRANCH_duoseq_while_nestedwhile_i
+
+REFINES
+    TestSet_BRANCH_duoseq_while_nestedwhile
+
+IMPORTS
+    duoseq_while_nestedwhile
+
+OPERATIONS
+    verdict <-- TEST_0_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

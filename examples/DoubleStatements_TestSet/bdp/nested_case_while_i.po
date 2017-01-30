@@ -1,0 +1,58 @@
+THEORY ProofList IS
+_f(1) & _f(4) & opnested_case_while.21,(_f(13) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(8) & _f(27) => _f(28));
+_f(1) & _f(4) & opnested_case_while.20,(_f(13) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(25) => _f(26));
+_f(1) & _f(4) & opnested_case_while.19,(_f(13) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(22) & _f(18) => _f(24));
+_f(1) & _f(4) & opnested_case_while.18,(_f(13) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(22) & _f(16) => _f(23));
+_f(1) & _f(4) & opnested_case_while.17,(_f(13) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & opnested_case_while.16,(_f(13) & _f(14) & _f(11) & _f(12) & _f(15) & _f(18) => _f(19));
+_f(1) & _f(4) & opnested_case_while.15,(_f(13) & _f(14) & _f(11) & _f(12) & _f(15) & _f(16) => _f(17));
+_f(1) & _f(4) & opnested_case_while.14,(_f(13) & _f(14) & _f(10) & _f(5) & _f(6) & _f(8) & _f(27) => _f(28));
+_f(1) & _f(4) & opnested_case_while.13,(_f(13) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(25) => _f(26));
+_f(1) & _f(4) & opnested_case_while.12,(_f(13) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(22) & _f(18) => _f(24));
+_f(1) & _f(4) & opnested_case_while.11,(_f(13) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(22) & _f(16) => _f(23));
+_f(1) & _f(4) & opnested_case_while.10,(_f(13) & _f(14) & _f(10) & _f(5) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & opnested_case_while.9,(_f(13) & _f(14) & _f(10) & _f(15) & _f(18) => _f(19));
+_f(1) & _f(4) & opnested_case_while.8,(_f(13) & _f(14) & _f(10) & _f(15) & _f(16) => _f(17));
+_f(1) & _f(4) & opnested_case_while.7,(_f(13) & _f(14) & _f(9) & _f(5) & _f(6) & _f(8) & _f(27) => _f(28));
+_f(1) & _f(4) & opnested_case_while.6,(_f(13) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(25) => _f(26));
+_f(1) & _f(4) & opnested_case_while.5,(_f(13) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(22) & _f(18) => _f(24));
+_f(1) & _f(4) & opnested_case_while.4,(_f(13) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(22) & _f(16) => _f(23));
+_f(1) & _f(4) & opnested_case_while.3,(_f(13) & _f(14) & _f(9) & _f(5) & _f(6) & _f(20) => _f(21));
+_f(1) & _f(4) & opnested_case_while.2,(_f(13) & _f(14) & _f(9) & _f(15) & _f(18) => _f(19));
+_f(1) & _f(4) & opnested_case_while.1,(_f(13) & _f(14) & _f(9) & _f(15) & _f(16) => _f(17))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((res1) = (res1)) & ((res2) = (res2));
+((res1$1) = (res1)) & ((res2$1) = (res2));
+(0 <= ii$1);
+(ii$1 <= yy);
+(ii$1 +1 <= yy);
+not((ii$1 +1 <= yy));
+((xx) : (({0})));
+((xx) : (({1})));
+not(((xx) : (({0}))));
+not(((xx) : (({1}))));
+((xx) : (NAT));
+((yy) : (NAT));
+"Loop initialisation";
+"Check invariant (0 <= ii)";
+(0 <= 0);
+"Check invariant (ii <= yy)";
+(0 <= yy);
+"Loop variant is positive";
+(0 <= (yy - ii$1));
+"Loop invariant is preserved";
+(0 <= (ii$1 + 1));
+((ii$1 + 1) <= yy);
+"Variant is decreasing";
+((yy - (ii$1 + 1)) +1 <= (yy - ii$1));
+"End of loop";
+(((xx) : (({xx}))) & ((xx) = (xx)) & ((ii$1) = (yy))) or (((xx) : (({xx}))) & ((xx) = (xx)) & ((ii$1) = (yy)));
+((xx) : (NAT)) & ((yy) : (NAT))
+END
+&
+THEORY EnumerateX
+END

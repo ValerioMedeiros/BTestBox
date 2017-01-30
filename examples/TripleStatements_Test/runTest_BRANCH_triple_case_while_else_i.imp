@@ -1,0 +1,43 @@
+IMPLEMENTATION
+    runTest_BRANCH_triple_case_while_else_i
+
+REFINES
+    runTest_BRANCH_triple_case_while_else
+
+IMPORTS
+    TestSet_BRANCH_triple_case_while_else
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriple_case_while_else =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriple_case_while_else =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5 IN
+            v0 <-- TEST_0_optriple_case_while_else;
+            v1 <-- TEST_1_optriple_case_while_else;
+            v2 <-- TEST_2_optriple_case_while_else;
+            v3 <-- TEST_3_optriple_case_while_else;
+            v4 <-- TEST_4_optriple_case_while_else;
+            v5 <-- TEST_5_optriple_case_while_else;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriple_case_while_else;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

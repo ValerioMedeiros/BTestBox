@@ -1,0 +1,352 @@
+<Machine name='MchIncludingMchWithSEES_i' type='implementation'>
+<Abstraction>MchIncludingMchWithSEES</Abstraction>
+<Imports>
+<Attr>
+<Pos l='12' c='1' s='7'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='13' c='5' s='11'/>
+</Attr>
+<Name>MchWithSEES</Name>
+</Referenced_Machine>
+</Imports>
+<Sees>
+<Attr>
+<Pos l='9' c='1' s='4'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='10' c='5' s='11'/>
+</Attr>
+<Name>LockMachine</Name>
+</Referenced_Machine>
+</Sees>
+<Concrete_Variables>
+<Attr>
+<Pos l='15' c='1' s='18'/>
+</Attr>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='16' c='5' s='6'/>
+</Attr>
+</Id>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='16' c='13' s='9'/>
+</Attr>
+</Id>
+</Concrete_Variables>
+<Invariant>
+<Attr>
+<Pos l='18' c='1' s='9'/>
+</Attr>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='19' c='15' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='19' c='5' s='9'/>
+</Attr>
+</Id>
+<Id value='INT' typref='3603043417'>
+<Attr>
+<Pos l='19' c='17' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='19' c='33' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='19' c='23' s='9'/>
+</Attr>
+</Id>
+<Id value='inside' typref='2701647786'>
+<Attr>
+<Pos l='19' c='35' s='6'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='21' c='1' s='14'/>
+</Attr>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='22' c='12' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='22' c='5' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='22' c='15' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='22' c='32' s='2'/>
+</Attr>
+<Variables>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='22' c='22' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='22' c='35' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Initialisation>
+<Operations>
+<Operation name='leavingTheHouse'>
+<Attr>
+<Pos l='25' c='5' s='15' endLine='29'/>
+</Attr>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='25' c='21' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<Nary_Sub op=';'>
+<Operation_Call>
+<Attr>
+<Pos l='27' c='19' s='0'/>
+</Attr>
+<Name>
+<Id value='leaveHouse'>
+<Attr>
+<Pos l='27' c='9' s='10'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='27' c='20' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+</Operation_Call>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='35' s='2'/>
+</Attr>
+<Variables>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='27' c='25' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='-' typref='2701647786'>
+<Attr>
+<Pos l='27' c='48' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='27' c='38' s='9'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='27' c='50' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='28' c='9' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='28' c='22' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='28' c='12' s='9'/>
+</Attr>
+</Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='28' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='28' c='38' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='28' c='31' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='28' c='41' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+<Operation name='enteringTheHouse'>
+<Attr>
+<Pos l='32' c='5' s='16' endLine='36'/>
+</Attr>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='32' c='22' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<Nary_Sub op=';'>
+<Operation_Call>
+<Attr>
+<Pos l='34' c='19' s='0'/>
+</Attr>
+<Name>
+<Id value='enterHouse'>
+<Attr>
+<Pos l='34' c='9' s='10'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='34' c='20' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+</Operation_Call>
+<Assignement_Sub>
+<Attr>
+<Pos l='34' c='35' s='2'/>
+</Attr>
+<Variables>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='34' c='25' s='9'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='+' typref='2701647786'>
+<Attr>
+<Pos l='34' c='48' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='34' c='38' s='9'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='34' c='50' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='35' c='9' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&gt;'>
+<Attr>
+<Pos l='35' c='22' s='1'/>
+</Attr>
+<Id value='insideIMP' typref='2701647786'>
+<Attr>
+<Pos l='35' c='12' s='9'/>
+</Attr>
+</Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='35' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='35' c='38' s='2'/>
+</Attr>
+<Variables>
+<Id value='lights' typref='2043437594'>
+<Attr>
+<Pos l='35' c='31' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='35' c='41' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='3603043417'>
+<Unary_Exp op='POW'>
+<Id value='INTEGER'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

@@ -1,0 +1,15 @@
+IMPLEMENTATION
+    TestSet_BRANCH_Skip_i
+
+REFINES
+    TestSet_BRANCH_Skip
+
+IMPORTS
+    Skip
+
+OPERATIONS
+    verdict <-- TEST_0_opskip =
+    BEGIN
+        verdict := TRUE
+    END
+END

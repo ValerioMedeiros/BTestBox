@@ -1,0 +1,21 @@
+/* MchWithSets_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithSets_i
+REFINES MchWithSets
+
+VALUES
+    max_count = 10
+
+OPERATIONS
+    res <-- opMchWithSets(nn) =
+    BEGIN
+        IF nn < max_count THEN
+            res := Okay
+        ELSE
+            res := Out_of_Range
+        END
+    END
+END

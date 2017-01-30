@@ -1,0 +1,7 @@
+<Machine name='triple_while_else_if' type='abstraction'>
+    <Initialisation>
+        <Skip/>
+    </Initialisation>
+    <TypeInfos/>
+    
+</Machine>

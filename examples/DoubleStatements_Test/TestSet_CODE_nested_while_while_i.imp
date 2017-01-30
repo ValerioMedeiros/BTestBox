@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_CODE_nested_while_while_i
+
+REFINES
+    TestSet_CODE_nested_while_while
+
+IMPORTS
+    nested_while_while
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_while_while =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_while(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

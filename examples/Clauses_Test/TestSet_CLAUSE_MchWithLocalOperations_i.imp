@@ -1,0 +1,15 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_MchWithLocalOperations_i
+
+REFINES
+    TestSet_CLAUSE_MchWithLocalOperations
+
+IMPORTS
+    MchWithLocalOperations
+
+OPERATIONS
+    verdict <-- TEST_0_opMchWithLocalOperations =
+    BEGIN
+        verdict := TRUE
+    END
+END

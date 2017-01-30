@@ -1,0 +1,70 @@
+IMPLEMENTATION
+    runTest_BRANCH_MchToExtend_i
+
+REFINES
+    runTest_BRANCH_MchToExtend
+
+IMPORTS
+    TestSet_BRANCH_MchToExtend
+
+LOCAL_OPERATIONS
+    verdict <-- testInc =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testDec =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testRandomInc =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testInc =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_Inc;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testDec =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_Dec;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testRandomInc =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_RandomInc;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1, v2 IN
+            v0 <-- testInc;
+            v1 <-- testDec;
+            v2 <-- testRandomInc;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

@@ -1,0 +1,172 @@
+<Machine name='OC_IFELSE_NDET_i' type='implementation'>
+<Abstraction>OC_IFELSE</Abstraction>
+<Imports>
+<Attr>
+<Pos l='9' c='1' s='7'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='10' c='5' s='15'/>
+</Attr>
+<Name>NONDET_MCH_ELSE</Name>
+</Referenced_Machine>
+</Imports>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='opOC_IFELSE'>
+<Attr>
+<Pos l='13' c='5' s='3' endLine='21'/>
+</Attr>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='13' c='5' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='13' c='25' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='13' c='29' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<Nary_Sub op=';'>
+<Operation_Call>
+<Attr>
+<Pos l='15' c='13' s='3'/>
+</Attr>
+<Name>
+<Id value='opNONDET_MCH_ELSE'>
+<Attr>
+<Pos l='15' c='17' s='17'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='15' c='35' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='15' c='39' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='15' c='9' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+</Operation_Call>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='16' c='9' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&gt;'>
+<Attr>
+<Pos l='16' c='15' s='1'/>
+</Attr>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='16' c='12' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='16' c='17' s='2'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Operation_Call>
+<Attr>
+<Pos l='17' c='17' s='3'/>
+</Attr>
+<Name>
+<Id value='opNONDET_MCH_ELSE'>
+<Attr>
+<Pos l='17' c='21' s='17'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='17' c='39' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='17' c='43' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='17' c='13' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+</Operation_Call>
+</Then>
+<Else>
+<Operation_Call>
+<Attr>
+<Pos l='19' c='17' s='3'/>
+</Attr>
+<Name>
+<Id value='opNONDET_MCH_ELSE'>
+<Attr>
+<Pos l='19' c='21' s='17'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'>
+<Attr>
+<Pos l='19' c='39' s='2'/>
+</Attr>
+</Id>
+<Id value='yy' typref='2701647786'>
+<Attr>
+<Pos l='19' c='43' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='19' c='13' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+</Operation_Call>
+</Else>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>

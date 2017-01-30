@@ -1,0 +1,15 @@
+/* MchWithPromotes_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithPromotes_i
+REFINES MchWithPromotes
+
+IMPORTS
+    MchToExtend
+    
+PROMOTES
+    Inc, Dec
+
+END

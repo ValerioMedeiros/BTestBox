@@ -1,0 +1,43 @@
+IMPLEMENTATION
+    runTest_CODE_triple_else_while_case_i
+
+REFINES
+    runTest_CODE_triple_else_while_case
+
+IMPORTS
+    TestSet_CODE_triple_else_while_case
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriple_else_while_case =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriple_else_while_case =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5 IN
+            v0 <-- TEST_0_optriple_else_while_case;
+            v1 <-- TEST_1_optriple_else_while_case;
+            v2 <-- TEST_2_optriple_else_while_case;
+            v3 <-- TEST_3_optriple_else_while_case;
+            v4 <-- TEST_4_optriple_else_while_case;
+            v5 <-- TEST_5_optriple_else_while_case;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriple_else_while_case;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

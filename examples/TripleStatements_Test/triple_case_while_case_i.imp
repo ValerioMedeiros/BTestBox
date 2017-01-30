@@ -1,0 +1,65 @@
+/* triple_case_while_case_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_case_while_case_i
+REFINES triple_case_while_case
+
+OPERATIONS
+    res1, res2, res3 <-- optriple_case_while_case(xx, yy, zz)=
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            res1 := xx; res2 := ii; res3 := zz;
+            CASE xx OF
+                EITHER 0 THEN
+                    WHILE ii < yy DO
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := ii + 1; res3 := zz                    
+                            END
+                        END;
+                        ii := ii + 1
+                    INVARIANT 0 <= ii & ii <= yy & res1 = xx & res3 = zz & res2 = ii
+                    VARIANT yy - ii
+                    END
+                OR 1 THEN
+                    WHILE ii < yy DO
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := ii + 1; res3 := zz                    
+                            END
+                        END;
+                        ii := ii + 1
+                    INVARIANT 0 <= ii & ii <= yy & res1 = xx & res3 = zz & res2 = ii
+                    VARIANT yy - ii
+                    END
+                ELSE
+                    WHILE ii < yy DO
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := ii + 1; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := ii + 1; res3 := zz                    
+                            END
+                        END;
+                        ii := ii + 1
+                    INVARIANT 0 <= ii & ii <= yy & res1 = xx & res3 = zz & res2 = ii
+                    VARIANT yy - ii
+                    END
+                END
+            END    
+        END
+    END
+END

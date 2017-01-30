@@ -1,0 +1,55 @@
+IMPLEMENTATION
+    runTest_BRANCH_triple_case_else_case_i
+
+REFINES
+    runTest_BRANCH_triple_case_else_case
+
+IMPORTS
+    TestSet_BRANCH_triple_case_else_case
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriple_case_else_case =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriple_case_else_case =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17 IN
+            v0 <-- TEST_0_optriple_case_else_case;
+            v1 <-- TEST_1_optriple_case_else_case;
+            v2 <-- TEST_2_optriple_case_else_case;
+            v3 <-- TEST_3_optriple_case_else_case;
+            v4 <-- TEST_4_optriple_case_else_case;
+            v5 <-- TEST_5_optriple_case_else_case;
+            v6 <-- TEST_6_optriple_case_else_case;
+            v7 <-- TEST_7_optriple_case_else_case;
+            v8 <-- TEST_8_optriple_case_else_case;
+            v9 <-- TEST_9_optriple_case_else_case;
+            v10 <-- TEST_10_optriple_case_else_case;
+            v11 <-- TEST_11_optriple_case_else_case;
+            v12 <-- TEST_12_optriple_case_else_case;
+            v13 <-- TEST_13_optriple_case_else_case;
+            v14 <-- TEST_14_optriple_case_else_case;
+            v15 <-- TEST_15_optriple_case_else_case;
+            v16 <-- TEST_16_optriple_case_else_case;
+            v17 <-- TEST_17_optriple_case_else_case;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE & v6 = TRUE & v7 = TRUE & v8 = TRUE & v9 = TRUE & v10 = TRUE & v11 = TRUE & v12 = TRUE & v13 = TRUE & v14 = TRUE & v15 = TRUE & v16 = TRUE & v17 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriple_case_else_case;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

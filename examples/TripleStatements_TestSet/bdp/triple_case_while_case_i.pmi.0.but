@@ -1,0 +1,1 @@
+﻿Flag(FileOn("triple_case_while_case_i.pmi.0.res")) & Set(toto | zz: INTEGER & 0<=zz & zz<=2147483647 & res3$2 = zz => res3$2 = zz)

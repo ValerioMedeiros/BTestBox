@@ -1,0 +1,15 @@
+THEORY ProofList
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+((1..2)*{answer}): FIN(NATURAL*{answer}) & not(((1..2)*{answer}) = {}) & ((max_count) = (10));
+((nn) : (NAT));
+(nn +1 <= max_count);
+not((nn +1 <= max_count));
+((1..2)*{answer}): FIN(NATURAL*{answer}) & not(((1..2)*{answer}) = {})
+END
+&
+THEORY EnumerateX IS
+answer == {Okay,Out_of_Range}
+END

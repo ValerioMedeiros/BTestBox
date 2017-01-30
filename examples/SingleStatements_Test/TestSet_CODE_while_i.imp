@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_CODE_while_i
+
+REFINES
+    TestSet_CODE_while
+
+IMPORTS
+    while
+
+OPERATIONS
+    verdict <-- TEST_0_opwhile =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opwhile(1);
+            IF aux1 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

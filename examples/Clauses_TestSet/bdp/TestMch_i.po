@@ -1,0 +1,43 @@
+THEORY ProofList IS
+_f(1) & _f(3) & _f(12) & _f(2) & WellDefinedness_test_op_1.2,(_f(17) => _f(19));
+_f(1) & _f(3) & _f(12) & _f(2) & WellDefinedness_test_op_1.1,(_f(17) => _f(18));
+_f(1) & _f(3) & _f(22) & refinement_of_set_variables_test_op_1.2,(_f(20) => _f(24));
+_f(1) & _f(3) & _f(22) & refinement_of_set_variables_test_op_1.1,(_f(20) => _f(23));
+_f(1) & _f(3) & _f(12) & _f(14) & test_op_1.4,(_f(16) & _f(20) => _f(21));
+_f(1) & _f(3) & _f(12) & _f(14) & test_op_1.3,(_f(15) & _f(20) => _f(21));
+_f(1) & _f(3) & _f(12) & _f(14) & test_op_1.2,(_f(17) => _f(19));
+_f(1) & _f(3) & _f(12) & _f(14) & test_op_1.1,(_f(17) => _f(18));
+_f(1) & _f(6) & _f(2) & set_variables_test_op_1.2,(_f(7) & _f(10) & _f(10) => _f(11));
+_f(1) & _f(6) & _f(2) & set_variables_test_op_1.1,(_f(7) & _f(8) & _f(8) => _f(9))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((count$1) : (NAT)) & (count$1 <= 10);
+((0) : (NAT));
+(0 <= 10);
+((count) : (NAT)) & (count <= 10);
+"Imported machine invariant is preserved";
+"Check invariant ((count) : (NAT))";
+((6) : (NAT));
+"Check invariant (count <= 10)";
+(6 <= 10);
+((countI$1) = (count$1));
+((verdict) = (verdict));
+((verdict$1) = (verdict));
+((countI$1) = (7));
+not(((countI$1) = (7)));
+"Precondition predicate";
+((1) : (NAT));
+((count$1 + 1) <= 10);
+"Refinement is correct";
+((countI$1) = ((count$1 + 1)));
+((count) = (count$1)) & ((countI) = (countI$1));
+((6) = (count$1));
+((countI) = (6));
+((nn) : (NAT))
+END
+&
+THEORY EnumerateX
+END

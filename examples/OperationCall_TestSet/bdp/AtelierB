@@ -1,0 +1,11 @@
+ATB*ATB*Encoding:UTF-8
+ATB*POG*Generate_Obvious_PO:FALSE
+ATB*POG*Generate_WD_PO:TRUE
+ATB*ATB*Proof_Obligations_Generator_NG:TRUE
+ATB*PR*Use_Rule_Package:?
+ATB*ATB*TypeChecker_Command:TC32.kin
+ATB*ATB*Proof_Obligations_Generator_Command:PO32.kin
+ATB*ATB*Prover_Command:MU32.kin
+ATB*ATB*ML_Command:ML32.kin
+ATB*BCOMP*MAXINT_value:2147483647
+ATB*BCOMP*MININT_value:-2147483648

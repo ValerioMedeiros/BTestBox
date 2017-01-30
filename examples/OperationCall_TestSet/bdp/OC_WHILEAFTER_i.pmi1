@@ -1,0 +1,68 @@
+﻿THEORY BalanceX IS
+  OC_WHILEAFTER_i,16,2,0,13,0,0,1;
+  opOC_WHILEAFTER,16,2,0,13,0,0,1
+END
+&
+THEORY ProofState IS
+  Proved(Util);
+  Proved(3);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(Util);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0)
+END
+&
+THEORY MethodList IS
+  pp(rp.1 | 5);
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pp(rp.1 | 5);
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr
+END
+&
+THEORY PassList IS
+  Force(0),(?;0;1;2;3);
+  Force(3),(?;0;1;2);
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),(?;0;1;2;3);
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version IS
+  PRVersion("svn")(CLT == "svn")
+END

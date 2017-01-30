@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<db_xml>
+    <atelierb version="3_7_ubuntu-cvs" />
+    <project decomp_dir="C:\Users\Diego Oliveira\Documents\binstall_projects\Clauses_TestSet\bdp\expand_src" old_decomp_dir="C:\Users\Diego Oliveira\Documents\binstall_projects\Clauses_TestSet\bdp\src">
+        <!-- Definition directory list -->
+        <!-- Component file list -->
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchToBeImported" suffix="mch" user="Diego">
+            <component name="MchToBeImported" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchToExtend" suffix="mch" user="Diego">
+            <component name="MchToExtend" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchToExtend_i" suffix="imp" user="Diego">
+            <component name="MchToExtend_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithAConstants" suffix="mch" user="Diego">
+            <component name="MchWithAConstants" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithAConstants_i" suffix="imp" user="Diego">
+            <component name="MchWithAConstants_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithCConstants" suffix="mch" user="Diego">
+            <component name="MchWithCConstants" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithCConstants_i" suffix="imp" user="Diego">
+            <component name="MchWithCConstants_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithConstants" suffix="mch" user="Diego">
+            <component name="MchWithConstants" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithConstants_i" suffix="imp" user="Diego">
+            <component name="MchWithConstants_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithConstraints" suffix="mch" user="Diego">
+            <component name="MchWithConstraints" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithConstraints_i" suffix="imp" user="Diego">
+            <component name="MchWithConstraints_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithExtends" suffix="mch" user="Diego">
+            <component name="MchWithExtends" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithExtends_i" suffix="imp" user="Diego">
+            <component name="MchWithExtends_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithLocalOperations" suffix="mch" user="Diego">
+            <component name="MchWithLocalOperations" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithLocalOperations_i" suffix="imp" user="Diego">
+            <component name="MchWithLocalOperations_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithPromotes" suffix="mch" user="Diego">
+            <component name="MchWithPromotes" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithPromotes_i" suffix="imp" user="Diego">
+            <component name="MchWithPromotes_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithSets" suffix="mch" user="Diego">
+            <component name="MchWithSets" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithSets_i" suffix="imp" user="Diego">
+            <component name="MchWithSets_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithVariables" suffix="mch" user="Diego">
+            <component name="MchWithVariables" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="MchWithVariables_i" suffix="imp" user="Diego">
+            <component name="MchWithVariables_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="TestMch" suffix="mch" user="Diego">
+            <component name="TestMch" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/Clauses_TestSet" name="TestMch_i" suffix="imp" user="Diego">
+            <component name="TestMch_i" type="implementation" />
+        </component_file>
+    </project>
+</db_xml>

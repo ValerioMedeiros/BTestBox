@@ -1,0 +1,20 @@
+/* IMP_OC_NONDET_MCH_ELSE_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION IMP_OC_NONDET_MCH_ELSE_i
+REFINES NONDET_MCH_ELSE
+
+OPERATIONS
+    res <-- opNONDET_MCH_ELSE(xx, yy) =
+    PRE xx : NAT & yy : NAT
+    THEN
+        CHOICE
+            res := xx
+        OR
+            res := yy
+        END
+    END
+
+ END

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<db_xml>
+    <atelierb version="3_7_ubuntu-cvs" />
+    <project decomp_dir="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet\bdp\expand_src" old_decomp_dir="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet\bdp\src">
+        <!-- Definition directory list -->
+        <definition_dir path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" />
+        <!-- Component file list -->
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="duoseq_while_else" suffix="mch" user="Diego">
+            <component name="duoseq_while_else" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="duoseq_while_else_i" suffix="imp" user="Diego">
+            <component name="duoseq_while_else_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="duoseq_while_nestedwhile" suffix="mch" user="Diego">
+            <component name="duoseq_while_nestedwhile" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="duoseq_while_nestedwhile_i" suffix="imp" user="Diego">
+            <component name="duoseq_while_nestedwhile_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_case" suffix="mch" user="Diego">
+            <component name="nested_case_case" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_case_i" suffix="imp" user="Diego">
+            <component name="nested_case_case_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_else" suffix="mch" user="Diego">
+            <component name="nested_case_else" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_else_i" suffix="imp" user="Diego">
+            <component name="nested_case_else_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_if" suffix="mch" user="Diego">
+            <component name="nested_case_if" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_if_i" suffix="imp" user="Diego">
+            <component name="nested_case_if_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_while" suffix="mch" user="Diego">
+            <component name="nested_case_while" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_case_while_i" suffix="imp" user="Diego">
+            <component name="nested_case_while_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_case" suffix="mch" user="Diego">
+            <component name="nested_else_case" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_case_i" suffix="imp" user="Diego">
+            <component name="nested_else_case_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_else" suffix="mch" user="Diego">
+            <component name="nested_else_else" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_else_i" suffix="imp" user="Diego">
+            <component name="nested_else_else_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_if" suffix="mch" user="Diego">
+            <component name="nested_else_if" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_if_i" suffix="imp" user="Diego">
+            <component name="nested_else_if_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_while" suffix="mch" user="Diego">
+            <component name="nested_else_while" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_else_while_i" suffix="imp" user="Diego">
+            <component name="nested_else_while_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_case" suffix="mch" user="Diego">
+            <component name="nested_if_case" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_case_i" suffix="imp" user="Diego">
+            <component name="nested_if_case_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_else" suffix="mch" user="Diego">
+            <component name="nested_if_else" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_else_i" suffix="imp" user="Diego">
+            <component name="nested_if_else_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_if" suffix="mch" user="Diego">
+            <component name="nested_if_if" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_if_i" suffix="imp" user="Diego">
+            <component name="nested_if_if_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_while" suffix="mch" user="Diego">
+            <component name="nested_if_while" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_if_while_i" suffix="imp" user="Diego">
+            <component name="nested_if_while_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_case" suffix="mch" user="Diego">
+            <component name="nested_while_case" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_case_i" suffix="imp" user="Diego">
+            <component name="nested_while_case_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_else" suffix="mch" user="Diego">
+            <component name="nested_while_else" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_else_i" suffix="imp" user="Diego">
+            <component name="nested_while_else_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_if" suffix="mch" user="Diego">
+            <component name="nested_while_if" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_if_i" suffix="imp" user="Diego">
+            <component name="nested_while_if_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_while" suffix="mch" user="Diego">
+            <component name="nested_while_while" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_while_i" suffix="imp" user="Diego">
+            <component name="nested_while_while_i" type="implementation" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_whileseq" suffix="mch" user="Diego">
+            <component name="nested_while_whileseq" type="specification" />
+        </component_file>
+        <component_file path="C:\Users\Diego Oliveira\Documents\projects\DoubleStatements_TestSet" name="nested_while_whileseq_i" suffix="imp" user="Diego">
+            <component name="nested_while_whileseq_i" type="implementation" />
+        </component_file>
+    </project>
+</db_xml>

@@ -1,0 +1,26 @@
+THEORY ProofList IS
+_f(1) & _f(3) & _f(4) & _f(2) & RandomInc.1,(_f(10) => _f(16));
+_f(1) & _f(3) & _f(4) & _f(2) & Inc.1,(_f(8) & _f(9) & _f(7) & _f(10) & _f(11) => _f(12))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((count) : (NAT));
+((count) = (count$1));
+((nn) : (NAT)) & ((count + nn) +1 <= 50);
+((count$1 + nn) <= 50);
+not(((count$1 + nn) <= 50));
+((nn) : (NAT));
+((count$1 + nn) +1 <= 50);
+"Refinement is correct";
+"Check invariant ((count) = (count$1))";
+(((count$1 + nn)) = (count$1));
+((nn) : (NAT)) & (0 <= (count - nn));
+(0 <= (count$1 - nn));
+not((0 <= (count$1 - nn)));
+#(nn).(((nn) : (((0) .. ((50 - count$1))))) & (((count$1 + nn)) = (count$1)))
+END
+&
+THEORY EnumerateX
+END

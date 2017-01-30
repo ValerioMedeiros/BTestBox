@@ -1,0 +1,58 @@
+IMPLEMENTATION
+    runTest_CLAUSE_MchWithSEES_i
+
+REFINES
+    runTest_CLAUSE_MchWithSEES
+
+IMPORTS
+    TestSet_CLAUSE_MchWithSEES
+
+LOCAL_OPERATIONS
+    verdict <-- testguestArrived =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testguestLeaved =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testenterHouse =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testleaveHouse =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testguestArrived =
+    BEGIN
+        verdict <-- TEST_0_guestArrived
+    END;
+
+    verdict <-- testguestLeaved =
+    BEGIN
+        verdict <-- TEST_0_guestLeaved
+    END;
+
+    verdict <-- testenterHouse =
+    BEGIN
+        verdict <-- TEST_0_enterHouse
+    END;
+
+    verdict <-- testleaveHouse =
+    BEGIN
+        verdict <-- TEST_0_leaveHouse
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1, v2, v3 IN
+            v0 <-- testguestArrived;
+            v1 <-- testguestLeaved;
+            v2 <-- testenterHouse;
+            v3 <-- testleaveHouse;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

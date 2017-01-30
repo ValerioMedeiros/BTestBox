@@ -1,0 +1,11 @@
+/* MchWithExtends_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithExtends_i
+REFINES MchWithExtends
+
+EXTENDS
+    MchToExtend
+END

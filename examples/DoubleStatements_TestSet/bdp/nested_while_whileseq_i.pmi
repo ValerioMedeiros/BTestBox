@@ -1,0 +1,98 @@
+﻿THEORY BalanceX IS
+  nested_while_whileseq_i,26,4,0,22,0,0,0;
+  opnested_while_whileseq,26,4,0,22,0,0,0
+END
+&
+THEORY ProofState IS
+  Proved(Util);
+  Proved(Util);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(Util);
+  Proved(Util);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0)
+END
+&
+THEORY MethodList IS
+  pp(rp.1 | 5);
+  pp(rp.1 | 5);
+  pr;
+  pr;
+  pr;
+  pp(rp.1 | 5);
+  pp(rp.1 | 5);
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr
+END
+&
+THEORY PassList IS
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version IS
+  PRVersion("svn")(CLT == "svn")
+END

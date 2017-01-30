@@ -1,0 +1,70 @@
+IMPLEMENTATION
+    TestSet_PATH_duoseq_while_nestedwhile_i
+
+REFINES
+    TestSet_PATH_duoseq_while_nestedwhile
+
+IMPORTS
+    duoseq_while_nestedwhile
+
+OPERATIONS
+    verdict <-- TEST_0_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(1, 0);
+            IF aux1 = 1 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(2, 1);
+            IF aux1 = 2 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(2, 1);
+            IF aux1 = 2 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_opduoseq_while_nestedwhile =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opduoseq_while_nestedwhile(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

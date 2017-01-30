@@ -1,0 +1,54 @@
+IMPLEMENTATION
+    runTest_BRANCH_LockMachine_i
+
+REFINES
+    runTest_BRANCH_LockMachine
+
+IMPORTS
+    TestSet_BRANCH_LockMachine
+
+LOCAL_OPERATIONS
+    verdict <-- testopenVault =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testcloseVault =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopenVault =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_openVault;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testcloseVault =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_closeVault;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- testopenVault;
+            v1 <-- testcloseVault;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

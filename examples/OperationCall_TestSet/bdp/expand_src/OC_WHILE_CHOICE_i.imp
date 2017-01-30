@@ -1,0 +1,31 @@
+﻿/* OC_WHILE_CHOICE_i
+ * Author: Diego Oliveira
+ * Creation date: 17/11/2016
+ */
+
+IMPLEMENTATION OC_WHILE_CHOICE_i
+REFINES OC_WHILE_CHOICE
+
+IMPORTS
+    NDET_WHILE_CHOICE
+
+OPERATIONS
+    res <-- opOC_WHILE_CHOICE ( nn ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res := 0 ;
+            WHILE ii < nn DO
+                ii := ii + 1 ;
+                res <-- opNDET_WHILE_CHOICE
+            INVARIANT res : { 0 , 5 , 10 } & 0 <= ii & ii <= nn
+            VARIANT nn - ii
+            END ;
+            IF res = 5 THEN
+                res := nn
+            ELSE
+                res := 0
+            END
+        END
+    END
+END

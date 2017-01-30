@@ -1,0 +1,54 @@
+IMPLEMENTATION
+    runTest_CODE_MchIncludingMchWithSEES_i
+
+REFINES
+    runTest_CODE_MchIncludingMchWithSEES
+
+IMPORTS
+    TestSet_CODE_MchIncludingMchWithSEES
+
+LOCAL_OPERATIONS
+    verdict <-- testleavingTheHouse =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testenteringTheHouse =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testleavingTheHouse =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_leavingTheHouse;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testenteringTheHouse =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_enteringTheHouse;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- testleavingTheHouse;
+            v1 <-- testenteringTheHouse;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

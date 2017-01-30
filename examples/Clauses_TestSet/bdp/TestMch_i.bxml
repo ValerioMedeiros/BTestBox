@@ -1,0 +1,250 @@
+<Machine name='TestMch_i' type='implementation'>
+<Abstraction>TestMch</Abstraction>
+<Imports>
+<Attr>
+<Pos l='9' c='1' s='7'/>
+</Attr>
+<Referenced_Machine>
+<Attr>
+<Pos l='10' c='5' s='15'/>
+</Attr>
+<Name>MchToBeImported</Name>
+</Referenced_Machine>
+</Imports>
+<Concrete_Variables>
+<Attr>
+<Pos l='12' c='1' s='18'/>
+</Attr>
+<Id value='countI' typref='2701647786'>
+<Attr>
+<Pos l='13' c='5' s='6'/>
+</Attr>
+</Id>
+</Concrete_Variables>
+<Invariant>
+<Attr>
+<Pos l='15' c='1' s='9'/>
+</Attr>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='16' c='12' s='1'/>
+</Attr>
+<Id value='countI' typref='2701647786'>
+<Attr>
+<Pos l='16' c='5' s='6'/>
+</Attr>
+</Id>
+<Id value='count' typref='2701647786'>
+<Attr>
+<Pos l='16' c='14' s='5'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='18' c='1' s='14'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='19' c='12' s='2'/>
+</Attr>
+<Variables>
+<Id value='countI' typref='2701647786'>
+<Attr>
+<Pos l='19' c='5' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='19' c='15' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Initialisation>
+<Local_Operations>
+<Attr>
+<Pos l='21' c='1' s='16'/>
+</Attr>
+<Operation name='set_variables_test_op_1'>
+<Attr>
+<Pos l='22' c='5' s='23'/>
+</Attr>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='22' c='37' s='2'/>
+</Attr>
+<Variables>
+<Id value='count' typref='2701647786'>
+<Attr>
+<Pos l='22' c='31' s='5'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='6' typref='2701647786'>
+<Attr>
+<Pos l='22' c='40' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Local_Operations>
+<Operations>
+<Attr>
+<Pos l='21' c='1' s='16'/>
+</Attr>
+<Operation name='set_variables_test_op_1'>
+<Attr>
+<Pos l='25' c='5' s='23'/>
+</Attr>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='25' c='38' s='2'/>
+</Attr>
+<Variables>
+<Id value='countI' typref='2701647786'>
+<Attr>
+<Pos l='25' c='31' s='6'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='6' typref='2701647786'>
+<Attr>
+<Pos l='25' c='41' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+<Operation name='test_op_1'>
+<Attr>
+<Pos l='27' c='5' s='7' endLine='36'/>
+</Attr>
+<Output_Parameters>
+<Id value='verdict' typref='2043437594'>
+<Attr>
+<Pos l='27' c='5' s='7'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Body>
+<Nary_Sub op=';'>
+<Operation_Call>
+<Attr>
+<Pos l='29' c='9' s='23'/>
+</Attr>
+<Name>
+<Id value='set_variables_test_op_1'>
+<Attr>
+<Pos l='29' c='9' s='23'/>
+</Attr>
+</Id>
+</Name>
+</Operation_Call>
+<Operation_Call>
+<Attr>
+<Pos l='30' c='12' s='0'/>
+</Attr>
+<Name>
+<Id value='Inc'>
+<Attr>
+<Pos l='30' c='9' s='3'/>
+</Attr>
+</Id>
+</Name>
+<Input_Parameters>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='30' c='13' s='1'/>
+</Attr>
+</Integer_Literal>
+</Input_Parameters>
+</Operation_Call>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='31' c='9' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='31' c='19' s='1'/>
+</Attr>
+<Id value='countI' typref='2701647786'>
+<Attr>
+<Pos l='31' c='12' s='6'/>
+</Attr>
+</Id>
+<Integer_Literal value='7' typref='2701647786'>
+<Attr>
+<Pos l='31' c='21' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='32' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='verdict' typref='2043437594'>
+<Attr>
+<Pos l='32' c='13' s='7'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'>
+<Attr>
+<Pos l='32' c='24' s='4'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+<Else>
+<Assignement_Sub>
+<Attr>
+<Pos l='34' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='verdict' typref='2043437594'>
+<Attr>
+<Pos l='34' c='13' s='7'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Boolean_Literal value='FALSE' typref='2043437594'>
+<Attr>
+<Pos l='34' c='24' s='5'/>
+</Attr>
+</Boolean_Literal>
+</Values>
+</Assignement_Sub>
+</Else>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+</TypeInfos>
+
+</Machine>

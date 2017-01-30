@@ -1,0 +1,4 @@
+﻿THEORY User_Pass IS
+Operation(opnested_else_while) & ff(0) & pr & pp(rp.1 | 60);
+Operation(opnested_else_while) & ff(0) & pp(rp.1 | 60)
+END 

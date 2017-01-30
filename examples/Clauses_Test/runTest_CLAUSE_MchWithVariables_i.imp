@@ -1,0 +1,74 @@
+IMPLEMENTATION
+    runTest_CLAUSE_MchWithVariables_i
+
+REFINES
+    runTest_CLAUSE_MchWithVariables
+
+IMPORTS
+    TestSet_CLAUSE_MchWithVariables
+
+LOCAL_OPERATIONS
+    verdict <-- testopIncCount =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testopRelease =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testresetCount =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testgetCount =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopIncCount =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_opIncCount;
+            v1 <-- TEST_1_opIncCount;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testopRelease =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_opRelease;
+            v1 <-- TEST_1_opRelease;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testresetCount =
+    BEGIN
+        verdict <-- TEST_0_resetCount
+    END;
+
+    verdict <-- testgetCount =
+    BEGIN
+        verdict <-- TEST_0_getCount
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1, v2, v3 IN
+            v0 <-- testopIncCount;
+            v1 <-- testopRelease;
+            v2 <-- testresetCount;
+            v3 <-- testgetCount;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

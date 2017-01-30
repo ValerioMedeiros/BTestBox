@@ -1,0 +1,31 @@
+IMPLEMENTATION
+    runTest_CLAUSE_assig_i
+
+REFINES
+    runTest_CLAUSE_assig
+
+IMPORTS
+    TestSet_CLAUSE_assig
+
+LOCAL_OPERATIONS
+    verdict <-- testopassig =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopassig =
+    BEGIN
+        verdict <-- TEST_0_opassig
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopassig;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

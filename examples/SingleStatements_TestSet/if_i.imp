@@ -1,0 +1,17 @@
+/* if_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION if_i
+REFINES if
+
+OPERATIONS
+    res <-- opif(xx)=
+    BEGIN
+        IF xx < 5 THEN
+            res := 0
+        END
+    END
+
+ END

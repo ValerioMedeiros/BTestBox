@@ -1,0 +1,49 @@
+IMPLEMENTATION
+    runTest_CLAUSE_MchToExtend_i
+
+REFINES
+    runTest_CLAUSE_MchToExtend
+
+IMPORTS
+    TestSet_CLAUSE_MchToExtend
+
+LOCAL_OPERATIONS
+    verdict <-- testInc =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testDec =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testRandomInc =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testInc =
+    BEGIN
+        verdict <-- TEST_0_Inc
+    END;
+
+    verdict <-- testDec =
+    BEGIN
+        verdict <-- TEST_0_Dec
+    END;
+
+    verdict <-- testRandomInc =
+    BEGIN
+        verdict <-- TEST_0_RandomInc
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1, v2 IN
+            v0 <-- testInc;
+            v1 <-- testDec;
+            v2 <-- testRandomInc;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

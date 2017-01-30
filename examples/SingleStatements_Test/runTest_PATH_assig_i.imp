@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_PATH_assig_i
+
+REFINES
+    runTest_PATH_assig
+
+IMPORTS
+    TestSet_PATH_assig
+
+LOCAL_OPERATIONS
+    verdict <-- testopassig =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopassig =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opassig;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopassig;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

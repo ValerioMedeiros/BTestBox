@@ -1,0 +1,14 @@
+/* NDET_WHILE_CHOICE_i
+ * Author: Diego Oliveira
+ * Creation date: 17/11/2016
+ */
+
+IMPLEMENTATION NDET_WHILE_CHOICE_i
+REFINES NDET_WHILE_CHOICE
+
+OPERATIONS
+     res <-- opNDET_WHILE_CHOICE = res := 10
+
+
+
+END

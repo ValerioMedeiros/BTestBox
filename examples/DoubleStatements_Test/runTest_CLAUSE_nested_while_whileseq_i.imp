@@ -1,0 +1,41 @@
+IMPLEMENTATION
+    runTest_CLAUSE_nested_while_whileseq_i
+
+REFINES
+    runTest_CLAUSE_nested_while_whileseq
+
+IMPORTS
+    TestSet_CLAUSE_nested_while_whileseq
+
+LOCAL_OPERATIONS
+    verdict <-- testopnested_while_whileseq =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopnested_while_whileseq =
+    BEGIN
+        VAR v0, v1, v2, v3 IN
+            v0 <-- TEST_0_opnested_while_whileseq;
+            v1 <-- TEST_1_opnested_while_whileseq;
+            v2 <-- TEST_2_opnested_while_whileseq;
+            v3 <-- TEST_3_opnested_while_whileseq;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopnested_while_whileseq;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

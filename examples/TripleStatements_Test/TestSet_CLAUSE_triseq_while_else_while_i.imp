@@ -1,0 +1,46 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_triseq_while_else_while_i
+
+REFINES
+    TestSet_CLAUSE_triseq_while_else_while
+
+IMPORTS
+    triseq_while_else_while
+
+OPERATIONS
+    verdict <-- TEST_0_optriseq_while_else_while =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriseq_while_else_while(1);
+            IF aux1 = 1 & aux2 = 0 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_optriseq_while_else_while =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriseq_while_else_while(0);
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_optriseq_while_else_while =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriseq_while_else_while(5);
+            IF aux1 = 5 & aux2 = 5 & aux3 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

@@ -1,0 +1,870 @@
+<Machine name='triple_else_while_case_i' type='implementation'>
+    <Abstraction>triple_else_while_case</Abstraction>
+    <Initialisation>
+        <Skip/>
+    </Initialisation>
+    <Operations>
+        <Operation name='optriple_else_while_case'>
+            <Attr>
+                <Pos l='10' c='5' s='4' endLine='49'/>
+            </Attr>
+            <Output_Parameters>
+                <Id value='res1' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='5' s='4'/>
+                    </Attr>
+                </Id>
+                <Id value='res2' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='11' s='4'/>
+                    </Attr>
+                </Id>
+                <Id value='res3' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='17' s='4'/>
+                    </Attr>
+                </Id>
+            </Output_Parameters>
+            <Input_Parameters>
+                <Id value='xx' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='51' s='2'/>
+                    </Attr>
+                </Id>
+                <Id value='yy' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='55' s='2'/>
+                    </Attr>
+                </Id>
+                <Id value='zz' typref='2701647786'>
+                    <Attr>
+                        <Pos l='10' c='59' s='2'/>
+                    </Attr>
+                </Id>
+            </Input_Parameters>
+            <Body>
+                <VAR_IN>
+                    <Attr>
+                        <Pos l='12' c='9' s='3'/>
+                    </Attr>
+                    <Variables>
+                        <Id value='ii' typref='2701647786'>
+                            <Attr>
+                                <Pos l='12' c='13' s='2'/>
+                            </Attr>
+                        </Id>
+                    </Variables>
+                    <Body>
+                        <Nary_Sub op=';'>
+                            <Assignement_Sub>
+                                <Attr>
+                                    <Pos l='13' c='16' s='2'/>
+                                </Attr>
+                                <Variables>
+                                    <Id value='ii' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='13' c='13' s='2'/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Values>
+                                    <Integer_Literal value='0' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='13' c='19' s='1'/>
+                                        </Attr>
+                                    </Integer_Literal>
+                                </Values>
+                            </Assignement_Sub>
+                            <Assignement_Sub>
+                                <Attr>
+                                    <Pos l='14' c='18' s='2'/>
+                                </Attr>
+                                <Variables>
+                                    <Id value='res2' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='14' c='13' s='4'/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Values>
+                                    <Id value='ii' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='14' c='21' s='2'/>
+                                        </Attr>
+                                    </Id>
+                                </Values>
+                            </Assignement_Sub>
+                            <Assignement_Sub>
+                                <Attr>
+                                    <Pos l='14' c='30' s='2'/>
+                                </Attr>
+                                <Variables>
+                                    <Id value='res3' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='14' c='25' s='4'/>
+                                        </Attr>
+                                    </Id>
+                                </Variables>
+                                <Values>
+                                    <Id value='zz' typref='2701647786'>
+                                        <Attr>
+                                            <Pos l='14' c='33' s='2'/>
+                                        </Attr>
+                                    </Id>
+                                </Values>
+                            </Assignement_Sub>
+                            <If_Sub elseif='no'>
+                                <Attr>
+                                    <Pos l='15' c='13' s='2'/>
+                                </Attr>
+                                <Condition>
+                                    <Exp_Comparison op='&lt;'>
+                                        <Attr>
+                                            <Pos l='15' c='19' s='1'/>
+                                        </Attr>
+                                        <Id value='xx' typref='2701647786'>
+                                            <Attr>
+                                                <Pos l='15' c='16' s='2'/>
+                                            </Attr>
+                                        </Id>
+                                        <Integer_Literal value='5' typref='2701647786'>
+                                            <Attr>
+                                                <Pos l='15' c='21' s='1'/>
+                                            </Attr>
+                                        </Integer_Literal>
+                                    </Exp_Comparison>
+                                </Condition>
+                                <Then>
+                                    <Nary_Sub op=';'>
+                                        <Assignement_Sub>
+                                            <Attr>
+                                                <Pos l='16' c='22' s='2'/>
+                                            </Attr>
+                                            <Variables>
+                                                <Id value='res1' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='16' c='17' s='4'/>
+                                                    </Attr>
+                                                </Id>
+                                            </Variables>
+                                            <Values>
+                                                <Integer_Literal value='0' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='16' c='25' s='1'/>
+                                                    </Attr>
+                                                </Integer_Literal>
+                                            </Values>
+                                        </Assignement_Sub>
+                                        <While>
+                                            <Attr>
+                                                <Pos l='17' c='17' s='5'/>
+                                            </Attr>
+                                            <Condition>
+                                                <Exp_Comparison op='&lt;'>
+                                                    <Attr>
+                                                        <Pos l='17' c='26' s='1'/>
+                                                    </Attr>
+                                                    <Id value='ii' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='17' c='23' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id value='yy' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='17' c='28' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                            </Condition>
+                                            <Body>
+                                                <Nary_Sub op=';'>
+                                                    <Case_Sub>
+                                                        <Attr>
+                                                            <Pos l='18' c='21' s='4'/>
+                                                        </Attr>
+                                                        <Value>
+                                                            <Id value='zz' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='18' c='26' s='2'/>
+                                                                </Attr>
+                                                            </Id>
+                                                        </Value>
+                                                        <Choices>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='19' c='25' s='6'/>
+                                                                </Attr>
+                                                                <Value>
+                                                                    <Integer_Literal value='0' typref='2701647786'>
+                                                                        <Attr>
+                                                                            <Pos l='19' c='32' s='1'/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                </Value>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='20' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='20' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='20' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='20' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='20' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='20' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='20' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='20' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='21' c='25' s='2'/>
+                                                                </Attr>
+                                                                <Value>
+                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                        <Attr>
+                                                                            <Pos l='21' c='28' s='1'/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                </Value>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='22' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='22' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='22' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='22' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='22' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='22' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='22' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='22' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                        </Choices>
+                                                        <Else>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='23' c='25' s='4'/>
+                                                                </Attr>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='24' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='24' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='24' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='24' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='24' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='24' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='24' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='24' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                        </Else>
+                                                    </Case_Sub>
+                                                    <Assignement_Sub>
+                                                        <Attr>
+                                                            <Pos l='27' c='24' s='2'/>
+                                                        </Attr>
+                                                        <Variables>
+                                                            <Id value='ii' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='27' c='21' s='2'/>
+                                                                </Attr>
+                                                            </Id>
+                                                        </Variables>
+                                                        <Values>
+                                                            <Binary_Exp op='+' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='27' c='30' s='1'/>
+                                                                </Attr>
+                                                                <Id value='ii' typref='2701647786'>
+                                                                    <Attr>
+                                                                        <Pos l='27' c='27' s='2'/>
+                                                                    </Attr>
+                                                                </Id>
+                                                                <Integer_Literal value='1' typref='2701647786'>
+                                                                    <Attr>
+                                                                        <Pos l='27' c='32' s='1'/>
+                                                                    </Attr>
+                                                                </Integer_Literal>
+                                                            </Binary_Exp>
+                                                        </Values>
+                                                    </Assignement_Sub>
+                                                </Nary_Sub>
+                                            </Body>
+                                            <Invariant>
+                                                <Nary_Pred op='&amp;'>
+                                                    <Exp_Comparison op='&lt;='>
+                                                        <Attr>
+                                                            <Pos l='28' c='29' s='2'/>
+                                                        </Attr>
+                                                        <Integer_Literal value='0' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='27' s='1'/>
+                                                            </Attr>
+                                                        </Integer_Literal>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='32' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='&lt;='>
+                                                        <Attr>
+                                                            <Pos l='28' c='40' s='2'/>
+                                                        </Attr>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='37' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='yy' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='43' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='='>
+                                                        <Attr>
+                                                            <Pos l='28' c='53' s='1'/>
+                                                        </Attr>
+                                                        <Id value='res2' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='48' s='4'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='55' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='='>
+                                                        <Attr>
+                                                            <Pos l='28' c='65' s='1'/>
+                                                        </Attr>
+                                                        <Id value='res3' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='60' s='4'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='zz' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='28' c='67' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                </Nary_Pred>
+                                            </Invariant>
+                                            <Variant>
+                                                <Binary_Exp op='-' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='29' c='28' s='1'/>
+                                                    </Attr>
+                                                    <Id value='yy' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='29' c='25' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id value='ii' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='29' c='30' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Binary_Exp>
+                                            </Variant>
+                                        </While>
+                                    </Nary_Sub>
+                                </Then>
+                                <Else>
+                                    <Nary_Sub op=';'>
+                                        <Assignement_Sub>
+                                            <Attr>
+                                                <Pos l='32' c='22' s='2'/>
+                                            </Attr>
+                                            <Variables>
+                                                <Id value='res1' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='32' c='17' s='4'/>
+                                                    </Attr>
+                                                </Id>
+                                            </Variables>
+                                            <Values>
+                                                <Id value='xx' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='32' c='25' s='2'/>
+                                                    </Attr>
+                                                </Id>
+                                            </Values>
+                                        </Assignement_Sub>
+                                        <While>
+                                            <Attr>
+                                                <Pos l='33' c='17' s='5'/>
+                                            </Attr>
+                                            <Condition>
+                                                <Exp_Comparison op='&lt;'>
+                                                    <Attr>
+                                                        <Pos l='33' c='26' s='1'/>
+                                                    </Attr>
+                                                    <Id value='ii' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='33' c='23' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id value='yy' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='33' c='28' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Exp_Comparison>
+                                            </Condition>
+                                            <Body>
+                                                <Nary_Sub op=';'>
+                                                    <Case_Sub>
+                                                        <Attr>
+                                                            <Pos l='34' c='21' s='4'/>
+                                                        </Attr>
+                                                        <Value>
+                                                            <Id value='zz' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='34' c='26' s='2'/>
+                                                                </Attr>
+                                                            </Id>
+                                                        </Value>
+                                                        <Choices>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='35' c='25' s='6'/>
+                                                                </Attr>
+                                                                <Value>
+                                                                    <Integer_Literal value='0' typref='2701647786'>
+                                                                        <Attr>
+                                                                            <Pos l='35' c='32' s='1'/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                </Value>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='36' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='36' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='36' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='36' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='36' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='36' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='36' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='36' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='37' c='25' s='2'/>
+                                                                </Attr>
+                                                                <Value>
+                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                        <Attr>
+                                                                            <Pos l='37' c='28' s='1'/>
+                                                                        </Attr>
+                                                                    </Integer_Literal>
+                                                                </Value>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='38' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='38' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='38' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='38' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='38' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='38' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='38' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='38' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                        </Choices>
+                                                        <Else>
+                                                            <Choice>
+                                                                <Attr>
+                                                                    <Pos l='39' c='25' s='4'/>
+                                                                </Attr>
+                                                                <Then>
+                                                                    <Nary_Sub op=';'>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='40' c='34' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res2' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='40' c='29' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Binary_Exp op='+' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='40' c='40' s='1'/>
+                                                                                    </Attr>
+                                                                                    <Id value='ii' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='40' c='37' s='2'/>
+                                                                                        </Attr>
+                                                                                    </Id>
+                                                                                    <Integer_Literal value='1' typref='2701647786'>
+                                                                                        <Attr>
+                                                                                            <Pos l='40' c='42' s='1'/>
+                                                                                        </Attr>
+                                                                                    </Integer_Literal>
+                                                                                </Binary_Exp>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                        <Assignement_Sub>
+                                                                            <Attr>
+                                                                                <Pos l='40' c='50' s='2'/>
+                                                                            </Attr>
+                                                                            <Variables>
+                                                                                <Id value='res3' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='40' c='45' s='4'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Variables>
+                                                                            <Values>
+                                                                                <Id value='zz' typref='2701647786'>
+                                                                                    <Attr>
+                                                                                        <Pos l='40' c='53' s='2'/>
+                                                                                    </Attr>
+                                                                                </Id>
+                                                                            </Values>
+                                                                        </Assignement_Sub>
+                                                                    </Nary_Sub>
+                                                                </Then>
+                                                            </Choice>
+                                                        </Else>
+                                                    </Case_Sub>
+                                                    <Assignement_Sub>
+                                                        <Attr>
+                                                            <Pos l='43' c='24' s='2'/>
+                                                        </Attr>
+                                                        <Variables>
+                                                            <Id value='ii' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='43' c='21' s='2'/>
+                                                                </Attr>
+                                                            </Id>
+                                                        </Variables>
+                                                        <Values>
+                                                            <Binary_Exp op='+' typref='2701647786'>
+                                                                <Attr>
+                                                                    <Pos l='43' c='30' s='1'/>
+                                                                </Attr>
+                                                                <Id value='ii' typref='2701647786'>
+                                                                    <Attr>
+                                                                        <Pos l='43' c='27' s='2'/>
+                                                                    </Attr>
+                                                                </Id>
+                                                                <Integer_Literal value='1' typref='2701647786'>
+                                                                    <Attr>
+                                                                        <Pos l='43' c='32' s='1'/>
+                                                                    </Attr>
+                                                                </Integer_Literal>
+                                                            </Binary_Exp>
+                                                        </Values>
+                                                    </Assignement_Sub>
+                                                </Nary_Sub>
+                                            </Body>
+                                            <Invariant>
+                                                <Nary_Pred op='&amp;'>
+                                                    <Exp_Comparison op='&lt;='>
+                                                        <Attr>
+                                                            <Pos l='44' c='29' s='2'/>
+                                                        </Attr>
+                                                        <Integer_Literal value='0' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='27' s='1'/>
+                                                            </Attr>
+                                                        </Integer_Literal>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='32' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='&lt;='>
+                                                        <Attr>
+                                                            <Pos l='44' c='40' s='2'/>
+                                                        </Attr>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='37' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='yy' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='43' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='='>
+                                                        <Attr>
+                                                            <Pos l='44' c='53' s='1'/>
+                                                        </Attr>
+                                                        <Id value='res2' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='48' s='4'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='ii' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='55' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                    <Exp_Comparison op='='>
+                                                        <Attr>
+                                                            <Pos l='44' c='65' s='1'/>
+                                                        </Attr>
+                                                        <Id value='res3' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='60' s='4'/>
+                                                            </Attr>
+                                                        </Id>
+                                                        <Id value='zz' typref='2701647786'>
+                                                            <Attr>
+                                                                <Pos l='44' c='67' s='2'/>
+                                                            </Attr>
+                                                        </Id>
+                                                    </Exp_Comparison>
+                                                </Nary_Pred>
+                                            </Invariant>
+                                            <Variant>
+                                                <Binary_Exp op='-' typref='2701647786'>
+                                                    <Attr>
+                                                        <Pos l='45' c='28' s='1'/>
+                                                    </Attr>
+                                                    <Id value='yy' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='45' c='25' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                    <Id value='ii' typref='2701647786'>
+                                                        <Attr>
+                                                            <Pos l='45' c='30' s='2'/>
+                                                        </Attr>
+                                                    </Id>
+                                                </Binary_Exp>
+                                            </Variant>
+                                        </While>
+                                    </Nary_Sub>
+                                </Else>
+                            </If_Sub>
+                        </Nary_Sub>
+                    </Body>
+                </VAR_IN>
+            </Body>
+        </Operation>
+    </Operations>
+    <TypeInfos>
+    <Type id='2701647786'>
+        <Id value='INTEGER'/>
+        </Type>
+</TypeInfos>
+    
+</Machine>

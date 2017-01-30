@@ -1,0 +1,96 @@
+/* triple_case_case_while_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_case_case_while_i
+REFINES triple_case_case_while
+
+OPERATIONS
+    res1, res2, res3 <-- optriple_case_case_while(xx, yy, zz)=
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            CASE xx OF
+                EITHER 0 THEN
+                    CASE yy OF
+                        EITHER 0 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        OR 1 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        ELSE
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        END
+                    END
+                OR 1 THEN
+                    CASE yy OF
+                        EITHER 0 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        OR 1 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        ELSE
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        END
+                    END
+                ELSE
+                    CASE yy OF
+                        EITHER 0 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        OR 1 THEN
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        ELSE
+                            WHILE ii < zz DO
+                                ii := ii + 1
+                            INVARIANT 0 <= ii & ii <= zz
+                            VARIANT zz - ii
+                            END;
+                            res1 := xx; res2 := yy; res3 := ii
+                        END
+                    END
+                END
+            END
+        END
+        
+    END
+
+ END

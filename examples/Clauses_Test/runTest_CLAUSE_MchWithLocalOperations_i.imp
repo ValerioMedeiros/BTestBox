@@ -1,0 +1,31 @@
+IMPLEMENTATION
+    runTest_CLAUSE_MchWithLocalOperations_i
+
+REFINES
+    runTest_CLAUSE_MchWithLocalOperations
+
+IMPORTS
+    TestSet_CLAUSE_MchWithLocalOperations
+
+LOCAL_OPERATIONS
+    verdict <-- testopMchWithLocalOperations =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopMchWithLocalOperations =
+    BEGIN
+        verdict <-- TEST_0_opMchWithLocalOperations
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopMchWithLocalOperations;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

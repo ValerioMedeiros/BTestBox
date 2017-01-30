@@ -1,0 +1,22 @@
+THEORY ProofList IS
+_f(1) & _f(4) & opNONDET_MCH_ELSE.2,(_f(7) & _f(8) & _f(6) & _f(9) => _f(11));
+_f(1) & _f(4) & opNONDET_MCH_ELSE.1,(_f(7) & _f(8) & _f(5) & _f(9) => _f(10))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483648) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((res) = (res));
+((res$1) = (res));
+(yy +1 <= xx);
+not((yy +1 <= xx));
+((xx) : (NAT));
+((yy) : (NAT));
+"Refinement is correct";
+((((yy +1 <= xx)) => (((xx) = (xx)))) & ((not((yy +1 <= xx))) => (((xx) = (yy))))) or ((((yy +1 <= xx)) => (((xx) = (xx)))) & ((not((yy +1 <= xx))) => (((xx) = (yy)))));
+((((yy +1 <= xx)) => (((yy) = (xx)))) & ((not((yy +1 <= xx))) => (((yy) = (yy))))) or ((((yy +1 <= xx)) => (((yy) = (xx)))) & ((not((yy +1 <= xx))) => (((yy) = (yy)))));
+((xx) : (NAT)) & ((yy) : (NAT))
+END
+&
+THEORY EnumerateX
+END

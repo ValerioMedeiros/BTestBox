@@ -1,0 +1,36 @@
+/* MchToExtend_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchToExtend_i
+REFINES MchToExtend
+
+INITIALISATION
+    count := 0
+    
+OPERATIONS
+    Inc(nn)=
+    BEGIN
+        VAR sum IN
+            sum := count + nn;
+            IF sum <= 50 THEN
+                count := sum
+            END
+        END
+    END;
+
+    
+    Dec(nn)=
+    BEGIN
+        VAR sub IN
+            sub := count - nn;
+            IF sub >= 0 THEN
+                count := sub
+            END
+        END
+    END;   
+    
+    RandomInc = count := count
+    
+ END

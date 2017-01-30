@@ -1,0 +1,40 @@
+IMPLEMENTATION
+    runTest_CLAUSE_LockMachine_i
+
+REFINES
+    runTest_CLAUSE_LockMachine
+
+IMPORTS
+    TestSet_CLAUSE_LockMachine
+
+LOCAL_OPERATIONS
+    verdict <-- testopenVault =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END;
+
+    verdict <-- testcloseVault =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopenVault =
+    BEGIN
+        verdict <-- TEST_0_openVault
+    END;
+
+    verdict <-- testcloseVault =
+    BEGIN
+        verdict <-- TEST_0_closeVault
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- testopenVault;
+            v1 <-- testcloseVault;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

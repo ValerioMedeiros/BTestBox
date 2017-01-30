@@ -1,0 +1,27 @@
+﻿THEORY BalanceX IS
+  MchToExtend_i,2,0,0,0,0,1,0;
+  Inc,1,0,0,0,0,1,0;
+  RandomInc,1,0,0,0,0,0,0
+END
+&
+THEORY ProofState IS
+  Unproved;
+  Proved(2)
+END
+&
+THEORY MethodList IS
+  ?;
+  pr
+END
+&
+THEORY PassList IS
+  Force(0),(?;0;1;2;3);
+  Force(2),(?;0;1)
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version IS
+  PRVersion("svn")(CLT == "svn")
+END

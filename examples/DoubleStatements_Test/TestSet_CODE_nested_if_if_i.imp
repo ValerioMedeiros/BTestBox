@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_CODE_nested_if_if_i
+
+REFINES
+    TestSet_CODE_nested_if_if
+
+IMPORTS
+    nested_if_if
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_if_if =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_if_if(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

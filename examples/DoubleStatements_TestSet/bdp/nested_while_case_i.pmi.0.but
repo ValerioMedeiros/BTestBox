@@ -1,0 +1,1 @@
+﻿Flag(FileOn("nested_while_case_i.pmi.0.res")) & Set(toto | yy: INTEGER & 0<=yy & yy<=2147483647 & res2$2 = yy => res2$2 = yy)

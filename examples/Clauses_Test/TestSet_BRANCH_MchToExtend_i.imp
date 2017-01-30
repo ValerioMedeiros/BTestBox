@@ -1,0 +1,49 @@
+IMPLEMENTATION
+    TestSet_BRANCH_MchToExtend_i
+
+REFINES
+    TestSet_BRANCH_MchToExtend
+
+IMPORTS
+    MchToExtend
+
+OPERATIONS
+    verdict <-- TEST_0_Inc =
+    BEGIN
+        VAR aux1 IN
+            Inc(0);
+            aux1 <-- OperationForTestGetcountMchToExtend;
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_Dec =
+    BEGIN
+        VAR aux1 IN
+            Dec(0);
+            aux1 <-- OperationForTestGetcountMchToExtend;
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_RandomInc =
+    BEGIN
+        VAR aux1 IN
+            RandomInc;
+            aux1 <-- OperationForTestGetcountMchToExtend;
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

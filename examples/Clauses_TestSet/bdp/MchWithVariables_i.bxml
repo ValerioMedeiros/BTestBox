@@ -1,0 +1,498 @@
+<Machine name='MchWithVariables_i' type='implementation'>
+<Abstraction>MchWithVariables</Abstraction>
+<Values>
+<Attr>
+<Pos l='9' c='1' s='6'/>
+</Attr>
+<Valuation ident='max_count' typref='2701647786'>
+<Attr>
+<Pos l='10' c='5' s='9'/>
+</Attr>
+<Integer_Literal value='10' typref='2701647786'>
+<Attr>
+<Pos l='10' c='17' s='2'/>
+</Attr>
+</Integer_Literal>
+</Valuation>
+</Values>
+<Concrete_Variables>
+<Attr>
+<Pos l='12' c='1' s='18'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='13' c='5' s='8'/>
+</Attr>
+</Id>
+</Concrete_Variables>
+<Invariant>
+<Attr>
+<Pos l='15' c='1' s='9'/>
+</Attr>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='16' c='14' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='16' c='5' s='8'/>
+</Attr>
+</Id>
+<Id value='NAT' typref='3603043417'>
+<Attr>
+<Pos l='16' c='16' s='3'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;='>
+<Attr>
+<Pos l='16' c='31' s='2'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='16' c='22' s='8'/>
+</Attr>
+</Id>
+<Id value='max_count' typref='2701647786'>
+<Attr>
+<Pos l='16' c='34' s='9'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Attr>
+<Pos l='16' c='55' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='16' c='46' s='8'/>
+</Attr>
+</Id>
+<Id value='count' typref='2701647786'>
+<Attr>
+<Pos l='16' c='57' s='5'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Attr>
+<Pos l='18' c='1' s='14'/>
+</Attr>
+<Assignement_Sub>
+<Attr>
+<Pos l='19' c='14' s='2'/>
+</Attr>
+<Variables>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='19' c='5' s='8'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='19' c='17' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Initialisation>
+<Operations>
+<Operation name='opIncCount'>
+<Attr>
+<Pos l='22' c='5' s='3' endLine='33'/>
+</Attr>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='22' c='5' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='22' c='24' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<VAR_IN>
+<Attr>
+<Pos l='24' c='9' s='3'/>
+</Attr>
+<Variables>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='24' c='13' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Body>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='25' c='17' s='2'/>
+</Attr>
+<Variables>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='25' c='13' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='+' typref='2701647786'>
+<Attr>
+<Pos l='25' c='29' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='25' c='20' s='8'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='25' c='31' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='26' c='13' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&lt;'>
+<Attr>
+<Pos l='26' c='20' s='1'/>
+</Attr>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='26' c='16' s='3'/>
+</Attr>
+</Id>
+<Id value='max_count' typref='2701647786'>
+<Attr>
+<Pos l='26' c='22' s='9'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='27' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='27' c='17' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='27' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='28' c='26' s='2'/>
+</Attr>
+<Variables>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='28' c='17' s='8'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='+' typref='2701647786'>
+<Attr>
+<Pos l='28' c='38' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='28' c='29' s='8'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='28' c='40' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Then>
+<Else>
+<Assignement_Sub>
+<Attr>
+<Pos l='30' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='30' c='17' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='30' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Else>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</VAR_IN>
+</Body>
+</Operation>
+<Operation name='opRelease'>
+<Attr>
+<Pos l='35' c='5' s='3' endLine='45'/>
+</Attr>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='35' c='5' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='35' c='23' s='2'/>
+</Attr>
+</Id>
+</Input_Parameters>
+<Body>
+<VAR_IN>
+<Attr>
+<Pos l='37' c='9' s='3'/>
+</Attr>
+<Variables>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='37' c='13' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Body>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='38' c='17' s='2'/>
+</Attr>
+<Variables>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='38' c='13' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='-' typref='2701647786'>
+<Attr>
+<Pos l='38' c='29' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='38' c='20' s='8'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='38' c='31' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+<If_Sub elseif='no'>
+<Attr>
+<Pos l='39' c='13' s='2'/>
+</Attr>
+<Condition>
+<Exp_Comparison op='&lt;'>
+<Attr>
+<Pos l='39' c='20' s='1'/>
+</Attr>
+<Id value='aux' typref='2701647786'>
+<Attr>
+<Pos l='39' c='16' s='3'/>
+</Attr>
+</Id>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='39' c='22' s='1'/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Condition>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='40' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='40' c='17' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='40' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Then>
+<Else>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Attr>
+<Pos l='42' c='21' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='42' c='17' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='1' typref='2701647786'>
+<Attr>
+<Pos l='42' c='24' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Attr>
+<Pos l='42' c='36' s='2'/>
+</Attr>
+<Variables>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='42' c='27' s='8'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Binary_Exp op='-' typref='2701647786'>
+<Attr>
+<Pos l='42' c='48' s='1'/>
+</Attr>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='42' c='39' s='8'/>
+</Attr>
+</Id>
+<Id value='nn' typref='2701647786'>
+<Attr>
+<Pos l='42' c='50' s='2'/>
+</Attr>
+</Id>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Else>
+</If_Sub>
+</Nary_Sub>
+</Body>
+</VAR_IN>
+</Body>
+</Operation>
+<Operation name='resetCount'>
+<Attr>
+<Pos l='47' c='5' s='10'/>
+</Attr>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='47' c='27' s='2'/>
+</Attr>
+<Variables>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='47' c='18' s='8'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'>
+<Attr>
+<Pos l='47' c='30' s='1'/>
+</Attr>
+</Integer_Literal>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+<Operation name='getCount'>
+<Attr>
+<Pos l='49' c='5' s='3'/>
+</Attr>
+<Output_Parameters>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='49' c='5' s='3'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Body>
+<Assignement_Sub>
+<Attr>
+<Pos l='49' c='28' s='2'/>
+</Attr>
+<Variables>
+<Id value='res' typref='2701647786'>
+<Attr>
+<Pos l='49' c='24' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='countImp' typref='2701647786'>
+<Attr>
+<Pos l='49' c='31' s='8'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='3603043417'>
+<Unary_Exp op='POW'>
+<Id value='INTEGER'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

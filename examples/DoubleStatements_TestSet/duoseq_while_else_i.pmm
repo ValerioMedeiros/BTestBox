@@ -1,0 +1,3 @@
+﻿THEORY User_Pass IS
+Operation(opduoseq_while_else) & ff(0) & pp(rp.1 | 5)
+END 

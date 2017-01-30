@@ -1,0 +1,46 @@
+IMPLEMENTATION
+    TestSet_PATH_case_i
+
+REFINES
+    TestSet_PATH_case
+
+IMPORTS
+    case
+
+OPERATIONS
+    verdict <-- TEST_0_opcase =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opcase(2);
+            IF aux1 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opcase =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opcase(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opcase =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opcase(1);
+            IF aux1 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

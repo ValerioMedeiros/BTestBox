@@ -1,0 +1,23 @@
+/* while_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION while_i
+REFINES while
+
+OPERATIONS
+    res <-- opwhile(xx)=
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            WHILE ii < xx DO
+                ii := ii + 1
+            INVARIANT ii >= 0 & ii <= xx
+            VARIANT xx - ii
+            END;
+            res := ii
+        END
+    END
+
+ END

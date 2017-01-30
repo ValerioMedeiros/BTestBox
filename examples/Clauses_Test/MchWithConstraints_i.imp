@@ -1,0 +1,19 @@
+/* MchWithConstraints_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithConstraints_i(max_count)
+REFINES MchWithConstraints
+
+OPERATIONS
+    res <-- opMchWithConstraints(nn)=
+    BEGIN
+        IF nn < max_count THEN
+            res := TRUE
+        ELSE
+            res := FALSE
+        END
+    END
+
+ END

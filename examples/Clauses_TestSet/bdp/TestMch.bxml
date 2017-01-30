@@ -1,0 +1,82 @@
+<Machine name='TestMch' type='abstraction'>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='test_op_1'>
+<Attr>
+<Pos l='9' c='5' s='7' endLine='9'/>
+</Attr>
+<Output_Parameters>
+<Id value='verdict' typref='2043437594'>
+<Attr>
+<Pos l='9' c='5' s='7'/>
+</Attr>
+</Id>
+</Output_Parameters>
+<Body>
+<ANY_Sub>
+<Attr>
+<Pos l='9' c='29' s='3'/>
+</Attr>
+<Variables>
+<Id value='ans' typref='2043437594'>
+<Attr>
+<Pos l='9' c='33' s='3'/>
+</Attr>
+</Id>
+</Variables>
+<Pred>
+<Exp_Comparison op=':'>
+<Attr>
+<Pos l='9' c='47' s='1'/>
+</Attr>
+<Id value='ans' typref='2043437594'>
+<Attr>
+<Pos l='9' c='43' s='3'/>
+</Attr>
+</Id>
+<Id value='BOOL' typref='4282494527'>
+<Attr>
+<Pos l='9' c='49' s='4'/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Pred>
+<Then>
+<Assignement_Sub>
+<Attr>
+<Pos l='9' c='67' s='2'/>
+</Attr>
+<Variables>
+<Id value='verdict' typref='2043437594'>
+<Attr>
+<Pos l='9' c='59' s='7'/>
+</Attr>
+</Id>
+</Variables>
+<Values>
+<Id value='ans' typref='2043437594'>
+<Attr>
+<Pos l='9' c='70' s='3'/>
+</Attr>
+</Id>
+</Values>
+</Assignement_Sub>
+</Then>
+</ANY_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='4282494527'>
+<Unary_Exp op='POW'>
+<Id value='BOOL'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

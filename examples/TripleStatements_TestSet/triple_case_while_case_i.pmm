@@ -1,0 +1,3 @@
+﻿THEORY User_Pass IS
+Operation(optriple_case_while_case) & ff(0) & pr & pp(rp.1 | 60) & pp(rp.1 | 60)
+END 

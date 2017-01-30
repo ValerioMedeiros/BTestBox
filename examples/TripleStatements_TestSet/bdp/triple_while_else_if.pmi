@@ -1,0 +1,12 @@
+THEORY BalanceX IS
+triple_while_else_if,0,0,0,0,0,0,0
+END
+&
+THEORY ProofState
+END
+&
+THEORY MethodList
+END
+&
+THEORY PassList
+END

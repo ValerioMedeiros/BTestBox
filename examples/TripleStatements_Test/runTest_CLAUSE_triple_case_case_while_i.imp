@@ -1,0 +1,67 @@
+IMPLEMENTATION
+    runTest_CLAUSE_triple_case_case_while_i
+
+REFINES
+    runTest_CLAUSE_triple_case_case_while
+
+IMPORTS
+    TestSet_CLAUSE_triple_case_case_while
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriple_case_case_while =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriple_case_case_while =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29 IN
+            v0 <-- TEST_0_optriple_case_case_while;
+            v1 <-- TEST_1_optriple_case_case_while;
+            v2 <-- TEST_2_optriple_case_case_while;
+            v3 <-- TEST_3_optriple_case_case_while;
+            v4 <-- TEST_4_optriple_case_case_while;
+            v5 <-- TEST_5_optriple_case_case_while;
+            v6 <-- TEST_6_optriple_case_case_while;
+            v7 <-- TEST_7_optriple_case_case_while;
+            v8 <-- TEST_8_optriple_case_case_while;
+            v9 <-- TEST_9_optriple_case_case_while;
+            v10 <-- TEST_10_optriple_case_case_while;
+            v11 <-- TEST_11_optriple_case_case_while;
+            v12 <-- TEST_12_optriple_case_case_while;
+            v13 <-- TEST_13_optriple_case_case_while;
+            v14 <-- TEST_14_optriple_case_case_while;
+            v15 <-- TEST_15_optriple_case_case_while;
+            v16 <-- TEST_16_optriple_case_case_while;
+            v17 <-- TEST_17_optriple_case_case_while;
+            v18 <-- TEST_18_optriple_case_case_while;
+            v19 <-- TEST_19_optriple_case_case_while;
+            v20 <-- TEST_20_optriple_case_case_while;
+            v21 <-- TEST_21_optriple_case_case_while;
+            v22 <-- TEST_22_optriple_case_case_while;
+            v23 <-- TEST_23_optriple_case_case_while;
+            v24 <-- TEST_24_optriple_case_case_while;
+            v25 <-- TEST_25_optriple_case_case_while;
+            v26 <-- TEST_26_optriple_case_case_while;
+            v27 <-- TEST_27_optriple_case_case_while;
+            v28 <-- TEST_28_optriple_case_case_while;
+            v29 <-- TEST_29_optriple_case_case_while;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE & v6 = TRUE & v7 = TRUE & v8 = TRUE & v9 = TRUE & v10 = TRUE & v11 = TRUE & v12 = TRUE & v13 = TRUE & v14 = TRUE & v15 = TRUE & v16 = TRUE & v17 = TRUE & v18 = TRUE & v19 = TRUE & v20 = TRUE & v21 = TRUE & v22 = TRUE & v23 = TRUE & v24 = TRUE & v25 = TRUE & v26 = TRUE & v27 = TRUE & v28 = TRUE & v29 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriple_case_case_while;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

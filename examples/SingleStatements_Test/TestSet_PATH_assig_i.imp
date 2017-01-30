@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_PATH_assig_i
+
+REFINES
+    TestSet_PATH_assig
+
+IMPORTS
+    assig
+
+OPERATIONS
+    verdict <-- TEST_0_opassig =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opassig(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

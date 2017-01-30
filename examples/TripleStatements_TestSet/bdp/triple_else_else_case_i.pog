@@ -1,0 +1,3711 @@
+<Proof_Obligations>
+<Define name="B definitions">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="NAT"/>
+<Binary_Exp op="..">
+<Integer_Literal value="0"/>
+<Id value="MAXINT"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="INT"/>
+<Binary_Exp op="..">
+<Id value="MININT"/>
+<Id value="MAXINT"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Nary_Pred>
+</Define>
+<Define name="ctx"/>
+<Define name="seext"/>
+<Define name="mchcst"/>
+<Define name="aprp"/>
+<Define name="abs"/>
+<Define name="inv"/>
+<Define name="ass"/>
+<Define name="imlprp"/>
+<Define name="imprp"/>
+<Define name="imext"/>
+<Proof_Obligation>
+<Comment>Valuation dans une implantation</Comment>
+<Tag>ValuesLemmas</Tag>
+<Tag>CONSTRAINTS</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="imprp"/>
+<Hypothesis>
+<Nary_Pred op="&amp;"/>
+</Hypothesis>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Initialisation dans une implantation</Comment>
+<Tag>Initialisation</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Local_Hyp num="1">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une implantation / Precondition</Comment>
+<Tag>optriple_else_else_case</Tag>
+<Tag>PRECONDITION</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="12"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="10" s="2" c="9"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:2">
+<Attr>
+<Pos l="10" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="23"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:1">
+<Attr>
+<Pos l="10" s="2" c="20"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:2">
+<Attr>
+<Pos l="10" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="34"/>
+</Attr>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:1">
+<Attr>
+<Pos l="10" s="2" c="31"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:2">
+<Attr>
+<Pos l="10" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+<Exp_Comparison op="=">
+<Id value="res1" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:1:1">
+<Attr>
+<Pos l="9" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="res1" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="5"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="res2" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:1:2">
+<Attr>
+<Pos l="9" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="res2" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="11"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="res3" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:1:3">
+<Attr>
+<Pos l="9" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="res3" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="17"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une implantation</Comment>
+<Tag>optriple_else_else_case</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="res1" suffix="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="res1" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="5"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="res2" suffix="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="res2" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="11"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="res3" suffix="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="res3" suffix="" typref="2701647786">
+<Attr>
+<Pos l="9" s="4" c="17"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="7">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="8">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="15" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="9">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="10">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="11">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="12">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="13">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="14">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="15">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="16">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:1:1">
+<Attr>
+<Pos l="17" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="17">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="18">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="19">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="20">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="21">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="22">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="23">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="24">
+<Nary_Pred op="&amp;">
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="15" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:1:1">
+<Attr>
+<Pos l="17" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="25">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="26">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="27">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="28">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="29">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="30">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="31">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="32">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="33">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="25" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="34">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="35">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="36">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="37">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="38">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="39">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="40">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="41">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:1:1">
+<Attr>
+<Pos l="27" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="42">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="43">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="44">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="45">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="46">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="47">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="48">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="49">
+<Nary_Pred op="&amp;">
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="25" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:1:1">
+<Attr>
+<Pos l="27" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="50">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="51">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="52">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="53">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="54">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="55">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="56">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="57">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="58">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="59">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="37" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="60">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="61">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="62">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="63">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="64">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="65">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="66">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="67">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:1:1">
+<Attr>
+<Pos l="39" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="68">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="69">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="70">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="71">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="72">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="73">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="74">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="75">
+<Nary_Pred op="&amp;">
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="37" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:1:1">
+<Attr>
+<Pos l="39" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="76">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="77">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="78">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="79">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="80">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="81">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="82">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="83">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="84">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="47" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="85">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="86">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="87">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="88">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="89">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="90">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="91">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="92">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:1:1">
+<Attr>
+<Pos l="49" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="93">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="94">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="95">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="96">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="97">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="98">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="99">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="100">
+<Nary_Pred op="&amp;">
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="47" s="1" c="28"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Integer_Literal value="1" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:1:1">
+<Attr>
+<Pos l="49" s="1" c="24"/>
+</Attr>
+</Integer_Literal>
+</Nary_Exp>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="101">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="102">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="103">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="12"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="10" s="2" c="9"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:2">
+<Attr>
+<Pos l="10" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="23"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:1">
+<Attr>
+<Pos l="10" s="2" c="20"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:2">
+<Attr>
+<Pos l="10" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="34"/>
+</Attr>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:1">
+<Attr>
+<Pos l="10" s="2" c="31"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:2">
+<Attr>
+<Pos l="10" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="25"/>
+<Ref_Hyp num="8"/>
+<Ref_Hyp num="7"/>
+<Ref_Hyp num="3"/>
+<Ref_Hyp num="1"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="16" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="16" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="16" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="18" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="18" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="18" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="25"/>
+<Ref_Hyp num="16"/>
+<Ref_Hyp num="15"/>
+<Ref_Hyp num="11"/>
+<Ref_Hyp num="9"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="16" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="16" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="16" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="18" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="18" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="18" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="25"/>
+<Ref_Hyp num="24"/>
+<Ref_Hyp num="23"/>
+<Ref_Hyp num="19"/>
+<Ref_Hyp num="17"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="16" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="16" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="16" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:1:1">
+<Attr>
+<Pos l="14" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="18" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="18" s="4" c="38"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:2:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="18" s="4" c="51"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="50"/>
+<Ref_Hyp num="33"/>
+<Ref_Hyp num="32"/>
+<Ref_Hyp num="28"/>
+<Ref_Hyp num="27"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="26" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="26" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="26" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="28" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="28" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="28" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="50"/>
+<Ref_Hyp num="41"/>
+<Ref_Hyp num="40"/>
+<Ref_Hyp num="36"/>
+<Ref_Hyp num="35"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="26" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="26" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="26" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="28" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="28" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="28" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="51"/>
+<Ref_Hyp num="50"/>
+<Ref_Hyp num="49"/>
+<Ref_Hyp num="48"/>
+<Ref_Hyp num="44"/>
+<Ref_Hyp num="43"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="26" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="26" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="26" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="24" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="28" s="4" c="25"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="28" s="4" c="38"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:3:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:2:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="28" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="76"/>
+<Ref_Hyp num="59"/>
+<Ref_Hyp num="58"/>
+<Ref_Hyp num="57"/>
+<Ref_Hyp num="55"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="38" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="38" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="38" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="40" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="40" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="40" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="76"/>
+<Ref_Hyp num="67"/>
+<Ref_Hyp num="66"/>
+<Ref_Hyp num="65"/>
+<Ref_Hyp num="63"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="38" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="38" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="38" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="40" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="40" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="40" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="76"/>
+<Ref_Hyp num="75"/>
+<Ref_Hyp num="74"/>
+<Ref_Hyp num="73"/>
+<Ref_Hyp num="71"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="38" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="38" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="38" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:1:1">
+<Attr>
+<Pos l="36" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="40" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Integer_Literal value="0" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Integer_Literal>
+<Integer_Literal value="0" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="40" s="4" c="39"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:2:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:2:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="40" s="4" c="52"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="101"/>
+<Ref_Hyp num="84"/>
+<Ref_Hyp num="83"/>
+<Ref_Hyp num="82"/>
+<Ref_Hyp num="81"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="48" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="48" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="48" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="50" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="50" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:1:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="50" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="101"/>
+<Ref_Hyp num="92"/>
+<Ref_Hyp num="91"/>
+<Ref_Hyp num="90"/>
+<Ref_Hyp num="89"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="48" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="48" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="48" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="50" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="50" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:2:2:2:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="50" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal>
+<Tag>Refinement is correct</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="103"/>
+<Ref_Hyp num="102"/>
+<Ref_Hyp num="101"/>
+<Ref_Hyp num="100"/>
+<Ref_Hyp num="99"/>
+<Ref_Hyp num="98"/>
+<Ref_Hyp num="97"/>
+</Nary_Pred>
+<Nary_Pred op="or">
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:1:1:1">
+<Attr>
+<Pos l="48" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:2:1:1">
+<Attr>
+<Pos l="48" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:1:2:1:3:1:1">
+<Attr>
+<Pos l="48" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+<Binary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+<Nary_Exp op="{">
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:1:1">
+<Attr>
+<Pos l="46" s="2" c="22"/>
+</Attr>
+</Id>
+</Nary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:1:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:1:1:1,">
+<Attr>
+<Pos l="10" s="4" c="5"/>
+</Attr>
+</Id>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:1:1:1">
+<Attr>
+<Pos l="50" s="4" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:2:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:2,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:2:1:1,">
+<Attr>
+<Pos l="10" s="4" c="11"/>
+</Attr>
+</Id>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:2:1:1">
+<Attr>
+<Pos l="50" s="4" c="39"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="zz" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:3:2:1,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:1:3,C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:3:1:3:1:1:1:3:1:1,">
+<Attr>
+<Pos l="10" s="4" c="17"/>
+</Attr>
+</Id>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:2:1,,C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:4:1:3:1:3:1:2:2:2:1:3:1:1">
+<Attr>
+<Pos l="50" s="4" c="53"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+</Proof_Obligation>
+<Proof_Obligation>
+<Tag>WellDefinednessProperties</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imprp"/>
+<Hypothesis/>
+</Proof_Obligation>
+<Proof_Obligation>
+<Tag>WellDefinednessInvariant</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+</Proof_Obligation>
+<Proof_Obligation>
+<Tag>WellDefinednessInitialisation</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une implementation</Comment>
+<Tag>WellDefinedness_optriple_else_else_case</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="12"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:1">
+<Attr>
+<Pos l="10" s="2" c="9"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:1:2">
+<Attr>
+<Pos l="10" s="3" c="14"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="23"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:1">
+<Attr>
+<Pos l="10" s="2" c="20"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:2:2">
+<Attr>
+<Pos l="10" s="3" c="25"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Attr>
+<Pos l="10" s="1" c="34"/>
+</Attr>
+<Id value="zz" typref="2701647786" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:1">
+<Attr>
+<Pos l="10" s="2" c="31"/>
+</Attr>
+</Id>
+<Id value="NAT" typref="3603043417" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:2:1:3:1:3:2">
+<Attr>
+<Pos l="10" s="3" c="36"/>
+</Attr>
+</Id>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="13" s="1" c="19"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:1">
+<Attr>
+<Pos l="13" s="2" c="16"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:2:1:1:1:2">
+<Attr>
+<Pos l="13" s="1" c="21"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="35" s="1" c="18"/>
+</Attr>
+<Id value="yy" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="35" s="2" c="15"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="35" s="1" c="20"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Unary_Pred op="not">
+<Exp_Comparison op="&lt;">
+<Attr>
+<Pos l="12" s="1" c="15"/>
+</Attr>
+<Id value="xx" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:1">
+<Attr>
+<Pos l="12" s="2" c="12"/>
+</Attr>
+</Id>
+<Integer_Literal value="5" typref="2701647786" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:3:1:3:1:1:1:2">
+<Attr>
+<Pos l="12" s="1" c="17"/>
+</Attr>
+</Integer_Literal>
+</Exp_Comparison>
+</Unary_Pred>
+</Local_Hyp>
+</Proof_Obligation>
+<TypeInfos>
+<Type id="2701647786">
+<Id value="INTEGER" tag="C:\Users\Diego Oliveira\Documents\projects\TripleStatements_TestSet\bdp\triple_else_else_case_i.bxml:1:4:1:1"/>
+</Type>
+<Type id="2701647786">
+<Id value="INTEGER" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:3:1:1"/>
+</Type>
+<Type id="3603043417">
+<Unary_Exp op="POW">
+<Id value="INTEGER" tag="C:/Users/Diego Oliveira/Documents/projects/TripleStatements_TestSet/bdp\triple_else_else_case.bxml:1:3:2:1:1"/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+</Proof_Obligations>

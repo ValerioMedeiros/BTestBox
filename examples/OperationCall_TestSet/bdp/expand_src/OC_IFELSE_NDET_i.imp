@@ -1,0 +1,23 @@
+﻿/* OC_IFELSE_NDET_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION OC_IFELSE_NDET_i
+REFINES OC_IFELSE
+
+IMPORTS
+    NONDET_MCH_ELSE
+
+OPERATIONS
+    res <-- opOC_IFELSE ( xx , yy ) =
+    BEGIN
+        res <-- opNONDET_MCH_ELSE ( xx , yy ) ;
+        IF xx > yy THEN
+            res <-- opNONDET_MCH_ELSE ( xx , yy )
+        ELSE
+            res <-- opNONDET_MCH_ELSE ( xx , yy )
+        END
+    END
+
+ END

@@ -1,0 +1,33 @@
+﻿/* nested_while_case_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION nested_while_case_i
+REFINES nested_while_case
+
+OPERATIONS
+    res1 , res2 <-- opnested_while_case ( xx , yy ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res2 := yy ;
+            WHILE ii < xx DO
+                CASE yy OF
+                    EITHER 0 THEN
+                        res2 := yy
+                    OR 1 THEN
+                        res2 := yy
+                    ELSE
+                        res2 := yy
+                    END
+                END ;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & res2 = yy
+            VARIANT xx - ii
+            END ;
+            res1 := ii
+        END
+    END
+
+ END

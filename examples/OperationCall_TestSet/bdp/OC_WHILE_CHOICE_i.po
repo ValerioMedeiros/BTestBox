@@ -1,0 +1,50 @@
+THEORY ProofList IS
+_f(1) & _f(4) & opOC_WHILE_CHOICE.11,(_f(12) & _f(5) & _f(6) & _f(7) & _f(11) & _f(10) & _f(29) => _f(31));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.10,(_f(12) & _f(5) & _f(6) & _f(7) & _f(11) & _f(9) & _f(29) => _f(30));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.9,(_f(12) & _f(5) & _f(6) & _f(7) & _f(8) & _f(22) & _f(14) => _f(28));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.8,(_f(12) & _f(5) & _f(6) & _f(7) & _f(8) & _f(26) => _f(27));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.7,(_f(12) & _f(5) & _f(6) & _f(7) & _f(8) & _f(22) & _f(18) => _f(25));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.6,(_f(12) & _f(5) & _f(6) & _f(7) & _f(8) & _f(22) & _f(16) => _f(24));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.5,(_f(12) & _f(5) & _f(6) & _f(7) & _f(8) & _f(22) & _f(14) => _f(23));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.4,(_f(12) & _f(5) & _f(6) & _f(7) & _f(20) => _f(21));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.3,(_f(12) & _f(13) & _f(18) => _f(19));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.2,(_f(12) & _f(13) & _f(16) => _f(17));
+_f(1) & _f(4) & opOC_WHILE_CHOICE.1,(_f(12) & _f(13) & _f(14) => _f(15))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483648) .. (2147483647))));
+btrue;
+((nn) : (NAT)) & ((res) = (res));
+((res$1) = (res));
+((res$2) : (({0}\/{5}\/{10})));
+(0 <= ii$1);
+(ii$1 <= nn);
+(ii$1 +1 <= nn);
+((res$2) = (5));
+not(((res$2) = (5)));
+not((ii$1 +1 <= nn));
+((nn) : (NAT));
+"Loop initialisation";
+"Check invariant ((res$1) : (({0}\/{5}\/{10})))";
+((0) : (({0}\/{5}\/{10})));
+"Check invariant (0 <= ii)";
+(0 <= 0);
+"Check invariant (ii <= nn)";
+(0 <= nn);
+"Loop variant is positive";
+(0 <= (nn - ii$1));
+"Loop invariant is preserved";
+((5) : (({0}\/{5}\/{10})));
+(0 <= (ii$1 + 1));
+((ii$1 + 1) <= nn);
+"Variant is decreasing";
+((nn - (ii$1 + 1)) +1 <= (nn - ii$1));
+((10) : (({0}\/{5}\/{10})));
+"End of loop";
+(((nn) = (nn))) or (((nn) = (0)));
+(((0) = (nn))) or (((0) = (0)))
+END
+&
+THEORY EnumerateX
+END

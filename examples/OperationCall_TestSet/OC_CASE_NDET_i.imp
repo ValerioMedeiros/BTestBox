@@ -1,0 +1,27 @@
+/* OC_CASE_NDET_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION OC_CASE_NDET_i
+REFINES OC_CASE
+
+IMPORTS
+    NONDET_MCH_CASE
+
+OPERATIONS
+    res <-- opOC_CASE(xx)=
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                res <-- opNONDET_MCH_CASE(xx)
+            OR 1 THEN
+                res <-- opNONDET_MCH_CASE(xx)
+            ELSE
+                res <-- opNONDET_MCH_CASE(xx)
+            END
+        END
+    END
+
+
+ END

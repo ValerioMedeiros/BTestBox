@@ -1,0 +1,48 @@
+﻿/* triple_else_while_else_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_else_while_else_i
+REFINES triple_else_while_else
+
+OPERATIONS
+    res1 , res2 , res3 <-- optriple_else_while_else ( xx , yy , zz ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res2 := ii ;
+            IF zz < 5 THEN
+                res3 := 0
+            ELSE
+                res3 := zz
+            END ;
+            IF xx < 5 THEN
+                res1 := 0 ;
+                WHILE ii < yy DO
+                    IF zz < 5 THEN
+                        res2 := ii + 1 ; res3 := 0
+                    ELSE
+                        res2 := ii + 1 ; res3 := zz
+                    END ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & ( zz < 5 => res3 = 0 ) & ( not ( zz < 5 ) => res3 = zz )
+                VARIANT yy - ii
+                END
+            ELSE
+                res1 := xx ;
+                WHILE ii < yy DO
+                    IF zz < 5 THEN
+                        res2 := ii + 1 ; res3 := 0
+                    ELSE
+                        res2 := ii + 1 ; res3 := zz
+                    END ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & ( zz < 5 => res3 = 0 ) & ( not ( zz < 5 ) => res3 = zz )
+                VARIANT yy - ii
+                END
+            END
+        END
+    END
+
+ END

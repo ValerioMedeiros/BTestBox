@@ -1,0 +1,1 @@
+﻿Flag(FileOn("IMP_OC_NONDET_MCH_WHILEINSIDE.pmi.0.res")) & Set(toto | xx: NAT & 0<=ii$1 & ii$1<=xx & (ii$1 = 0 => res$2 = 0) & (not(ii$1 = 0) => res$2 = xx) & not(ii$1+1<=xx) & "End of loop" => res$2 = xx or res$2 = xx)

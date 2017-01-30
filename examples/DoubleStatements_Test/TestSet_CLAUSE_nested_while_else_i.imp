@@ -1,0 +1,70 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_nested_while_else_i
+
+REFINES
+    TestSet_CLAUSE_nested_while_else
+
+IMPORTS
+    nested_while_else
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_while_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_else(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opnested_while_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_else(0, 5);
+            IF aux1 = 0 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opnested_while_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_else(1, 5);
+            IF aux1 = 1 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_opnested_while_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_else(0, 5);
+            IF aux1 = 0 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_opnested_while_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_else(1, 0);
+            IF aux1 = 1 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

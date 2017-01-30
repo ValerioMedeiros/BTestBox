@@ -1,0 +1,120 @@
+/* triple_case_case_case_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_case_case_case_i
+REFINES triple_case_case_case
+
+OPERATIONS
+    res1, res2, res3 <-- optriple_case_case_case(xx, yy, zz)=
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                CASE yy OF
+                    EITHER 0 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    OR 1 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    ELSE
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    END
+                END
+            OR 1 THEN
+                CASE yy OF
+                    EITHER 0 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    OR 1 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    ELSE
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    END
+                END
+            ELSE
+                CASE yy OF
+                    EITHER 0 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    OR 1 THEN
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    ELSE
+                        CASE zz OF
+                            EITHER 0 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            OR 1 THEN
+                                res1 := xx; res2 := yy; res3 := zz
+                            ELSE
+                                res1 := xx; res2 := yy; res3 := zz
+                            END
+                        END
+                    END
+                END
+            END
+        END
+        
+    END
+
+ END

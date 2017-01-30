@@ -1,0 +1,1 @@
+﻿Flag(FileOn("duoseq_while_nestedwhile_i.pmi.0.res")) & Set(toto | nn1: NAT & nn2: NAT & 0<=ii$2 & ii$2<=nn1 & res1$3 = ii$2 & (ii$2 = 0 => res2$4 = 0) & (not(ii$2 = 0) => res2$4 = nn2) & not(ii$2+1<=nn1) & 0<=ii$1 & ii$1<=nn1 & res1$2 = ii$1 & (ii$1 = 0 => res2$2 = 0) & (not(ii$1 = 0) => res2$2 = nn2) & not(ii$1+1<=nn1) & not(0+1<=nn1) & "End of loop" => res1$2 = nn1)

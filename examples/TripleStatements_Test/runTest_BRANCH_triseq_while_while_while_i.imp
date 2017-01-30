@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_BRANCH_triseq_while_while_while_i
+
+REFINES
+    runTest_BRANCH_triseq_while_while_while
+
+IMPORTS
+    TestSet_BRANCH_triseq_while_while_while
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriseq_while_while_while =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriseq_while_while_while =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_optriseq_while_while_while;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriseq_while_while_while;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END
