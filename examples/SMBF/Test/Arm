@@ -9,7 +9,14 @@ INVARIANT
 INITIALISATION
   pos_x := 0
 OPERATIONS
+  Getpos_xForTest <-- OperationForTestGetpos_xArm = 
+    ANY aux WHERE aux : 0..100 THEN Getpos_xForTest := aux END;
 
+  SetVariablesForTestArm(nn1) = 
+  PRE nn1 : NAT
+  THEN
+      skip
+  END;
 
   move =
     ANY xx WHERE
