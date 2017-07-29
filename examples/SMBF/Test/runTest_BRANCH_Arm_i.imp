@@ -1,39 +1,51 @@
 IMPLEMENTATION
-    runTest_BRANCH_Arm_i
-
+  runTest_Branch_Arm_i
 REFINES
-    runTest_BRANCH_Arm
-
+  runTest_Branch_Arm
 IMPORTS
-    TestSet_BRANCH_Arm
-
+  TestSet_Branch_Arm
 LOCAL_OPERATIONS
-    verdict <-- testop1 =
-        ANY kk WHERE kk : BOOL THEN verdict := kk END
-
+  verdict <-- Test_move =
+  ANY kk WHERE kk : BOOL THEN verdict := kk END;
+  
+  verdict <-- Test_wrongMove =
+  ANY kk WHERE kk : BOOL THEN verdict := kk END
 OPERATIONS
-    verdict <-- testop1 =
-    BEGIN
-        VAR v0, v1 IN
-            v0 <-- TEST_0_op1;
-            v1 <-- TEST_1_op1;
-            IF v0 = TRUE & v1 = TRUE THEN
-                verdict := TRUE
-            ELSE
-                verdict := FALSE
-            END
-        END
-    END;
-
-    verdict <-- testAll =
-    BEGIN
-        VAR v0 IN
-            v0 <-- testop1;
-            IF v0 = TRUE THEN
-                verdict := TRUE
-            ELSE
-                verdict := FALSE
-            END
-        END
+  verdict <-- Test_move =
+  BEGIN
+    VAR aux1, aux2 IN
+      aux1 <-- TEST_1_move;
+      aux2 <-- TEST_2_move;
+      IF aux1 = TRUE & aux2 = TRUE THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
     END
+  END;
+  
+  verdict <-- Test_wrongMove =
+  BEGIN
+    VAR aux1 IN
+      aux1 <-- TEST_1_wrongMove;
+      IF aux1 = TRUE THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
+    END
+  END;
+  
+  verdict <-- Test_All =
+  BEGIN
+    VAR v0, v1 IN
+      v0 <-- Test_move;
+      v1 <-- Test_wrongMove;
+      IF v0 = TRUE & v1 = TRUE THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
+    END
+  END
 END
