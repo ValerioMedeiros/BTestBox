@@ -33,7 +33,6 @@ void runTest_BRANCH_Arm__testmove(bool *verdict)
         
         TestSet_BRANCH_Arm__TEST_0_move(&v0);
         TestSet_BRANCH_Arm__TEST_1_move(&v1);
-        TestSet_BRANCH_Arm__TEST_2_move(&v2);
         if(((v0 == true) &&
             (v1 == true)) &&
         (v2 == true))
