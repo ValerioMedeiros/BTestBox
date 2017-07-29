@@ -1,0 +1,26 @@
+/* Motor_i
+ * Author: Diego
+ * Creation date: 7/29/2017
+ */
+
+IMPLEMENTATION Motor_i
+REFINES Motor
+
+
+OPERATIONS
+    returnValue <-- get_detachment(inputValue) =
+    BEGIN
+        VAR aux IN
+            aux := inputValue mod 2;
+            IF aux = 0 THEN
+                returnValue := 3
+            ELSE
+                IF inputValue > 97 THEN
+                    returnValue := 1
+                ELSE
+                    returnValue := - 1
+                END
+            END
+        END
+    END
+END
