@@ -25,7 +25,6 @@ extern void TestSet_BRANCH_Arm__INITIALISATION(void);
 
 extern void TestSet_BRANCH_Arm__TEST_0_move(bool *verdict);
 extern void TestSet_BRANCH_Arm__TEST_1_move(bool *verdict);
-extern void TestSet_BRANCH_Arm__TEST_2_move(bool *verdict);
 extern void TestSet_BRANCH_Arm__TEST_0_wrongMove(bool *verdict);
 
 #ifdef __cplusplus
