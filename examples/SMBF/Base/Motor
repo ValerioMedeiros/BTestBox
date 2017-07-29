@@ -1,0 +1,22 @@
+/* Motor
+ * Author: Diego
+ * Creation date: 7/28/2017
+ */
+MACHINE
+    Motor
+
+OPERATIONS
+    returnValue <-- get_detachment(inputValue) =
+    PRE inputValue : 0..100 
+    THEN
+        IF inputValue mod 2 = 0 THEN
+            returnValue := 3
+        ELSE
+            IF inputValue > 97 THEN
+                returnValue := 1
+            ELSE
+                returnValue := - 1
+            END
+        END
+    END
+END
