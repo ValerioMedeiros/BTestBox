@@ -22,25 +22,6 @@ void TestSet_BRANCH_Arm__INITIALISATION(void)
 
 void TestSet_BRANCH_Arm__TEST_0_move(bool *verdict)
 {
-    Arm__SetVariablesForTestArm(1);
-    {
-        int32_t aux1;
-        
-        Arm__move();
-        Arm__OperationForTestGetpos_xArm(&aux1);
-        if(aux1 == 0)
-        {
-            (*verdict) = true;
-        }
-        else
-        {
-            (*verdict) = false;
-        }
-    }
-}
-
-void TestSet_BRANCH_Arm__TEST_1_move(bool *verdict)
-{
     Arm__SetVariablesForTestArm(100);
     {
         int32_t aux1;
@@ -58,7 +39,7 @@ void TestSet_BRANCH_Arm__TEST_1_move(bool *verdict)
     }
 }
 
-void TestSet_BRANCH_Arm__TEST_2_move(bool *verdict)
+void TestSet_BRANCH_Arm__TEST_1_move(bool *verdict)
 {
     Arm__SetVariablesForTestArm(0);
     {
