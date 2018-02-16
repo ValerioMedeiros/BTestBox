@@ -1,0 +1,28 @@
+/* MchWithAConstants_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithAConstants_i
+REFINES MchWithAConstants
+
+CONSTANTS
+    max_countConcrete
+
+PROPERTIES
+    max_countConcrete = max_count
+
+VALUES
+    max_countConcrete = 10
+
+OPERATIONS
+    res <-- opMchWithAConstants(nn) =
+    BEGIN
+        IF nn < max_countConcrete THEN
+            res := TRUE
+        ELSE
+            res := FALSE
+        END
+    END
+
+ END

@@ -1,0 +1,154 @@
+IMPLEMENTATION
+    TestSet_CODE_triple_else_else_case_i
+
+REFINES
+    TestSet_CODE_triple_else_else_case
+
+IMPORTS
+    triple_else_else_case
+
+OPERATIONS
+    verdict <-- TEST_0_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 5, 2);
+            IF aux1 = 5 & aux2 = 5 & aux3 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 5, 2);
+            IF aux1 = 0 & aux2 = 5 & aux3 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 0, 2);
+            IF aux1 = 5 & aux2 = 0 & aux3 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 0, 2);
+            IF aux1 = 0 & aux2 = 0 & aux3 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 5, 0);
+            IF aux1 = 5 & aux2 = 5 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_5_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 5, 1);
+            IF aux1 = 5 & aux2 = 5 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_6_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 0, 0);
+            IF aux1 = 5 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_7_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(5, 0, 1);
+            IF aux1 = 5 & aux2 = 0 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_8_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 5, 0);
+            IF aux1 = 0 & aux2 = 5 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_9_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 5, 1);
+            IF aux1 = 0 & aux2 = 5 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_10_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 0, 0);
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_11_optriple_else_else_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_else_else_case(0, 0, 1);
+            IF aux1 = 0 & aux2 = 0 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

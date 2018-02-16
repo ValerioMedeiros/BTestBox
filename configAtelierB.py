@@ -33,7 +33,6 @@ def installExtension(path,probcli_path):
     print("Downloading the CuTest.h (MIT License)")
     urllib.urlretrieve("https://raw.githubusercontent.com/mity/cutest/master/include/cutest.h", filename=path_libs+os.sep+"cutest.h")
     print("BTestKit was installed")
-      
 
 def question(msg,opt,optconc):
     global etool
@@ -51,8 +50,13 @@ def question(msg,opt,optconc):
 
 
 
-
-path = raw_input("Please, type the path of Atelier B extensions, (for example  '/Applications/AtelierB.app/AB/extensions'):")
-path_prob = raw_input("Please, type the path of ProB, (for example  '/Users/"+getpass.getuser()+"/Applications/ProB/probcli.sh'):")
-installExtension(path,path_prob)
-exit()
+try:
+    path = raw_input("Please, type the path of Atelier B extensions, (for example  '/Applications/AtelierB.app/AB/extensions'):")
+    path_prob = raw_input("Please, type the path of ProB, (for example  '/Users/"+getpass.getuser()+"/Applications/ProB/probcli.sh'):")
+    installExtension(path,path_prob)
+    exit()
+except NameError:
+    path = input("Please, type the path of Atelier B extensions, (for example  '/Applications/AtelierB.app/AB/extensions'):")
+    path_prob = input("Please, type the path of ProB, (for example  '/Users/"+getpass.getuser()+"/Applications/ProB/probcli.sh'):")
+    installExtension(path,path_prob)
+    exit()

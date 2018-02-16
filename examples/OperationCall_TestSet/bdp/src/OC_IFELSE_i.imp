@@ -1,0 +1,22 @@
+﻿/* OC_IFELSE_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION OC_IFELSE_i
+REFINES OC_IFELSE
+
+IMPORTS
+    DET_MCH_ELSE
+
+OPERATIONS
+    res <-- opOC_IFELSE ( xx , yy ) =
+    BEGIN
+        IF xx > yy THEN
+            res <-- opDET_MCH_ELSE ( xx , yy )
+        ELSE
+            res <-- opDET_MCH_ELSE ( xx , yy )
+        END
+    END
+
+ END

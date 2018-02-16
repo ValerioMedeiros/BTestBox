@@ -1,0 +1,30 @@
+/* nested_while_while_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION nested_while_while_i
+REFINES nested_while_while
+
+OPERATIONS
+    res1, res2 <-- opnested_while_while(xx, yy)=
+    BEGIN
+        VAR ii, jj IN
+            ii := 0; jj := 0;
+            res1 := ii; res2 := jj;
+            WHILE ii < xx DO
+                WHILE jj < yy DO
+                    res2 := jj + 1;
+                    jj := jj + 1
+                INVARIANT 0 <= jj & jj <= yy & res2 = jj
+                VARIANT yy - jj
+                END;
+                res1 := ii + 1;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & res1 = ii & 0 <= jj & jj <= yy & res2 = jj & (ii > 0 => res2 = yy) & (not(ii > 0) => res2 = 0)
+            VARIANT xx - ii
+            END
+        END     
+    END
+
+ END

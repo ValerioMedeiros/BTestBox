@@ -1,0 +1,58 @@
+IMPLEMENTATION
+    TestSet_PATH_nested_else_else_i
+
+REFINES
+    TestSet_PATH_nested_else_else
+
+IMPORTS
+    nested_else_else
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_else_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_else_else(5, 5);
+            IF aux1 = 5 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opnested_else_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_else_else(5, 0);
+            IF aux1 = 5 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opnested_else_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_else_else(0, 5);
+            IF aux1 = 0 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_opnested_else_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_else_else(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

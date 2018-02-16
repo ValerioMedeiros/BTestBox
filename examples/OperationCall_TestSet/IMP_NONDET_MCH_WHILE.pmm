@@ -1,0 +1,3 @@
+﻿THEORY User_Pass IS
+Operation(opNONDET_MCH_WHILE) & ff(0) & pp(rp.1 | 5)
+END 

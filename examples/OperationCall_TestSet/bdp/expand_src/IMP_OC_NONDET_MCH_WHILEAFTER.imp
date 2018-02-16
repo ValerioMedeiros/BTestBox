@@ -1,0 +1,28 @@
+﻿/* IMP_OC_NONDET_MCH_WHILEAFTER
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION IMP_OC_NONDET_MCH_WHILEAFTER
+REFINES NONDET_MCH_WHILE
+
+IMPORTS
+    DET_MCH_WHILE
+
+OPERATIONS
+    res <-- opNONDET_MCH_WHILE ( xx ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res := ii ;
+            WHILE ii < xx DO
+                res := ii + 1 ;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & res = ii
+            VARIANT xx - ii
+            END ;
+            res <-- opDET_MCH_WHILE ( xx )
+        END
+    END
+
+ END

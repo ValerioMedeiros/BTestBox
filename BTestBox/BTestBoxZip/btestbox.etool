@@ -1,0 +1,12 @@
+<externalTool name="BTestBox"
+	category="component"
+	label="Test Code Translation"
+	tooltip="Test if the translation is well performed">
+	<toolParameter name="BTestBoxInterface"
+		type="tool"
+		default="BTestBoxInterface" /> 
+	<command>${BTestBoxInterface}</command>
+		<param>${projectBdp}</param>
+		<param>${extensionsDir}</param>
+		<param>${componentName}</param>
+</externalTool>

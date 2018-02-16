@@ -1,0 +1,26 @@
+﻿/* IMP_OC_NONDET_MCH_CASE
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION IMP_OC_NONDET_MCH_CASE
+REFINES NONDET_MCH_CASE
+
+IMPORTS
+    DET_MCH_CASE
+
+OPERATIONS
+    res <-- opNONDET_MCH_CASE ( xx ) =
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                res <-- opDET_MCH_CASE ( xx )
+            OR 1 THEN
+                res <-- opDET_MCH_CASE ( xx )
+            ELSE
+                res <-- opDET_MCH_CASE ( xx )
+            END
+        END
+    END
+
+ END

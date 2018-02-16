@@ -1,0 +1,9 @@
+digraph {
+Skip_i [ label=" Skip\nSkip_i " shape= box ]
+assig_i [ label=" assig\nassig_i " shape= box ]
+case_i [ label=" case\ncase_i " shape= box ]
+else_i [ label=" else\nelse_i " shape= box ]
+if_i [ label=" if\nif_i " shape= box ]
+while_i [ label=" while\nwhile_i " shape= box ]
+
+}

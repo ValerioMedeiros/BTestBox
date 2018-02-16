@@ -1,0 +1,94 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_triple_while_while_case_i
+
+REFINES
+    TestSet_CLAUSE_triple_while_while_case
+
+IMPORTS
+    triple_while_while_case
+
+OPERATIONS
+    verdict <-- TEST_0_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 0, 0);
+            IF aux1 = 1 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(0, 0, 0);
+            IF aux1 = 0 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 1, 0);
+            IF aux1 = 1 & aux2 = 1 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 0, 0);
+            IF aux1 = 1 & aux2 = 0 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 1, 0);
+            IF aux1 = 1 & aux2 = 1 & aux3 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_5_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 1, 1);
+            IF aux1 = 1 & aux2 = 1 & aux3 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_6_optriple_while_while_case =
+    BEGIN
+        VAR aux1, aux2, aux3 IN
+            aux1, aux2, aux3 <-- optriple_while_while_case(1, 1, 2);
+            IF aux1 = 1 & aux2 = 1 & aux3 = 2 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

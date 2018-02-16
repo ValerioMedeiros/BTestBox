@@ -1,0 +1,23 @@
+﻿/* IMP_NONDET_MCH_CASE
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION IMP_NONDET_MCH_CASE
+REFINES NONDET_MCH_CASE
+
+OPERATIONS
+    res <-- opNONDET_MCH_CASE ( xx ) =
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                res := xx
+            OR 1 THEN
+                res := xx
+            ELSE
+                res := xx
+            END
+        END
+    END
+
+ END

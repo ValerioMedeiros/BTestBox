@@ -1,0 +1,35 @@
+/* triseq_while_else_while_i
+ * Author: Diego Oliveira
+ * Creation date: 08/11/2016
+ */
+
+IMPLEMENTATION triseq_while_else_while_i
+REFINES triseq_while_else_while
+
+OPERATIONS
+    res1, res2, res3 <-- optriseq_while_else_while(xx)=
+    BEGIN
+        VAR ii IN
+            ii := 0;
+            WHILE ii < xx DO
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx
+            VARIANT xx - ii
+            END;
+            res1 := ii;
+            IF xx < 5 THEN
+                res2 := 0
+            ELSE
+                res2 := xx
+            END;
+            ii := 0;
+            WHILE ii < xx DO
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx
+            VARIANT xx - ii
+            END;
+            res3 := ii
+        END
+    END
+
+ END

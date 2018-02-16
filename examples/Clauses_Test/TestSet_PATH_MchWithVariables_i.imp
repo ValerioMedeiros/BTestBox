@@ -1,0 +1,94 @@
+IMPLEMENTATION
+    TestSet_PATH_MchWithVariables_i
+
+REFINES
+    TestSet_PATH_MchWithVariables
+
+IMPORTS
+    MchWithVariables
+
+OPERATIONS
+    verdict <-- TEST_0_opIncCount =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1, aux2 IN
+            aux1 <-- opIncCount(10);
+            aux2 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opIncCount =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1, aux2 IN
+            aux1 <-- opIncCount(1);
+            aux2 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_opRelease =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1, aux2 IN
+            aux1 <-- opRelease(0);
+            aux2 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 1 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opRelease =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1, aux2 IN
+            aux1 <-- opRelease(1);
+            aux2 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_resetCount =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1 IN
+            resetCount;
+            aux1 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_getCount =
+    BEGIN
+        SetVariablesForTestMchWithVariables(0);
+        VAR aux1, aux2 IN
+            aux1 <-- getCount;
+            aux2 <-- OperationForTestGetcountImpMchWithVariables;
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

@@ -1,0 +1,25 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_MchToExtend_i
+
+REFINES
+    TestSet_CLAUSE_MchToExtend
+
+IMPORTS
+    MchToExtend
+
+OPERATIONS
+    verdict <-- TEST_0_Inc =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_Dec =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_RandomInc =
+    BEGIN
+        verdict := TRUE
+    END
+END

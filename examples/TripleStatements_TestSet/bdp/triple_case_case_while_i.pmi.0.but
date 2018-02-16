@@ -1,0 +1,1 @@
+﻿Flag(FileOn("triple_case_case_while_i.pmi.0.res")) & Set(toto | zz: INTEGER & 0<=zz & zz<=2147483647 & 0<=ii$1 & ii$1<=zz & not(1+ii$1<=zz) & ii$1<=2147483647 & zz+1<=1+ii$1 & not(zz = 1+ii$1) & zz<=1+ii$1 & ii$1<=1+ii$1 & 0<=1+ii$1 & 1<=1+ii$1 => ii$1 = zz)

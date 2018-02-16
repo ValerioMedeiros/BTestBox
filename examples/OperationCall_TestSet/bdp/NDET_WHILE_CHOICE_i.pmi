@@ -1,0 +1,23 @@
+﻿THEORY BalanceX IS
+  NDET_WHILE_CHOICE_i,1,0,0,1,0,0,0;
+  opNDET_WHILE_CHOICE,1,0,0,1,0,0,0
+END
+&
+THEORY ProofState IS
+  Proved(0)
+END
+&
+THEORY MethodList IS
+  pr
+END
+&
+THEORY PassList IS
+  Force(0),?
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version IS
+  PRVersion("svn")(CLT == "svn")
+END

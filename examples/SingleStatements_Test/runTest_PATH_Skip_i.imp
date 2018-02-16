@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_PATH_Skip_i
+
+REFINES
+    runTest_PATH_Skip
+
+IMPORTS
+    TestSet_PATH_Skip
+
+LOCAL_OPERATIONS
+    verdict <-- testopskip =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopskip =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opskip;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopskip;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

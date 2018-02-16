@@ -1,0 +1,51 @@
+﻿/* triple_else_while_case_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_else_while_case_i
+REFINES triple_else_while_case
+
+OPERATIONS
+    res1 , res2 , res3 <-- optriple_else_while_case ( xx , yy , zz ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res2 := ii ; res3 := zz ;
+            IF xx < 5 THEN
+                res1 := 0 ;
+                WHILE ii < yy DO
+                    CASE zz OF
+                        EITHER 0 THEN
+                            res2 := ii + 1 ; res3 := zz
+                        OR 1 THEN
+                            res2 := ii + 1 ; res3 := zz
+                        ELSE
+                            res2 := ii + 1 ; res3 := zz
+                        END
+                    END ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & res3 = zz
+                VARIANT yy - ii
+                END
+            ELSE
+                res1 := xx ;
+                WHILE ii < yy DO
+                    CASE zz OF
+                        EITHER 0 THEN
+                            res2 := ii + 1 ; res3 := zz
+                        OR 1 THEN
+                            res2 := ii + 1 ; res3 := zz
+                        ELSE
+                            res2 := ii + 1 ; res3 := zz
+                        END
+                    END ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & res3 = zz
+                VARIANT yy - ii
+                END
+            END
+        END
+    END
+
+ END

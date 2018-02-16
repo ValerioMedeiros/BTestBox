@@ -1,0 +1,34 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_else_i
+
+REFINES
+    TestSet_CLAUSE_else
+
+IMPORTS
+    else
+
+OPERATIONS
+    verdict <-- TEST_0_opelse =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opelse(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opelse =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opelse(5);
+            IF aux1 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

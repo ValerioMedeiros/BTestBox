@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_CODE_IMP_OC_NONDET_MCH_WHILEAFTER
+
+REFINES
+    runTest_CODE_NONDET_MCH_WHILE
+
+IMPORTS
+    TestSet_CODE_NONDET_MCH_WHILE
+
+LOCAL_OPERATIONS
+    verdict <-- testopNONDET_MCH_WHILE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopNONDET_MCH_WHILE =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opNONDET_MCH_WHILE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopNONDET_MCH_WHILE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

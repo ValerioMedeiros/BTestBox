@@ -1,0 +1,105 @@
+THEORY ProofList IS
+_f(1) & _f(4) & optriple_case_case_while.63,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.62,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.61,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.60,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.59,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.58,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.57,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(11) & _f(12) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.56,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.55,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.54,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.53,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.52,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.51,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.50,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(10) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.49,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.48,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.47,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.46,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.45,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.44,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.43,(_f(17) & _f(18) & _f(19) & _f(15) & _f(16) & _f(9) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.42,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.41,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.40,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.39,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.38,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.37,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.36,(_f(17) & _f(18) & _f(19) & _f(14) & _f(11) & _f(12) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.35,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.34,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.33,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.32,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.31,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.30,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.29,(_f(17) & _f(18) & _f(19) & _f(14) & _f(10) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.28,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.27,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.26,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.25,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.24,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.23,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.22,(_f(17) & _f(18) & _f(19) & _f(14) & _f(9) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.21,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.20,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.19,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.18,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.17,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.16,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.15,(_f(17) & _f(18) & _f(19) & _f(13) & _f(11) & _f(12) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.14,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.13,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.12,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.11,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.10,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.9,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.8,(_f(17) & _f(18) & _f(19) & _f(13) & _f(10) & _f(20) & _f(21) => _f(22));
+_f(1) & _f(4) & optriple_case_case_while.7,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(6) & _f(8) & _f(32) => _f(33));
+_f(1) & _f(4) & optriple_case_case_while.6,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(6) & _f(7) & _f(30) => _f(31));
+_f(1) & _f(4) & optriple_case_case_while.5,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(23) => _f(29));
+_f(1) & _f(4) & optriple_case_case_while.4,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(6) & _f(7) & _f(27) & _f(21) => _f(28));
+_f(1) & _f(4) & optriple_case_case_while.3,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(5) & _f(6) & _f(25) => _f(26));
+_f(1) & _f(4) & optriple_case_case_while.2,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(20) & _f(23) => _f(24));
+_f(1) & _f(4) & optriple_case_case_while.1,(_f(17) & _f(18) & _f(19) & _f(13) & _f(9) & _f(20) & _f(21) => _f(22))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT)) & ((res1) = (res1)) & ((res2) = (res2)) & ((res3) = (res3));
+((res1$1) = (res1)) & ((res2$1) = (res2)) & ((res3$1) = (res3));
+(0 <= ii$1);
+(ii$1 <= zz);
+(ii$1 +1 <= zz);
+not((ii$1 +1 <= zz));
+((yy) : (({0})));
+((yy) : (({1})));
+not(((yy) : (({0}))));
+not(((yy) : (({1}))));
+((xx) : (({0})));
+((xx) : (({1})));
+not(((xx) : (({0}))));
+not(((xx) : (({1}))));
+((xx) : (NAT));
+((yy) : (NAT));
+((zz) : (NAT));
+"Loop initialisation";
+"Check invariant (0 <= ii)";
+(0 <= 0);
+"Check invariant (ii <= zz)";
+(0 <= zz);
+"Loop variant is positive";
+(0 <= (zz - ii$1));
+"Loop invariant is preserved";
+(0 <= (ii$1 + 1));
+((ii$1 + 1) <= zz);
+"Variant is decreasing";
+((zz - (ii$1 + 1)) +1 <= (zz - ii$1));
+"End of loop";
+(((xx) : (({xx}))) & (((yy) : (({yy}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((ii$1) = (zz))) or (((yy) : (({yy}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((ii$1) = (zz)))) or (((xx) : (({xx}))) & (((yy) : (({yy}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((ii$1) = (zz))) or (((yy) : (({yy}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((ii$1) = (zz))));
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT))
+END
+&
+THEORY EnumerateX
+END

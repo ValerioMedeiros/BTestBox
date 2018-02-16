@@ -1,0 +1,40 @@
+IMPLEMENTATION
+    runTest_CLAUSE_case_i
+
+REFINES
+    runTest_CLAUSE_case
+
+IMPORTS
+    TestSet_CLAUSE_case
+
+LOCAL_OPERATIONS
+    verdict <-- testopcase =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopcase =
+    BEGIN
+        VAR v0, v1, v2 IN
+            v0 <-- TEST_0_opcase;
+            v1 <-- TEST_1_opcase;
+            v2 <-- TEST_2_opcase;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopcase;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

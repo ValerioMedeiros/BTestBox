@@ -1,0 +1,30 @@
+THEORY ProofList IS
+_f(1) & _f(4) & opnested_case_else.6,(_f(11) & _f(12) & _f(9) & _f(10) & _f(6) & _f(13) => _f(15));
+_f(1) & _f(4) & opnested_case_else.5,(_f(11) & _f(12) & _f(9) & _f(10) & _f(5) & _f(13) => _f(14));
+_f(1) & _f(4) & opnested_case_else.4,(_f(11) & _f(12) & _f(8) & _f(6) & _f(13) => _f(15));
+_f(1) & _f(4) & opnested_case_else.3,(_f(11) & _f(12) & _f(8) & _f(5) & _f(13) => _f(14));
+_f(1) & _f(4) & opnested_case_else.2,(_f(11) & _f(12) & _f(7) & _f(6) & _f(13) => _f(15));
+_f(1) & _f(4) & opnested_case_else.1,(_f(11) & _f(12) & _f(7) & _f(5) & _f(13) => _f(14))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((res1) = (res1)) & ((res2) = (res2));
+((res1$1) = (res1)) & ((res2$1) = (res2));
+(yy +1 <= 5);
+not((yy +1 <= 5));
+((xx) : (({0})));
+((xx) : (({1})));
+not(((xx) : (({0}))));
+not(((xx) : (({1}))));
+((xx) : (NAT));
+((yy) : (NAT));
+"Refinement is correct";
+(((xx) : (({xx}))) & (((yy +1 <= 5)) => (((xx) = (xx)) & ((0) = (0)))) & ((not((yy +1 <= 5))) => (((xx) = (xx)) & ((0) = (yy))))) or (((xx) : (({xx}))) & (((yy +1 <= 5)) => (((xx) = (xx)) & ((0) = (0)))) & ((not((yy +1 <= 5))) => (((xx) = (xx)) & ((0) = (yy)))));
+(((xx) : (({xx}))) & (((yy +1 <= 5)) => (((xx) = (xx)) & ((yy) = (0)))) & ((not((yy +1 <= 5))) => (((xx) = (xx)) & ((yy) = (yy))))) or (((xx) : (({xx}))) & (((yy +1 <= 5)) => (((xx) = (xx)) & ((yy) = (0)))) & ((not((yy +1 <= 5))) => (((xx) = (xx)) & ((yy) = (yy)))));
+((xx) : (NAT)) & ((yy) : (NAT))
+END
+&
+THEORY EnumerateX
+END

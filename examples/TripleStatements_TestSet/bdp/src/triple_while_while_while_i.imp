@@ -1,0 +1,36 @@
+﻿/* triple_while_while_while_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_while_while_while_i
+REFINES triple_while_while_while
+
+OPERATIONS
+    res1 , res2 , res3 <-- optriple_while_while_while ( xx , yy , zz ) =
+    BEGIN
+        VAR ii , jj , kk IN
+            ii := 0 ; jj := 0 ; kk := 0 ;
+            res1 := ii ; res2 := jj ; res3 := kk ;
+            WHILE ii < xx DO
+                WHILE jj < yy DO
+                    WHILE kk < zz DO
+                        res3 := kk + 1 ;
+                        kk := kk + 1
+                    INVARIANT 0 <= kk & kk <= zz & res3 = kk
+                    VARIANT zz - kk
+                    END ;
+                    res2 := jj + 1 ;
+                    jj := jj + 1
+                INVARIANT 0 <= jj & jj <= yy & res2 = jj & 0 <= kk & kk <= zz & res3 = kk & ( jj > 0 => res3 = zz ) & ( not ( jj > 0 ) => res3 = 0 )
+                VARIANT yy - jj
+                END ;
+                res1 := ii + 1 ;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & res1 = ii & 0 <= jj & jj <= yy & res2 = jj & ( ii > 0 => res2 = yy ) & ( not ( ii > 0 ) => res2 = 0 ) & 0 <= kk & kk <= zz & res3 = kk & ( jj > 0 & ii > 0 => res3 = zz ) & ( not ( jj > 0 ) or not ( ii > 0 ) => res3 = 0 )
+            VARIANT xx - ii
+            END
+        END
+    END
+
+ END

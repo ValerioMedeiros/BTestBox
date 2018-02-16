@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_CODE_while_i
+
+REFINES
+    runTest_CODE_while
+
+IMPORTS
+    TestSet_CODE_while
+
+LOCAL_OPERATIONS
+    verdict <-- testopwhile =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopwhile =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opwhile;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopwhile;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

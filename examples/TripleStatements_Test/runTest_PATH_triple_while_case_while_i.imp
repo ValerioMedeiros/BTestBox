@@ -1,0 +1,44 @@
+IMPLEMENTATION
+    runTest_PATH_triple_while_case_while_i
+
+REFINES
+    runTest_PATH_triple_while_case_while
+
+IMPORTS
+    TestSet_PATH_triple_while_case_while
+
+LOCAL_OPERATIONS
+    verdict <-- testoptriple_while_case_while =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testoptriple_while_case_while =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5, v6 IN
+            v0 <-- TEST_0_optriple_while_case_while;
+            v1 <-- TEST_1_optriple_while_case_while;
+            v2 <-- TEST_2_optriple_while_case_while;
+            v3 <-- TEST_3_optriple_while_case_while;
+            v4 <-- TEST_4_optriple_while_case_while;
+            v5 <-- TEST_5_optriple_while_case_while;
+            v6 <-- TEST_6_optriple_while_case_while;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE & v6 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testoptriple_while_case_while;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

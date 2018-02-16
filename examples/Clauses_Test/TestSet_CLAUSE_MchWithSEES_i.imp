@@ -1,0 +1,30 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_MchWithSEES_i
+
+REFINES
+    TestSet_CLAUSE_MchWithSEES
+
+IMPORTS
+    MchWithSEES, LockMachine
+
+OPERATIONS
+    verdict <-- TEST_0_guestArrived =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_guestLeaved =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_enterHouse =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_leaveHouse =
+    BEGIN
+        verdict := TRUE
+    END
+END

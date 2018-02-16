@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_BRANCH_IMP_DET_MCH_WHILE
+
+REFINES
+    TestSet_BRANCH_DET_MCH_WHILE
+
+IMPORTS
+    DET_MCH_WHILE
+
+OPERATIONS
+    verdict <-- TEST_0_opDET_MCH_WHILE =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opDET_MCH_WHILE(0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

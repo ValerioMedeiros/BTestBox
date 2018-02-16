@@ -1,0 +1,48 @@
+/* duoseq_while_nestedwhile_i
+ * Author: Diego Oliveira
+ * Creation date: 15/11/2016
+ */
+
+IMPLEMENTATION duoseq_while_nestedwhile_i
+REFINES duoseq_while_nestedwhile
+
+OPERATIONS
+    res1, res2 <-- opduoseq_while_nestedwhile(nn1 , nn2)=
+    BEGIN
+        VAR ii, jj IN
+            ii := 0; jj := 0;
+            res1 := 0; res2 := 0;
+            WHILE ii < nn1 DO
+                res1 := ii + 1;
+                jj := 0;
+                res2 := 0;
+                WHILE jj < nn2 DO
+                    res2 := jj + 1;
+                    jj := jj + 1
+                INVARIANT 0 <= jj & jj <= nn2 & res2 = jj
+                VARIANT nn2 - jj
+                END;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= nn1 & res1 = ii & (ii = 0 => res2 = 0) & (not(ii = 0) => res2 = nn2)
+            VARIANT nn1 - ii
+            END;
+            ii := 0; jj := 0;
+            res1 := 0; res2 := 0;
+            WHILE ii < nn1 DO
+                res1 := ii + 1;
+                jj := 0;
+                res2 := 0;
+                WHILE jj < nn2 DO
+                    res2 := jj + 1;
+                    jj := jj + 1
+                INVARIANT 0 <= jj & jj <= nn2 & res2 = jj
+                VARIANT nn2 - jj
+                END;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= nn1 & res1 = ii & (ii = 0 => res2 = 0) & (not(ii = 0) => res2 = nn2)
+            VARIANT nn1 - ii
+            END
+        END
+    END
+
+ END

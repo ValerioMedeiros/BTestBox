@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_CODE_MchWithLocalOperations_i
+
+REFINES
+    TestSet_CODE_MchWithLocalOperations
+
+IMPORTS
+    MchWithLocalOperations
+
+OPERATIONS
+    verdict <-- TEST_0_opMchWithLocalOperations =
+    BEGIN
+        VAR aux1 IN
+            aux1 <-- opMchWithLocalOperations(0, 0);
+            IF aux1 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

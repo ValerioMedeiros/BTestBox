@@ -1,0 +1,15 @@
+﻿/* IMP_DET_MCH_WHILE
+ * Author: Diego Oliveira
+ * Creation date: 22/11/2016
+ */
+
+IMPLEMENTATION IMP_DET_MCH_WHILE
+REFINES DET_MCH_WHILE
+
+OPERATIONS
+    res <-- opDET_MCH_WHILE ( nn ) =
+    BEGIN
+        res := nn
+    END
+
+ END

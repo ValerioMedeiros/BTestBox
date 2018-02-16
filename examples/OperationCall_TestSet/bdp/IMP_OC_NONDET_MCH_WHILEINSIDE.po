@@ -1,0 +1,48 @@
+THEORY ProofList IS
+_f(1) & _f(4) & opNONDET_MCH_WHILE.9,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(14) & _f(30) => _f(31));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.8,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(13) & _f(28) => _f(29));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.7,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(13) & _f(11) & _f(24) => _f(27));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.6,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(13) & _f(24) & _f(19) => _f(26));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.5,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(13) & _f(24) & _f(17) => _f(25));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.4,(_f(15) & _f(7) & _f(8) & _f(9) & _f(10) & _f(22) => _f(23));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.3,(_f(15) & _f(6) & _f(16) => _f(21));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.2,(_f(15) & _f(16) & _f(19) => _f(20));
+_f(1) & _f(4) & opNONDET_MCH_WHILE.1,(_f(15) & _f(16) & _f(17) => _f(18))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483648) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((res) = (res));
+((res$1) = (res));
+((0) = (0));
+not(((0) = (0)));
+(0 <= ii$1);
+(ii$1 <= xx);
+((((ii$1) = (0))) => (((res$2) = (0))));
+((not(((ii$1) = (0)))) => (((res$2) = (xx))));
+(((ii$1 + 1)) = (0));
+not((((ii$1 + 1)) = (0)));
+(ii$1 +1 <= xx);
+not((ii$1 +1 <= xx));
+((xx) : (NAT));
+"Loop initialisation";
+"Check invariant (0 <= ii)";
+(0 <= 0);
+"Check invariant (ii <= xx)";
+(0 <= xx);
+((0) = (xx));
+"Loop variant is positive";
+(0 <= (xx - ii$1));
+"Loop invariant is preserved";
+(0 <= (ii$1 + 1));
+((ii$1 + 1) <= xx);
+((xx) = (0));
+"Variant is decreasing";
+((xx - (ii$1 + 1)) +1 <= (xx - ii$1));
+"End of loop";
+(((res$2) = (xx))) or (((res$2) = (xx)))
+END
+&
+THEORY EnumerateX
+END

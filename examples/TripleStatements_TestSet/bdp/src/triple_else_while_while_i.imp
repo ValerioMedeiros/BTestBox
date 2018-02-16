@@ -1,0 +1,47 @@
+﻿/* triple_else_while_while_i
+ * Author: Diego Oliveira
+ * Creation date: 07/11/2016
+ */
+
+IMPLEMENTATION triple_else_while_while_i
+REFINES triple_else_while_while
+
+OPERATIONS
+    res1 , res2 , res3 <-- optriple_else_while_while ( xx , yy , zz ) =
+    BEGIN
+        VAR ii , jj IN
+            ii := 0 ; jj := 0 ;
+            res2 := ii ; res3 := jj ;
+            IF xx < 5 THEN
+                res1 := 0 ;
+                WHILE ii < yy DO
+                    WHILE jj < zz DO
+                        res3 := jj + 1 ;
+                        jj := jj + 1
+                    INVARIANT 0 <= jj & jj <= zz & res3 = jj
+                    VARIANT zz - jj
+                    END ;
+                    res2 := ii + 1 ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & 0 <= jj & jj <= zz & res3 = jj & ( ii > 0 => res3 = zz ) & ( not ( ii > 0 ) => res3 = 0 )
+                VARIANT yy - ii
+                END
+            ELSE
+                res1 := xx ;
+                WHILE ii < yy DO
+                    WHILE jj < zz DO
+                        res3 := jj + 1 ;
+                        jj := jj + 1
+                    INVARIANT 0 <= jj & jj <= zz & res3 = jj
+                    VARIANT zz - jj
+                    END ;
+                    res2 := ii + 1 ;
+                    ii := ii + 1
+                INVARIANT 0 <= ii & ii <= yy & res2 = ii & 0 <= jj & jj <= zz & res3 = jj & ( ii > 0 => res3 = zz ) & ( not ( ii > 0 ) => res3 = 0 )
+                VARIANT yy - ii
+                END
+            END
+        END
+    END
+
+ END

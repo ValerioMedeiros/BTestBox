@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    TestSet_BRANCH_LockMachine_i
+
+REFINES
+    TestSet_BRANCH_LockMachine
+
+IMPORTS
+    LockMachine
+
+OPERATIONS
+    verdict <-- TEST_0_openVault =
+    BEGIN
+        SetVariablesForTestLockMachine(FALSE);
+        VAR aux1 IN
+            openVault;
+            aux1 <-- OperationForTestGetisOpenIMPLockMachine;
+            IF aux1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_0_closeVault =
+    BEGIN
+        SetVariablesForTestLockMachine(TRUE);
+        VAR aux1 IN
+            closeVault;
+            aux1 <-- OperationForTestGetisOpenIMPLockMachine;
+            IF aux1 = FALSE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

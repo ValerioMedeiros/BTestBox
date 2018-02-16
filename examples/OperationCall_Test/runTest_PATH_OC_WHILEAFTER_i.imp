@@ -1,0 +1,39 @@
+IMPLEMENTATION
+    runTest_PATH_OC_WHILEAFTER_i
+
+REFINES
+    runTest_PATH_OC_WHILEAFTER
+
+IMPORTS
+    TestSet_PATH_OC_WHILEAFTER
+
+LOCAL_OPERATIONS
+    verdict <-- testopOC_WHILEAFTER =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopOC_WHILEAFTER =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_opOC_WHILEAFTER;
+            v1 <-- TEST_1_opOC_WHILEAFTER;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopOC_WHILEAFTER;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

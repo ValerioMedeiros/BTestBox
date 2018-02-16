@@ -1,0 +1,19 @@
+/* IMP_DET_MCH_ELSE
+ * Author: Diego Oliveira
+ * Creation date: 22/11/2016
+ */
+
+IMPLEMENTATION IMP_DET_MCH_ELSE
+REFINES DET_MCH_ELSE
+
+OPERATIONS
+    res <-- opDET_MCH_ELSE(xx, yy)=
+    BEGIN
+        IF xx > yy THEN
+            res := xx
+        ELSE
+            res := yy
+        END
+    END
+
+ END

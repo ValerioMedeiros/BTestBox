@@ -1,0 +1,41 @@
+IMPLEMENTATION
+    runTest_CLAUSE_OC_WHILEBEFORE_i
+
+REFINES
+    runTest_CLAUSE_OC_WHILEBEFORE
+
+IMPORTS
+    TestSet_CLAUSE_OC_WHILEBEFORE
+
+LOCAL_OPERATIONS
+    verdict <-- testopOC_WHILEBEFORE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopOC_WHILEBEFORE =
+    BEGIN
+        VAR v0, v1, v2, v3 IN
+            v0 <-- TEST_0_opOC_WHILEBEFORE;
+            v1 <-- TEST_1_opOC_WHILEBEFORE;
+            v2 <-- TEST_2_opOC_WHILEBEFORE;
+            v3 <-- TEST_3_opOC_WHILEBEFORE;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopOC_WHILEBEFORE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

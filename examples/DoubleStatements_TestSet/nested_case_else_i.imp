@@ -1,0 +1,35 @@
+/* nested_case_else_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION nested_case_else_i
+REFINES nested_case_else
+
+OPERATIONS
+    res1, res2 <-- opnested_case_else(xx, yy)=
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                IF yy < 5 THEN
+                    res1 := xx; res2 := 0
+                ELSE
+                    res1 := xx; res2 := yy
+                END
+            OR 1 THEN
+                IF yy < 5 THEN
+                    res1 := xx; res2 := 0
+                ELSE
+                    res1 := xx; res2 := yy
+                END
+            ELSE
+                IF yy < 5 THEN
+                    res1 := xx; res2 := 0
+                ELSE
+                    res1 := xx; res2 := yy
+                END
+            END
+        END
+    END
+
+ END

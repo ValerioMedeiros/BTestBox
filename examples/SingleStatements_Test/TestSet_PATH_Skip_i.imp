@@ -1,0 +1,22 @@
+IMPLEMENTATION
+    TestSet_PATH_Skip_i
+
+REFINES
+    TestSet_PATH_Skip
+
+IMPORTS
+    Skip
+
+OPERATIONS
+    verdict <-- TEST_0_opskip =
+    BEGIN
+        VAR  IN
+            opskip;
+            IF  THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

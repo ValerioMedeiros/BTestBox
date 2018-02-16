@@ -1,0 +1,46 @@
+IMPLEMENTATION
+    runTest_CLAUSE_nested_case_if_i
+
+REFINES
+    runTest_CLAUSE_nested_case_if
+
+IMPORTS
+    TestSet_CLAUSE_nested_case_if
+
+LOCAL_OPERATIONS
+    verdict <-- testopnested_case_if =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopnested_case_if =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5, v6, v7, v8 IN
+            v0 <-- TEST_0_opnested_case_if;
+            v1 <-- TEST_1_opnested_case_if;
+            v2 <-- TEST_2_opnested_case_if;
+            v3 <-- TEST_3_opnested_case_if;
+            v4 <-- TEST_4_opnested_case_if;
+            v5 <-- TEST_5_opnested_case_if;
+            v6 <-- TEST_6_opnested_case_if;
+            v7 <-- TEST_7_opnested_case_if;
+            v8 <-- TEST_8_opnested_case_if;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE & v6 = TRUE & v7 = TRUE & v8 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopnested_case_if;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

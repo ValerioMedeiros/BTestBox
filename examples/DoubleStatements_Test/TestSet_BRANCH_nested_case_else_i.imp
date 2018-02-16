@@ -1,0 +1,82 @@
+IMPLEMENTATION
+    TestSet_BRANCH_nested_case_else_i
+
+REFINES
+    TestSet_BRANCH_nested_case_else
+
+IMPORTS
+    nested_case_else
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(2, 5);
+            IF aux1 = 2 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(0, 5);
+            IF aux1 = 0 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(1, 5);
+            IF aux1 = 1 & aux2 = 5 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(2, 0);
+            IF aux1 = 2 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_5_opnested_case_else =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_case_else(1, 0);
+            IF aux1 = 1 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

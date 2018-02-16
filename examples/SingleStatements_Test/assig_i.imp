@@ -1,0 +1,15 @@
+/* assig_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION assig_i
+REFINES assig
+
+OPERATIONS
+    res <-- opassig(xx)=
+    BEGIN
+        res := xx
+    END
+
+ END

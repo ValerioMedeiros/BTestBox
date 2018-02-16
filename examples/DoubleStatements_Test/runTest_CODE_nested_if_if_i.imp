@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_CODE_nested_if_if_i
+
+REFINES
+    runTest_CODE_nested_if_if
+
+IMPORTS
+    TestSet_CODE_nested_if_if
+
+LOCAL_OPERATIONS
+    verdict <-- testopnested_if_if =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopnested_if_if =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opnested_if_if;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopnested_if_if;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

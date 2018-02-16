@@ -1,0 +1,22 @@
+﻿/* MchWithConstants_i
+ * Author: Diego Oliveira
+ * Creation date: 16/11/2016
+ */
+
+IMPLEMENTATION MchWithConstants_i
+REFINES MchWithConstants
+
+VALUES
+    max_count = 10
+
+OPERATIONS
+    res <-- opMchWithCConstants ( nn ) =
+    BEGIN
+        IF nn < max_count THEN
+            res := TRUE
+        ELSE
+            res := FALSE
+        END
+    END
+
+ END

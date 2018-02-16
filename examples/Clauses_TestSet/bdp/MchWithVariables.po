@@ -1,0 +1,36 @@
+THEORY ProofList IS
+_f(1) & _f(2) & _f(8) & _f(19) & resetCount.2,(_f(3) & _f(6) => _f(7));
+_f(1) & _f(2) & _f(8) & _f(19) & resetCount.1,(_f(3) & _f(4) => _f(5));
+_f(1) & _f(2) & _f(8) & _f(14) & opRelease.2,(_f(16) & _f(3) & _f(6) => _f(18));
+_f(1) & _f(2) & _f(8) & _f(14) & opRelease.1,(_f(16) & _f(3) & _f(4) => _f(17));
+_f(1) & _f(2) & _f(8) & _f(9) & opIncCount.2,(_f(10) & _f(3) & _f(6) => _f(13));
+_f(1) & _f(2) & _f(8) & _f(9) & opIncCount.1,(_f(10) & _f(3) & _f(4) => _f(12));
+_f(1) & _f(2) & Initialisation.2,(_f(3) & _f(6) => _f(7));
+_f(1) & _f(2) & Initialisation.1,(_f(3) & _f(4) => _f(5))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+((max_count) = (10));
+"Invariant is preserved";
+"Check invariant ((count) : (NAT))";
+((0) : (NAT));
+"Check invariant (count <= max_count)";
+(0 <= max_count);
+((count) : (NAT)) & (count <= max_count);
+((nn) : (NAT)) & (0 +1 <= nn);
+((count + nn) +1 <= max_count);
+not(((count + nn) +1 <= max_count));
+(((count + nn)) : (NAT));
+((count + nn) <= max_count);
+((nn) : (NAT));
+((count - nn) +1 <= 0);
+not(((count - nn) +1 <= 0));
+(((count - nn)) : (NAT));
+((count - nn) <= max_count);
+btrue;
+((count) : (NAT))
+END
+&
+THEORY EnumerateX
+END

@@ -1,0 +1,1 @@
+﻿Flag(FileOn("triple_else_while_while_i.pmi.0.res")) & Set(toto | xx: NAT & yy: NAT & zz: NAT & not(xx+1<=5) & 0<=ii$1 & ii$1<=yy & res2$2 = ii$1 & 0<=jj$1 & jj$1<=zz & res3$2 = jj$1 & (0+1<=ii$1 => res3$2 = zz) & (not(0+1<=ii$1) => res3$2 = 0) & not(ii$1+1<=yy) & not(xx+1<=5) & 0+1<=yy & "End of loop" => res3$2 = zz)

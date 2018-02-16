@@ -1,0 +1,42 @@
+IMPLEMENTATION
+    runTest_PATH_duoseq_while_nestedwhile_i
+
+REFINES
+    runTest_PATH_duoseq_while_nestedwhile
+
+IMPORTS
+    TestSet_PATH_duoseq_while_nestedwhile
+
+LOCAL_OPERATIONS
+    verdict <-- testopduoseq_while_nestedwhile =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopduoseq_while_nestedwhile =
+    BEGIN
+        VAR v0, v1, v2, v3, v4 IN
+            v0 <-- TEST_0_opduoseq_while_nestedwhile;
+            v1 <-- TEST_1_opduoseq_while_nestedwhile;
+            v2 <-- TEST_2_opduoseq_while_nestedwhile;
+            v3 <-- TEST_3_opduoseq_while_nestedwhile;
+            v4 <-- TEST_4_opduoseq_while_nestedwhile;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopduoseq_while_nestedwhile;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

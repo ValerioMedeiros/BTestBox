@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_BRANCH_OC_WHILEINSIDE_NDET_i
+
+REFINES
+    runTest_BRANCH_OC_WHILEINSIDE
+
+IMPORTS
+    TestSet_BRANCH_OC_WHILEINSIDE
+
+LOCAL_OPERATIONS
+    verdict <-- testopOC_WHILEINSIDE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopOC_WHILEINSIDE =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opOC_WHILEINSIDE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopOC_WHILEINSIDE;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

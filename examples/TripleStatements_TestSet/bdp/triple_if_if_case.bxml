@@ -1,0 +1,7 @@
+<Machine name='triple_if_if_case' type='abstraction'>
+    <Initialisation>
+        <Skip/>
+    </Initialisation>
+    <TypeInfos/>
+    
+</Machine>

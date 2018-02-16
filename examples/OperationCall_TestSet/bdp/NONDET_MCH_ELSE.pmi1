@@ -1,0 +1,12 @@
+THEORY BalanceX IS
+NONDET_MCH_ELSE,0,0,0,0,0,0,0
+END
+&
+THEORY ProofState
+END
+&
+THEORY MethodList
+END
+&
+THEORY PassList
+END

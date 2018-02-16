@@ -1,0 +1,38 @@
+IMPLEMENTATION
+    runTest_BRANCH_MchWithLocalOperations_i
+
+REFINES
+    runTest_BRANCH_MchWithLocalOperations
+
+IMPORTS
+    TestSet_BRANCH_MchWithLocalOperations
+
+LOCAL_OPERATIONS
+    verdict <-- testopMchWithLocalOperations =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopMchWithLocalOperations =
+    BEGIN
+        VAR v0 IN
+            v0 <-- TEST_0_opMchWithLocalOperations;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopMchWithLocalOperations;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

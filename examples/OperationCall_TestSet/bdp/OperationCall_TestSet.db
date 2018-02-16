@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<db_xml>
+    <atelierb version="3_7_ubuntu-cvs" />
+    <project decomp_dir="C:\Users\Diego Oliveira\Documents\binstall_projects\OperationCall_TestSet\bdp\expand_src" old_decomp_dir="C:\Users\Diego Oliveira\Documents\binstall_projects\OperationCall_TestSet\bdp\src">
+        <!-- Definition directory list -->
+        <!-- Component file list -->
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="DET_MCH_CASE" suffix="mch" user="Diego">
+            <component name="DET_MCH_CASE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="DET_MCH_ELSE" suffix="mch" user="Diego">
+            <component name="DET_MCH_ELSE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="DET_MCH_WHILE" suffix="mch" user="Diego">
+            <component name="DET_MCH_WHILE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_DET_MCH_CASE" suffix="imp" user="Diego">
+            <component name="IMP_DET_MCH_CASE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_DET_MCH_ELSE" suffix="imp" user="Diego">
+            <component name="IMP_DET_MCH_ELSE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_DET_MCH_WHILE" suffix="imp" user="Diego">
+            <component name="IMP_DET_MCH_WHILE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_NONDET_MCH_CASE" suffix="imp" user="Diego">
+            <component name="IMP_NONDET_MCH_CASE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_NONDET_MCH_ELSE" suffix="imp" user="Diego">
+            <component name="IMP_NONDET_MCH_ELSE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_NONDET_MCH_WHILE" suffix="imp" user="Diego">
+            <component name="IMP_NONDET_MCH_WHILE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_OC_NONDET_MCH_CASE" suffix="imp" user="Diego">
+            <component name="IMP_OC_NONDET_MCH_CASE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_OC_NONDET_MCH_ELSE" suffix="imp" user="Diego">
+            <component name="IMP_OC_NONDET_MCH_ELSE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_OC_NONDET_MCH_WHILEAFTER" suffix="imp" user="Diego">
+            <component name="IMP_OC_NONDET_MCH_WHILEAFTER" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_OC_NONDET_MCH_WHILEBEFORE" suffix="imp" user="Diego">
+            <component name="IMP_OC_NONDET_MCH_WHILEBEFORE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="IMP_OC_NONDET_MCH_WHILEINSIDE" suffix="imp" user="Diego">
+            <component name="IMP_OC_NONDET_MCH_WHILEINSIDE" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="NDET_WHILE_CHOICE" suffix="mch" user="Diego">
+            <component name="NDET_WHILE_CHOICE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="NDET_WHILE_CHOICE_i" suffix="imp" user="Diego">
+            <component name="NDET_WHILE_CHOICE_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="NONDET_MCH_CASE" suffix="mch" user="Diego">
+            <component name="NONDET_MCH_CASE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="NONDET_MCH_ELSE" suffix="mch" user="Diego">
+            <component name="NONDET_MCH_ELSE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="NONDET_MCH_WHILE" suffix="mch" user="Diego">
+            <component name="NONDET_MCH_WHILE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_CASE" suffix="mch" user="Diego">
+            <component name="OC_CASE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_CASE_NDET_i" suffix="imp" user="Diego">
+            <component name="OC_CASE_NDET_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_CASE_i" suffix="imp" user="Diego">
+            <component name="OC_CASE_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_IFELSE" suffix="mch" user="Diego">
+            <component name="OC_IFELSE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_IFELSE_NDET_i" suffix="imp" user="Diego">
+            <component name="OC_IFELSE_NDET_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_IFELSE_i" suffix="imp" user="Diego">
+            <component name="OC_IFELSE_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEAFTER" suffix="mch" user="Diego">
+            <component name="OC_WHILEAFTER" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEAFTER_NDET_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEAFTER_NDET_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEAFTER_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEAFTER_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEBEFORE" suffix="mch" user="Diego">
+            <component name="OC_WHILEBEFORE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEBEFORE_NDET_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEBEFORE_NDET_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEBEFORE_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEBEFORE_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEINSIDE" suffix="mch" user="Diego">
+            <component name="OC_WHILEINSIDE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEINSIDE_NDET_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEINSIDE_NDET_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILEINSIDE_i" suffix="imp" user="Diego">
+            <component name="OC_WHILEINSIDE_i" type="implementation" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILE_CHOICE" suffix="mch" user="Diego">
+            <component name="OC_WHILE_CHOICE" type="specification" />
+        </component_file>
+        <component_file path="C:/Users/Diego Oliveira/Documents/binstall_projects/OperationCall_TestSet" name="OC_WHILE_CHOICE_i" suffix="imp" user="Diego">
+            <component name="OC_WHILE_CHOICE_i" type="implementation" />
+        </component_file>
+    </project>
+</db_xml>

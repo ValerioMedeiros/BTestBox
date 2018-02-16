@@ -1,0 +1,70 @@
+IMPLEMENTATION
+    TestSet_PATH_nested_while_whileseq_i
+
+REFINES
+    TestSet_PATH_nested_while_whileseq
+
+IMPORTS
+    nested_while_whileseq
+
+OPERATIONS
+    verdict <-- TEST_0_opnested_while_whileseq =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_whileseq(0, 0);
+            IF aux1 = 0 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_1_opnested_while_whileseq =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_whileseq(1, 0);
+            IF aux1 = 1 & aux2 = 0 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_2_opnested_while_whileseq =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_whileseq(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_3_opnested_while_whileseq =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_whileseq(2, 1);
+            IF aux1 = 2 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- TEST_4_opnested_while_whileseq =
+    BEGIN
+        VAR aux1, aux2 IN
+            aux1, aux2 <-- opnested_while_whileseq(1, 1);
+            IF aux1 = 1 & aux2 = 1 THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

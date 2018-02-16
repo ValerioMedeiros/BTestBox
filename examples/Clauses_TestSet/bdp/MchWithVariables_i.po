@@ -1,0 +1,70 @@
+THEORY ProofList IS
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(2) & resetCount.2,(_f(4) & _f(7) => _f(8));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(2) & resetCount.1,(_f(4) & _f(5) => _f(6));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.9,(_f(17) & _f(31) & _f(29) & _f(4) & _f(21) => _f(36));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.8,(_f(17) & _f(31) & _f(29) & _f(4) & _f(7) => _f(34));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.7,(_f(17) & _f(31) & _f(29) & _f(4) & _f(5) => _f(33));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.6,(_f(17) & _f(31) & _f(28) & _f(4) => _f(24));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.5,(_f(17) & _f(31) & _f(28) & _f(4) & _f(21) => _f(35));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.4,(_f(17) & _f(31) & _f(28) & _f(4) & _f(7) => _f(34));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.3,(_f(17) & _f(31) & _f(28) & _f(4) & _f(5) => _f(33));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.2,(_f(17) & _f(30) & _f(29) & _f(4) => _f(26));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opRelease.1,(_f(17) & _f(30) & _f(29) & _f(4) & _f(21) => _f(32));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.9,(_f(17) & _f(18) & _f(16) & _f(13) & _f(4) => _f(26));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.8,(_f(17) & _f(18) & _f(16) & _f(13) & _f(4) & _f(21) => _f(25));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.7,(_f(17) & _f(18) & _f(15) & _f(14) & _f(4) => _f(24));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.6,(_f(17) & _f(18) & _f(15) & _f(14) & _f(4) & _f(21) => _f(23));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.5,(_f(17) & _f(18) & _f(15) & _f(14) & _f(4) & _f(7) => _f(20));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.4,(_f(17) & _f(18) & _f(15) & _f(14) & _f(4) & _f(5) => _f(19));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.3,(_f(17) & _f(18) & _f(15) & _f(13) & _f(4) & _f(21) => _f(22));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.2,(_f(17) & _f(18) & _f(15) & _f(13) & _f(4) & _f(7) => _f(20));
+_f(1) & _f(3) & _f(3) & _f(9) & _f(10) & _f(12) & opIncCount.1,(_f(17) & _f(18) & _f(15) & _f(13) & _f(4) & _f(5) => _f(19));
+_f(1) & _f(3) & _f(3) & Initialisation.2,(_f(4) & _f(7) => _f(8));
+_f(1) & _f(3) & _f(3) & Initialisation.1,(_f(4) & _f(5) => _f(6))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((max_count) = (10));
+"Refinement is correct";
+"Check invariant ((countImp$1) : (NAT))";
+((0) : (NAT));
+"Check invariant (countImp$1 <= max_count)";
+(0 <= max_count);
+((count) : (NAT)) & (count <= max_count);
+((countImp$1) : (NAT)) & (countImp$1 <= max_count) & ((countImp$1) = (count));
+((nn) : (NAT)) & (0 +1 <= nn) & ((res) = (res));
+((res$1) = (res));
+((count + nn) +1 <= max_count);
+not(((count + nn) +1 <= max_count));
+((countImp$1 + nn) +1 <= max_count);
+not(((countImp$1 + nn) +1 <= max_count));
+((nn) : (NAT));
+(0 +1 <= nn);
+(((countImp$1 + nn)) : (NAT));
+((countImp$1 + nn) <= max_count);
+"Check invariant ((countImp$1) = (count))";
+(((countImp$1 + nn)) = ((count + nn)));
+(((countImp$1 + nn)) = (count));
+((1) = (0));
+((countImp$1) = ((count + nn)));
+((0) = (1));
+((nn) : (NAT)) & ((res) = (res));
+((count - nn) +1 <= 0);
+not(((count - nn) +1 <= 0));
+((countImp$1 - nn) +1 <= 0);
+not(((countImp$1 - nn) +1 <= 0));
+((countImp$1) = ((count - nn)));
+(((countImp$1 - nn)) : (NAT));
+((countImp$1 - nn) <= max_count);
+(((countImp$1 - nn)) = (count));
+(((countImp$1 - nn)) = ((count - nn)));
+((res) = (res));
+(countImp$1 <= max_count);
+((countImp$1) : (NAT));
+((nn) : (NAT)) & (0 +1 <= nn)
+END
+&
+THEORY EnumerateX
+END

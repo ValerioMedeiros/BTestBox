@@ -1,0 +1,35 @@
+﻿/* MchWithLocalOperations_i
+ * Author: Diego Oliveira
+ * Creation date: 17/11/2016
+ */
+
+IMPLEMENTATION MchWithLocalOperations_i
+REFINES MchWithLocalOperations
+
+LOCAL_OPERATIONS
+    res <-- max_y ( nn1 , nn2 ) =
+    PRE nn1 : NAT & nn2 : NAT
+    THEN
+        IF nn1 > nn2 THEN
+            res := nn1
+        ELSE
+            res := nn2
+        END
+    END
+
+OPERATIONS
+    res <-- max_y ( nn1 , nn2 ) =
+    BEGIN
+        IF nn1 > nn2 THEN
+            res := nn1
+        ELSE
+            res := nn2
+        END
+    END ;
+
+    res <-- opMchWithLocalOperations ( nn1 , nn2 ) =
+    BEGIN
+        res <-- max_y ( nn1 , nn2 )
+    END
+
+ END

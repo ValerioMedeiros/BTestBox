@@ -1,0 +1,41 @@
+THEORY ProofList IS
+_f(1) & _f(4) & optriple_else_else_case.12,(_f(13) & _f(14) & _f(15) & _f(8) & _f(6) & _f(11) & _f(12) & _f(8) & _f(6) & _f(16) => _f(20));
+_f(1) & _f(4) & optriple_else_else_case.11,(_f(13) & _f(14) & _f(15) & _f(8) & _f(6) & _f(10) & _f(8) & _f(6) & _f(16) => _f(20));
+_f(1) & _f(4) & optriple_else_else_case.10,(_f(13) & _f(14) & _f(15) & _f(8) & _f(6) & _f(9) & _f(8) & _f(6) & _f(16) => _f(20));
+_f(1) & _f(4) & optriple_else_else_case.9,(_f(13) & _f(14) & _f(15) & _f(8) & _f(5) & _f(11) & _f(12) & _f(8) & _f(5) & _f(16) => _f(19));
+_f(1) & _f(4) & optriple_else_else_case.8,(_f(13) & _f(14) & _f(15) & _f(8) & _f(5) & _f(10) & _f(8) & _f(5) & _f(16) => _f(19));
+_f(1) & _f(4) & optriple_else_else_case.7,(_f(13) & _f(14) & _f(15) & _f(8) & _f(5) & _f(9) & _f(8) & _f(5) & _f(16) => _f(19));
+_f(1) & _f(4) & optriple_else_else_case.6,(_f(13) & _f(14) & _f(15) & _f(7) & _f(6) & _f(11) & _f(12) & _f(7) & _f(6) & _f(16) => _f(18));
+_f(1) & _f(4) & optriple_else_else_case.5,(_f(13) & _f(14) & _f(15) & _f(7) & _f(6) & _f(10) & _f(7) & _f(6) & _f(16) => _f(18));
+_f(1) & _f(4) & optriple_else_else_case.4,(_f(13) & _f(14) & _f(15) & _f(7) & _f(6) & _f(9) & _f(7) & _f(6) & _f(16) => _f(18));
+_f(1) & _f(4) & optriple_else_else_case.3,(_f(13) & _f(14) & _f(15) & _f(7) & _f(5) & _f(11) & _f(12) & _f(7) & _f(5) & _f(16) => _f(17));
+_f(1) & _f(4) & optriple_else_else_case.2,(_f(13) & _f(14) & _f(15) & _f(7) & _f(5) & _f(10) & _f(7) & _f(5) & _f(16) => _f(17));
+_f(1) & _f(4) & optriple_else_else_case.1,(_f(13) & _f(14) & _f(15) & _f(7) & _f(5) & _f(9) & _f(7) & _f(5) & _f(16) => _f(17))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+btrue;
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT)) & ((res1) = (res1)) & ((res2) = (res2)) & ((res3) = (res3));
+((res1$1) = (res1)) & ((res2$1) = (res2)) & ((res3$1) = (res3));
+(yy +1 <= 5);
+not((yy +1 <= 5));
+(xx +1 <= 5);
+not((xx +1 <= 5));
+((zz) : (({0})));
+((zz) : (({1})));
+not(((zz) : (({0}))));
+not(((zz) : (({1}))));
+((xx) : (NAT));
+((yy) : (NAT));
+((zz) : (NAT));
+"Refinement is correct";
+(((zz) : (({zz}))) & ((0) = (0)) & ((0) = (0)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((0) = (0)) & ((0) = (0)) & ((zz) = (zz)));
+(((zz) : (({zz}))) & ((0) = (0)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((0) = (0)) & ((yy) = (yy)) & ((zz) = (zz)));
+(((zz) : (({zz}))) & ((xx) = (xx)) & ((0) = (0)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((0) = (0)) & ((zz) = (zz)));
+(((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz))) or (((zz) : (({zz}))) & ((xx) = (xx)) & ((yy) = (yy)) & ((zz) = (zz)));
+((xx) : (NAT)) & ((yy) : (NAT)) & ((zz) : (NAT))
+END
+&
+THEORY EnumerateX
+END

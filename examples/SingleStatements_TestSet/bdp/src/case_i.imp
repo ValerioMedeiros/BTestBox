@@ -1,0 +1,23 @@
+﻿/* case_i
+ * Author: Diego Oliveira
+ * Creation date: 04/11/2016
+ */
+
+IMPLEMENTATION case_i
+REFINES case
+
+OPERATIONS
+    res <-- opcase ( xx ) =
+    BEGIN
+        CASE xx OF
+            EITHER 0 THEN
+                res := xx
+            OR 1 THEN
+                res := xx
+            ELSE
+                res := xx
+            END
+        END
+    END
+
+ END

@@ -1,0 +1,1 @@
+﻿Flag(FileOn("OC_WHILEBEFORE_i.pmi.res")) & Set(toto | yy: INTEGER & 0<=yy & yy<=2147483647 & 0<=ii$1 & ii$1<=yy & not(1+ii$1<=yy) & ii$1<=2147483647 & yy+1<=1+ii$1 & not(yy = 1+ii$1) & yy<=1+ii$1 & not(1+ii$1 = yy) & 1<=1+ii$1 => ii$1 = yy)

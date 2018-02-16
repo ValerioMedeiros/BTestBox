@@ -1,0 +1,35 @@
+﻿/* OC_WHILEBEFORE_i
+ * Author: Diego Oliveira
+ * Creation date: 10/11/2016
+ */
+
+IMPLEMENTATION OC_WHILEBEFORE_i
+REFINES OC_WHILEBEFORE
+
+IMPORTS
+    DET_MCH_WHILE
+
+OPERATIONS
+    res1 , res2 <-- opOC_WHILEBEFORE ( xx , yy ) =
+    BEGIN
+        VAR ii IN
+            ii := 0 ;
+            res1 <-- opDET_MCH_WHILE ( xx ) ;
+            res2 <-- opDET_MCH_WHILE ( yy ) ;
+            WHILE ii < xx DO
+                res1 := ii + 1 ;
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= xx & ( ii = 0 => res1 = xx ) & ( not ( ii = 0 ) => res1 = ii )
+            VARIANT xx - ii
+            END ;
+            ii := 0 ;
+            WHILE ii < yy DO
+                ii := ii + 1
+            INVARIANT 0 <= ii & ii <= yy
+            VARIANT yy - ii
+            END ;
+            res2 := ii
+        END
+    END
+
+ END

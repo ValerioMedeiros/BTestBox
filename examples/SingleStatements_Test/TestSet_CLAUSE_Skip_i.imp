@@ -1,0 +1,15 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_Skip_i
+
+REFINES
+    TestSet_CLAUSE_Skip
+
+IMPORTS
+    Skip
+
+OPERATIONS
+    verdict <-- TEST_0_opskip =
+    BEGIN
+        verdict := TRUE
+    END
+END

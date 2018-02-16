@@ -1,0 +1,43 @@
+IMPLEMENTATION
+    runTest_CODE_nested_else_case_i
+
+REFINES
+    runTest_CODE_nested_else_case
+
+IMPORTS
+    TestSet_CODE_nested_else_case
+
+LOCAL_OPERATIONS
+    verdict <-- testopnested_else_case =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopnested_else_case =
+    BEGIN
+        VAR v0, v1, v2, v3, v4, v5 IN
+            v0 <-- TEST_0_opnested_else_case;
+            v1 <-- TEST_1_opnested_else_case;
+            v2 <-- TEST_2_opnested_else_case;
+            v3 <-- TEST_3_opnested_else_case;
+            v4 <-- TEST_4_opnested_else_case;
+            v5 <-- TEST_5_opnested_else_case;
+            IF v0 = TRUE & v1 = TRUE & v2 = TRUE & v3 = TRUE & v4 = TRUE & v5 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopnested_else_case;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

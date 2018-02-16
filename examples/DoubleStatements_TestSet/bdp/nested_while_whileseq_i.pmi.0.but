@@ -1,0 +1,1 @@
+﻿Flag(FileOn("nested_while_whileseq_i.pmi.0.res")) & Set(toto | xx: NAT & yy: NAT & 0<=ii$1 & ii$1<=xx & res1$2 = ii$1 & (not(ii$1 = 0) => res2$2 = yy) & (ii$1 = 0 => res2$2 = 0) & 0<=jj$1 & jj$1<=yy & res2$2 = jj$1 & not(ii$1+1<=xx) & not(xx+1<=1) & "End of loop" => res2$2 = yy)

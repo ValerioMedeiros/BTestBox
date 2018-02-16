@@ -1,0 +1,20 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_LockMachine_i
+
+REFINES
+    TestSet_CLAUSE_LockMachine
+
+IMPORTS
+    LockMachine
+
+OPERATIONS
+    verdict <-- TEST_0_openVault =
+    BEGIN
+        verdict := TRUE
+    END;
+
+    verdict <-- TEST_0_closeVault =
+    BEGIN
+        verdict := TRUE
+    END
+END

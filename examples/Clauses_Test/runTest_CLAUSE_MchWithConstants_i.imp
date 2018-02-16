@@ -1,0 +1,39 @@
+IMPLEMENTATION
+    runTest_CLAUSE_MchWithConstants_i
+
+REFINES
+    runTest_CLAUSE_MchWithConstants
+
+IMPORTS
+    TestSet_CLAUSE_MchWithConstants
+
+LOCAL_OPERATIONS
+    verdict <-- testopMchWithCConstants =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+
+OPERATIONS
+    verdict <-- testopMchWithCConstants =
+    BEGIN
+        VAR v0, v1 IN
+            v0 <-- TEST_0_opMchWithCConstants;
+            v1 <-- TEST_1_opMchWithCConstants;
+            IF v0 = TRUE & v1 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END;
+
+    verdict <-- testAll =
+    BEGIN
+        VAR v0 IN
+            v0 <-- testopMchWithCConstants;
+            IF v0 = TRUE THEN
+                verdict := TRUE
+            ELSE
+                verdict := FALSE
+            END
+        END
+    END
+END

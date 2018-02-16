@@ -1,0 +1,37 @@
+﻿/* TestMch_i
+ * Author: Diego Oliveira
+ * Creation date: 17/11/2016
+ */
+
+IMPLEMENTATION TestMch_i
+REFINES TestMch
+
+IMPORTS
+    MchToBeImported
+
+CONCRETE_VARIABLES
+    countI
+
+INVARIANT
+    countI = count
+
+INITIALISATION
+    countI := 0
+
+LOCAL_OPERATIONS
+    set_variables_test_op_1 = count := 6
+
+OPERATIONS
+    set_variables_test_op_1 = countI := 6 ;
+
+    verdict <-- test_op_1 =
+    BEGIN
+        set_variables_test_op_1 ;
+        Inc ( 1 ) ;
+        IF countI = 7 THEN
+            verdict := TRUE
+        ELSE
+            verdict := FALSE
+        END
+    END
+END

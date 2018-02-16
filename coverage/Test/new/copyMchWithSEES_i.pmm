@@ -1,5 +1,0 @@
-﻿THEORY User_Pass IS
-Operation(guestArrived) & ff(0) & pp(rt.1 | 5);
-Operation(enterHouse) & ff(0) & pp(rt.1 | 5);
-Operation(leaveHouse) & ff(0) & pp(rt.1 | 5)
-END 

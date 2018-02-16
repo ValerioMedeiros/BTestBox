@@ -1,0 +1,15 @@
+IMPLEMENTATION
+    TestSet_CLAUSE_assig_i
+
+REFINES
+    TestSet_CLAUSE_assig
+
+IMPORTS
+    assig
+
+OPERATIONS
+    verdict <-- TEST_0_opassig =
+    BEGIN
+        verdict := TRUE
+    END
+END

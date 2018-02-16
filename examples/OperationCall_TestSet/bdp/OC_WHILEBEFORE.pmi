@@ -1,0 +1,18 @@
+﻿THEORY BalanceX IS
+  OC_WHILEBEFORE,0,0,0,0,0,0,0
+END
+&
+THEORY ProofState 
+END
+&
+THEORY MethodList 
+END
+&
+THEORY PassList 
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version 
+END

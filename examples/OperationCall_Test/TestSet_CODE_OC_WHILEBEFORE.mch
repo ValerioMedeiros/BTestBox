@@ -1,0 +1,7 @@
+MACHINE
+    TestSet_CODE_OC_WHILEBEFORE
+
+OPERATIONS
+    verdict <-- TEST_0_opOC_WHILEBEFORE =
+        ANY kk WHERE kk : BOOL THEN verdict := kk END
+END

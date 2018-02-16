@@ -1,0 +1,11 @@
+THEORY ProofList
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483648) .. (2147483647))));
+((xx) : (NAT));
+btrue
+END
+&
+THEORY EnumerateX
+END
