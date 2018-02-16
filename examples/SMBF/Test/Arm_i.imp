@@ -1,0 +1,41 @@
+/* Arm_i
+ * Author: Diego
+ * Creation date: 7/28/2017
+ */
+
+IMPLEMENTATION Arm_i
+REFINES Arm
+IMPORTS Motor
+CONCRETE_VARIABLES
+    pos_x
+INVARIANT
+    pos_x : 0..100 
+INITIALISATION
+    pos_x := 0
+OPERATIONS
+  Getpos_xForTest <-- OperationForTestGetpos_xArm =
+    Getpos_xForTest := pos_x;
+
+  SetVariablesForTestArm(nn1) = 
+  BEGIN
+    pos_x := nn1
+  END
+
+  move =
+  VAR xx IN 
+      xx <-- get_detachment(pos_x);
+      VAR aux IN
+          aux := pos_x + xx;
+          IF aux <= 100 &
+              aux >= 0
+          THEN
+              pos_x := pos_x + xx
+          END
+      END
+  END;
+    
+  wrongMove =
+  IF pos_x < 0 THEN
+      pos_x := 0
+  END
+END

@@ -1,0 +1,50 @@
+IMPLEMENTATION
+  TestSet_Branch_Arm_i
+REFINES
+  TestSet_Branch_Arm
+IMPORTS
+  Arm
+OPERATIONS
+
+  verdict <-- TEST_1_move =
+  BEGIN
+    SetVariablesForTestArm(0);
+    VAR aux1 IN
+      move;
+      aux1 <-- GetPos_x;
+      IF aux1 = 3 THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
+    END
+  END;
+  
+  verdict <-- TEST_2_move =
+  BEGIN
+    SetVariablesForTestArm(100);
+    VAR aux1 IN
+      move;
+      aux1 <-- GetPos_x;
+      IF aux1 = 100 THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
+    END
+  END;
+  
+  verdict <-- TEST_1_wrongMove =
+  BEGIN
+    SetVariablesForTestArm(0);
+    VAR aux1 IN
+      wrongMove;
+      aux1 <-- GetPos_x;
+      IF aux1 = 0 THEN
+        verdict := TRUE
+      ELSE
+        verdict := FALSE
+      END
+    END
+  END
+END
