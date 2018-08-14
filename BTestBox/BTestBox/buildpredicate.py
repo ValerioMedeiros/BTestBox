@@ -132,7 +132,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
-        del way[len(way) - 1]
+        #del way[len(way) - 1]
         return newPredicateXML, posMut
     elif buildpaths.graphgen.nodetype[
         node] == "ConditionWhile" and node == condWhile:  # Stop the while and return predicate
@@ -540,7 +540,7 @@ def getMutables(inputs, outputs, condWhile, posMut, docXML):
 
 def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, operationMch,
               importedMch, seesMch, operationName, impName, predicateInputs, variablesList, variablesTypeList,
-              directory, atelierBDir, proBPath, copy_directory):
+              directory, atelierBDir, proBPath, copy_directory, maxint):
     """
     Get the output for a given input and operation
     """
@@ -602,9 +602,9 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, oper
                     addXMLtoXML(predicateXML, childNode.cloneNode(20), docXML)
     if arrayModification != []:
         solveArrayModification(predicateXML, arrayModification)
-    ExistValues, OutputVariables, predicate = checkPredicate(predicateXML, "Getting the outputs for guide " + str(pathToCover),
+    ExistValues, OutputVariables, predicate, tempoAvaliacao = checkPredicate(predicateXML, "Getting the outputs for guide " + str(pathToCover),
                                                              outputList, proBPath, copy_directory, operationImp,
-                                                             operationMch, importedMch, seesMch, variablesList,
+                                                             operationMch, importedMch, seesMch, maxint, variablesList,
                                                              variablesTypeList, True)
     if ExistValues:
         OutputVariables = insertSetsInOutputVariables(OutputVariables, predicate, predicateXML, predicateInputs,
@@ -620,7 +620,7 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, oper
     else:
         print("Output(s) were NOT found for the predicate: " + predicate)
         print('Outputs not found, this operation cannot be covered')
-    return OutputVariables, ExistValues
+    return OutputVariables, ExistValues, tempoAvaliacao
 
 
 def addTheOutputsTypeToPredicateXML(predicateXML, outputs, docXML, operationXML):
@@ -892,7 +892,7 @@ def transformArrayInXML(valuesString, docXML):
     return naryExp
 
 
-def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, imp, mch, importedMch, seesMch, variablesList = [], variablesTypeList =  [], isOutput = False):
+def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, imp, mch, importedMch, seesMch, maxint, variablesList = [], variablesTypeList =  [], isOutput = False):
     """
     Check if the generated predicate can hold true
 
@@ -913,7 +913,7 @@ def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, imp,
 #    if inputsString != []:
 #        for inp in inputsString:
 #            predicate = predicate[:len(predicate) - 1:] + " & " + inp + ")"
-    ans, variables = callprob.evaluate(predicate, message, inputs, proBPath, copy_directory)
+    ans, variables, tempoAvaliacoes = callprob.evaluate(predicate, message, inputs, proBPath, copy_directory, maxint)
     reSwapSets(predicateXML, imp.parentNode.parentNode)
     if isOutput:
         reSwapSetsInsideArrays(predicateXML, imp.parentNode.parentNode, variablesList, variablesTypeList)
@@ -921,7 +921,7 @@ def checkPredicate(predicateXML, message, inputs, proBPath, copy_directory, imp,
     SETSComponentsId.clear()
     global numberOfEnumeratedSetComponents
     numberOfEnumeratedSetComponents = 0
-    return ans, variables, predicate
+    return ans, variables, predicate, tempoAvaliacoes
 
 
 def reSwapSetsInsideArrays(predicateXML, imp, variablesList, variablesTypeList):

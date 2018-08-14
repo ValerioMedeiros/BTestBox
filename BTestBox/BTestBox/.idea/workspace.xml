@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe13faf8-04bb-44ab-8a58-b0973cd5999e" name="Default" comment="" />
+    <list default="true" id="f4d662e2-ea95-4b87-929f-6e00e5adcdab" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,30 +13,15 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
-  <component name="FavoritesManager">
-    <favorites_list name="BTestBox" />
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="btestbox.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/btestbox.py">
+      <file leaf-file-name="graphic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="226" column="82" lean-forward="true" selection-start-line="226" selection-start-column="82" selection-end-line="226" selection-end-column="82" />
+            <state relative-caret-position="-253">
+              <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
               <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="makecoverage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/makecoverage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#112#127#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,20 +30,34 @@
       <file leaf-file-name="buildpredicate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildpredicate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15538">
-              <caret line="920" column="10" lean-forward="false" selection-start-line="920" selection-start-column="10" selection-end-line="920" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="8874">
+              <caret line="528" column="53" lean-forward="false" selection-start-line="528" selection-start-column="53" selection-end-line="528" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="callprob.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/callprob.py">
+      <file leaf-file-name="btestbox.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/btestbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+            <state relative-caret-position="3026">
+              <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solveroc.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/solveroc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="582" column="13" lean-forward="false" selection-start-line="582" selection-start-column="13" selection-end-line="582" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,8 +66,8 @@
       <file leaf-file-name="HTMLgen.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HTMLgen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5168">
-              <caret line="304" column="43" lean-forward="false" selection-start-line="304" selection-start-column="43" selection-end-line="304" selection-end-column="43" />
+            <state relative-caret-position="476">
+              <caret line="30" column="130" lean-forward="false" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="130" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -76,59 +75,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="coverageprocess.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/coverageprocess.py">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6392">
-              <caret line="376" column="70" lean-forward="false" selection-start-line="376" selection-start-column="66" selection-end-line="376" selection-end-column="70" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#0#17#0" expanded="true" />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solveroc.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/solveroc.py">
+      <file leaf-file-name="nodescreator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodescreator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="525" column="25" lean-forward="false" selection-start-line="525" selection-start-column="22" selection-end-line="525" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createBTestSet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/createBTestSet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="75" column="4" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="82" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="instgen.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/instgen.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2448">
-              <caret line="144" column="23" lean-forward="false" selection-start-line="144" selection-start-column="23" selection-end-line="144" selection-end-column="23" />
+            <state relative-caret-position="221">
+              <caret line="13" column="42" lean-forward="false" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graphgen.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphgen.py">
+      <file leaf-file-name="testTranslation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testTranslation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6375">
-              <caret line="375" column="11" lean-forward="false" selection-start-line="375" selection-start-column="11" selection-end-line="375" selection-end-column="11" />
+            <state relative-caret-position="374">
+              <caret line="22" column="25" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
-                <element signature="e#0#27#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -138,48 +113,31 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print</find>
-      <find>varOutput</find>
-      <find>assig</find>
-      <find>initialisation</find>
-      <find>path</find>
-      <find>dopath</find>
-      <find>ClauseCo</find>
-      <find>SetVariab</find>
-      <find>&quot;\\&quot;</find>
-      <find>'\\'</find>
-      <find>\\report_'</find>
-      <find>\\reportText_'</find>
-      <find>\\lang</find>
+      <find>senha</find>
+      <find>args</find>
+      <find>checkOkButton</find>
+      <find>MAXINT</find>
+      <find>re.</find>
+      <find>bbi</find>
       <find>\\</find>
-      <find>os.sep</find>
-      <find>code</find>
-      <find>Code</find>
+      <find>exe</find>
       <find>atelier</find>
-      <find>ate</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/buildpredicate.py" />
-        <option value="$PROJECT_DIR$/instgen.py" />
-        <option value="$PROJECT_DIR$/callprob.py" />
-        <option value="$PROJECT_DIR$/solveroc.py" />
-        <option value="$PROJECT_DIR$/createBTestSet.py" />
-        <option value="$PROJECT_DIR$/graphgen.py" />
-        <option value="$PROJECT_DIR$/makecoverage.py" />
-        <option value="$PROJECT_DIR$/HTMLgen.py" />
-        <option value="$PROJECT_DIR$/coverageprocess.py" />
         <option value="$PROJECT_DIR$/btestbox.py" />
+        <option value="$PROJECT_DIR$/testTranslation.py" />
+        <option value="$PROJECT_DIR$/graphic.py" />
+        <option value="$PROJECT_DIR$/solveroc.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -196,25 +154,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BTestBoxCInterface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BTestBoxCInterface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BTestBox" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Diego\PycharmProjects\BTestBox-Save" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Diego\PycharmProjects\BTestBox" />
+      <recent name="C:\Users\Diego\PycharmProjects" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.btestbox">
-    <configuration default="false" name="btestbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.graphic">
+    <configuration default="false" name="graphic" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -225,9 +192,9 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/btestbox.py" />
-      <option name="PARAMETERS" value="C C9X &quot;Branch Coverage&quot; &quot;C:\Program Files (x86)\Atelier B full 4.3.1&quot; &quot;C:\Users\Diego\Documents\bprojects\exemplos&quot; demoQualificacao Arm_i gcc C:\ProB\probcli.exe" />
+      <module name="BTestBoxCInterface" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graphic.py" />
+      <option name="PARAMETERS" value="&quot;C:\Users\Diego\Documents\bprojects\exemplos&quot; &quot;C:\Program Files (x86)\Atelier B full 4.3.1&quot; Example_i" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -242,7 +209,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -257,7 +224,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -269,7 +236,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -288,7 +255,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -307,7 +274,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -328,7 +295,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -350,7 +317,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BTestBox" />
+      <module name="BTestBoxCInterface" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -366,11 +333,11 @@
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Python.btestbox" />
+      <item index="0" class="java.lang.String" itemvalue="Python.graphic" />
     </list>
     <recent_temporary>
       <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.btestbox" />
+        <item index="0" class="java.lang.String" itemvalue="Python.graphic" />
       </list>
     </recent_temporary>
   </component>
@@ -379,44 +346,35 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fe13faf8-04bb-44ab-8a58-b0973cd5999e" name="Default" comment="" />
-      <created>1496322795191</created>
+      <changelist id="f4d662e2-ea95-4b87-929f-6e00e5adcdab" name="Default" comment="" />
+      <created>1523971710941</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1496322795191</updated>
+      <updated>1523971710941</updated>
     </task>
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="0" width="1936" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21614583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37869197" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30379745" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37869197" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39978904" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -426,501 +384,123 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/instgen.py</url>
-          <line>703</line>
-          <option name="timeStamp" value="127" />
+          <url>file://$PROJECT_DIR$/btestbox.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/HTMLgen.py</url>
-          <line>312</line>
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/makecoverage.py</url>
-          <line>294</line>
-          <option name="timeStamp" value="184" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>786</line>
-          <option name="timeStamp" value="189" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>745</line>
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>705</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>653</line>
-          <option name="timeStamp" value="192" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>647</line>
-          <option name="timeStamp" value="193" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>643</line>
-          <option name="timeStamp" value="194" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>644</line>
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>648</line>
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <line>649</line>
-          <option name="timeStamp" value="197" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/createBTestSet.py</url>
-          <option name="timeStamp" value="198" />
+          <url>file://$PROJECT_DIR$/testTranslation.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-      <option name="time" value="199" />
+      <option name="time" value="3" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="buildpaths.graphgen.nodecond" language="Python" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/instgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="66" lean-forward="true" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3179">
-          <caret line="191" column="19" lean-forward="false" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4641">
-          <caret line="273" column="0" lean-forward="false" selection-start-line="273" selection-start-column="0" selection-end-line="273" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coverageprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10863">
-          <caret line="639" column="16" lean-forward="false" selection-start-line="639" selection-start-column="16" selection-end-line="639" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/createBTestSet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3179">
-          <caret line="191" column="19" lean-forward="false" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4641">
-          <caret line="273" column="0" lean-forward="false" selection-start-line="273" selection-start-column="0" selection-end-line="273" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coverageprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10863">
-          <caret line="639" column="16" lean-forward="false" selection-start-line="639" selection-start-column="16" selection-end-line="639" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/createBTestSet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3264">
-          <caret line="192" column="76" lean-forward="false" selection-start-line="192" selection-start-column="75" selection-end-line="192" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17765">
-          <caret line="1045" column="4" lean-forward="false" selection-start-line="1045" selection-start-column="4" selection-end-line="1045" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3264">
-          <caret line="192" column="76" lean-forward="false" selection-start-line="192" selection-start-column="75" selection-end-line="192" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17765">
-          <caret line="1045" column="4" lean-forward="false" selection-start-line="1045" selection-start-column="4" selection-end-line="1045" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
+    <entry file="file://$PROJECT_DIR$/graphic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17765">
-          <caret line="1045" column="4" lean-forward="false" selection-start-line="1045" selection-start-column="4" selection-end-line="1045" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17765">
-          <caret line="1045" column="4" lean-forward="false" selection-start-line="1045" selection-start-column="4" selection-end-line="1045" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4165">
-          <caret line="245" column="0" lean-forward="false" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4233">
-          <caret line="249" column="26" lean-forward="false" selection-start-line="249" selection-start-column="26" selection-end-line="249" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildpaths.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="1595" column="0" lean-forward="false" selection-start-line="1595" selection-start-column="0" selection-end-line="1595" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/xml/dom/minidom.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="845" column="23" lean-forward="true" selection-start-line="845" selection-start-column="23" selection-end-line="845" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="424" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testTranslation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-697">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../BTestBox-Save/buildpredicate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/subprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="954" column="0" lean-forward="false" selection-start-line="954" selection-start-column="0" selection-end-line="954" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makecoverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#112#127#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildpredicate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15538">
-          <caret line="920" column="10" lean-forward="false" selection-start-line="920" selection-start-column="10" selection-end-line="920" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5168">
-          <caret line="304" column="43" lean-forward="false" selection-start-line="304" selection-start-column="43" selection-end-line="304" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coverageprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6392">
-          <caret line="376" column="70" lean-forward="false" selection-start-line="376" selection-start-column="66" selection-end-line="376" selection-end-column="70" />
+        <state relative-caret-position="8874">
+          <caret line="528" column="53" lean-forward="true" selection-start-line="528" selection-start-column="53" selection-end-line="528" selection-end-column="53" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instgen.py">
+    <entry file="file://$PROJECT_DIR$/btestbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2448">
-          <caret line="144" column="23" lean-forward="false" selection-start-line="144" selection-start-column="23" selection-end-line="144" selection-end-column="23" />
+        <state relative-caret-position="3026">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solveroc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9843">
+          <caret line="583" column="104" lean-forward="false" selection-start-line="583" selection-start-column="101" selection-end-line="583" selection-end-column="104" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="30" column="130" lean-forward="false" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="130" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodescreator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="42" lean-forward="false" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphgen.py">
+    <entry file="file://$PROJECT_DIR$/testTranslation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6375">
-          <caret line="375" column="11" lean-forward="false" selection-start-line="375" selection-start-column="11" selection-end-line="375" selection-end-column="11" />
+        <state relative-caret-position="374">
+          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#112#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildpredicate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8704">
+          <caret line="518" column="92" lean-forward="true" selection-start-line="517" selection-start-column="3" selection-end-line="518" selection-end-column="92" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/btestbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4182">
+          <caret line="251" column="131" lean-forward="false" selection-start-line="251" selection-start-column="125" selection-end-line="251" selection-end-column="131" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
@@ -929,38 +509,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/callprob.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+        <state relative-caret-position="-15">
+          <caret line="11" column="3" lean-forward="false" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HTMLgen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="30" column="130" lean-forward="false" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="130" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createBTestSet.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="4" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="82" selection-end-column="21" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/solveroc.py">
+    <entry file="file://$PROJECT_DIR$/nodescreator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="525" column="25" lean-forward="false" selection-start-line="525" selection-start-column="22" selection-end-line="525" selection-end-column="25" />
+        <state relative-caret-position="221">
+          <caret line="13" column="42" lean-forward="false" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildpredicate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8874">
+          <caret line="528" column="53" lean-forward="false" selection-start-line="528" selection-start-column="53" selection-end-line="528" selection-end-column="53" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/btestbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="226" column="82" lean-forward="true" selection-start-line="226" selection-start-column="82" selection-end-line="226" selection-end-column="82" />
+        <state relative-caret-position="3026">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testTranslation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="25" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+          <folding>
+            <element signature="e#112#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solveroc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="582" column="13" lean-forward="false" selection-start-line="582" selection-start-column="13" selection-end-line="582" selection-end-column="13" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

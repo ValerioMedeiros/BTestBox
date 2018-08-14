@@ -1,6 +1,7 @@
 import os
 import subprocess
 import re
+import time
 
 def executeSubWithReturn(cmd, n="" , out=True):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -17,22 +18,24 @@ def executeSubWithReturn(cmd, n="" , out=True):
 
     return p.returncode, output, errors
 
-def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use this function to evaluate
+def evaluate(stringexpression, message, entries, proBPath, copy_directory, maxint): #Use this function to evaluate
     variables = list()
+    start_avaliacao = time.time()
     if len(stringexpression) > 1000:
         if not os.path.isdir(copy_directory):
             os.mkdir(copy_directory)
         predicateFile = open(copy_directory + '/predicateFile.eval', 'w')
         predicateFile.write(stringexpression)
         predicateFile.close()
-        rcode, output, errors = executeSubWithReturn(proBPath + " -disable_timeout -p MAXINT 1000 -p MININT -1000 -p SYMBOLIC TRUE -p "
-                                                                "EXPAND_FORALL_UPTO 0 -eval_file " + '"' + copy_directory + '/predicateFile.eval"',
+        rcode, output, errors = executeSubWithReturn(proBPath + " -disable_timeout -p MAXINT " + str(maxint) + " -p MININT -" + str(maxint) + " -p SYMBOLIC TRUE -p "
+                                                                "EXPAND_FORALL_UPTO 0 -eval_file " + '"' + copy_directory + os.sep + 'predicateFile.eval"',
                                                      message, True)
         os.remove(copy_directory + "/predicateFile.eval")
     else:
-        rcode, output, errors = executeSubWithReturn(proBPath+" -p MAXINT 50000 -p MININT -50000 -p SYMBOLIC TRUE -p "
+        rcode, output, errors = executeSubWithReturn(proBPath+" -p MAXINT " + str(maxint) + " -p MININT -" + str(maxint) + " -p SYMBOLIC TRUE -p "
                                                               "EXPAND_FORALL_UPTO 0 -eval "+'"'+stringexpression+'"',
                                                      message, True)
+    endavaliacao = time.time() - start_avaliacao
     if (rcode==0): #evaluate the return code
         if "TRUE/1" in str(output):
             stringoutput = str(output)
@@ -45,13 +48,13 @@ def evaluate(stringexpression, message, entries, proBPath, copy_directory): #Use
                     if entry == match.group(1):
                         variables.append(match.group(1)+' = '+match.group(2))
             print(errors)
-            return True, variables
+            return True, variables, endavaliacao
         elif "FALSE/1" in str(output):
-            return False, []
+            return False, [], endavaliacao
         else:
-            return False, []
+            return False, [], endavaliacao
     else:
         print("Error calling the ProB evaluating the follow expression:")
         print(stringexpression)
         print(errors)
-        return 0, []
+        return 0, [], endavaliacao

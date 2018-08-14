@@ -374,7 +374,11 @@ def mapIf(node, opmch):
     """
     thenNodeList = list()
     # If Condition
-    condition = node.childNodes.item(3)
+    for testenode in node.childNodes:
+        if testenode.nodeType != testenode.TEXT_NODE:
+            if testenode.tagName == "Condition":
+                condition = testenode
+    # condition = node.childNodes.item(3)
     condition = condition.childNodes.item(1)
     nodetype[str(len(nodetype) + 1)] = "Condition"
     nodedata[str(len(nodedata) + 1)] = condition
@@ -383,15 +387,24 @@ def mapIf(node, opmch):
     nodemap[str(len(nodemap) + 1)].append(conditionNode)  # Adding in the END* node
     # Then
     nodecond[str(int(conditionNode) + 1)] = "True"
-    then = node.childNodes.item(5)
-    makeMap(then, opmch)
+    for testenode in node.childNodes:
+        if testenode.nodeType != testenode.TEXT_NODE:
+            if testenode.tagName == "Then":
+                then = testenode
+                makeMap(then, opmch)
+    # then = node.childNodes.item(5)
+    # makeMap(then, opmch)
     thenNode = str(len(nodemap) - 1)  # To add in the END*
     thenNodeList = nodemap[str(len(nodemap))]  # To add in the END*
     nodecond[str(int(thenNode) + 1)] = "True and False"
     # Else
     if node.lastChild.previousSibling.tagName == "Else":  # Check if the ELSE exists
         nodecond[str(int(thenNode) + 1)] = "False"
-        makeMap(node.childNodes.item(7), opmch)
+        for testenode in node.childNodes:
+            if testenode.nodeType != testenode.TEXT_NODE:
+                if testenode.tagName == "Else":
+                    makeMap(testenode, opmch)
+        # makeMap(node.childNodes.item(7), opmch)
         elseNode = str(len(nodemap) - 1)  # To add in the END*
     # Connecting the END node
     if node.lastChild.previousSibling.tagName == "Else":
@@ -416,9 +429,17 @@ def mapCase(node, opmch):
     node: The node of the Case_Sub in the BXML tree
     """
     # First part of the condition for everycase
-    firstconditionpart = node.childNodes.item(3).firstChild.nextSibling
+    for testenode in node.childNodes:
+        if testenode.nodeType != testenode.TEXT_NODE:
+            if testenode.tagName == "Value":
+                firstconditionpart = testenode.firstChild.nextSibling
+    # firstconditionpart = node.childNodes.item(3).firstChild.nextSibling
     # The condition of every other case
-    choices = node.childNodes.item(5).childNodes
+    for testenode in node.childNodes:
+        if testenode.nodeType != testenode.TEXT_NODE:
+            if testenode.tagName == "Choices":
+                choices = testenode.childNodes
+    # choices = node.childNodes.item(5).childNodes
     allThenNodes = list()
     for choice in choices:
         case = minidom.getDOMImplementation()
@@ -457,8 +478,18 @@ def mapCase(node, opmch):
                     allThenNodes.append(thennode)
             nodemap[str(int(thenNode) + 1)] = [conditionNode]
     if node.lastChild.previousSibling.tagName == "Else":
-        body = node.lastChild.previousSibling.firstChild.nextSibling
-        body = body.childNodes.item(3)
+        # body = node.lastChild.previousSibling.firstChild.nextSibling
+        # body = body.childNodes.item(3)
+        for testenode in node.childNodes:
+            if testenode.nodeType != testenode.TEXT_NODE:
+                if testenode.tagName == "Else":
+                    for childTestNode in testenode.childNodes:
+                        if childTestNode.nodeType != childTestNode.TEXT_NODE:
+                            if childTestNode.tagName == "Choice":
+                                for childChildTestNode in childTestNode.childNodes:
+                                    if childChildTestNode.nodeType != childChildTestNode.TEXT_NODE:
+                                        if childChildTestNode.tagName == "Then":
+                                            body = childChildTestNode
         nodecond[str(int(thenNode) + 1)] = "False"
         makeMap(body, opmch)
         elseNode = str(len(nodemap) - 1)  # To add in the END*
@@ -591,7 +622,6 @@ def makeMap(node, opmch, importedMch=[], seesMch=[], refinementMch = [], directo
     opmch: The node of the operation in the machine (to get the Precondition)
     node: One of the nodes inside the Tree
     """
-    # print(node.tagName)
     for childnode in node.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             tag = childnode.tagName
@@ -631,6 +661,7 @@ def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch
     seesMch: List with the seen machines
     refinementMch: List with the refinements
     """
+
     makeMap(operationimp, operationmch, importedMch, seesMch, refinementMch, directory)
     nodetype[str(len(nodetype) + 1)] = "END"  # Adding a type for the END node
     outputs = None
@@ -681,7 +712,6 @@ def mapOperations(operationimp, operationmch, directory, importedMch=[], seesMch
         finalOutputXML.appendChild(docXML.createTextNode('\n'))
     nodedata[str(len(nodedata) + 1)] = finalOutputXML.firstChild.nextSibling  # Adding data for the END node
     nodeinva[str(len(nodeinva) + 1)] = ""
-
     for key in sorted(nodemap.keys()):
         print(key, nodemap[key], nodetype[key], nodedata[key], nodecond[key], nodeinva[key])
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BTestBox.iml" filepath="$PROJECT_DIR$/.idea/BTestBox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BTestBoxCInterface.iml" filepath="$PROJECT_DIR$/.idea/BTestBoxCInterface.iml" />
     </modules>
   </component>
 </project>

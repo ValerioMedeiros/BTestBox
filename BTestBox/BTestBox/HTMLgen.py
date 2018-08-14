@@ -1,13 +1,36 @@
 import createBTestSet
 import os
-
+import time
 
 def createHTML(directory, coverage, nonCovered, copy_directory, impName, mchName, operationNames, entries, outs,
-               coveredPercentage, importedMch, seesMch):
+               coveredPercentage, importedMch, seesMch, times, tempoTotal):
+    start_time = time.time()
     HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entries, outs)
     HTMLlib(directory, mchName, impName, copy_directory, importedMch, seesMch, coverage)
     genHTMLDoc(impName, coverage, directory, copy_directory, operationNames, nonCovered, coveredPercentage)
+    times[0].append(time.time() - start_time)
+    tempoTotal =  time.time() - tempoTotal
+    createTimeFile(times, copy_directory, coverage, impName, operationNames, tempoTotal)
 
+def createTimeFile(times, copy_directory, coverage, impName, operationNames, tempo_total):
+    total_avaliacao = 0
+    txtDoc = open(copy_directory + os.sep + 'times_' + coverage.upper() + '_' + impName + '.txt', 'w')
+    text = 'Tempos de seções do BTestBox para a implementação ' + impName + '\n\n'
+    text += 'O tempo total para a execução do BTestBox para a implementação ' + impName + ' foi de ' + str(tempo_total) +  ' segundos \n\n'
+    for i in range(len(operationNames)):
+        text += 'Tempos para a operação ' + operationNames[i] + ' segundos\n'
+        text += 'Tempo de criação do grafo : ' + str(times[i + 1][0]) + ' segundos\n'
+        text += 'Tempo de criação dos guias : ' + str(times[i + 1][1]) + ' segundos\n'
+        text += 'Tempo de geração dos predicados : ' + str(times[i + 1][2]) + ' segundos\n'
+        text += 'Tempo de avaliação dos predicados : ' + str(times[i + 1][3]) + ' segundos\n\n'
+        total_avaliacao += times[i + 1][3]
+
+    text += 'Tempo para a geração dos arquivos de teste : ' + str(times[0][0]) + ' segundos\n'
+    text += 'Tempo para a compilação e execução : ' + str(times[0][1]) + ' segundos\n'
+    text += 'Tempo para a geração do reporte : ' + str(times[0][2]) + ' segundos\n'
+    text += 'A etapa de avaliação dos predicados foi responsável por ' + str(total_avaliacao/tempo_total*100) + '% do tempo da execução do BTestBox para essa implementação'
+    txtDoc.write(text)
+    txtDoc.close()
 
 def createHTMLnoOperations(coverage, copy_directory, impName):
     HTMLDoc = open(copy_directory + os.sep + 'report_' + coverage.upper() + '_' + impName + '.html', 'w')

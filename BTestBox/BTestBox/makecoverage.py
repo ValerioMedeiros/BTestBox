@@ -1,6 +1,7 @@
 import buildpredicate
 import instgen
 from xml.dom import minidom
+import time
 
 '''
 predicate: module responsible for making the predicate that walk through a path.
@@ -9,7 +10,7 @@ minidom: module responsible for making a tree from a xml file.
 
 
 def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeStatus, importedMch, seesMch, impName,
-                 directory, atelierBDir, proBPath, copy_directory):
+                 directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
     """
     Code Coverage, function responsible of making the Code Coverage, in CC we need to exercise every instruction of the code at least once.
 
@@ -40,6 +41,8 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
     aux = paths
     covered = False
     # Process
+    tempoAvaliacaoTotal = 0
+    start_time_GeneratingTests = time.time()
     while len(aux) != 0 and not covered:
         countcover = 0
         for p in sorted(aux.keys()):  # Searching for the path with the biggest number of non covered nodes
@@ -50,14 +53,14 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
             if count[p] > count[pathToCover]:
                 pathToCover = p
 
-        ExistValues, inVariables, outVariables, vL, vTypeL = makePredicateCodeCoverage(operationImp, operationMch,
+        ExistValues, inVariables, outVariables, vL, vTypeL, tempoAvaliacaoUmPath = makePredicateCodeCoverage(operationImp, operationMch,
                                                                                        aux[pathToCover],
                                                                                        pathToCover, inputs, outputs,
                                                                                        operationName, nodeStatus,
                                                                                        importedMch, seesMch, impName,
                                                                                        directory, atelierBDir,
                                                                                        proBPath,
-                                                                                       copy_directory)  # Finding the predicate
+                                                                                       copy_directory, maxint)  # Finding the predicate
         for i in range(len(outputs)):
             vL.append(outputs[i])
             vTypeL.append(outputsTypes[i])
@@ -79,12 +82,15 @@ def CodeCoverage(operationImp, operationMch, paths, inputs, operationName, nodeS
                 del aux[p]
         if len(aux) != 0:  # If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys())  # Passing the lowest number
+        tempoAvaliacaoTotal += tempoAvaliacaoUmPath
+    times[operationNumber].append(time.time() - start_time_GeneratingTests - tempoAvaliacaoTotal)
+    times[operationNumber].append(tempoAvaliacaoTotal)
     return covered, allInVariables, allOutVariables, vL, vTypeL
 
 
 def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inputs, outputs, operationName,
                               nodeStatus, importedMch, seesMch, impName, directory, atelierBDir, proBPath,
-                              copy_directory):
+                              copy_directory, maxint):
     """
     Make the predicate for Code Coverage
 
@@ -134,19 +140,20 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList,
                                            variablesTypeList,
                                            directory)
-    ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+    ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Statement Coverage - trying to get inputs for path " + str(
-                                                                          pathToCover), inputs+variablesList, proBPath,
+                                                                          pathToCover) + "of the operation " + operationName, inputs+variablesList, proBPath,
                                                                       copy_directory,
-                                                                      operationImp, operationMch, importedMch, seesMch)
+                                                                      operationImp, operationMch, importedMch, seesMch, maxint)
+    tempoAvaliacaoSaida = 0
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
         print("An input option is ", variables)
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+        output, ExistValues, tempoAvaliacaoSaida = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
                                                        operationMch, importedMch, seesMch,
                                                        operationName, impName, variables, variablesList,
                                                        variablesTypeList, directory, atelierBDir, proBPath,
-                                                       copy_directory)
+                                                       copy_directory, maxint)
         if ExistValues:
             for node in path:  # Setting all branches of the path to True (Covered)
                 nodeStatus[node] = True
@@ -163,11 +170,11 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, variables, output, variablesList, variablesTypeList
+    return ExistValues, variables, output, variablesList, variablesTypeList, tempoAvaliacaoEntrada + tempoAvaliacaoSaida
 
 
 def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, paths, inputs, operationName,
-                   importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory):
+                   importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
     """
     Branch Coverage, function responsible of making the Branch Coverage, in BC we need to exercise every branch of the code at least once.
 
@@ -198,7 +205,9 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
     outputs, outputsTypes = getOutputsVariables(operationImp)
     aux = paths
     covered = False
+    tempoAvaliacaoTotal = 0
     # Process
+    start_time_GeneratingTests = time.time()
     while len(aux) != 0 and not covered:
         countcover = 0
         for p in sorted(aux.keys()):  # Searching for the path with the biggest number of non covered branches
@@ -208,14 +217,14 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                     count[p] += 1
             if count[p] > count[pathToCover]:
                 pathToCover = p
-        ExistValues, inVariables, outVariables, vL, vTypeL = makePredicateBranchCoverage(operationImp, operationMch,
+        ExistValues, inVariables, outVariables, vL, vTypeL, tempoAvaliacaoUmPath = makePredicateBranchCoverage(operationImp, operationMch,
                                                                                          aux[pathToCover],
                                                                                          branchStatus, branchesPaths,
                                                                                          pathToCover, inputs, outputs,
                                                                                          operationName, importedMch,
                                                                                          seesMch, impName, directory,
                                                                                          atelierBDir, proBPath,
-                                                                                         copy_directory)
+                                                                                         copy_directory, maxint)
         for i in range(len(outputs)):
             vL.append(outputs[i])
             vTypeL.append(outputsTypes[i])
@@ -237,12 +246,15 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                 del aux[p]
         if len(aux) != 0:  # If still existing a path, pathToCover receives the lowest number
             pathToCover = min(aux.keys())  # Passing the lowest number
+        tempoAvaliacaoTotal += tempoAvaliacaoUmPath
+    times[operationNumber].append(time.time() - start_time_GeneratingTests - tempoAvaliacaoTotal)
+    times[operationNumber].append(tempoAvaliacaoTotal)
     return covered, allInVariables, allOutVariables, vL, vTypeL
 
 
 def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, branchesPaths, pathToCover, inputs,
                                 outputs, operationName, importedMch, seesMch, impName, directory, atelierBDir, proBPath,
-                                copy_directory):
+                                copy_directory, maxint):
     """
     Make the predicate for Branch Coverage
 
@@ -292,20 +304,21 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
         del way[len(way) - 1]
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
                             directory)
-    ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+    ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Branch Coverage - trying to get inputs for "
                                                                       "guide " + str(
-                                                                          pathToCover), inputs + variablesList, proBPath,
+                                                                          pathToCover) + "of the operation " + operationName, inputs + variablesList, proBPath,
                                                                       copy_directory,
-                                                                      operationImp, operationMch, importedMch, seesMch)
+                                                                      operationImp, operationMch, importedMch, seesMch, maxint)
+    tempoAvalicaoSaida = 0
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
         print("An input option is ", variables)
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+        output, ExistValues, tempoAvalicaoSaida = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
                                                        operationMch, importedMch, seesMch,
                                                        operationName, impName, variables, variablesList,
                                                        variablesTypeList, directory, atelierBDir, proBPath,
-                                                       copy_directory)
+                                                       copy_directory, maxint)
         if ExistValues:
             for branch in branchesPaths[pathToCover]:  # Setting all branches of the path to True (Covered)
                 branchStatus[branch] = True
@@ -322,11 +335,11 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, variables, output, variablesList, variablesTypeList
+    return ExistValues, variables, output, variablesList, variablesTypeList, tempoAvaliacaoEntrada + tempoAvalicaoSaida
 
 
 def PathCoverage(operationImp, operationMch, paths, inputs, operationName, importedMch, seesMch, impName, directory,
-                 atelierBDir, proBPath, copy_directory):
+                 atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
     """
     Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at
     least once.
@@ -356,15 +369,17 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
     pathToCover = 1
     aux = paths.copy()
     allcovered = True
+    start_time_GeneratingTests = time.time()
+    tempoAvaliacaoTotal = 0
     # Process
     while len(aux) != 0:
-        covered, inVariables, outVariables, vL, vTypeL, hasPredicate = makePredicatePathCoverage(operationImp, operationMch,
+        covered, inVariables, outVariables, vL, vTypeL, hasPredicate, tempoAvaliacaoUmPath = makePredicatePathCoverage(operationImp, operationMch,
                                                                                    aux[pathToCover], pathToCover,
                                                                                    inputs, outputs,
                                                                                    operationName, importedMch, seesMch,
                                                                                    impName,
                                                                                    directory, atelierBDir, proBPath,
-                                                                                   copy_directory)
+                                                                                   copy_directory, maxint)
         for i in range(len(outputs)):
             vL.append(outputs[i])
             vTypeL.append(outputsTypes[i])
@@ -379,11 +394,14 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
             pathToCover = min(aux.keys())  # Passing the lowest number
         if len(uncoveredPaths) != 0:
             allcovered = False
+        tempoAvaliacaoTotal += tempoAvaliacaoUmPath
+    times[operationNumber].append(time.time() - start_time_GeneratingTests - tempoAvaliacaoTotal)
+    times[operationNumber].append(tempoAvaliacaoTotal)
     return allcovered, allInVariables, allOutVariables, uncoveredPaths, vL, vTypeL
 
 
 def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inputs, outputs, operationName,
-                              importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory):
+                              importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, maxint):
     """
     Make the predicate for Path Coverage
 
@@ -433,19 +451,20 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList,
                                            variablesTypeList,
                                            directory)
-    ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+    ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Path Coverage - trying to get inputs for path " + str(
-                                                                          pathToCover), inputs+variablesList, proBPath,
+                                                                          pathToCover) + "of the operation " + operationName, inputs+variablesList, proBPath,
                                                                       copy_directory,
-                                                                      operationImp, operationMch, importedMch, seesMch)
+                                                                      operationImp, operationMch, importedMch, seesMch, maxint)
+    tempoAvaliacaoSaida = 0
     if ExistValues:
         print("Input(s) were found for the predicate: " + predicate)
         print("An input option is ", variables)
-        output, ExistValues = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
+        output, ExistValues, tempoAvaliacaoSaida = buildpredicate.getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp,
                                                        operationMch, importedMch, seesMch,
                                                        operationName, impName, variables, variablesList,
                                                        variablesTypeList, directory, atelierBDir, proBPath,
-                                                       copy_directory)
+                                                       copy_directory, maxint)
         covered = True
     elif predicate != "":
         print("Inputs were NOT found for the predicate: " + predicate)
@@ -461,7 +480,7 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, variables, output, variablesList, variablesTypeList, covered
+    return ExistValues, variables, output, variablesList, variablesTypeList, covered, tempoAvaliacaoEntrada + tempoAvaliacaoSaida
 
 
 '''
@@ -553,7 +572,7 @@ def makePredicateLineCoverage(operationImp, operationMch, node, path, inputs, op
 
 
 def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationName, importedMch, seesMch, impName,
-                   directory, atelierBDir, proBPath, copy_directory):
+                   directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
     allInVariables = list()
     allOutVariables = list()
     clauseData = list()
@@ -570,6 +589,8 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
     predNumber = 1
     clauseNumber = 1
     covered = True
+    start_time_GeneratingTests = time.time()
+    tempoAvaliacaoTotalEntradas = 0
     for node in sorted(buildpredicate.buildpaths.graphgen.nodemap.keys()):  # The key is a string, changing for int
         nodemapKeys.append(int(node))
     for node in sorted(nodemapKeys):
@@ -594,12 +615,13 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
                     originalVarList.append(var)
                 if pathkey > previousPaths:
                     print(buildpredicate.buildpaths.partialPaths[pathkey])
-                    covered, fixedNames, variablesList, docXML, variablesListType, allVariablesOperation = \
+                    covered, fixedNames, variablesList, docXML, variablesListType, allVariablesOperation, tempoAvaliacaoUmPath = \
                         makePredicateClauseCoverage(operationImp, operationMch, str(node),
                                                     buildpredicate.buildpaths.partialPaths[pathkey], clauseData,
                                                     clauseMap, predNumber, inputs, outputs, operationName,
                                                     importedMch, seesMch, impName, directory, atelierBDir,
-                                                    allInVariables, proBPath, coveredClauses, copy_directory)
+                                                    allInVariables, proBPath, coveredClauses, copy_directory, maxint)
+                    tempoAvaliacaoTotalEntradas += tempoAvaliacaoUmPath
                     if covered:
                         for variable in allInVariables:
                             if variable not in originalVarList:
@@ -613,9 +635,11 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
             predNumber += 1
     for completePathsKey in sorted(completePaths.keys()):
         print(completePathsKey, completePaths[completePathsKey])
+    tempoAvaliacaoSaidaTotal = 0
     for i in range(len(allInVariables)):
         ExistValues = False
         for completePathsKey in sorted(completePaths.keys()):
+
             countPartial = 0
             originalVarList = []
             originalVarListType = []
@@ -626,12 +650,13 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
                 if node in completePaths[completePathsKey]:
                     countPartial += 1
             if countPartial == len(buildpredicate.buildpaths.partialPaths[partialPathForInput[i]]):
-                out, ExistValues = buildpredicate.getOutput(completePaths[completePathsKey], completePathsKey,
+                out, ExistValues, tempoAvaliacaoSaida = buildpredicate.getOutput(completePaths[completePathsKey], completePathsKey,
                                                             allVariablesOperation, outputs,
                                                             fixedNames, operationImp, operationMch, importedMch,
                                                             seesMch, operationName, impName, allInVariables[i],
                                                             originalVarList, originalVarListType, directory,
-                                                            atelierBDir, proBPath, copy_directory)
+                                                            atelierBDir, proBPath, copy_directory, maxint)
+                tempoAvaliacaoSaidaTotal += tempoAvaliacaoSaida
             for j in range(len(outputs)):
                 originalVarList.append(outputs[j])
                 originalVarListType.append(outputsTypes[j])
@@ -642,13 +667,16 @@ def ClauseCoverage(operationImp, operationMch, inputs, completePaths, operationN
     # print(allInVariables, allOutVariables)
     # for i in range(len(allInVariables)):
     #    print(allInVariables[i], allOutVariables[i])
+    tempoAvaliacaoTotal = tempoAvaliacaoTotalEntradas + tempoAvaliacaoSaidaTotal
+    times[operationNumber].append(time.time() - (start_time_GeneratingTests + tempoAvaliacaoTotal))
+    times[operationNumber].append(tempoAvaliacaoTotal)
     return allCovered, allInVariables, allOutVariables, uncoveredPredicates, coveredClauses, originalVarList, \
            originalVarListType
 
 
 def makePredicateClauseCoverage(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber,
                                 inputs, outputs, operationName, importedMch, seesMch, impName, directory, atelierBDir,
-                                allInVariables, proBPath, coveredClauses, copy_directory):
+                                allInVariables, proBPath, coveredClauses, copy_directory, maxint):
     ExistValues = True
     pred = minidom.getDOMImplementation()
     docXML = pred.createDocument(None, "Condition", None)
@@ -658,14 +686,15 @@ def makePredicateClauseCoverage(operationImp, operationMch, node, path, clauseDa
     variablesList = list()
     variablesTypeList = list()
     arrayModification = list()
+    tempoAvaliacao = 0
     sizeinputs = len(inputs)
     addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
                         directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
-    testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
+    tempoAvaliacao = testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
                 importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
                 variablesTypeList, fixedNames, outputs, docXML, predicateXML, min(clauseMap[str(predNumber)]),
-                coveredClauses, copy_directory, arrayModification)
+                coveredClauses, copy_directory, arrayModification, tempoAvaliacao, maxint)
     for variable in inputs:
         allVariablesOperation.append(variable)
     for clause in coveredClauses.keys():
@@ -675,16 +704,18 @@ def makePredicateClauseCoverage(operationImp, operationMch, node, path, clauseDa
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, fixedNames, variablesList, docXML, variablesTypeList, allVariablesOperation
+    return ExistValues, fixedNames, variablesList, docXML, variablesTypeList, allVariablesOperation, tempoAvaliacao
 
 
 def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
                 importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
                 variablesTypeList, fixedNames, outputs, docXML, predicateXML, clauseToTest, coveredClauses,
-                copy_directory, arrayModification, testingClauses=[]):
+                copy_directory, arrayModification, tempoAvaliacao, maxint, testingClauses=[]):
     needTest = False
     testingClauses.append(clauseToTest)
     enteredInPositive = False
+    timeFirstPart = 0
+    timeSecondPart = 0
     for clause in coveredClauses.keys():
         if not coveredClauses[clause]:
             needTest = True
@@ -726,11 +757,11 @@ def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, p
                                                                                           atelierBDir,
                                                                                           arrayModification)
             del way[len(way) - 1]
-        ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+        ExistValues, variables, predicate, timeFirstPart = buildpredicate.checkPredicate(predicateXML,
                                                                           "Clause coverage - trying to reach line " + node,
                                                                           inputs, proBPath, copy_directory,
                                                                           operationImp, operationMch, importedMch,
-                                                                          seesMch)
+                                                                          seesMch, maxint)
         if ExistValues:
             print("Found inputs for the predicate: " + predicate)
             print("The inputs are: ", variables)
@@ -738,12 +769,12 @@ def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, p
             if variables not in allInVariables:
                 allInVariables.append(variables)
             if clauseToTest < max(clauseMap[str(predNumber)]):
-                testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
+                timeFirstPart = testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
                             operationName,
                             importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables,
                             variablesList,
                             variablesTypeList, fixedNames, outputs, docXML, positivePredicateXML.cloneNode(20),
-                            clauseToTest + 1, coveredClauses, copy_directory, arrayModification, testingClauses)
+                            clauseToTest + 1, coveredClauses, copy_directory, arrayModification, timeFirstPart, maxint, testingClauses)
         else:
             print("Not found inputs for the predicate: " + predicate + " testing the negative anyway")
     del testingClauses[-1]
@@ -806,11 +837,11 @@ def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, p
                                                                                           atelierBDir,
                                                                                           arrayModification)
             del way[len(way) - 1]
-        ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+        ExistValues, variables, predicate, timeSecondPart = buildpredicate.checkPredicate(predicateXML,
                                                                           "Clause coverage - trying to reach line " + node,
                                                                           inputs, proBPath, copy_directory,
                                                                           operationImp, operationMch, importedMch,
-                                                                          seesMch)
+                                                                          seesMch, maxint)
         if ExistValues:
             print("Found inputs for the predicate: " + predicate)
             print("The inputs are: ", variables)
@@ -818,15 +849,16 @@ def testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, p
             if variables not in allInVariables:
                 allInVariables.append(variables)
             if clauseToTest < max(clauseMap[str(predNumber)]):
-                testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
+                timeSecondPart = testClauses(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
                             operationName,
                             importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables,
                             variablesList,
                             variablesTypeList, fixedNames, outputs, docXML, negativePredicateXML.cloneNode(20),
-                            clauseToTest + 1, coveredClauses, copy_directory, arrayModification, testingClauses)
+                            clauseToTest + 1, coveredClauses, copy_directory, arrayModification, timeSecondPart, maxint, testingClauses)
         else:
             print("Not found inputs for the predicate: " + predicate + " end of test for this combination of clauses")
     del testingClauses[-1]
+    return tempoAvaliacao + timeFirstPart + timeSecondPart
 
 
 def getClauses(node, clauseData, clauseMap, clauseCond, predNumber, clauseNumber):
@@ -846,7 +878,7 @@ def getClauses(node, clauseData, clauseMap, clauseCond, predNumber, clauseNumber
 
 
 def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, operationName, importedMch, seesMch, impName,
-                   directory, atelierBDir, proBPath, copy_directory):
+                   directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
     allInVariables = list()
     allInVariablesNew = list()
     allOutVariables = list()
@@ -864,6 +896,8 @@ def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, ope
     predNumber = 1
     clauseNumber = 1
     covered = True
+    start_time_GeneratingTests = time.time()
+    tempoAvaliacaoTotalEntradas = 0
     for node in sorted(buildpredicate.buildpaths.graphgen.nodemap.keys()):  # The key is a string, changing for int
         nodemapKeys.append(int(node))
     for node in sorted(nodemapKeys):
@@ -888,12 +922,13 @@ def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, ope
                     originalVarList.append(var)
                 if pathkey > previousPaths:
                     print(buildpredicate.buildpaths.partialPaths[pathkey])
-                    covered, fixedNames, variablesList, docXML, variablesListType, allVariablesOperation = \
+                    covered, fixedNames, variablesList, docXML, variablesListType, allVariablesOperation, tempoAvaliacaoUmPath = \
                         makePredicateCombinatorialCoverage(operationImp, operationMch, str(node),
                                                     buildpredicate.buildpaths.partialPaths[pathkey], clauseData,
                                                     clauseMap, predNumber, inputs, outputs, operationName,
                                                     importedMch, seesMch, impName, directory, atelierBDir,
-                                                    allInVariables, proBPath, coveredClauses, copy_directory)
+                                                    allInVariables, proBPath, coveredClauses, copy_directory, maxint)
+                    tempoAvaliacaoTotalEntradas += tempoAvaliacaoUmPath
                     if covered:
                         for variable in allInVariables:
                             if variable not in originalVarList:
@@ -907,6 +942,7 @@ def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, ope
             predNumber += 1
     for completePathsKey in sorted(completePaths.keys()):
         print(completePathsKey, completePaths[completePathsKey])
+    tempoAvaliacaoSaidaTotal = 0
     for i in range(len(allInVariables)):
         ExistValues = False
         for completePathsKey in sorted(completePaths.keys()):
@@ -920,12 +956,13 @@ def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, ope
                 if node in completePaths[completePathsKey]:
                     countPartial += 1
             if countPartial == len(buildpredicate.buildpaths.partialPaths[partialPathForInput[i]]):
-                out, ExistValues = buildpredicate.getOutput(completePaths[completePathsKey], completePathsKey,
+                out, ExistValues, tempoAvaliacaoSaida = buildpredicate.getOutput(completePaths[completePathsKey], completePathsKey,
                                                             allVariablesOperation, outputs,
                                                             fixedNames, operationImp, operationMch, importedMch,
                                                             seesMch, operationName, impName, allInVariables[i],
                                                             originalVarList, originalVarListType, directory,
-                                                            atelierBDir, proBPath, copy_directory)
+                                                            atelierBDir, proBPath, copy_directory, maxint)
+                tempoAvaliacaoSaidaTotal += tempoAvaliacaoSaida
             for j in range(len(outputs)):
                 originalVarList.append(outputs[j])
                 originalVarListType.append(outputsTypes[j])
@@ -943,13 +980,16 @@ def CombinatorialCoverage(operationImp, operationMch, inputs, completePaths, ope
     for i in range(len(allInVariablesNew)):
         if allInVariablesNew[i] != []:
             allInVariables.append(allInVariablesNew[i])
+    tempoAvaliacaoTotal = tempoAvaliacaoTotalEntradas + tempoAvaliacaoSaidaTotal
+    times[operationNumber].append(time.time() - (start_time_GeneratingTests + tempoAvaliacaoTotal))
+    times[operationNumber].append(tempoAvaliacaoTotal)
     return allCovered, allInVariables, allOutVariables, uncoveredPredicates, coveredClauses, originalVarList, \
            originalVarListType, clauseNumber, clauseData
 
 
 def makePredicateCombinatorialCoverage(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber,
                                 inputs, outputs, operationName, importedMch, seesMch, impName, directory, atelierBDir,
-                                allInVariables, proBPath, coveredClauses, copy_directory):
+                                allInVariables, proBPath, coveredClauses, copy_directory, maxint):
     ExistValues = True
     pred = minidom.getDOMImplementation()
     docXML = pred.createDocument(None, "Condition", None)
@@ -960,13 +1000,14 @@ def makePredicateCombinatorialCoverage(operationImp, operationMch, node, path, c
     variablesTypeList = list()
     arrayModification = list()
     sizeinputs = len(inputs)
+    tempoAvaliacao = 0
     addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
                         directory)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
-    testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
+    tempoAvaliacao = testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
                 importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
                 variablesTypeList, fixedNames, outputs, docXML, predicateXML, min(clauseMap[str(predNumber)]),
-                coveredClauses, copy_directory, arrayModification)
+                coveredClauses, copy_directory, arrayModification, tempoAvaliacao, maxint)
     for variable in inputs:
         allVariablesOperation.append(variable)
     for clause in coveredClauses.keys():
@@ -976,13 +1017,13 @@ def makePredicateCombinatorialCoverage(operationImp, operationMch, node, path, c
         for i in range(len(inputs)):
             if i > sizeinputs - 1:
                 inputs.pop()
-    return ExistValues, fixedNames, variablesList, docXML, variablesTypeList, allVariablesOperation
+    return ExistValues, fixedNames, variablesList, docXML, variablesTypeList, allVariablesOperation, tempoAvaliacao
 
 
 def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs, operationName,
                 importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables, variablesList,
                 variablesTypeList, fixedNames, outputs, docXML, predicateXML, clauseToTest, coveredClauses,
-                copy_directory, arrayModification, testingClauses=[]):
+                copy_directory, arrayModification, tempoAvaliacao, maxint, testingClauses=[]):
     #needTest = False
     testingClauses.append(clauseToTest)
     #enteredInPositive = False
@@ -997,6 +1038,8 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
     #    enteredInPositive = True
     way = list()
     posMut = list()
+    timeFirstPart = 0
+    timeSecondPart = 0
     changedVariablesWhile = list()
     if clauseToTest == min(clauseMap[str(predNumber)]):
         predicateXML.appendChild(docXML.createTextNode("\n"))
@@ -1027,11 +1070,11 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
                                                                                       atelierBDir,
                                                                                       arrayModification)
         del way[len(way) - 1]
-    ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+    ExistValues, variables, predicate, timeFirstPart = buildpredicate.checkPredicate(predicateXML,
                                                                       "Combinatorial Coverage - trying to reach line " + node,
                                                                       inputs, proBPath, copy_directory,
                                                                       operationImp, operationMch, importedMch,
-                                                                      seesMch)
+                                                                      seesMch, maxint)
     if ExistValues:
         print("Found inputs for the predicate: " + predicate)
         print("The inputs are: ", variables)
@@ -1039,12 +1082,12 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
     if variables not in allInVariables:
         allInVariables.append(variables)
         if clauseToTest < max(clauseMap[str(predNumber)]):
-            testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
+            timeFirstPart = testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
                         operationName,
                         importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables,
                         variablesList,
                         variablesTypeList, fixedNames, outputs, docXML, positivePredicateXML.cloneNode(20),
-                        clauseToTest + 1, coveredClauses, copy_directory, arrayModification, testingClauses)
+                        clauseToTest + 1, coveredClauses, copy_directory, arrayModification, timeFirstPart, maxint, testingClauses)
     else:
         print("Not found inputs for the predicate: " + predicate + " testing the negative anyway")
     del testingClauses[-1]
@@ -1106,11 +1149,11 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
                                                                                       atelierBDir,
                                                                                       arrayModification)
         del way[len(way) - 1]
-    ExistValues, variables, predicate = buildpredicate.checkPredicate(predicateXML,
+    ExistValues, variables, predicate, timeSecondPart = buildpredicate.checkPredicate(predicateXML,
                                                                       "Combinatorial Coverage - trying to reach line " + node,
                                                                       inputs, proBPath, copy_directory,
                                                                       operationImp, operationMch, importedMch,
-                                                                      seesMch)
+                                                                      seesMch, maxint)
     if ExistValues:
         print("Found inputs for the predicate: " + predicate)
         print("The inputs are: ", variables)
@@ -1118,15 +1161,16 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
         if variables not in allInVariables:
             allInVariables.append(variables)
         if clauseToTest < max(clauseMap[str(predNumber)]):
-            testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
+            timeSecondPart = testClausesCombinatorial(operationImp, operationMch, node, path, clauseData, clauseMap, predNumber, inputs,
                         operationName,
                         importedMch, seesMch, impName, directory, atelierBDir, proBPath, allInVariables,
                         variablesList,
                         variablesTypeList, fixedNames, outputs, docXML, negativePredicateXML.cloneNode(20),
-                        clauseToTest + 1, coveredClauses, copy_directory, arrayModification, testingClauses)
+                        clauseToTest + 1, coveredClauses, copy_directory, arrayModification, timeSecondPart, maxint, testingClauses)
     else:
         print("Not found inputs for the predicate: " + predicate + " end of test for this combination of clauses")
     del testingClauses[-1]
+    return tempoAvaliacao + timeFirstPart + timeSecondPart
 
 def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
                          directory):

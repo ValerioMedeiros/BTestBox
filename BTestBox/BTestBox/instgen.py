@@ -23,7 +23,7 @@ def make_operation(node):
 
 def make_assig(node):
     """Build an assignement in a string"""
-    text = ""
+    text = " "
     if node.childNodes.item(1).tagName == "Attr":
         text += make_inst(node.childNodes.item(3))  # Variables Child
         text += " := "
@@ -58,7 +58,7 @@ def make_binaryexp(node, needParathensis):
     else:
         iterator = 1
     text += callmake(node, node.childNodes.item(iterator).tagName)  # First operand of a binary evaluation
-    text += node.getAttribute("op")
+    text += " " + node.getAttribute("op") + " "
     text += selfcaller(node.childNodes.item(iterator+2))  # Second operand of a binary evaluation
     if node.getAttribute('op') == "(":
         text += ')'
