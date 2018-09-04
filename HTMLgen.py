@@ -18,17 +18,17 @@ def createTimeFile(times, copy_directory, coverage, impName, operationNames, tem
     text = 'Tempos de secoes do BTestBox para a implementacao ' + impName + '\n\n'
     text += 'O tempo total para a execucao do BTestBox para a implementacao ' + impName + ' foi de ' + str(tempo_total) +  ' segundos \n\n'
     for i in range(len(operationNames)):
-        text += 'Tempos para a operacao ' + operationNames[i] + ' segundos\n'
-        text += 'Tempo de criacao do grafo : ' + str(times[i + 1][0]) + ' segundos\n'
-        text += 'Tempo de criacao dos guias : ' + str(times[i + 1][1]) + ' segundos\n'
-        text += 'Tempo de geracao dos predicados : ' + str(times[i + 1][2]) + ' segundos\n'
-        text += 'Tempo de avaliacao dos predicados : ' + str(times[i + 1][3]) + ' segundos\n\n'
+        text += 'Tempos para a opercao ' + operationNames[i] + ' segundos\n'
+        text += 'Tempo de cricao do grafo : ' + str(times[i + 1][0]) + ' segundos\n'
+        text += 'Tempo de cricao dos guias : ' + str(times[i + 1][1]) + ' segundos\n'
+        text += 'Tempo de gercao dos predicados : ' + str(times[i + 1][2]) + ' segundos\n'
+        text += 'Tempo de avalicao dos predicados : ' + str(times[i + 1][3]) + ' segundos\n\n'
         total_avaliacao += times[i + 1][3]
 
-    text += 'Tempo para a geracao dos arquivos de teste : ' + str(times[0][0]) + ' segundos\n'
-    text += 'Tempo para a compilacao e execucao : ' + str(times[0][1]) + ' segundos\n'
-    text += 'Tempo para a geracao do reporte : ' + str(times[0][2]) + ' segundos\n'
-    text += 'A etapa de avaliacao dos predicados foi responsavel por ' + str(total_avaliacao/tempo_total*100) + '% do tempo da execucao do BTestBox para essa implementacao'
+    text += 'Tempo para a gercao dos arquivos de teste : ' + str(times[0][0]) + ' segundos\n'
+    text += 'Tempo para a compilcao e execucao : ' + str(times[0][1]) + ' segundos\n'
+    text += 'Tempo para a gercao do reporte : ' + str(times[0][2]) + ' segundos\n'
+    text += 'A etapa de avalicao dos predicados foi responsavel por ' + str(total_avaliacao/tempo_total*100) + '% do tempo da execucao do BTestBox para essa implementacao'
     txtDoc.write(text)
     txtDoc.close()
 

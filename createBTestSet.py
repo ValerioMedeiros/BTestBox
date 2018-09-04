@@ -77,6 +77,8 @@ def makeCopyFile(impNameFile, mchNameFile, mchBXML, impBXML, includedMch, direct
         os.mkdir(copy_directory)
     copiedImp = open(copy_directory + '/' + impNameFile + '.imp', 'w')
     copiedMch = open(copy_directory + '/' + mchNameFile + '.mch', 'w')
+    print(str(directory + '/' + mchNameFile + '.mch'))
+    print(str(copy_directory + '/' + mchNameFile + '.mch'))
     shutil.copyfile(str(directory + '/' + mchNameFile + '.mch'), str(copy_directory + '/' + mchNameFile + '.mch'))
     shutil.copyfile(str(directory + '/' + impNameFile + '.imp'), str(copy_directory + '/' + impNameFile + '.imp'))
     copiedImp.close()

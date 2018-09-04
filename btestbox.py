@@ -126,14 +126,17 @@ def getImportedMachine(imp, importedMch, seesMch, includedMch, directory, mch=[]
 def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, target_language, translator_profile, compiler, b_module, coverage, MAXINT):
     impName = b_module
     directory = project_directory
+    position = len(directory) - 4
+    directory = directory[:position:]
     for i in reversed(range(len(directory))):
-        if (directory[i] == os.sep or directory[i] == '/'):
+        if (directory[i] == os.sep or directory[i] == '/' or directory[i] == '\\'):
             position = i
             break
     copy_directory = directory[:position:] + os.sep + copy_directory
+    print(copy_directory)
     proBPath = probcliPath
     coverage = coverage
-    atelierBDirectory = atelier
+    atelierBDirectory = atelier[:len(atelier)-11:]
     bdpdirectory = directory + os.sep + 'bdp'
 
     refinementMch = list()
@@ -154,7 +157,6 @@ def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, t
         getImportedMachine(ref, importedMch, seesMch, includedMch, bdpdirectory + os.sep, mch)
     noOperations = True
     tempo_inicialTotal = time.time()
-
     for childnode in imp.firstChild.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             if childnode.tagName == "Operations":
