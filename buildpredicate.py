@@ -448,7 +448,7 @@ def buildInstruction(node, predicateXML, posMut, variablesList, variablesTypeLis
                 if Id.getAttribute("value") in posMut:
                     parent = Id.parentNode
                     isInQuant = False
-                    while not parent.parentNode is None:  # ESSE WHILE PODE TAH ERRADO é while parent.parentNode != None
+                    while not parent.parentNode is None: 
                         if parent.tagName == "Quantified_Pred":
                             isInQuant = True
                         parent = parent.parentNode

@@ -14,14 +14,13 @@ default="'''+sys.executable+'''"/>
 def installExtension(path,probcli_path):
     global etool
     etoolend = '''
-    <param>${componentName}</param>
-    <param>${componentDir}</param>
-    <param>project.xml</param>
-    <param>${projectTrad}</param>
+    <param>${projectBdp}</param>
+	<param>${extensionsDir}</param>
+	<param>${componentName}</param>
 </externalTool>'''
 
     res= etool + '<param>'+probcli_path+'</param>'
-    res= res + '    <param>-m</param>    <param>all</param>'
+    #res= res + '    <param>-m</param>    <param>all</param>'
     res = res.replace("CurrentPath.py", os.path.realpath(__file__).replace("configAtelierB","graphic")) + etoolend
     f = open(path+os.sep+'btestbox.etool','w')
     f.write(res)

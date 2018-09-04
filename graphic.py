@@ -22,6 +22,9 @@ progdescription = "BTestBox Interface"
 
 parser = argparse.ArgumentParser(parents=[parser], description=progdescription)
 
+parser.add_argument('ProB_directory',
+                    help='Directory of the proB')
+
 parser.add_argument('project_directory',
                     help='Directory of the project')
 
@@ -148,15 +151,16 @@ class Griding:
 
         self.currentProfile.trace('w', callback=checkOkButton)
 
+
         # Probcli path
         Label(self.raiz, text='Probcli (ProB) Path:').grid(row=9, column=1, sticky=W, pady=3)
-        self.probcliPath = StringVar(value='C:\\ProB\\probcli.exe')
+        self.probcliPath = StringVar(value=args.ProB_directory)
         self.probcliPathFrame = Entry(self.raiz, textvariable=self.probcliPath, width=10)
         self.probcliPathFrame.grid(row=9, column=2, sticky=E + W, pady=3)
         self.probcliPathFrame.focus_force()
         self.probcliPath.trace('w', callback=checkOkButton)
 
-        # Probcli path
+        # Compiler path
         Label(self.raiz, text='Compiler:').grid(row=8, column=1, sticky=W, pady=3)
         self.chosenCompiler = StringVar()
         self.chosenCompilerFrame = Entry(self.raiz, textvariable=self.chosenCompiler, width=10)
@@ -270,6 +274,16 @@ class Griding:
                                    args.b_module,
                                    self.currentCriteria.get() + ' Coverage',
                                    MAXINT)
+
+        msg = "Test Finished"
+        NORM_FONT = ("Verdana", 10)
+        popup = Tk()
+        popup.wm_title("!")
+        label = Label(popup, text=msg, font=NORM_FONT)
+        label.pack(side="top", fill="x")
+        B1 = Button(popup, text="Ok", command=popup.destroy)
+        B1.pack()
+        popup.mainloop()
 
     def closeButtonClicked(self):
         self.raiz.destroy()
