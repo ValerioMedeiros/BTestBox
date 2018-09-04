@@ -22,8 +22,8 @@ def installExtension(path,probcli_path):
 
     res= etool + '<param>'+probcli_path+'</param>'
     res= res + '    <param>-m</param>    <param>all</param>'
-    res = res.replace("CurrentPath.py", os.path.realpath(__file__).replace("configAtelierB","btestbox")) + etoolend
-    f = open(path+os.sep+'btest.etool','w')
+    res = res.replace("CurrentPath.py", os.path.realpath(__file__).replace("configAtelierB","graphic")) + etoolend
+    f = open(path+os.sep+'btestbox.etool','w')
     f.write(res)
     f.close()
     

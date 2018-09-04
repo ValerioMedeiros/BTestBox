@@ -1,107 +1,278 @@
-#!/usr/bin/python2.7
-'''
-Created on Feb 9, 2016
-
-@author: valerio
-'''
-
-import os
+from xml.dom import minidom
+import coverageprocess
 import sys
-import argparse
-import shutil
-import src.generate
-import src.utils
-import src.gui2
-
+import HTMLgen
+import os
 import time
 
+# if True:
+#     for arg in sys.argv:
+#         print(arg + " ", )
+#     print("\n" + ("-" * 80))
+#
+# parser = argparse.ArgumentParser(add_help=False)
+#
+# progdescription = "BTestBox is awesome"
+#
+# parser = argparse.ArgumentParser(parents=[parser], description=progdescription)
+#
+# parser.add_argument('target_language',
+#                     help='The language to translate')
+#
+# parser.add_argument('translator_profile',
+#                     help='The translator profile')
+#
+# parser.add_argument('coverage',
+#                     help='Selects the coverage.')
+#
+# parser.add_argument('atelier',
+#                     help='Directory of Atelier-B')
+#
+# parser.add_argument('project_directory',
+#                     help='Directory of the project')
+#
+# parser.add_argument('copy_directory',
+#                     help='Target directory name to do tests')
+#
+# # parser.add_argument('settings',
+# #                    help='project settings file')
+#
+# parser.add_argument('b_module',
+#                     help='Name of the B module (implementation)')
+#
+# parser.add_argument('compiler',
+#                     help='The compiler to compilate the translated file')
+#
+# parser.add_argument('probcliPath',
+#                     help='ProB (probcli) path')
+#
+# # parser.add_argument('-mch', '--machines', action='store_true',
+# #                    help='use the machines to calculate operation calls')
+#
+# parser.add_argument('--MAXINT', action='store_true', default=50000,
+#                     help='Change the maximum and mininum interger of ProB preference')
+#
+# parser.add_argument('-v', '--verbose', action='store_true',
+#                     help='Outputs some information while running')
+#
+# args = parser.parse_args()
+#
+# if (args.verbose):
+#     print("BTestBox configuration")
+#     print("- AtelierB directory: " + args.atelier)
+#     print("- Bpd project directory : " + args.project_directory)
+#     print("- Copy directory: " + args.copy_directory)
+#     print("- ProB (probcli) directory: " + args.probcliPath)
+#     print("- Translation Language: " + args.target_language)
+#     print("- Translation Profile: " + args.translator_profile)
+#     print("- Compiler: " + args.compiler)
+#     # print("- B project settings file: " + args.settings)
+#     print("- B module: " + args.b_module)
+#     print("- Coverage: " + args.coverage)
 
 
-
-if True:
-    for arg in sys.argv:
-        print arg+" ",
-    print ("\n"+("-"*80))
-
-parser = argparse.ArgumentParser(add_help=False)
-
-progdescription='Generates C test for B modules.'
-
-parser = argparse.ArgumentParser(parents=[parser],description=progdescription)
-
-parser.add_argument('probcli_path',
-                    help='path of ProB (probcli.sh)')
-parser.add_argument('b_module',
-                    help='name of the B module (implementation)')
-
-parser.add_argument('directory',
-                    help='when set, the program will lookup files in that directory')
-parser.add_argument('settings',
-                    help='project settings file')
-parser.add_argument('out_dir',
-                    help='output C test directory')
-parser.add_argument('-m', '--mode', choices=['b2c','b2llvm','ComenC','all'], default='comp',
-                    help='Selects code generation mode.')
-parser.add_argument('output_directory', nargs='?',
-                    help='defines the output file directory')
-
-
-args = parser.parse_args()
-
-
-print(" BTestKit code generation configuration")
-print("- ProBcli path: " + args.probcli_path)
-print("- B module: " + args.b_module)
-print("- C test output directory: " + args.out_dir)
-print("- BXML directory: " + args.directory)
-print("- code generation mode: " + args.mode)
-print("- B project settings file: " + args.settings)
-
-# Create the directory
-directory_test = args.out_dir + os.sep + "btest_"+args.b_module
-if not os.path.exists(directory_test):
-    os.makedirs(directory_test)
-
-#Executa the ProB
-
-
-
-parameters_tests = {"defined": False, "max_cases":"0" ,"languages":[],"heuristic":"","criteria":""}
-
-src.gui2.draw_gui(parameters_tests)
-
-if not(parameters_tests["defined"]):
-    print("No script tests defined!")
-    exit()
-
-start_time = time.time()
-src.utils.executeSub(""+args.probcli_path+" -animate "+str(3+int(parameters_tests["max_cases"])) +" -his "+directory_test+os.sep+"history.txt -his_option show_init -his_option show_states "+args.directory+os.sep+args.b_module+".imp",args.b_module,True)
+def getImportedMachine(imp, importedMch, seesMch, includedMch, directory, mch=[]):
+    #Function responsible of getting the bxml files of each imported/seen/extended/included machine.
+    #It starts with actual file being read and the lists responsible for saving the machines.
+    for childnode in imp.getElementsByTagName("Machine")[0].childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            if childnode.tagName == 'Abstraction':
+                for mchchildnodes in mch.firstChild.childNodes:
+                    if mchchildnodes.nodeType != mchchildnodes.TEXT_NODE:
+                        if mchchildnodes.tagName == "Includes":
+                            importedMchTree = mchchildnodes.getElementsByTagName(
+                                "Name")  # Getting all names of imported machines
+                            for name in importedMchTree:
+                                includedMch.append(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"))
+            if childnode.tagName == "Imports":
+                importedMchTree = childnode.getElementsByTagName("Name")  # Getting all names of imported machines
+                for name in importedMchTree:
+                    importedMch.append(minidom.parse(
+                        directory + os.sep + name.firstChild.data + ".bxml"))  # Getting the imported machine
+                    getImportedMachine(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"), importedMch,
+                                       seesMch, includedMch,
+                                       directory)  # Getting the imported machines imported by the imported machine
+            if childnode.tagName == "Extends":
+                importedMchTree = childnode.getElementsByTagName("Name")  # Getting all names of imported machines
+                for name in importedMchTree:
+                    importedMch.append(minidom.parse(
+                        directory + os.sep + name.firstChild.data + ".bxml"))  # Getting the imported machine
+                    getImportedMachine(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"), importedMch,
+                                       seesMch, includedMch,
+                                       directory)  # Getting the imported machines imported by the imported machine
+            if childnode.tagName == "Sees":
+                importedMchTree = childnode.getElementsByTagName("Name")  # Getting all names of imported machines
+                for name in importedMchTree:
+                    alreadyInTheList = False
+                    for mch in seesMch:
+                        if mch.firstChild.getAttribute('name') == name.firstChild.data:
+                            alreadyInTheList = True
+                    if not alreadyInTheList:
+                        seesMch.append(minidom.parse(
+                            directory + os.sep + name.firstChild.data + ".bxml"))  # Getting the imported machine
+                        getImportedMachine(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"),
+                                           importedMch, seesMch, includedMch,
+                                           directory)  # Getting the imported machines imported by the imported machine
+            if childnode.tagName == "Includes":
+                importedMchTree = childnode.getElementsByTagName("Name")  # Getting all names of imported machines
+                for name in importedMchTree:
+                    includedMch.append(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"))
+                    importedMch.append(minidom.parse(
+                        directory + os.sep + name.firstChild.data + ".bxml"))  # Getting the imported machine
+                    getImportedMachine(minidom.parse(directory + os.sep + name.firstChild.data + ".bxml"), importedMch,
+                                       seesMch, includedMch, directory)
 
 
-#caminho,arquivo = ("../../Testes/PrimeirosExemplos/Array", 'test_results.xml')  
-#caminho,arquivo = ("../../Testes/PrimeirosExemplos/Calculator", 'test_results.xml')    
-#caminho,arquivo = ("../../Testes/PrimeirosExemplos/Counter", 'test_results.xml')
-#caminho,arquivo = ("../../Testes/PrimeirosExemplos/ATM", 'test_results.xml')
+def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, target_language, translator_profile, compiler, b_module, coverage, MAXINT):
+    impName = b_module
+    directory = project_directory
+    for i in reversed(range(len(directory))):
+        if (directory[i] == os.sep or directory[i] == '/'):
+            position = i
+            break
+    copy_directory = directory[:position:] + os.sep + copy_directory
+    proBPath = probcliPath
+    coverage = coverage
+    atelierBDirectory = atelier
+    bdpdirectory = directory + os.sep + 'bdp'
 
-#resultado = gerar_casos_de_testes_xml(caminho, arquivo)
-res = src.generate.gerar_casos_de_testes_history(directory_test+os.sep+"history.txt", args.b_module)
+    refinementMch = list()
+    print(bdpdirectory + os.sep + impName + ".bxml")
+    imp = minidom.parse(bdpdirectory + os.sep + impName + ".bxml")
+    mch = imp.getElementsByTagName("Abstraction")[0]  # Getting the Machine name
+    mch = minidom.parse(bdpdirectory + os.sep + mch.firstChild.data + ".bxml")  # Getting the machine
+    while mch.firstChild.getAttribute("type") == "refinement":
+        refinementMch.append(mch)
+        mch = mch.getElementsByTagName("Abstraction")[0]
+        mch = minidom.parse(bdpdirectory + os.sep + mch.firstChild.data + ".bxml")
+    mchName = mch.firstChild.getAttribute("name")
+    importedMch = list()
+    seesMch = list()
+    includedMch = list()
+    getImportedMachine(imp, importedMch, seesMch, includedMch, bdpdirectory + os.sep, mch)
+    for ref in refinementMch:
+        getImportedMachine(ref, importedMch, seesMch, includedMch, bdpdirectory + os.sep, mch)
+    noOperations = True
+    tempo_inicialTotal = time.time()
+
+    for childnode in imp.firstChild.childNodes:
+        if childnode.nodeType != childnode.TEXT_NODE:
+            if childnode.tagName == "Operations":
+                noOperations = False
+                operationsimp = childnode  # Surfing until Operations
+                operationsmch = mch.getElementsByTagName("Operations")[0]  # Surfing until Operations in the machine
+                if coverage == "Statement Coverage":
+                    entries, outs, operationNames, nonCovered, coveredPercentage, times = coverageprocess.DoCodeCoverage(imp, mch,
+                                                                                                                  importedMch,
+                                                                                                                  seesMch,
+                                                                                                                  includedMch,
+                                                                                                                  operationsmch,
+                                                                                                                  operationsimp,
+                                                                                                                  impName,
+                                                                                                                  directory,
+                                                                                                                  atelierBDirectory,
+                                                                                                                  copy_directory,
+                                                                                                                  proBPath,
+                                                                                                                  refinementMch,
+                                                                                                                    target_language,
+                                                                                                                    translator_profile,
+                                                                                                                    compiler,MAXINT)
+                elif coverage == "Branch Coverage":
+                    entries, outs, operationNames, nonCovered, coveredPercentage, times = coverageprocess.DoBranchCoverage(imp,
+                                                                                                                    mch,
+                                                                                                                    importedMch,
+                                                                                                                    seesMch,
+                                                                                                                    includedMch,
+                                                                                                                    operationsmch,
+                                                                                                                    operationsimp,
+                                                                                                                    impName,
+                                                                                                                    directory,
+                                                                                                                    atelierBDirectory,
+                                                                                                                    copy_directory,
+                                                                                                                    proBPath,
+                                                                                                                    refinementMch,
+                                                                                                                    target_language,
+                                                                                                                    translator_profile,
+                                                                                                                    compiler,MAXINT)
+                elif coverage == "Path Coverage":
+                    entries, outs, operationNames, nonCovered, coveredPercentage, times = coverageprocess.DoPathCoverage(imp, mch,
+                                                                                                                  importedMch,
+                                                                                                                  seesMch,
+                                                                                                                  includedMch,
+                                                                                                                  operationsmch,
+                                                                                                                  operationsimp,
+                                                                                                                  impName,
+                                                                                                                  directory,
+                                                                                                                  atelierBDirectory,
+                                                                                                                  copy_directory,
+                                                                                                                  proBPath,
+                                                                                                                  refinementMch,
+                                                                                                                    target_language,
+                                                                                                                    translator_profile,
+                                                                                                                    compiler,MAXINT)
+                # elif coverage == "line":
+                #    entries, outs, operationNames, nonCovered = coverageprocess.DoLineCoverage(imp, mch, importedMch,
+                #                                                                               seesMch, includedMch,
+                #                                                                               operationsmch, operationsimp,
+                #                                                                               impName, directory,
+                #                                                                               atelierBDirectory,
+                #                                                                               copy_directory, proBPath)
+                elif coverage == "Clause Coverage":
+                    entries, outs, operationNames, nonCovered, coveredPercentage, times = coverageprocess.DoClauseCoverage(imp,
+                                                                                                                    mch,
+                                                                                                                    importedMch,
+                                                                                                                    seesMch,
+                                                                                                                    includedMch,
+                                                                                                                    operationsmch,
+                                                                                                                    operationsimp,
+                                                                                                                    impName,
+                                                                                                                    directory,
+                                                                                                                    atelierBDirectory,
+                                                                                                                    copy_directory,
+                                                                                                                    proBPath,
+                                                                                                                    refinementMch,
+                                                                                                                    target_language,
+                                                                                                                    translator_profile,
+                                                                                                                    compiler,MAXINT)
+                elif coverage == "Combinatorial Coverage":
+                    entries, outs, operationNames, nonCovered, coveredPercentage, times = coverageprocess.DoCombinatorialCoverage(imp,
+                                                                                                                    mch,
+                                                                                                                    importedMch,
+                                                                                                                    seesMch,
+                                                                                                                    includedMch,
+                                                                                                                    operationsmch,
+                                                                                                                    operationsimp,
+                                                                                                                    impName,
+                                                                                                                    directory,
+                                                                                                                    atelierBDirectory,
+                                                                                                                    copy_directory,
+                                                                                                                    proBPath,
+                                                                                                                    refinementMch,
+                                                                                                                    target_language,
+                                                                                                                    translator_profile,
+                                                                                                                    compiler,MAXINT)
+                else:
+                    print('No valid coverage chosen')
+                    break
+                HTMLgen.createHTML(directory, coverage.replace(' Coverage', ''), nonCovered, copy_directory, impName, mchName, operationNames,
+                                   entries, outs, coveredPercentage, importedMch, seesMch, times, tempo_inicialTotal)
+    if noOperations:
+        HTMLgen.createHTMLnoOperations(coverage.replace(' Coverage', ''), copy_directory, impName)
 
 
-# Grava o Makefile e o arquivo gerado de testes
-src.utils.writefile(src.utils.makefile_text.replace("#FILENAMECOMP#",args.b_module) , directory_test+os.sep+"Makefile")
+#For Testing uncomment and change the lines above:
 
-shutil.copyfile(os.path.dirname(os.path.abspath(__file__))+os.sep+"libs/cutest.h", directory_test+os.sep+"cutest.h")
+'''
 
+BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B full 4.3.1",
+                  "C:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExamplesValerio",
+                  "testandoValerioComp50",
+                  "C:"+os.sep+"ProB",
+                  "C",
+                  "C9X",
+                  "gcc",
+                  "COMP_2seq50_OPS_IMP",
+                  "Statement Coverage",
+                  50)
 
-
-#Gerar os testes e grava os resultados
-f = open(directory_test+os.sep+args.b_module+"_btest.c" ,'w')
-f.write(res) 
-f.close() 
-print("Btest executed successfully")
-print("Random animation of  %s operations and time of execution: %s seconds." % (int(parameters_tests["max_cases"]),(time.time() - start_time)))
-
-spent_time_to_run_lot = time.time() - start_time
-seconds_in_one_hour= 60*60
-slots_in_one_hour = seconds_in_one_hour/spent_time_to_run_lot
-print("Estimated random animation of  %d operations in one hour " % (slots_in_one_hour*int(parameters_tests["max_cases"])) )
+'''
