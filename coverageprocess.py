@@ -6,6 +6,15 @@ import createBTestSet
 import testTranslation
 import os
 import time
+from threading import Thread
+from Queue import Queue
+
+#Definindo a fila maxima
+q = Queue(maxsize=0)
+# Use many threads (50 max, or one for each url)
+num_theads = min(40, len(numberOfOperations))
+
+results = [{} for x in operationsList]
 
 '''
 buildpaths: buildpaths is the module responsible to create the paths and the branches, it depends of the graphgen.
@@ -26,37 +35,9 @@ operationsimp: An node with all the operations of the implementation
 operationsmch: An node with all the operations of the machine
 '''
 
-
-def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
-                     directory, atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
-                     compiler, maxint):
-    """
-    Function responsible of doing the Branch Coverage, it has no inputs or return.
-
-    Variables:
-    allcovered: When False, means that one or more branches could not be covered.
-    operationImp: One operation of all operations in the implementation
-    operationname: The name of the operation
-    inputs: The inputs of the operation
-    operationMch: The machine version of the implementation operation
-    """
-    # Initialisation
-    print("Checking if the implementation " + impName + " is Branch Covered\n")
-    allcovered = True
-    allInVariablesForTest = dict()
-    allOutVariablesForTest = dict()
-    variablesList = dict()
-    variablesTypeList = dict()
-    operationsNames = list()
-    coveredPercentage = list()
-    count = 0
-    notCovered = dict()
-    times = dict()
-    # Process
-    for operationImp in operationsimp.childNodes:
-        if operationImp.nodeType != operationImp.TEXT_NODE:
-            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
-                count += 1
+#Processo dentro de DoBranchCoverage Comentado
+'''
+count += 1
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Branch Covered")
                 if operationImp.getElementsByTagName('Input_Parameters') != []:
@@ -127,6 +108,38 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     allcovered = False
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
+'''
+
+def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
+                     directory, atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler, maxint):
+    """
+    Function responsible of doing the Branch Coverage, it has no inputs or return.
+
+    Variables:
+    allcovered: When False, means that one or more branches could not be covered.
+    operationImp: One operation of all operations in the implementation
+    operationname: The name of the operation
+    inputs: The inputs of the operation
+    operationMch: The machine version of the implementation operation
+    """
+    # Initialisation
+    print("Checking if the implementation " + impName + " is Branch Covered\n")
+    allcovered = True
+    allInVariablesForTest = dict()
+    allOutVariablesForTest = dict()
+    variablesList = dict()
+    variablesTypeList = dict()
+    operationsNames = list()
+    coveredPercentage = list()
+    count = 0
+    notCovered = dict()
+    times = dict()
+    # Process
+    for operationImp in operationsimp.childNodes:
+        if operationImp.nodeType != operationImp.TEXT_NODE:
+            if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
+
     if allcovered:
         print("All operations of " + impName + " are covered by Branch Coverage!")
         print("Now they translation will be tested.")
