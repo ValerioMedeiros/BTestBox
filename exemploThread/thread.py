@@ -12,8 +12,6 @@ urls = ["diego", "http://www.google.com", "http://www.uol.com"]
 # Define a crawl function that retrieves data from a url and places the result in results[index]
 # The 'results' list will hold our retrieved data
 # The 'urls' list contains all of the urls that are to be checked for data
-results = [{} for x in urls]
-
 
 # Threaded function for queue processing.
 def crawl(q, result):
