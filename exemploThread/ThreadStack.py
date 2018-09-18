@@ -8,13 +8,16 @@ from queue import Queue
 ...
 logging.getLogger().addHandler(logging.StreamHandler())
 
-urls = ["diego", "http://www.google.com", "http://www.uol.com"]
-
+urls = ["diego", "http://www.google.com", "http://www.uol.com"] * 30
+listData = [{"data": 0}] * len(urls)
 
 # Define a crawl function that retrieves data from a url and places the result in results[index]
 # The 'results' list will hold our retrieved data
 # The 'urls' list contains all of the urls that are to be checked for data
 
+x = 0
+
+z = Queue()
 
 # Threaded function for queue processing.
 def crawl(q, result):
@@ -22,6 +25,9 @@ def crawl(q, result):
         work = q.get()  # fetch new work from the Queue
         try:
             data = urlopen(work[1]).read()
+            z.put(data[0:5])
+            listData[x]["data"] = data
+            x=+1
             logging.warning("Requested..." + work[1])
             result[work[0]] = data  # Store data back at correct index
         except:
@@ -42,10 +48,11 @@ for i in range(len(urls)):
     # need the index and the url in each queue item.
     q.put((i, urls[i]))
 
-cores = 5
+cores = 100
 # Use many threads (50 max, or one for each url)
 num_Threads = min(cores, len(urls))
 
+# Creating and adding the first of the queue to the stack
 stack = Queue(maxsize=0)
 stack.put(q.get())
 
@@ -66,4 +73,6 @@ while q.qsize() > 0:
         print('Finishing thread ', i)
 # now we wait until the queue has been processed
 stack.join()
+print(z.queue)
+print(z.qsize())
 logging.warning('All tasks completed.')

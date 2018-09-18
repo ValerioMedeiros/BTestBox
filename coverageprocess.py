@@ -7,14 +7,36 @@ import testTranslation
 import os
 import time
 from threading import Thread
-from Queue import Queue
+from queue import Queue
+import multiprocessing
 
 #Definindo a fila maxima
-q = Queue(maxsize=0)
-# Use many threads (50 max, or one for each url)
-num_theads = min(40, len(numberOfOperations))
+queueOfOperations = Queue(maxsize=0)
+# Number of cores capable of doing calculation or the number of calculations at the same time
+#cores = 1
+cores = multiprocessing.cpu_count()
+operationsList = list()
+# Number of threads running at  the same time, depends of the number of cores or operations
+num_threads = min(cores, len(operationsList))
 
-results = [{} for x in operationsList]
+
+def DoBranchCoverageThreads(queue, qVars, count, result):
+    while not queue.empty():
+        work = queue.get()  # fetch new work from the Queue
+        operationsmch, times, directory = qVars.queue[count-1]["operationsmch"], qVars.queue[count-1]["times"], qVars.queue[count-1]["directory"]
+        importedMch, seesMch, refinementMch = qVars.queue[count-1]["importedMch"], qVars.queue[count-1]["seesMch"], qVars.queue[count-1]["refinementMch"]
+        impName, atelierBDir, proBPath = qVars.queue[count-1]["impName"], qVars.queue[count-1]["atelierBDir"], qVars.queue[count-1]["proBPath"]
+        copy_directory, maxint, operationsNames = qVars.queue[count-1]["copy_directory"], qVars.queue[count-1]["maxint"], qVars.queue[count-1]["operationsNames"]
+        allInVariablesForTest, allOutVariablesForTest, variablesList = qVars.queue[count-1]["allInVariablesForTest"], qVars.queue[count-1]["allOutVariablesForTest"], qVars.queue[count-1]["variablesList"]
+        variablesTypeList, coveredPercentage, notCovered = qVars.queue[count-1]["variablesTypeList"], qVars.queue[count-1]["coveredPercentage"], qVars.queue[count-1]["notCovered"]
+        branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
+                      impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
+                      allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
+                      coveredPercentage, notCovered)
+        queue.task_done()
+    return True
+
+
 
 '''
 buildpaths: buildpaths is the module responsible to create the paths and the branches, it depends of the graphgen.
@@ -24,20 +46,11 @@ instgen: module to generate the instructions.
 minidom: module to read the bxml file in a tree.
 '''
 
-# Initialisation
-'''
-In the initialisation we get all the implementations of the imported machines, also we get the machine of the implementation being evaluated.
-impName: Name of the implementation
-imp: Variable with the parse of the implementation bxml
-mch: Variable with the parse of the implementation bxml
-importedMch: list of parses, with all implementation imported.
-operationsimp: An node with all the operations of the implementation
-operationsmch: An node with all the operations of the machine
-'''
-
 #Processo dentro de DoBranchCoverage Comentado
-'''
-count += 1
+def branchCoverageProcess(count, operationImp, operationsmch, times, directory, importedMch, seesMch, refinementMch,
+                          impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
+                          allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
+                          coveredPercentage, notCovered):
                 operationname = operationImp.getAttribute("name")
                 print("Checking if the operation " + operationname + " is Branch Covered")
                 if operationImp.getElementsByTagName('Input_Parameters') != []:
@@ -108,7 +121,6 @@ count += 1
                     allcovered = False
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
-'''
 
 def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
                      directory, atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
@@ -139,6 +151,55 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     for operationImp in operationsimp.childNodes:
         if operationImp.nodeType != operationImp.TEXT_NODE:
             if operationImp.tagName == 'Operation' and not checkIfItIsLocal(operationImp):
+                operationsList.append(operationImp)
+
+    # Continue the process with threads if there is a operation
+    if operationsList != []:
+        # Populating Queue with tasks
+        # Also depends of the number of operations, the results have to respect the number of operations
+        results = [{} for x in operationsList]
+
+        # Load up the queue with the operations to fetch and the index for each job (as a tuple):
+        for i in range(len(operationsList)):
+            # Need the index and the url in each queue item.
+            queueOfOperations.put((i, operationsList[i]))
+
+        # List of variables (used for control)
+        listOfVariables = [{"operationsmch": 0, "times": 0}] * len(operationsList)
+
+        # Creating a queue that you serve as stack and our counter
+        qVars = Queue()
+        qVars.put({"operationsmch":operationsmch, "times":times,
+                   "directory":directory, "importedMch":importedMch, "seesMch":seesMch, "refinementMch":refinementMch,
+                   "impName":impName, "atelierBDir":atelierBDir, "proBPath":proBPath, "copy_directory":copy_directory,
+                   "maxint":maxint, "operationsNames":operationsNames, "allInVariablesForTest":allInVariablesForTest,
+                   "allOutVariablesForTest":allOutVariablesForTest, "variablesList":variablesList,
+                   "variablesTypeList":variablesTypeList, "coveredPercentage":coveredPercentage,
+                   "notCovered":notCovered})
+
+        # Creating and adding the first of the queue to the stack
+        stack = Queue(maxsize=0)
+        stack.put(queueOfOperations.get())
+
+        # Starting worker threads on queue processing
+        # for i in range(num_threads):
+        while True:
+            for i in range(min(cores, queueOfOperations.qsize())):
+                stack.put(queueOfOperations.get())
+            for i in range(stack.qsize()):
+                count = + 1
+                print('Starting thread ', i)
+                worker = Thread(target=DoBranchCoverageThreads, args=(stack, qVars, count, results))
+                worker.setDaemon(True)  # Setting threads as "daemon" allows main program to
+                                        # Exit eventually even if these don't finish
+                                        # Correctly.
+                worker.start()
+                print('Finishing thread ', i)
+        # Now we wait until the queue has been processed
+            if queueOfOperations.qsize() <= 0:
+                break
+        stack.join()
+
 
     if allcovered:
         print("All operations of " + impName + " are covered by Branch Coverage!")
