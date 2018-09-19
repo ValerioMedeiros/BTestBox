@@ -1,0 +1,22 @@
+﻿/* COMPIMP_i
+ * Author: 
+ * Creation date: 3/28/16
+ */
+
+IMPLEMENTATION
+    COMPIMP_i
+REFINES
+   COMPIMP
+/*CONCRETE_VARIABLES
+    step
+INVARIANT
+    step : INT
+INITIALISATION
+    step := 1
+*/OPERATIONS
+    res <-- do_int ( value ) =
+    BEGIN
+                res := ( value + 1 ) mod 1024
+    END
+
+ END

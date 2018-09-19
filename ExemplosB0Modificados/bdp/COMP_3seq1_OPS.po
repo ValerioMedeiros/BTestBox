@@ -1,0 +1,30 @@
+THEORY ProofList IS
+_f(1) & Initialisation.3,(_f(2) & _f(7) => _f(8));
+_f(1) & Initialisation.2,(_f(2) & _f(5) => _f(6));
+_f(1) & Initialisation.1,(_f(2) & _f(3) => _f(4))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+"Invariant is preserved";
+"Check invariant ((counter) : (NAT))";
+((1) : (NAT));
+"Check invariant ((max_counter) : (NAT))";
+((1024) : (NAT));
+"Check invariant ((check_BLOCK) : (INT))";
+((0) : (INT));
+((counter) : (NAT)) & ((max_counter) : (NAT)) & ((cond1) : (BOOL)) & ((check_boolexp) : (BOOL)) & ((check_BLOCK) : (INT)) & ((check_BECOME) : (INT)) & ((check_IF) : (INT)) & ((check_CASE) : (INT)) & ((check_SEQUENCE) : (INT)) & ((check_WHILE) : (INT)) & ((check_OPER_CALL) : (INT));
+((check_WHILE) : (INT));
+((check_SEQUENCE) : (INT));
+((check_CASE) : (INT));
+((check_IF) : (INT));
+((check_BECOME) : (INT));
+((check_BLOCK) : (INT));
+((check_boolexp) : (BOOL));
+((cond1) : (BOOL));
+((max_counter) : (NAT));
+((counter) : (NAT))
+END
+&
+THEORY EnumerateX
+END

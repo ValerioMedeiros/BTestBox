@@ -1,0 +1,38 @@
+<Machine name='COMPIMP_i' type='implementation'>
+<Abstraction>COMPIMP</Abstraction>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='do_int'>
+<Output_Parameters>
+<Id value='res' typref='2701647786'/>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='value' typref='2701647786'/>
+</Input_Parameters>
+<Body>
+<Assignement_Sub>
+<Variables>
+<Id value='res' typref='2701647786'/>
+</Variables>
+<Values>
+<Binary_Exp op='mod' typref='2701647786'>
+<Binary_Exp op='+' typref='2701647786'>
+<Id value='value' typref='2701647786'/>
+<Integer_Literal value='1' typref='2701647786'/>
+</Binary_Exp>
+<Integer_Literal value='1024' typref='2701647786'/>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>
