@@ -7,11 +7,25 @@ import testTranslation
 import os
 import time
 from threading import Thread
-from queue import Queue
+#from queue import Queue
 import multiprocessing
 
+
+import sys
+is_py2 = sys.version[0] == '2'
+if is_py2:
+    import Queue as queue
+else:
+    import queue as queue
+
+
+
+
+
+
+
 #Definindo a fila maxima
-queueOfOperations = Queue(maxsize=0)
+queueOfOperations = queue.Queue(maxsize=0)
 # Number of cores capable of doing calculation or the number of calculations at the same time
 #cores = 1
 cores = multiprocessing.cpu_count()
@@ -168,7 +182,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
         listOfVariables = [{"operationsmch": 0, "times": 0}] * len(operationsList)
 
         # Creating a queue that you serve as stack and our counter
-        qVars = Queue()
+        qVars = queue.Queue()
         qVars.put({"operationsmch":operationsmch, "times":times,
                    "directory":directory, "importedMch":importedMch, "seesMch":seesMch, "refinementMch":refinementMch,
                    "impName":impName, "atelierBDir":atelierBDir, "proBPath":proBPath, "copy_directory":copy_directory,
@@ -178,7 +192,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                    "notCovered":notCovered})
 
         # Creating and adding the first of the queue to the stack
-        stack = Queue(maxsize=0)
+        stack = queue.Queue(maxsize=0)
         stack.put(queueOfOperations.get())
 
         # Starting worker threads on queue processing
