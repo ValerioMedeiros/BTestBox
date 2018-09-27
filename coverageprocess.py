@@ -27,27 +27,26 @@ else:
 #Definindo a fila maxima
 queueOfOperations = queue.Queue(maxsize=0)
 # Number of cores capable of doing calculation or the number of calculations at the same time
-#cores = 1
-cores = multiprocessing.cpu_count()
+cores = 1
+#cores = multiprocessing.cpu_count()
 operationsList = list()
-# Number of threads running at  the same time, depends of the number of cores or operations
-num_threads = min(cores, len(operationsList))
 
 
-def DoBranchCoverageThreads(queue, qVars, count, result):
-    while not queue.empty():
-        work = queue.get()  # fetch new work from the Queue
-        operationsmch, times, directory = qVars.queue[count-1]["operationsmch"], qVars.queue[count-1]["times"], qVars.queue[count-1]["directory"]
-        importedMch, seesMch, refinementMch = qVars.queue[count-1]["importedMch"], qVars.queue[count-1]["seesMch"], qVars.queue[count-1]["refinementMch"]
-        impName, atelierBDir, proBPath = qVars.queue[count-1]["impName"], qVars.queue[count-1]["atelierBDir"], qVars.queue[count-1]["proBPath"]
-        copy_directory, maxint, operationsNames = qVars.queue[count-1]["copy_directory"], qVars.queue[count-1]["maxint"], qVars.queue[count-1]["operationsNames"]
-        allInVariablesForTest, allOutVariablesForTest, variablesList = qVars.queue[count-1]["allInVariablesForTest"], qVars.queue[count-1]["allOutVariablesForTest"], qVars.queue[count-1]["variablesList"]
-        variablesTypeList, coveredPercentage, notCovered = qVars.queue[count-1]["variablesTypeList"], qVars.queue[count-1]["coveredPercentage"], qVars.queue[count-1]["notCovered"]
-        branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
-                      impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
-                      allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
-                      coveredPercentage, notCovered)
-        queue.task_done()
+
+def DoBranchCoverageThreads(operationImp, qVars, count, result):
+   # while not queue.empty():
+        #work = queue.get()  # fetch new work from the Queue
+    operationsmch, times, directory = qVars.queue[count-1]["operationsmch"], qVars.queue[count-1]["times"], qVars.queue[count-1]["directory"]
+    importedMch, seesMch, refinementMch = qVars.queue[count-1]["importedMch"], qVars.queue[count-1]["seesMch"], qVars.queue[count-1]["refinementMch"]
+    impName, atelierBDir, proBPath = qVars.queue[count-1]["impName"], qVars.queue[count-1]["atelierBDir"], qVars.queue[count-1]["proBPath"]
+    copy_directory, maxint, operationsNames = qVars.queue[count-1]["copy_directory"], qVars.queue[count-1]["maxint"], qVars.queue[count-1]["operationsNames"]
+    allInVariablesForTest, allOutVariablesForTest, variablesList = qVars.queue[count-1]["allInVariablesForTest"], qVars.queue[count-1]["allOutVariablesForTest"], qVars.queue[count-1]["variablesList"]
+    variablesTypeList, coveredPercentage, notCovered = qVars.queue[count-1]["variablesTypeList"], qVars.queue[count-1]["coveredPercentage"], qVars.queue[count-1]["notCovered"]
+    branchCoverageProcess(count, operationImp, operationsmch, times, directory, importedMch, seesMch, refinementMch,
+                  impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
+                  allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
+                  coveredPercentage, notCovered)
+        #queue.task_done()
     return True
 
 
@@ -192,22 +191,31 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                    "notCovered":notCovered})
 
         # Creating and adding the first of the queue to the stack
-        stack = queue.Queue(maxsize=0)
+        stack = queue.Queue(maxsize=cores)
         stack.put(queueOfOperations.get())
 
         # Starting worker threads on queue processing
         # for i in range(num_threads):
         while True:
+            # Empilha as remanescentes
             for i in range(min(cores, queueOfOperations.qsize())):
                 stack.put(queueOfOperations.get())
-            for i in range(stack.qsize()):
+
+            #apagar #for i in range(stack.qsize()):
+            while not stack.empty():
                 count = + 1
                 print('Starting thread ', i)
-                worker = Thread(target=DoBranchCoverageThreads, args=(stack, qVars, count, results))
+
+                operationImp = stack.get()
+
+                worker = Thread(target=DoBranchCoverageThreads, args=(operationImp, qVars, count, results))
+
+
                 worker.setDaemon(True)  # Setting threads as "daemon" allows main program to
                                         # Exit eventually even if these don't finish
                                         # Correctly.
                 worker.start()
+                stack.task_done()
                 print('Finishing thread ', i)
         # Now we wait until the queue has been processed
             if queueOfOperations.qsize() <= 0:
