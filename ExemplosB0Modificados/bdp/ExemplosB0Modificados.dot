@@ -1,6 +1,10 @@
 digraph {
 COMPIMP_i [ label=" COMPIMP\nCOMPIMP_i " shape= box ]
+COMP_1seq1_OPS_IMP [ label=" COMP_1seq1_OPS\nCOMP_1seq1_OPS_IMP " shape= box ]
+COMP_2seq1_OPS_IMP [ label=" COMP_2seq1_OPS\nCOMP_2seq1_OPS_IMP " shape= box ]
 COMP_3seq1_OPS_IMP [ label=" COMP_3seq1_OPS\nCOMP_3seq1_OPS_IMP " shape= box ]
 
+"COMP_1seq1_OPS_IMP" -> "COMPIMP_i" []
+"COMP_2seq1_OPS_IMP" -> "COMPIMP_i" []
 "COMP_3seq1_OPS_IMP" -> "COMPIMP_i" []
 }

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3b6e662-8aaf-4487-b0dc-c78ba6a399d2" name="Default Changelist" comment="" />
+    <list default="true" id="c3b6e662-8aaf-4487-b0dc-c78ba6a399d2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/btestbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/btestbox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverageprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/coverageprocess.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,22 +25,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3429" />
+          <entry key="Python" value="3437" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3429" />
+          <entry key="py" value="3437" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="14" />
+          <entry key="py" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="14" />
+          <entry key="Python" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -48,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exemploThread/ThreadStack.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="54" selection-start-line="54" selection-end-line="56" selection-end-column="18" />
+            <state relative-caret-position="-3">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="e#4#18#0" expanded="true" />
               </folding>
@@ -60,8 +63,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coverageprocess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="28" column="161" selection-start-line="28" selection-start-column="161" selection-end-line="28" selection-end-column="161" />
+            <state relative-caret-position="221">
+              <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/coverageprocessAntes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2720">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -72,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createBTestSet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10098">
-              <caret line="597" column="51" selection-start-line="597" selection-start-column="35" selection-end-line="597" selection-end-column="51" />
+            <state relative-caret-position="17595">
+              <caret line="1038" column="34" selection-start-line="1038" selection-start-column="34" selection-end-line="1038" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -81,26 +96,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphgen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graphic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
-              <caret line="298" selection-start-line="298" selection-end-line="298" />
+            <state relative-caret-position="12087">
+              <caret line="715" selection-start-line="715" selection-end-line="715" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/buildpaths.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1173">
+              <caret line="69" selection-start-line="69" selection-end-line="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3995">
+              <caret line="239" column="32" selection-start-line="239" selection-start-column="32" selection-end-line="239" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/btestbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3264">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
+            <state relative-caret-position="99">
+              <caret line="268" column="60" lean-forward="true" selection-start-line="268" selection-start-column="18" selection-end-line="268" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -118,6 +142,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -141,9 +172,10 @@
       <list>
         <option value="$PROJECT_DIR$/exemploThread/thread.py" />
         <option value="$PROJECT_DIR$/exemploThread/ThreadStack.py" />
-        <option value="$PROJECT_DIR$/btestbox.py" />
         <option value="$PROJECT_DIR$/createBTestSet.py" />
         <option value="$PROJECT_DIR$/coverageprocess.py" />
+        <option value="$PROJECT_DIR$/coverageprocessAntes.py" />
+        <option value="$PROJECT_DIR$/btestbox.py" />
       </list>
     </option>
   </component>
@@ -157,25 +189,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="BTestBox" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BTestBox" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BTestBox" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BTestBox" type="462c0819:PsiDirectoryNode" />
-              <item name="exemploThread" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Users/Diego/Documents/GitHub/BTestBox/exemploThread/ThreadStack.py" />
@@ -193,7 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.graphic">
+  <component name="RunManager" selected="Python.btestbox">
     <configuration name="ThreadStack" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BTestBox" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -207,6 +221,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exemploThread/ThreadStack.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="btestbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BTestBox" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/btestbox.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -261,9 +296,11 @@
       <item itemvalue="Python.ThreadStack" />
       <item itemvalue="Python.thread" />
       <item itemvalue="Python.graphic" />
+      <item itemvalue="Python.btestbox" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.btestbox" />
         <item itemvalue="Python.graphic" />
         <item itemvalue="Python.ThreadStack" />
         <item itemvalue="Python.thread" />
@@ -293,14 +330,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.17860906" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41323212" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.41239893" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39892185" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -341,7 +379,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/coverageprocess.py</url>
-          <line>29</line>
+          <line>24</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -351,7 +389,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/coverageprocess.py</url>
-          <line>207</line>
+          <line>202</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
@@ -388,22 +426,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/createBTestSet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10098">
-          <caret line="597" column="51" selection-start-line="597" selection-start-column="35" selection-end-line="597" selection-end-column="51" />
+        <state relative-caret-position="17595">
+          <caret line="1038" column="34" selection-start-line="1038" selection-start-column="34" selection-end-line="1038" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphgen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/btestbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3264">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        <state relative-caret-position="12087">
+          <caret line="715" selection-start-line="715" selection-end-line="715" />
         </state>
       </provider>
     </entry>
@@ -417,10 +448,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/graphic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3995">
+          <caret line="239" column="32" selection-start-line="239" selection-start-column="32" selection-end-line="239" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/exemploThread/ThreadStack.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="54" selection-start-line="54" selection-end-line="56" selection-end-column="18" />
+        <state relative-caret-position="-3">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
             <element signature="e#4#18#0" expanded="true" />
           </folding>
@@ -429,18 +467,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coverageprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="28" column="161" selection-start-line="28" selection-start-column="161" selection-end-line="28" selection-end-column="161" />
+        <state relative-caret-position="221">
+          <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphic.py">
+    <entry file="file://$PROJECT_DIR$/coverageprocessAntes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="298" selection-start-line="298" selection-end-line="298" />
+        <state relative-caret-position="-2720">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/btestbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="268" column="60" lean-forward="true" selection-start-line="268" selection-start-column="18" selection-end-line="268" selection-end-column="60" />
         </state>
       </provider>
     </entry>

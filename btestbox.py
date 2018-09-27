@@ -264,29 +264,13 @@ def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, t
 
 #For Testing uncomment and change the lines above:
 
-
-
-BTestBoxExecution("/Applications/AtelierB.app/AB/extensions",
-                  "/Users/valerio/Dropbox/AtualRapido/BTestbox/BTestBox/ExemplosB0Modificados"+os.sep+"bdp",
+BTestBoxExecution("D:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B full 4.2.1"+os.sep+"extensions",
+                  "D:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExemplosB0Modificados"+os.sep+"bdp",
                   "testandoThreadsComThreads",
-                  "/Users/valerio/Myprograms/ProB_1.3.6/probcli",
+                  "D:"+os.sep+"ProB"+os.sep+"probcli.exe",
                   "C",
                   "C9X",
                   "gcc",
                   "COMP_3seq1_OPS_IMP",
                   "Branch Coverage",
                   50)
-'''
-
-BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B full 4.3.1",
-                  "C:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExamplesValerio",
-                  "testandoValerioComp50",
-                  "C:"+os.sep+"ProB",
-                  "C",
-                  "C9X",
-                  "gcc",
-                  "COMP_2seq50_OPS_IMP",
-                  "Statement Coverage",
-                  50)
-
-'''

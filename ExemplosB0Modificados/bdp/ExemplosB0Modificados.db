@@ -12,6 +12,18 @@
         <component_file path="D:\Users\Diego\Documents\bprojects\ExamplesB0" name="COMPIMP_i" suffix="imp" user="diego">
             <component name="COMPIMP_i" type="implementation" />
         </component_file>
+        <component_file path="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados" name="COMP_1seq1_OPS" suffix="mch" user="diego">
+            <component name="COMP_1seq1_OPS" type="specification" />
+        </component_file>
+        <component_file path="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados" name="COMP_1seq1_OPS_IMP" suffix="imp" user="diego">
+            <component name="COMP_1seq1_OPS_IMP" type="implementation" />
+        </component_file>
+        <component_file path="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados" name="COMP_2seq1_OPS" suffix="mch" user="diego">
+            <component name="COMP_2seq1_OPS" type="specification" />
+        </component_file>
+        <component_file path="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados" name="COMP_2seq1_OPS_IMP" suffix="imp" user="diego">
+            <component name="COMP_2seq1_OPS_IMP" type="implementation" />
+        </component_file>
         <component_file path="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados" name="COMP_3seq1_OPS" suffix="mch" user="diego">
             <component name="COMP_3seq1_OPS" type="specification" />
         </component_file>

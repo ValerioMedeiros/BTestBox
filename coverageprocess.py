@@ -19,11 +19,6 @@ else:
     import queue as queue
 
 
-
-
-
-
-
 #Definindo a fila maxima
 queueOfOperations = queue.Queue(maxsize=0)
 # Number of cores capable of doing calculation or the number of calculations at the same time
