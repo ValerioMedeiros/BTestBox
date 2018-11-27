@@ -174,7 +174,7 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
 
 
 def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, paths, inputs, operationName,
-                   importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
+                   importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, times, operationNumber, maxint, graph):
     """
     Branch Coverage, function responsible of making the Branch Coverage, in BC we need to exercise every branch of the code at least once.
 
@@ -224,7 +224,7 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
                                                                                          operationName, importedMch,
                                                                                          seesMch, impName, directory,
                                                                                          atelierBDir, proBPath,
-                                                                                         copy_directory, maxint)
+                                                                                         copy_directory, maxint, graph)
         for i in range(len(outputs)):
             vL.append(outputs[i])
             vTypeL.append(outputsTypes[i])
@@ -254,7 +254,7 @@ def BranchCoverage(operationImp, operationMch, branchesPaths, branchStatus, path
 
 def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, branchesPaths, pathToCover, inputs,
                                 outputs, operationName, importedMch, seesMch, impName, directory, atelierBDir, proBPath,
-                                copy_directory, maxint):
+                                copy_directory, maxint, graph):
     """
     Make the predicate for Branch Coverage
 
@@ -287,7 +287,7 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
     arrayModification = list()
     sizeinputs = len(inputs)
     addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                        directory)
+                        directory, graph)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
@@ -1173,7 +1173,7 @@ def testClausesCombinatorial(operationImp, operationMch, node, path, clauseData,
     return tempoAvaliacao + timeFirstPart + timeSecondPart
 
 def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                         directory):
+                         directory, graph):
         for childnode in operationImp.childNodes:
             if childnode.nodeType != childnode.TEXT_NODE:
                 if (childnode.tagName == "Parameters" or childnode.tagName == "Input_Parameters"):
@@ -1194,7 +1194,7 @@ def addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs
                             variablesList.append(Id.getAttribute('value'))
                             getVariableType(operationImp.parentNode.parentNode, Id.getAttribute('typref'),
                                             variablesTypeList)
-        solveAddVariablesToInputImportsAndSees(importedMch, inputs, variablesList, variablesTypeList, directory)
+        solveAddVariablesToInputImportsAndSees(importedMch, inputs, variablesList, variablesTypeList, directory, graph)
         solveAddVariablesToInputImportsAndSees(seesMch, inputs, variablesList, variablesTypeList, directory, True)
 
 def getVariableType(principal, variableType, variablesTypeList):
@@ -1212,10 +1212,10 @@ def getVariableType(principal, variableType, variablesTypeList):
                                 ['Normal', typ.getAttribute('id'), typ.firstChild.nextSibling.cloneNode(20)])
 
 
-def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList, variablesTypeList, directory,
+def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList, variablesTypeList, directory, graph,
                                            isSees=False):
     for mch in machines:
-        importedImplementation = buildpredicate.buildpaths.graphgen.getImpWithImportedMch(mch, directory)
+        importedImplementation = graph.getImpWithImportedMch(mch, directory)
         if importedImplementation is None and isSees == False:
             print('There is a machine that don\'t have implementation, this may break the algorithm')
         else:

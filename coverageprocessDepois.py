@@ -6,45 +6,44 @@ import createBTestSet
 import testTranslation
 import os
 import time
-import threading
-from queue import Queue
-import copy
+from threading import Thread
+#from queue import Queue
 import multiprocessing
 
+
+import sys
+is_py2 = sys.version[0] == '2'
+if is_py2:
+    import Queue as queue
+else:
+    import queue as queue
+
+
+#Definindo a fila maxima
+queueOfOperations = queue.Queue(maxsize=0)
 # Number of cores capable of doing calculation or the number of calculations at the same time
 cores = 1
-
-# Definindo a fila maxima
-queueOfOperations = Queue(maxsize=0)
-
+#cores = multiprocessing.cpu_count()
 operationsList = list()
-# Number of threads running at  the same time, depends of the number of cores or operations
-num_threads = min(cores, len(operationsList))
 
 
-def DoBranchCoverageThreads(queue, dictVars, count, result):
-    while not queue.empty():
-        work = queue.get()  # fetch new work from the Queue
-        operationsmch, times, directory = dictVars["operationsmch"], dictVars["times"], \
-                                          dictVars["directory"]
-        importedMch, seesMch, refinementMch = dictVars["importedMch"], dictVars["seesMch"], \
-                                              dictVars["refinementMch"]
-        impName, atelierBDir, proBPath = dictVars["impName"], dictVars["atelierBDir"], \
-                                         dictVars["proBPath"]
-        copy_directory, maxint, operationsNames = dictVars["copy_directory"], dictVars[
-            "maxint"], dictVars["operationsNames"]
-        allInVariablesForTest, allOutVariablesForTest, variablesList = copy.deepcopy(dictVars["allInVariablesForTest"]), \
-                                                                       copy.deepcopy(dictVars["allOutVariablesForTest"]), \
-                                                                       copy.deepcopy(dictVars["variablesList"])
-        variablesTypeList, coveredPercentage, notCovered = copy.deepcopy(dictVars["variablesTypeList"]), \
-                                                           copy.deepcopy(dictVars["coveredPercentage"]), \
-                                                           copy.deepcopy(dictVars["notCovered"])
-        branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
-                              impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
-                              allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
-                              coveredPercentage, notCovered)
-        queue.task_done()
+
+def DoBranchCoverageThreads(operationImp, qVars, count, result):
+   # while not queue.empty():
+        #work = queue.get()  # fetch new work from the Queue
+    operationsmch, times, directory = qVars.queue[count-1]["operationsmch"], qVars.queue[count-1]["times"], qVars.queue[count-1]["directory"]
+    importedMch, seesMch, refinementMch = qVars.queue[count-1]["importedMch"], qVars.queue[count-1]["seesMch"], qVars.queue[count-1]["refinementMch"]
+    impName, atelierBDir, proBPath = qVars.queue[count-1]["impName"], qVars.queue[count-1]["atelierBDir"], qVars.queue[count-1]["proBPath"]
+    copy_directory, maxint, operationsNames = qVars.queue[count-1]["copy_directory"], qVars.queue[count-1]["maxint"], qVars.queue[count-1]["operationsNames"]
+    allInVariablesForTest, allOutVariablesForTest, variablesList = qVars.queue[count-1]["allInVariablesForTest"], qVars.queue[count-1]["allOutVariablesForTest"], qVars.queue[count-1]["variablesList"]
+    variablesTypeList, coveredPercentage, notCovered = qVars.queue[count-1]["variablesTypeList"], qVars.queue[count-1]["coveredPercentage"], qVars.queue[count-1]["notCovered"]
+    branchCoverageProcess(count, operationImp, operationsmch, times, directory, importedMch, seesMch, refinementMch,
+                  impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
+                  allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
+                  coveredPercentage, notCovered)
+        #queue.task_done()
     return True
+
 
 
 '''
@@ -55,85 +54,81 @@ instgen: module to generate the instructions.
 minidom: module to read the bxml file in a tree.
 '''
 
-
-# Processo dentro de DoBranchCoverage Comentado
+#Processo dentro de DoBranchCoverage Comentado
 def branchCoverageProcess(count, operationImp, operationsmch, times, directory, importedMch, seesMch, refinementMch,
                           impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
                           allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
                           coveredPercentage, notCovered):
-    operationname = operationImp.getAttribute("name")
-    print("Checking if the operation " + operationname + " is Branch Covered")
-    if operationImp.getElementsByTagName('Input_Parameters') != []:
-        inputs = getInputs(operationImp)
-    else:
-        inputs = []
-    operationMch = operationsmch.firstChild.nextSibling
-    # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
-    #    operationMch.getAttribute('name') !=
-    #    operationImp.getAttribute('name')):
-    #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-    #        0].getElementsByTagName('Operation')
-    #    for operation in localOperations:
-    #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
-    #            operationMch = operation
-    while operationMch.getAttribute("name") != operationImp.getAttribute(
-            "name"):  # Surfing to the machine operation equal the imp operation
-        operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
-    start_time = time.time()
-    times[count] = list()
-    graph = graphgen.Graph()
-    graph.mapOperations(operationImp, operationMch, directory + os.sep + 'bdp', importedMch, seesMch, refinementMch)
-    times[count].append(time.time() - start_time)
-    start_time = time.time()
-    OBpaths = buildpaths.Paths()
-    OBpaths.makepaths(graph.nodemap)  # Building paths
-    OBpaths.makebranches(OBpaths.paths)  # Building branches
-    times[count].append(time.time() - start_time)
-    for key in OBpaths.paths:  # Printing the paths (for control)
-        print(key, OBpaths.paths[key])
-    # for key in sorted(OBpaths.graphgen.nodemap.keys()):
-    #    print(key, OBpaths.graphgen.nodemap[key], OBpaths.graphgen.nodetype[key],
-    #          OBpaths.graphgen.nodedata[key], OBpaths.graphgen.nodecond[key], OBpaths.graphgen.nodeinva[key])
-    covered, allInVariables, allOutVariables, vL, \
-    vTypeL = makecoverage.BranchCoverage(operationImp, operationMch, OBpaths.branchesPath,
-                                         OBpaths.branchesStatus, OBpaths.paths, inputs, operationname,
-                                         importedMch, seesMch, impName, directory + os.sep + 'bdp', atelierBDir,
-                                         proBPath, copy_directory, times, count, maxint, graph)
-    operationsNames.append(operationname)
-    allInVariablesForTest[count] = allInVariables
-    allOutVariablesForTest[count] = allOutVariables
-    variablesList[count] = vL
-    variablesTypeList[count] = vTypeL
-    if covered:
-        print("The operation " + operationname + " is covered by Branch Coverage\n")
-        coveredPercentage.append(100)
-    else:
-        countFails = 0
-        notCovered[count] = []
-        for branch in OBpaths.branchesStatus:  # Printing where it failed to reach
-            if not OBpaths.branchesStatus[branch]:
-                countFails += 1
-                for i in range(len(branch)):
-                    if branch[i] == '-':
-                        node1 = branch[0:i:]
-                        node2 = branch[i + 1:len(branch):]
-                if instgen.selfcaller(graph.nodedata[node2]) != "TRUE = TRUE":
-                    inode2 = instgen.selfcaller(graph.nodedata[node2])
+                operationname = operationImp.getAttribute("name")
+                print("Checking if the operation " + operationname + " is Branch Covered")
+                if operationImp.getElementsByTagName('Input_Parameters') != []:
+                    inputs = getInputs(operationImp)
                 else:
-                    inode2 = "END"
-                if instgen.selfcaller(graph.nodedata[node1]) != "TRUE = TRUE":
-                    inode1 = instgen.selfcaller(graph.nodedata[node1])
+                    inputs = []
+                operationMch = operationsmch.firstChild.nextSibling
+                # if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != [] and (
+                #    operationMch.getAttribute('name') !=
+                #    operationImp.getAttribute('name')):
+                #    localOperations = operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
+                #        0].getElementsByTagName('Operation')
+                #    for operation in localOperations:
+                #        if operation.getAttribute('name') == operationImp.getAttribute('name'):
+                #            operationMch = operation
+                while operationMch.getAttribute("name") != operationImp.getAttribute(
+                        "name"):  # Surfing to the machine operation equal the imp operation
+                    operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
+                start_time = time.time()
+                times[count] = list()
+                graphgen.mapOperations(operationImp, operationMch, directory + os.sep +'bdp', importedMch, seesMch, refinementMch)
+                times[count].append(time.time() - start_time)
+                start_time = time.time()
+                buildpaths.makepaths(graphgen.nodemap)  # Building paths
+                buildpaths.makebranches(buildpaths.paths)  # Building branches
+                times[count].append(time.time() - start_time)
+                for key in buildpaths.paths:  # Printing the paths (for control)
+                    print(key, buildpaths.paths[key])
+                # for key in sorted(buildpaths.graphgen.nodemap.keys()):
+                #    print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
+                #          buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
+                covered, allInVariables, allOutVariables, vL,\
+                vTypeL = makecoverage.BranchCoverage(operationImp, operationMch, buildpaths.branchesPath,
+                                                     buildpaths.branchesStatus, buildpaths.paths, inputs, operationname,
+                                                     importedMch, seesMch, impName, directory + os.sep +'bdp', atelierBDir,
+                                                     proBPath, copy_directory, times, count, maxint)
+                operationsNames.append(operationname)
+                allInVariablesForTest[count] = allInVariables
+                allOutVariablesForTest[count] = allOutVariables
+                variablesList[count] = vL
+                variablesTypeList[count] = vTypeL
+                if covered:
+                    print("The operation " + operationname + " is covered by Branch Coverage\n")
+                    coveredPercentage.append(100)
                 else:
-                    inode1 = "END"
-                notCovered[count].append([inode1, inode2])
-                print(
-                    "There is no way to reach the instruction " + inode2 + " passing through the instruction " + inode1)
-        coveredPercentage.append(100 * (len(OBpaths.branchesStatus) - countFails) / len(OBpaths.branchesStatus))
-        print("The operation " + operationname + " is NOT covered by Branch Coverage\n")
-        allcovered = False
-    graph.clearGraphs()
-    OBpaths.clearGraphs()
-
+                    countFails = 0
+                    notCovered[count] = []
+                    for branch in buildpaths.branchesStatus:  # Printing where it failed to reach
+                        if not buildpaths.branchesStatus[branch]:
+                            countFails += 1
+                            for i in range(len(branch)):
+                                if branch[i] == '-':
+                                    node1 = branch[0:i:]
+                                    node2 = branch[i + 1:len(branch):]
+                            if instgen.selfcaller(graphgen.nodedata[node2]) != "TRUE = TRUE":
+                                inode2 = instgen.selfcaller(graphgen.nodedata[node2])
+                            else:
+                                inode2 = "END"
+                            if instgen.selfcaller(graphgen.nodedata[node1]) != "TRUE = TRUE":
+                                inode1 = instgen.selfcaller(graphgen.nodedata[node1])
+                            else:
+                                inode1 = "END"
+                            notCovered[count].append([inode1, inode2])
+                            print(
+                                "There is no way to reach the instruction " + inode2 + " passing through the instruction " + inode1)
+                    coveredPercentage.append(100 * (len(buildpaths.branchesStatus) - countFails) / len(buildpaths.branchesStatus))
+                    print("The operation " + operationname + " is NOT covered by Branch Coverage\n")
+                    allcovered = False
+                graphgen.clearGraphs()
+                buildpaths.clearGraphs()
 
 def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
                      directory, atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
@@ -181,46 +176,46 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
         listOfVariables = [{"operationsmch": 0, "times": 0}] * len(operationsList)
 
         # Creating a queue that you serve as stack and our counter
-
-        dictVars = {"operationsmch": operationsmch, "times": times,
-                   "directory": directory, "importedMch": importedMch, "seesMch": seesMch,
-                   "refinementMch": refinementMch,
-                   "impName": impName, "atelierBDir": atelierBDir, "proBPath": proBPath,
-                   "copy_directory": copy_directory,
-                   "maxint": maxint, "operationsNames": operationsNames, "allInVariablesForTest": allInVariablesForTest,
-                   "allOutVariablesForTest": allOutVariablesForTest, "variablesList": variablesList,
-                   "variablesTypeList": variablesTypeList, "coveredPercentage": coveredPercentage,
-                   "notCovered": notCovered}
+        qVars = queue.Queue()
+        qVars.put({"operationsmch":operationsmch, "times":times,
+                   "directory":directory, "importedMch":importedMch, "seesMch":seesMch, "refinementMch":refinementMch,
+                   "impName":impName, "atelierBDir":atelierBDir, "proBPath":proBPath, "copy_directory":copy_directory,
+                   "maxint":maxint, "operationsNames":operationsNames, "allInVariablesForTest":allInVariablesForTest,
+                   "allOutVariablesForTest":allOutVariablesForTest, "variablesList":variablesList,
+                   "variablesTypeList":variablesTypeList, "coveredPercentage":coveredPercentage,
+                   "notCovered":notCovered})
 
         # Creating and adding the first of the queue to the stack
-        stack = Queue(maxsize=0)
+        stack = queue.Queue(maxsize=cores)
         stack.put(queueOfOperations.get())
 
         # Starting worker threads on queue processing
         # for i in range(num_threads):
         while True:
-            # Enche o remanescente da pilha
+            # Empilha as remanescentes
             for i in range(min(cores, queueOfOperations.qsize())):
-                if stack.qsize() < cores:
-                    stack.put(queueOfOperations.get())
-                else:
-                    break
-            # Inicia as threads atualmente na pilha
-            for i in range(stack.qsize()):
+                stack.put(queueOfOperations.get())
+
+            #apagar #for i in range(stack.qsize()):
+            while not stack.empty():
                 count = + 1
                 print('Starting thread ', i)
-                worker = threading.Thread(target=DoBranchCoverageThreads, args=(stack, dictVars, count, results))
+
+                operationImp = stack.get()
+
+                worker = Thread(target=DoBranchCoverageThreads, args=(operationImp, qVars, count, results))
+
+
                 worker.setDaemon(True)  # Setting threads as "daemon" allows main program to
-                # Exit eventually even if these don't finish
-                # Correctly.
+                                        # Exit eventually even if these don't finish
+                                        # Correctly.
                 worker.start()
+                stack.task_done()
                 print('Finishing thread ', i)
-            stack.join()
+        # Now we wait until the queue has been processed
             if queueOfOperations.qsize() <= 0:
                 break
-            #while len(threading.enumerate()) > cores:
-            #    continue
-        # Now we wait until the queue has been processed
+        stack.join()
 
 
     if allcovered:
@@ -260,7 +255,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
 
 def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
                    atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
-                   compiler, maxint):
+                     compiler, maxint):
     """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
@@ -308,16 +303,14 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
                 times[count] = list()
                 start_time = time.time()
-                graphgen.mapOperations(operationImp, operationMch, directory + os.sep + 'bdp', importedMch, seesMch,
-                                       refinementMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + os.sep +'bdp', importedMch, seesMch, refinementMch)
                 times[count].append(time.time() - start_time)
                 start_time = time.time()
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
                 times[count].append(time.time() - start_time)
-                covered, allInVariables, allOutVariables, uncoveredPaths, vL, \
+                covered, allInVariables, allOutVariables, uncoveredPaths, vL,\
                 vTypeL = makecoverage.PathCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname,
-                                                   importedMch, seesMch, impName, directory + os.sep + 'bdp',
-                                                   atelierBDir,
+                                                   importedMch, seesMch, impName, directory + os.sep +'bdp', atelierBDir,
                                                    proBPath, copy_directory, times, count, maxint)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
@@ -382,7 +375,7 @@ def DoPathCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
 
 def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
                    atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
-                   compiler, maxint):
+                     compiler, maxint):
     """
     Function responsible of doing the Path Coverage, it has no inputs or return.
 
@@ -430,8 +423,7 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
                 times[count] = list()
                 start_time = time.time()
-                graphgen.mapOperations(operationImp, operationMch, directory + os.sep + 'bdp', importedMch, seesMch,
-                                       refinementMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + os.sep +'bdp', importedMch, seesMch, refinementMch)
                 times[count].append(time.time() - start_time)
                 start_time = time.time()
                 buildpaths.makepaths(graphgen.nodemap)  # Building paths
@@ -439,11 +431,10 @@ def DoCodeCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, o
                 times[count].append(time.time() - start_time)
                 for key in buildpaths.paths:
                     print(key, buildpaths.paths[key])
-                covered, allInVariables, allOutVariables, vL, \
+                covered, allInVariables, allOutVariables, vL,\
                 vTypeL = makecoverage.CodeCoverage(operationImp, operationMch, buildpaths.paths, inputs, operationname,
                                                    buildpaths.nodeStatus, importedMch, seesMch, impName,
-                                                   directory + os.sep + 'bdp', atelierBDir, proBPath, copy_directory,
-                                                   times, count, maxint)
+                                                   directory + os.sep +'bdp', atelierBDir, proBPath, copy_directory, times, count, maxint)
                 operationsNames.append(operationname)
                 allInVariablesForTest[count] = allInVariables
                 allOutVariablesForTest[count] = allOutVariables
@@ -645,8 +636,7 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
                 times[count] = list()
                 start_time = time.time()
-                graphgen.mapOperations(operationImp, operationMch, directory + os.sep + 'bdp', importedMch, seesMch,
-                                       refinementMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + os.sep +'bdp', importedMch, seesMch, refinementMch)
                 times[count].append(time.time() - start_time)
                 start_time = time.time()
                 buildpaths.makepaths(graphgen.nodemap)
@@ -655,12 +645,11 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                           buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key],
                           buildpaths.graphgen.nodeinva[key])
-                covered, allInVariables, allOutVariables, \
+                covered, allInVariables, allOutVariables,\
                 uncoveredPredicates, coveredClauses, vL, \
                 vTypeL = makecoverage.ClauseCoverage(operationImp, operationMch, inputs, buildpaths.paths,
                                                      operationname, importedMch, seesMch, impName,
-                                                     directory + os.sep + 'bdp', atelierBDir, proBPath, copy_directory,
-                                                     times, count, maxint)
+                                                     directory + os.sep +'bdp', atelierBDir, proBPath, copy_directory, times, count, maxint)
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
                 operationsNames.append(operationname)
@@ -719,10 +708,9 @@ def DoClauseCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     return allInVariablesForTest, allOutVariablesForTest, operationsNames, notCovered, coveredPercentage, times
 
 
-def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName,
-                            directory,
-                            atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
-                            compiler, maxint):
+def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch, operationsimp, impName, directory,
+                     atelierBDir, copy_directory, proBPath, refinementMch, translator, translatorProfile,
+                     compiler, maxint):
     """
     Function responsible of doing the Clause Coverage, it has no inputs or return.
 
@@ -770,8 +758,7 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
                     operationMch = operationMch.nextSibling.nextSibling  # Jumping a TEXT_NODE
                 times[count] = list()
                 start_time = time.time()
-                graphgen.mapOperations(operationImp, operationMch, directory + os.sep + 'bdp', importedMch, seesMch,
-                                       refinementMch)
+                graphgen.mapOperations(operationImp, operationMch, directory + os.sep +'bdp', importedMch, seesMch, refinementMch)
                 times[count].append(time.time() - start_time)
                 start_time = time.time()
                 buildpaths.makepaths(graphgen.nodemap)
@@ -780,16 +767,11 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
                     print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key],
                           buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key],
                           buildpaths.graphgen.nodeinva[key])
-                covered, allInVariables, allOutVariables, \
+                covered, allInVariables, allOutVariables,\
                 uncoveredPredicates, coveredClauses, vL, \
-                vTypeL, clauseNumber, clauseData = makecoverage.CombinatorialCoverage(operationImp, operationMch,
-                                                                                      inputs, buildpaths.paths,
-                                                                                      operationname, importedMch,
-                                                                                      seesMch, impName,
-                                                                                      directory + os.sep + 'bdp',
-                                                                                      atelierBDir, proBPath,
-                                                                                      copy_directory, times, count,
-                                                                                      maxint)
+                vTypeL, clauseNumber, clauseData = makecoverage.CombinatorialCoverage(operationImp, operationMch, inputs, buildpaths.paths,
+                                                     operationname, importedMch, seesMch, impName,
+                                                     directory + os.sep +'bdp', atelierBDir, proBPath, copy_directory, times, count, maxint)
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
                 operationsNames.append(operationname)
@@ -812,9 +794,9 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
                     print("The operation: " + operationname + " is NOT covered by Combinatorial Coverage\n")
                     allcovered = False
                     allClausesList = list()
-                    for i in range(int(clauseNumber / 2)):
-                        allClausesList.append(i + 1)
-                        allClausesList.append(-i - 1)
+                    for i in range(int(clauseNumber/2)):
+                        allClausesList.append(i+1)
+                        allClausesList.append(-i-1)
                     for eachClause in allClausesList:
                         if eachClause not in coveredClauses:
                             text = ""
@@ -822,8 +804,7 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
                             if eachClause < 0:
                                 text += "not("
                                 endtext += ")"
-                            notCovered[count].append(
-                                text + instgen.selfcaller(clauseData[abs(eachClause) - 1]) + endtext)
+                            notCovered[count].append(text + instgen.selfcaller(clauseData[abs(eachClause)-1]) + endtext)
                     coveredPercentage.append(100 * (clauseNumber - coveredClausesNumber) / clauseNumber)
                 graphgen.clearGraphs()
                 buildpaths.clearGraphs()
@@ -834,8 +815,7 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
         times[0] = list()
         start_time = time.time()
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "combinatorial",
-                                  variablesList,
+                                  includedMch, operationsNames, directory, copy_directory, "combinatorial", variablesList,
                                   variablesTypeList)
         print('Testing the Translation')
         start_time = time.time()
@@ -849,8 +829,7 @@ def DoCombinatorialCoverage(imp, mch, importedMch, seesMch, includedMch, operati
         times[0] = list()
         start_time = time.time()
         createBTestSet.createTest(allInVariablesForTest, allOutVariablesForTest, imp, mch, importedMch, seesMch,
-                                  includedMch, operationsNames, directory, copy_directory, "combinatorial",
-                                  variablesList,
+                                  includedMch, operationsNames, directory, copy_directory, "combinatorial", variablesList,
                                   variablesTypeList)
         times[0].append(time.time() - start_time)
         print('Testing the Translation')
@@ -867,7 +846,7 @@ def getInputs(operationImp):  # NOW THAT I PASS THE OPERATIONIMP TO THE OTHER PR
     Function responsible for getting the Inputs for an operation
     Input:
     operationImp : The operation node in the implementation tree
-
+    
     Output:
     entries: A list with all the inputs
     '''
@@ -899,12 +878,10 @@ def getInputs(operationImp):  # NOW THAT I PASS THE OPERATIONIMP TO THE OTHER PR
                         entries.append(inputs[commas[i] + 1:commas[i + 1]:])
             return entries
 
-
 def checkIfItIsLocal(operationImp):
-    # Function to check is a operation belongs to local_operations clause
+    #Function to check is a operation belongs to local_operations clause
     if operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations') != []:
-        for localoperation in operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[
-            0].getElementsByTagName('Operation'):
+        for localoperation in operationImp.parentNode.parentNode.getElementsByTagName('Local_Operations')[0].getElementsByTagName('Operation'):
             if localoperation.getAttribute('name') == operationImp.getAttribute('name'):
                 return True
     return False
