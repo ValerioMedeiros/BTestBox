@@ -264,7 +264,7 @@ def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, t
 
 #For Testing uncomment and change the lines above:
 
-BTestBoxExecution("D:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B full 4.2.1"+os.sep+"extensions",
+BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B free 4.2.1"+os.sep+"extensions",
                   "D:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExemplosB0Modificados"+os.sep+"bdp",
                   "testandoThreadsComThreads",
                   "D:"+os.sep+"ProB"+os.sep+"probcli.exe",

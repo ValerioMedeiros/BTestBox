@@ -22,7 +22,7 @@ operationsList = list()
 num_threads = min(cores, len(operationsList))
 
 
-def DoBranchCoverageThreads(queue, dictVars, count, result):
+def DoBranchCoverageThreads(queue, dictVars, result):
     while not queue.empty():
         work = queue.get()  # fetch new work from the Queue
         operationsmch, times, directory = dictVars["operationsmch"], dictVars["times"], \
@@ -39,10 +39,13 @@ def DoBranchCoverageThreads(queue, dictVars, count, result):
         variablesTypeList, coveredPercentage, notCovered = (dictVars["variablesTypeList"]), \
                                                            (dictVars["coveredPercentage"]), \
                                                            (dictVars["notCovered"])
+        count = dictVars["count"]
+        count += 1
         branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
                               impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
                               allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
                               coveredPercentage, notCovered)
+        dictVars["count"] = count
         queue.task_done()
     return True
 
@@ -190,7 +193,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                    "maxint": maxint, "operationsNames": operationsNames, "allInVariablesForTest": allInVariablesForTest,
                    "allOutVariablesForTest": allOutVariablesForTest, "variablesList": variablesList,
                    "variablesTypeList": variablesTypeList, "coveredPercentage": coveredPercentage,
-                   "notCovered": notCovered}
+                   "notCovered": notCovered, "count" : 0}
 
         # Creating and adding the first of the queue to the stack
         stack = Queue(maxsize=0)
@@ -207,9 +210,9 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
                     break
             # Inicia as threads atualmente na pilha
             for i in range(stack.qsize()):
-                count = + 1
+
                 print('Starting thread ', i)
-                worker = threading.Thread(target=DoBranchCoverageThreads, args=(stack, dictVars, count, results))
+                worker = threading.Thread(target=DoBranchCoverageThreads, args=(stack, dictVars, results))
                 worker.setDaemon(True)  # Setting threads as "daemon" allows main program to
                 # Exit eventually even if these don't finish
                 # Correctly.
