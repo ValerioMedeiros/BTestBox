@@ -534,7 +534,7 @@ class Graph:
             if childnode.nodeType != childnode.TEXT_NODE:
                 if childnode.tagName == 'Body':
                     body = childnode.cloneNode(10)
-                self.makeMap(body, opmch)
+        self.makeMap(body, opmch)
         bodyNode = str(len(self.nodemap) - 1)  # To connect at the END*
         # Connecting the while nodes
         self.nodemap[conditionNode].append(bodyNode)

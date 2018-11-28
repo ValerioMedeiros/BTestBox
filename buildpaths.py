@@ -86,11 +86,11 @@ class Paths:
         Input:
         graph: The graph of the operation (nodemap)
         '''
-        pt = self.find_all_paths(graph, str(len(graph)), '1') #Find all paths from a graph from a point to other
+        pt = self.find_all_paths(graph.nodemap, str(len(graph.nodemap)), '1') #Find all paths from a graph from a point to other
         for p in range(len(pt)):
             self.paths[p+1] = pt[p]
             self.paths[p+1] = list(reversed(self.paths[p+1]))
-            self.identifyWhileEnd(self.paths[p+1])
+            self.identifyWhileEnd(self.paths[p+1], graph)
 
     def makePartialPaths(self, graph, start):
         '''
@@ -149,7 +149,7 @@ class Paths:
         for node in graph:
             self.nodeStatus[node] = False
 
-    def identifyWhileEnd(self, path):
+    def identifyWhileEnd(self, path, graph):
         '''
         Function responsible to identify the end of a while and add the nodeinva dict of this node to ENDWHILE
 
@@ -161,8 +161,8 @@ class Paths:
             if path[i] not in countlist:
                 countlist.append(path[i])
             else:
-                if "ENDWHILE" not in graphgen.nodecond[str(path[i-1])]:
-                    graphgen.nodecond[str(path[i-1])] += " ENDWHILE"
+                if "ENDWHILE" not in graph.nodecond[str(path[i-1])]:
+                    graph.nodecond[str(path[i-1])] += " ENDWHILE"
 
 
     def clearGraphs(self):

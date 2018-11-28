@@ -22,7 +22,7 @@ numberOfEnumeratedSetComponents = 0
 
 def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames, docXML, posMut,
                      operationImp, importedMch, operationName, impName, variablesList, variablesTypesList,
-                     changedVariablesWhile, directory, atelierBDir, arrayModification, changedVariablesOC=[]):
+                     changedVariablesWhile, directory, atelierBDir, arrayModification, graph, changedVariablesOC=[]):
     """
     Make the predicate in a XML
 
@@ -43,7 +43,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
     predicateXML: The predicate in the form of XML tree after evaluating the node(s)
     posMut: The variables that are quantified inside a while
     """
-    if " ENDWHILE" in buildpaths.graphgen.nodecond[node]:
+    if " ENDWHILE" in graph.nodecond[node]:
         thereWasQuantified = False
         if predicateXML.getElementsByTagName('Quantified_Pred') != []:
             thereWasQuantified = True
@@ -53,24 +53,24 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
                                              way, path, inputs, startWhile, condWhile, posMut, operationImp,
                                              docXML.createElement('Body'), impName,
                                              operationName, outputs, fixedNames, changedVariablesOC, importedMch,
-                                             directory, atelierBDir)
+                                             directory, atelierBDir, graph)
         for mut in newPosMut:
             if mut not in posMut:
                 posMut.append(mut)
         if thereWasQuantified:
             changeVariablesNames(predicateXML, inputs, outputs, fixedNames, changedVariablesWhile, posMut)
-    elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile"
+    elif graph.nodetype[node] == "Condition" or (graph.nodetype[node] == "ConditionWhile"
                                                                and int(way[len(way) - 1]) < int(way[len(way) - 2])):
-        predicateXML = buildCondition(node, predicateXML, way, path, docXML)
-    elif buildpaths.graphgen.nodetype[node] == "ConditionWhile":
+        predicateXML = buildCondition(node, predicateXML, way, path, docXML, graph)
+    elif graph.nodetype[node] == "ConditionWhile":
         if int(path[len(way)]) > int(node) + 1:
-            predicateXML = buildConditionWhileNotWhile(node, predicateXML, docXML)
+            predicateXML = buildConditionWhileNotWhile(node, predicateXML, docXML, graph)
         else:
-            predicateXML = addConditionToPredicate(buildpaths.graphgen.nodedata[node].cloneNode(10), predicateXML, docXML)
-            predicateXML = addConditionToPredicate(buildpaths.graphgen.nodeinva[node].cloneNode(10), predicateXML, docXML)
-    elif buildpaths.graphgen.nodetype[node] == "Instruction":
-        predicateXML = buildInstruction(node, predicateXML, posMut, variablesList, variablesTypesList, arrayModification)
-    elif buildpaths.graphgen.nodetype[node] == "Call":
+            predicateXML = addConditionToPredicate(graph.nodedata[node].cloneNode(10), predicateXML, docXML)
+            predicateXML = addConditionToPredicate(graph.nodeinva[node].cloneNode(10), predicateXML, docXML)
+    elif graph.nodetype[node] == "Instruction":
+        predicateXML = buildInstruction(node, predicateXML, posMut, variablesList, variablesTypesList, arrayModification, graph)
+    elif graph.nodetype[node] == "Call":
         if predicateXML.hasChildNodes():
             predicateXML, changedVariablesOC = solveroc.buildOperationCall(node, predicateXML.cloneNode(10), docXML,
                                                                            operationImp,
@@ -82,7 +82,7 @@ def makePredicateXML(node, predicateXML, way, path, inputs, outputs, fixedNames,
 
 def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs, startWhile,
                condWhile, posMut, operationImp, whilePredicateXML, impName,
-               operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir):
+               operationName, outputs, fixedNames, changedVariablesOC, importedMch, directory, atelierBDir, graph):
     """
     Make the predicate in a XML
 
@@ -107,7 +107,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
     predicateXML: The predicate in the form of XML tree after evaluating the node(s)
     posMut: The variables that are quantified inside a while
     """
-    if " ENDWHILE" in buildpaths.graphgen.nodecond[
+    if " ENDWHILE" in graph.nodecond[
         node] and node != condWhile and node != startWhile:  # Found a while inside a while
         # Building the inside
         startWhileIN = node
@@ -117,7 +117,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
                                                 startWhileIN, condWhileIN, [], operationImp,
                                                 docXML.createElement('Body'), impName,
                                                 operationName, outputs, fixedNames, changedVariablesOC, importedMch,
-                                                directory, atelierBDir)
+                                                directory, atelierBDir, graph)
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
@@ -128,34 +128,34 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
                                                 startWhile, condWhile, posMut, operationImp,
                                                 whilePredicateXML.cloneNode(20), impName,
                                                 operationName, outputs, fixedNames, changedVariablesOC, importedMch,
-                                                directory, atelierBDir)
+                                                directory, atelierBDir, graph)
         for mutable in newposMut:
             if mutable not in posMut:
                 posMut.append(mutable)
         #del way[len(way) - 1]
         return newPredicateXML, posMut
-    elif buildpaths.graphgen.nodetype[
+    elif graph.nodetype[
         node] == "ConditionWhile" and node == condWhile:  # Stop the while and return predicate
         # InsideWhile
-        quantPredVariables, posMut = getMutables(inputs, outputs, condWhile, posMut, docXML)
+        quantPredVariables, posMut = getMutables(inputs, outputs, condWhile, posMut, docXML, graph)
         quantPredNode = docXML.createElement('Quantified_Pred')
         quantPredNode.setAttribute('type', '#')
         if whilePredicateXML.hasChildNodes():
             if whilePredicateXML.firstChild.nextSibling.tagName == "Nary_Pred":
-                whilePredicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodedata[node].cloneNode(10))
+                whilePredicateXML.firstChild.nextSibling.appendChild(graph.nodedata[node].cloneNode(10))
                 whilePredicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
-                whilePredicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodeinva[node].cloneNode(10))
+                whilePredicateXML.firstChild.nextSibling.appendChild(graph.nodeinva[node].cloneNode(10))
                 whilePredicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
             else:
                 naryPredNode = nodescreator.createNaryPred(whilePredicateXML.firstChild.nextSibling,
-                                                           buildpaths.graphgen.nodedata[node].cloneNode(10), '&',
+                                                           graph.nodedata[node].cloneNode(10), '&',
                                                            docXML)
                 whilePredicateXML.insertBefore(naryPredNode, whilePredicateXML.firstChild.nextSibling)
-                whilePredicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodeinva[node].cloneNode(10))
+                whilePredicateXML.firstChild.nextSibling.appendChild(graph.nodeinva[node].cloneNode(10))
                 whilePredicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
         else:
-            naryPredNode = nodescreator.createNaryPred(buildpaths.graphgen.nodedata[node].cloneNode(10),
-                                                       buildpaths.graphgen.nodeinva[node].cloneNode(10), '&', docXML)
+            naryPredNode = nodescreator.createNaryPred(graph.nodedata[node].cloneNode(10),
+                                                       graph.nodeinva[node].cloneNode(10), '&', docXML)
             whilePredicateXML.appendChild(docXML.createTextNode('\n'))
             whilePredicateXML.appendChild(naryPredNode)
             whilePredicateXML.appendChild(docXML.createTextNode('\n'))
@@ -173,11 +173,11 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         quantPredNodeFG.setAttribute('type', '#')
         predicateXML = clonePredicateXML
         if predicateXML.firstChild.nextSibling.tagName == "Nary_Pred":
-            predicateXML.firstChild.nextSibling.appendChild(buildpaths.graphgen.nodeinva[node].cloneNode(10))
+            predicateXML.firstChild.nextSibling.appendChild(graph.nodeinva[node].cloneNode(10))
             predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode('\n'))
         else:
             naryPredNode = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling,
-                                                       buildpaths.graphgen.nodeinva[node].cloneNode(10), '&', docXML)
+                                                       graph.nodeinva[node].cloneNode(10), '&', docXML)
             predicateXML.insertBefore(naryPredNode, predicateXML.firstChild.nextSibling)
         quantPredNodeFG.appendChild(docXML.createTextNode('\n'))
         quantPredNodeFG.appendChild(docXML.createElement('Attr'))
@@ -194,19 +194,19 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
         newPredicateXML.appendChild(naryPredNode)
         newPredicateXML.appendChild(docXML.createTextNode('\n'))
         return newPredicateXML, posMut
-    elif buildpaths.graphgen.nodetype[node] == "Condition" or (buildpaths.graphgen.nodetype[node] == "ConditionWhile"
+    elif graph.nodetype[node] == "Condition" or (graph.nodetype[node] == "ConditionWhile"
                                                                and int(way[len(way) - 1]) < int(way[len(way) - 2])):
-        whilePredicateXML = buildCondition(node, whilePredicateXML, way, path, docXML)
-    elif buildpaths.graphgen.nodetype[
+        whilePredicateXML = buildCondition(node, whilePredicateXML, way, path, docXML, graph)
+    elif graph.nodetype[
         node] == "ConditionWhile":  # Every remaining ConditionWhile means that we have While that did not enter
         # In this case, the condition while will behaviour like a condition, but we need to add the invariant
-        whilePredicateXML = buildConditionWhileNotWhile(node, whilePredicateXML, docXML)
-    elif buildpaths.graphgen.nodetype[node] == "Instruction":
+        whilePredicateXML = buildConditionWhileNotWhile(node, whilePredicateXML, docXML, graph)
+    elif graph.nodetype[node] == "Instruction":
         # Here we shall get the possible mutables *important step since we need to know who put inside the exists*
         # posMut -> possible mutables
-        if buildpaths.graphgen.nodeinva[node] not in posMut:
-            posMut.append(buildpaths.graphgen.nodeinva[node])
-    elif buildpaths.graphgen.nodetype[node] == "Call":
+        if graph.nodeinva[node] not in posMut:
+            posMut.append(graph.nodeinva[node])
+    elif graph.nodetype[node] == "Call":
         if whilePredicateXML.hasChildNodes():
             whilePredicateXML, changedVariablesOC = solveroc.buildOperationCallInsideWhile(node,
                                                                                            10), docXML,
@@ -224,7 +224,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
                                                                                       impName, [], inputs, fixedNames, outputs,
                                                                                       changedVariablesOC, directory,
                                                                                       atelierBDir)
-        mystr = buildpaths.graphgen.nodeinva[node]
+        mystr = graph.nodeinva[node]
         wordList = re.sub("[^\w]", " ", mystr).split()
         for word in wordList:
             if word not in posMut:
@@ -234,7 +234,7 @@ def buildWhile(node, predicateXML, clonePredicateXML, docXML, way, path, inputs,
     predicateXML, posMut = buildWhile(node, predicateXML, predicateXML.cloneNode(10), docXML, way, path, inputs,
                                       startWhile, condWhile, posMut, operationImp, whilePredicateXML, impName,
                                       operationName, outputs, fixedNames, changedVariablesOC, importedMch,
-                                      directory, atelierBDir)
+                                      directory, atelierBDir, graph)
     return predicateXML, posMut
 
 
@@ -346,7 +346,7 @@ def addConditionToPredicate(instNode, predicateXML, docXML):
     return predicateXML
 
 
-def buildConditionWhileNotWhile(node, predicateXML, docXML):
+def buildConditionWhileNotWhile(node, predicateXML, docXML, graph):
     """
     Function to build the Condition While when is not entering the While (The guard is false in the first try)
 
@@ -358,8 +358,8 @@ def buildConditionWhileNotWhile(node, predicateXML, docXML):
     Return:
     predicateXML: The predicate in the form of a XML tree
     """
-    unaryNode = nodescreator.createUnaryNode(buildpaths.graphgen.nodedata[node].cloneNode(10), docXML)
-    instNode = nodescreator.createNaryPred(unaryNode, buildpaths.graphgen.nodeinva[node].cloneNode(10), '&', docXML)
+    unaryNode = nodescreator.createUnaryNode(graph.nodedata[node].cloneNode(10), docXML)
+    instNode = nodescreator.createNaryPred(unaryNode, graph.nodeinva[node].cloneNode(10), '&', docXML)
     if predicateXML.hasChildNodes():
         if predicateXML.firstChild.nextSibling.tagName != 'Nary_Pred':
             naryPredNode = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling, instNode, '&', docXML)
@@ -374,7 +374,7 @@ def buildConditionWhileNotWhile(node, predicateXML, docXML):
     return predicateXML
 
 
-def buildCondition(node, predicateXML, way, path, docXML):
+def buildCondition(node, predicateXML, way, path, docXML, graph):
     """
     Function to build the Condition of a If or a While
 
@@ -388,11 +388,11 @@ def buildCondition(node, predicateXML, way, path, docXML):
     Return:
     predicateXML: The predicate in the form of a XML tree
     """
-    instNode = buildpaths.graphgen.nodedata[node].cloneNode(10)
+    instNode = graph.nodedata[node].cloneNode(10)
     if predicateXML.hasChildNodes():
         if predicateXML.firstChild.nextSibling.tagName != "Nary_Pred":
-            if buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
-                            buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
+            if graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
+                            graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
                 instNode = nodescreator.createUnaryNode(instNode, docXML)
                 naryPredNode = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling, instNode, '&', docXML)
                 predicateXML.insertBefore(naryPredNode, predicateXML.firstChild.nextSibling)
@@ -400,14 +400,14 @@ def buildCondition(node, predicateXML, way, path, docXML):
                 naryPredNode = nodescreator.createNaryPred(predicateXML.firstChild.nextSibling, instNode, '&', docXML)
                 predicateXML.insertBefore(naryPredNode, predicateXML.firstChild.nextSibling)
         else:
-            if buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
-                            buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
+            if graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
+                            graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
                 instNode = nodescreator.createUnaryNode(instNode, docXML)
             predicateXML.firstChild.nextSibling.appendChild(instNode)
             predicateXML.firstChild.nextSibling.appendChild(docXML.createTextNode("\n"))
     else:
-        if buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
-                        buildpaths.graphgen.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
+        if graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "False" or \
+                        graph.nodecond[path[len(way)]].replace(" ENDWHILE", "") == "True and False":
             instNode = nodescreator.createUnaryNode(instNode, docXML)
         predicateXML.appendChild(docXML.createTextNode("\n"))
         predicateXML.appendChild(instNode)
@@ -415,7 +415,7 @@ def buildCondition(node, predicateXML, way, path, docXML):
     return predicateXML
 
 
-def buildInstruction(node, predicateXML, posMut, variablesList, variablesTypeList, arrayModification):
+def buildInstruction(node, predicateXML, posMut, variablesList, variablesTypeList, arrayModification, graph):
     """
     Function to change the predicate with the instruction
 
@@ -430,17 +430,17 @@ def buildInstruction(node, predicateXML, posMut, variablesList, variablesTypeLis
     predicateXML: The predicate in the form of a XML tree
     """
     if predicateXML.hasChildNodes():
-        variablesId = buildpaths.graphgen.nodedata[node].getElementsByTagName("Variables")[0]
+        variablesId = graph.nodedata[node].getElementsByTagName("Variables")[0]
         variablesId = variablesId.getElementsByTagName("Id")[0].getAttribute("value")
         if variablesId in variablesList:
             for i in range(len(variablesList)):
                 if variablesList[i] == variablesId:
                     arrayIndex = []
-                    allId = buildpaths.graphgen.nodedata[node].getElementsByTagName("Variables")[0].getElementsByTagName('Id')
+                    allId = graph.nodedata[node].getElementsByTagName("Variables")[0].getElementsByTagName('Id')
                     for i in range(len(allId)):
                         # if i > 0:
                         arrayIndex.append(allId[i].cloneNode(20))
-        values = buildpaths.graphgen.nodedata[node].getElementsByTagName("Values")[0]
+        values = graph.nodedata[node].getElementsByTagName("Values")[0]
         values = values.firstChild.nextSibling
         allId = predicateXML.getElementsByTagName("Id")
         for Id in allId:
@@ -496,7 +496,7 @@ def getArrayIndexNumber(arrayIndex, predicateXML):
     return indexChanges
 
 
-def getMutables(inputs, outputs, condWhile, posMut, docXML):
+def getMutables(inputs, outputs, condWhile, posMut, docXML, graph):
     """
     Function to get each variable that changes inside a while
 
@@ -514,7 +514,7 @@ def getMutables(inputs, outputs, condWhile, posMut, docXML):
     # Get the whilemutables
     # The whilemutables are every variable that changes in the while scope
     mutables = list()
-    mystr = instgen.make_inst(buildpaths.graphgen.nodeinva[condWhile])
+    mystr = instgen.make_inst(graph.nodeinva[condWhile])
     wordList = re.sub("[^\w]", " ", mystr).split()
     wordList = [x for x in wordList if not (x.isdigit() or x[0] == '-' and x[1:].isdigit())]
     for word in wordList:
@@ -540,7 +540,7 @@ def getMutables(inputs, outputs, condWhile, posMut, docXML):
 
 def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, operationMch,
               importedMch, seesMch, operationName, impName, predicateInputs, variablesList, variablesTypeList,
-              directory, atelierBDir, proBPath, copy_directory, maxint):
+              directory, atelierBDir, proBPath, copy_directory, maxint, graph):
     """
     Get the output for a given input and operation
     """
@@ -548,10 +548,10 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, oper
     docXML = pred.createDocument(None, "Condition", None)
     predicateXML = docXML.documentElement
     predicateXML.appendChild(docXML.createTextNode('\n'))
-    predicateXML.appendChild(buildpaths.graphgen.nodedata[str(len(buildpaths.graphgen.nodemap))].cloneNode(10))
+    predicateXML.appendChild(graph.nodedata[str(len(graph.nodemap))].cloneNode(10))
     predicateXML.appendChild(docXML.createTextNode('\n'))
     addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                            directory)  # ADICIONA VARIAVEIS PARA SEREM PRINTADAS E CHECADAS
+                            directory, graph)  # ADICIONA VARIAVEIS PARA SEREM PRINTADAS E CHECADAS
     sizeList, allArrayTypes = addVariablesToThePredicate(variablesList, predicateXML, docXML, variablesTypeList, predicateInputs)
     way = list()
     posMut = list()
@@ -572,7 +572,7 @@ def getOutput(path, pathToCover, inputs, outputs, fixedNames, operationImp, oper
                                                                        operationImp, importedMch, operationName,
                                                                        impName, variablesList, variablesTypeList,
                                                                        changedVariablesWhile, directory, atelierBDir,
-                                                                       arrayModification)
+                                                                       arrayModification, graph)
         del way[len(way) - 1]
     outputList = []
     auxList = list()
@@ -1012,7 +1012,7 @@ def setsSwapNames(principal, predicateXML):
                                     numberOfEnumeratedSetComponents += 1
 
 def addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                            directory):  # ADICIONANDO VARIAVEIS PARA SEREM PRINTADAS (COPIADA DE UMA FUNCAO DE MAKE COVERAGE E MODIFICADO)
+                            directory, graph):  # ADICIONANDO VARIAVEIS PARA SEREM PRINTADAS (COPIADA DE UMA FUNCAO DE MAKE COVERAGE E MODIFICADO)
     for childnode in operationImp.parentNode.parentNode.childNodes:
         if childnode.nodeType != childnode.TEXT_NODE:
             if (childnode.tagName == "Parameters" or childnode.tagName == "Variables" or
@@ -1036,9 +1036,9 @@ def addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, in
                                         Id.getAttribute('typref'),
                                         variablesTypeList)
     solveAddVariablesToInputImportsAndSees(importedMch, inputs, variablesList,
-                                           variablesTypeList, directory)
+                                           variablesTypeList, directory, graph)
     solveAddVariablesToInputImportsAndSees(seesMch, inputs, variablesList,
-                                           variablesTypeList, directory, True)
+                                           variablesTypeList, directory, graph, True)
 
 def getVariableType(principal, variableType, variablesTypeList):
     for childnode in principal.childNodes:  # FUNCAO COPIADA DE MAKE COVERAGE
@@ -1057,10 +1057,10 @@ def getVariableType(principal, variableType, variablesTypeList):
                                  typ.firstChild.nextSibling.cloneNode(20)])
 
 def solveAddVariablesToInputImportsAndSees(machines, inputs, variablesList,
-                                           variablesTypeList, directory,
+                                           variablesTypeList, directory, graph,
                                            isSees=False):  # FUNCAO COPIADA DE MAKE COVERAGE
     for mch in machines:
-        importedImplementation = buildpaths.graphgen.getImpWithImportedMch(mch,
+        importedImplementation = graph.getImpWithImportedMch(mch,
                                                                            directory)
         if importedImplementation is None and isSees == False:
             print(
@@ -1136,12 +1136,12 @@ for operationImp in operationsimp.childNodes:
             operationMch = operationsmch.firstChild.nextSibling #Jumping a TEXT_NODE
             while operationMch.getAttribute("name") != operationImp.getAttribute("name"): #Surfing to the machine operation equal the imp operation
                 operationMch = operationMch.nextSibling.nextSibling #Jumping a TEXT_NODE
-            buildpaths.graphgen.mapOperations(operationImp, operationMch)
-            buildpaths.makepaths(buildpaths.graphgen.nodemap)
+            graph.mapOperations(operationImp, operationMch)
+            buildpaths.makepaths(graph.nodemap)
             buildpaths.makebranches(buildpaths.paths)
             inputs = getInputs(operationImp)
-for key in sorted(buildpaths.graphgen.nodemap.keys()):
-    print(key, buildpaths.graphgen.nodemap[key], buildpaths.graphgen.nodetype[key], buildpaths.graphgen.nodedata[key], buildpaths.graphgen.nodecond[key], buildpaths.graphgen.nodeinva[key])
+for key in sorted(graph.nodemap.keys()):
+    print(key, graph.nodemap[key], graph.nodetype[key], graph.nodedata[key], graph.nodecond[key], graph.nodeinva[key])
 for key in sorted(buildpaths.paths.keys()):
     print(key, buildpaths.paths[key])
     

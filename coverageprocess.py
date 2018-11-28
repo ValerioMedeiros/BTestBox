@@ -33,12 +33,12 @@ def DoBranchCoverageThreads(queue, dictVars, count, result):
                                          dictVars["proBPath"]
         copy_directory, maxint, operationsNames = dictVars["copy_directory"], dictVars[
             "maxint"], dictVars["operationsNames"]
-        allInVariablesForTest, allOutVariablesForTest, variablesList = copy.deepcopy(dictVars["allInVariablesForTest"]), \
-                                                                       copy.deepcopy(dictVars["allOutVariablesForTest"]), \
-                                                                       copy.deepcopy(dictVars["variablesList"])
-        variablesTypeList, coveredPercentage, notCovered = copy.deepcopy(dictVars["variablesTypeList"]), \
-                                                           copy.deepcopy(dictVars["coveredPercentage"]), \
-                                                           copy.deepcopy(dictVars["notCovered"])
+        allInVariablesForTest, allOutVariablesForTest, variablesList = (dictVars["allInVariablesForTest"]), \
+                                                                       (dictVars["allOutVariablesForTest"]), \
+                                                                       (dictVars["variablesList"])
+        variablesTypeList, coveredPercentage, notCovered = (dictVars["variablesTypeList"]), \
+                                                           (dictVars["coveredPercentage"]), \
+                                                           (dictVars["notCovered"])
         branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
                               impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
                               allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
@@ -86,7 +86,7 @@ def branchCoverageProcess(count, operationImp, operationsmch, times, directory, 
     times[count].append(time.time() - start_time)
     start_time = time.time()
     OBpaths = buildpaths.Paths()
-    OBpaths.makepaths(graph.nodemap)  # Building paths
+    OBpaths.makepaths(graph)  # Building paths
     OBpaths.makebranches(OBpaths.paths)  # Building branches
     times[count].append(time.time() - start_time)
     for key in OBpaths.paths:  # Printing the paths (for control)

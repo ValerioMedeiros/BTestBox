@@ -139,7 +139,7 @@ def makePredicateCodeCoverage(operationImp, operationMch, path, pathToCover, inp
         del way[len(way) - 1]
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList,
                                            variablesTypeList,
-                                           directory)
+                                           directory, graph)
     ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Statement Coverage - trying to get inputs for path " + str(
                                                                           pathToCover) + "of the operation " + operationName, inputs+variablesList, proBPath,
@@ -300,10 +300,10 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
                                                                                       impName, variablesList,
                                                                                       variablesTypeList,
                                                                                       changedVariablesWhile, directory,
-                                                                                      atelierBDir, arrayModification)
+                                                                                      atelierBDir, arrayModification, graph)
         del way[len(way) - 1]
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                            directory)
+                            directory, graph)
     ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Branch Coverage - trying to get inputs for "
                                                                       "guide " + str(
@@ -318,7 +318,7 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
                                                        operationMch, importedMch, seesMch,
                                                        operationName, impName, variables, variablesList,
                                                        variablesTypeList, directory, atelierBDir, proBPath,
-                                                       copy_directory, maxint)
+                                                       copy_directory, maxint, graph)
         if ExistValues:
             for branch in branchesPaths[pathToCover]:  # Setting all branches of the path to True (Covered)
                 branchStatus[branch] = True
@@ -339,7 +339,7 @@ def makePredicateBranchCoverage(operationImp, operationMch, path, branchStatus, 
 
 
 def PathCoverage(operationImp, operationMch, paths, inputs, operationName, importedMch, seesMch, impName, directory,
-                 atelierBDir, proBPath, copy_directory, times, operationNumber, maxint):
+                 atelierBDir, proBPath, copy_directory, times, operationNumber, maxint, graph):
     """
     Path Coverage, function responsible of making the Path Coverage, in PC we need to exercise every path of the code at
     least once.
@@ -379,7 +379,7 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
                                                                                    operationName, importedMch, seesMch,
                                                                                    impName,
                                                                                    directory, atelierBDir, proBPath,
-                                                                                   copy_directory, maxint)
+                                                                                   copy_directory, maxint, graph)
         for i in range(len(outputs)):
             vL.append(outputs[i])
             vTypeL.append(outputsTypes[i])
@@ -401,7 +401,7 @@ def PathCoverage(operationImp, operationMch, paths, inputs, operationName, impor
 
 
 def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inputs, outputs, operationName,
-                              importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, maxint):
+                              importedMch, seesMch, impName, directory, atelierBDir, proBPath, copy_directory, maxint, graph):
     """
     Make the predicate for Path Coverage
 
@@ -433,7 +433,7 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
     arrayModification = list()
     sizeinputs = len(inputs)
     addVariablesToInput(operationImp, importedMch, seesMch, operationMch, inputs, variablesList, variablesTypeList,
-                        directory)
+                        directory. graph)
     fixedNames = getFixedNames(operationImp, importedMch, seesMch, operationMch)
     for key in path:
         way.append(key)
@@ -446,11 +446,11 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
                                                                                       impName, variablesList,
                                                                                       variablesTypeList,
                                                                                       changedVariablesWhile, directory,
-                                                                                      atelierBDir, arrayModification)
+                                                                                      atelierBDir, arrayModification, graph)
         del way[len(way) - 1]
     buildpredicate.addVariablesToBePrinted(operationImp, importedMch, seesMch, operationMch, inputs, variablesList,
                                            variablesTypeList,
-                                           directory)
+                                           directory, graph)
     ExistValues, variables, predicate, tempoAvaliacaoEntrada = buildpredicate.checkPredicate(predicateXML,
                                                                       "Path Coverage - trying to get inputs for path " + str(
                                                                           pathToCover) + "of the operation " + operationName, inputs+variablesList, proBPath,
@@ -464,7 +464,7 @@ def makePredicatePathCoverage(operationImp, operationMch, path, pathToCover, inp
                                                        operationMch, importedMch, seesMch,
                                                        operationName, impName, variables, variablesList,
                                                        variablesTypeList, directory, atelierBDir, proBPath,
-                                                       copy_directory, maxint)
+                                                       copy_directory, maxint, graph)
         covered = True
     elif predicate != "":
         print("Inputs were NOT found for the predicate: " + predicate)

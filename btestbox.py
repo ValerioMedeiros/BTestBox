@@ -271,6 +271,6 @@ BTestBoxExecution("D:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B full 4.2.1
                   "C",
                   "C9X",
                   "gcc",
-                  "COMP_1seq1_OPS_IMP",
+                  "whileSimples_i",
                   "Branch Coverage",
                   50)
