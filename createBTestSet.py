@@ -595,10 +595,10 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                     varOutput.append(wordList[1])
                 for outputOption in outputs[operation][i]:
                     variable = outputOption[:re.search(r"([a-zA-Z0-9\_]+) =", outputOption).end()-2:]
-                    if variable in variablesList[1]:
-                        for j in range(len(variablesList[1])):
-                            if variablesList[1][j] == variable:
-                                if variablesTypeList[1][j][0] == 'Array':
+                    if variable in variablesList[operation]:
+                        for j in range(len(variablesList[operation])):
+                            if variablesList[operation][j] == variable:
+                                if variablesTypeList[operation][j][0] == 'Array':
                                     matches = re.finditer(r"\|\-\>([a-zA-Z0-9\_]+)\)[\,\}]", outputOption)
                                     for matchNum, match in enumerate(matches):
                                         outputVarName.append(variable)
