@@ -263,7 +263,6 @@ def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, t
 
 
 #For Testing uncomment and change the lines above:
-
 BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B free 4.2.1"+os.sep+"extensions",
                   "D:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExemplosB0Modificados"+os.sep+"bdp",
                   "testandoThreadsComThreads",
@@ -271,6 +270,6 @@ BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B free 4.2.1
                   "C",
                   "C9X",
                   "gcc",
-                  "whileSimples_i",
+                  "COMP_1seq1_OPS_IMP",
                   "Branch Coverage",
                   50)

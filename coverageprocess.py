@@ -12,7 +12,7 @@ import copy
 import multiprocessing
 
 # Number of cores capable of doing calculation or the number of calculations at the same time
-cores = 1
+cores = 4
 
 # Definindo a fila maxima
 queueOfOperations = Queue(maxsize=0)
@@ -41,11 +41,11 @@ def DoBranchCoverageThreads(queue, dictVars, result):
                                                            (dictVars["notCovered"])
         count = dictVars["count"]
         count += 1
+        dictVars["count"] = count
         branchCoverageProcess(count, work[1], operationsmch, times, directory, importedMch, seesMch, refinementMch,
                               impName, atelierBDir, proBPath, copy_directory, maxint, operationsNames,
                               allInVariablesForTest, allOutVariablesForTest, variablesList, variablesTypeList,
                               coveredPercentage, notCovered)
-        dictVars["count"] = count
         queue.task_done()
     return True
 
@@ -102,7 +102,7 @@ def branchCoverageProcess(count, operationImp, operationsmch, times, directory, 
                                          OBpaths.branchesStatus, OBpaths.paths, inputs, operationname,
                                          importedMch, seesMch, impName, directory + os.sep + 'bdp', atelierBDir,
                                          proBPath, copy_directory, times, count, maxint, graph)
-    operationsNames.append(operationname)
+    operationsNames[count] = operationname
     allInVariablesForTest[count] = allInVariables
     allOutVariablesForTest[count] = allOutVariables
     variablesList[count] = vL
@@ -158,7 +158,7 @@ def DoBranchCoverage(imp, mch, importedMch, seesMch, includedMch, operationsmch,
     allOutVariablesForTest = dict()
     variablesList = dict()
     variablesTypeList = dict()
-    operationsNames = list()
+    operationsNames = dict()
     coveredPercentage = list()
     count = 0
     notCovered = dict()

@@ -2,6 +2,7 @@ import os
 import shutil
 import re
 import instgen
+import logging
 
 
 def createTest(inputs, output, impBXML, mchBXML, importedMch, seesMch, includedMch, operationsNames, directory,
@@ -48,12 +49,12 @@ def getImpWithImportedMch(importedMch, directory):
 
 
 def getOrder(impBXML, operationsNames):
-    inputOrderForOperation = []
-    outputOrderForOperation = []
-    for operation in operationsNames:
+    inputOrderForOperation = dict()
+    outputOrderForOperation = dict()
+    for numberOperation in range(len(operationsNames)):
         allOperationClause = impBXML.getElementsByTagName('Operation')
         for operationClause in allOperationClause:
-            if operationClause.getAttribute('name') == operation:
+            if operationClause.getAttribute('name') == operationsNames[numberOperation + 1]:
                 inputOrder = []
                 outputOrder = []
                 for child in operationClause.childNodes:
@@ -66,8 +67,9 @@ def getOrder(impBXML, operationsNames):
                             allId = child.getElementsByTagName('Id')
                             for Id in allId:
                                 outputOrder.append(Id.getAttribute('value'))
-                inputOrderForOperation.append(inputOrder)
-                outputOrderForOperation.append(outputOrder)
+                inputOrderForOperation[numberOperation + 1] = inputOrder
+                outputOrderForOperation[numberOperation + 1] = outputOrder
+                logging.error(outputOrder)
     return inputOrderForOperation, outputOrderForOperation
 
 
@@ -543,7 +545,7 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
             else:
                 machine += '\n'
         for i in range(len(inputs[operation])):
-            machine += '    verdict <-- TEST_' + str(i) + '_' + operationsNames[operation - 1] + ' =\n'
+            machine += '    verdict <-- TEST_' + str(i) + '_' + operationsNames[operation] + ' =\n'
             machine += '        ANY kk WHERE kk : BOOL THEN verdict := kk END'
             if i == max(range(len(inputs[operation]))):
                 if operation != max(sorted(inputs.keys())):
@@ -572,7 +574,7 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
     for operation in sorted(inputs.keys()):
         if len(inputs[operation]) == 0:
             i = 0
-            implementation += '    verdict <-- TEST_0_' + operationsNames[operation - 1] + ' =\n'
+            implementation += '    verdict <-- TEST_0_' + operationsNames[operation] + ' =\n'
             implementation += '    BEGIN\n'
             implementation += '        verdict := TRUE\n'
             implementation += '    END'
@@ -583,7 +585,7 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
         else:
             print(inputs)
             for i in range(len(inputs[operation])):
-                implementation += '    verdict <-- TEST_' + str(i) + '_' + operationsNames[operation - 1] + ' =\n'
+                implementation += '    verdict <-- TEST_' + str(i) + '_' + operationsNames[operation] + ' =\n'
                 implementation += '    BEGIN\n'
                 varInput = []
                 varOutput = []
@@ -607,7 +609,7 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                     wordListOut = re.sub("[^\w]", " ", outputOption).split()
                                     outputVarName.append(wordListOut[0])
                                     outputVarValue.append(wordListOut[1])
-                countAuxQuantity = len(outputsOrder[operation - 1])
+                countAuxQuantity = len(outputsOrder[operation])
                 if controlList != []:
                     # For the machine/implementation
                     variablesForTest = ""
@@ -810,47 +812,47 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                     if j != max(range(countAuxQuantity)):
                         implementation += ', '
                 implementation += ' IN\n'
-                if outputsOrder[operation - 1] != []:  # Operations WITH output
+                if outputsOrder[operation] != []:  # Operations WITH output
                     implementation += '            '
-                    for j in range(len(outputsOrder[operation - 1])):
+                    for j in range(len(outputsOrder[operation])):
                         implementation += 'aux' + str(j + 1)
-                        if j != max(range(len(outputsOrder[operation - 1]))):
+                        if j != max(range(len(outputsOrder[operation]))):
                             implementation += ', '
-                    implementation += ' <-- ' + operationsNames[operation - 1]
-                    if inputsOrder[operation - 1] != []:  # Operation WITH output and inputs
+                    implementation += ' <-- ' + operationsNames[operation]
+                    if inputsOrder[operation] != []:  # Operation WITH output and inputs
                         implementation += '('
-                        for j in range(len(inputsOrder[operation - 1])):
+                        for j in range(len(inputsOrder[operation])):
                             for k in range(len(varInput)):
-                                if str(inputsOrder[operation - 1][j]) == str(varInput[k]):
+                                if str(inputsOrder[operation][j]) == str(varInput[k]):
                                     implementation += str(varOutput[k])
-                            if j != max(range(len(inputsOrder[operation - 1]))):
+                            if j != max(range(len(inputsOrder[operation]))):
                                 implementation += ', '
                         implementation += ')'
                     implementation += ';\n'
                 else:  # Operation WITHOUT output
-                    implementation += '            ' + operationsNames[operation - 1]
-                    if inputsOrder[operation - 1] != []:  # Operations WITHOUT output and WITH inputs
+                    implementation += '            ' + operationsNames[operation]
+                    if inputsOrder[operation] != []:  # Operations WITHOUT output and WITH inputs
                         implementation += '('
-                        for j in range(len(inputsOrder[operation - 1])):
+                        for j in range(len(inputsOrder[operation])):
                             for k in range(len(varInput)):
-                                if str(inputsOrder[operation - 1][j]) == str(varInput[k]):
+                                if str(inputsOrder[operation][j]) == str(varInput[k]):
                                     implementation += str(varOutput[k])
-                            if j != max(range(len(inputsOrder[operation - 1]))):
+                            if j != max(range(len(inputsOrder[operation]))):
                                 implementation += ', '
                         implementation += ')'
                     implementation += ';\n'
                 countsaver = 0
                 for j in range(len(controlList)):  # Gets
-                    if outputsOrder[operation - 1] != []:
+                    if outputsOrder[operation] != []:
                         if controlList[j] in nonArrayVariables:
                             implementation += '            aux' + str(
-                                j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1) + ' <-- OperationForTestGet' + \
+                                j + 1 + max(range(len(outputsOrder[operation]))) + 1) + ' <-- OperationForTestGet' + \
                                               controlList[j] + controlListNames[j] + ';\n'
                             countsaver = j + 1
                         if controlList[j] in arrayVariables:
                             number, text = createArrayGet(controlList[j], inputs[operation][i], controlListNames[j],
-                                                          (j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1))
-                            countsaver = number - (max(range(len(outputsOrder[operation - 1]))) + 1)
+                                                          (j + 1 + max(range(len(outputsOrder[operation]))) + 1))
+                            countsaver = number - (max(range(len(outputsOrder[operation]))) + 1)
                             implementation += text
                     else:
                         if controlList[j] in nonArrayVariables:
@@ -870,13 +872,13 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                           controlListSEES[j][k] + seesName + ';\n'
                     countsaver = k + countsaver + 1 + j
                 implementation += '            IF '  # Start of the IF
-                if outputsOrder[operation - 1] != []:
-                    for j in range(len(outputsOrder[operation - 1])):
+                if outputsOrder[operation] != []:
+                    for j in range(len(outputsOrder[operation])):
                         implementation += 'aux' + str(j + 1) + ' = '
                         for k in range(len(outputVarName)):
-                            if str(outputsOrder[operation - 1][j]) == str(outputVarName[k]):
+                            if str(outputsOrder[operation][j]) == str(outputVarName[k]):
                                 implementation += str(outputVarValue[k])
-                        if j != max(range(len(outputsOrder[operation - 1]))):
+                        if j != max(range(len(outputsOrder[operation]))):
                             implementation += ' & '
                 countArray = 0
                 for j in range(len(controlList)):
@@ -887,11 +889,11 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                 timesAdded = 0
                                 for w in range(len(outputVarName)):
                                     if str(controlList[j]).replace("CONSTRAINTVAR_", "") == str(outputVarName[k]):
-                                        if j == 0 and outputsOrder[operation - 1] != []:
+                                        if j == 0 and outputsOrder[operation] != []:
                                             implementation += ' & '
-                                        if outputsOrder[operation - 1] != []:
+                                        if outputsOrder[operation] != []:
                                             implementation += 'aux' + str(
-                                                j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1 + countArray) + ' = '
+                                                j + 1 + max(range(len(outputsOrder[operation]))) + 1 + countArray) + ' = '
                                         else:
                                             implementation += 'aux' + str(j + 1 + countArray) + ' = ' + str(outputVarValue[w])
                                         countArray += 1
@@ -899,10 +901,10 @@ def createTestFile(mchName, impName, impBXML, mchBXML, inputs, outputs, seesMch,
                                         if timesAdded != arrayLength:
                                             implementation += ' & '
                             else:
-                                if j == 0 and outputsOrder[operation - 1] != []:
+                                if j == 0 and outputsOrder[operation] != []:
                                     implementation += ' & '
-                                if outputsOrder[operation - 1] != []:
-                                    implementation += 'aux' + str(j + 1 + max(range(len(outputsOrder[operation - 1]))) + 1 + countArray) + ' = '
+                                if outputsOrder[operation] != []:
+                                    implementation += 'aux' + str(j + 1 + max(range(len(outputsOrder[operation]))) + 1 + countArray) + ' = '
                                 else:
                                     implementation += 'aux' + str(j + 1 + countArray) + ' = '
                                 alreadyWriteVariables = []
@@ -997,14 +999,14 @@ def createTestInB(mchName, impName, copy_directory, operationsNames, inputs, cov
     implementation += 'IMPORTS\n    TestSet_' + coverage.upper() + "_" + mchName + '\n\n'
     implementation += 'LOCAL_OPERATIONS\n'
     for i in range(len(operationsNames)):
-        implementation += '    verdict <-- test' + operationsNames[i] + ' =\n'
+        implementation += '    verdict <-- test' + operationsNames[i+1] + ' =\n'
         implementation += '        ANY kk WHERE kk : BOOL THEN verdict := kk END'
         if i < len(operationsNames) - 1:
             implementation += ';\n\n'
     implementation += '\n\n'
     implementation += 'OPERATIONS\n'
     for i in range(len(operationsNames)):
-        implementation += '    verdict <-- test' + operationsNames[i] + ' =\n'
+        implementation += '    verdict <-- test' + operationsNames[i+1] + ' =\n'
         implementation += '    BEGIN\n'
         if len(inputs[i+1]) != 0:
             implementation += '        VAR '
@@ -1014,7 +1016,7 @@ def createTestInB(mchName, impName, copy_directory, operationsNames, inputs, cov
                     implementation += ', '
             implementation += ' IN\n'
             for j in range(len(inputs[i + 1])):
-                implementation += '            v' + str(j) + ' <-- TEST_' + str(j) + '_' + operationsNames[i] + ';\n'
+                implementation += '            v' + str(j) + ' <-- TEST_' + str(j) + '_' + operationsNames[i+1] + ';\n'
             implementation += '            IF '
             for j in range(len(inputs[i + 1])):
                 implementation += 'v' + str(j) + ' = TRUE '
@@ -1028,7 +1030,7 @@ def createTestInB(mchName, impName, copy_directory, operationsNames, inputs, cov
             implementation += '        END\n'
             implementation += '    END;\n\n'
         else:
-            implementation += '        verdict <-- TEST_0_' + operationsNames[i] + '\n'
+            implementation += '        verdict <-- TEST_0_' + operationsNames[i+1] + '\n'
             implementation += '    END;\n\n'
     implementation += '    verdict <-- testAll =\n'
     implementation += '    BEGIN\n'
@@ -1039,7 +1041,7 @@ def createTestInB(mchName, impName, copy_directory, operationsNames, inputs, cov
             implementation += ', '
     implementation += ' IN\n'
     for i in range(len(operationsNames)):
-        implementation += '            v' + str(i) + ' <-- test' + operationsNames[i] + ';\n'
+        implementation += '            v' + str(i) + ' <-- test' + operationsNames[i+1] + ';\n'
     implementation += '            IF '
     for i in range(len(operationsNames)):
         implementation += 'v' + str(i) + ' = TRUE '

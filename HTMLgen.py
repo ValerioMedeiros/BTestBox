@@ -18,17 +18,17 @@ def createTimeFile(times, copy_directory, coverage, impName, operationNames, tem
     text = 'Tempos de secoes do BTestBox para a implementacao ' + impName + '\n\n'
     text += 'O tempo total para a execucao do BTestBox para a implementacao ' + impName + ' foi de ' + str(tempo_total) +  ' segundos \n\n'
     for i in range(len(operationNames)):
-        text += 'Tempos para a opercao ' + operationNames[i] + ' segundos\n'
+        text += 'Tempos para a operacao ' + operationNames[i+1] + ' segundos\n'
         text += 'Tempo de cricao do grafo : ' + str(times[i + 1][0]) + ' segundos\n'
         text += 'Tempo de cricao dos guias : ' + str(times[i + 1][1]) + ' segundos\n'
         text += 'Tempo de gercao dos predicados : ' + str(times[i + 1][2]) + ' segundos\n'
         text += 'Tempo de avalicao dos predicados : ' + str(times[i + 1][3]) + ' segundos\n\n'
         total_avaliacao += times[i + 1][3]
 
-    text += 'Tempo para a gercao dos arquivos de teste : ' + str(times[0][0]) + ' segundos\n'
-    text += 'Tempo para a compilcao e execucao : ' + str(times[0][1]) + ' segundos\n'
-    text += 'Tempo para a gercao do reporte : ' + str(times[0][2]) + ' segundos\n'
-    text += 'A etapa de avalicao dos predicados foi responsavel por ' + str(total_avaliacao/tempo_total*100) + '% do tempo da execucao do BTestBox para essa implementacao'
+    text += 'Tempo para a geracao dos arquivos de teste : ' + str(times[0][0]) + ' segundos\n'
+    text += 'Tempo para a compilacao e execucao : ' + str(times[0][1]) + ' segundos\n'
+    text += 'Tempo para a geracao do reporte : ' + str(times[0][2]) + ' segundos\n'
+    text += 'A etapa de avaliacao dos predicados foi responsavel por ' + str(total_avaliacao/tempo_total*100) + '% do tempo da execucao do BTestBox para essa implementacao'
     txtDoc.write(text)
     txtDoc.close()
 
@@ -107,7 +107,7 @@ def genHTMLDoc(impName, coverage, directory, copy_directory, operationNames, non
             text += '<tr bgcolor="#ff3333">\n'
         else:
             text += '<tr bgcolor="#00FF00">\n'
-        text += '<td><b><center><a href="file:///'+directory.replace(" ", "%20")+os.sep+impName+'.imp">'+operationNames[i]+'</a></center></b></td>\n'
+        text += '<td><b><center><a href="file:///'+directory.replace(" ", "%20")+os.sep+impName+'.imp">'+operationNames[i+1]+'</a></center></b></td>\n'
         text += '</tr>\n'
     text += '</table>\n'
     text += '</td>\n'
@@ -254,7 +254,7 @@ def HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entr
             text += '-' * 240
             text += '</p>'
             NumberOfTests = 1
-            text += '<p style="color:green">Tests for the Operation ' + operationNames[int(key) - 1] + '<br>\n\n'
+            text += '<p style="color:green">Tests for the Operation ' + operationNames[int(key)] + '<br>\n\n'
             for i in range(len(entries[key])):
                 text += 'Test ' + str(NumberOfTests) + ':<br>\n'
                 text += 'Input(s): '
@@ -290,7 +290,7 @@ def HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entr
             else:
                 textColor = 'style="color:green"'
             NumberOfTests = 1
-            text += '<p ' + textColor + '>Tests for the Operation ' + operationNames[int(key) - 1] + '</p>\n\n'
+            text += '<p ' + textColor + '>Tests for the Operation ' + operationNames[int(key)] + '</p>\n\n'
             for i in range(len(entries[key])):
                 text += '<p ' + textColor + '>Test ' + str(NumberOfTests) + ':<br>\n'
                 text += 'Input(s): '
@@ -304,7 +304,7 @@ def HTMLText(coverage, nonCovered, copy_directory, impName, operationNames, entr
                 NumberOfTests += 1
             if key in nonCovered:
                 text += '<p ' + textColor + '>The operation ' + operationNames[
-                    int(key) - 1] + ' did not reach ' + coverage + ' coverage</p>\n'
+                    int(key)] + ' did not reach ' + coverage + ' coverage</p>\n'
                 if coverage == 'Branch':
                     text += '<p ' + textColor + '>It cannot pass through the branch(es):<br>\n'
                     for i in range(len(nonCovered[key])):
