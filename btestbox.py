@@ -12,7 +12,7 @@ import time
 #
 # parser = argparse.ArgumentParser(add_help=False)
 #
-# progdescription = "BTestBox is awesome"
+# progdescription = "BTestBox"
 #
 # parser = argparse.ArgumentParser(parents=[parser], description=progdescription)
 #
@@ -56,7 +56,7 @@ import time
 #                     help='Outputs some information while running')
 #
 # args = parser.parse_args()
-#
+
 # if (args.verbose):
 #     print("BTestBox configuration")
 #     print("- AtelierB directory: " + args.atelier)
@@ -263,6 +263,7 @@ def BTestBoxExecution(atelier, project_directory, copy_directory, probcliPath, t
 
 
 #For Testing uncomment and change the lines above:
+'''
 BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B free 4.2.1"+os.sep+"extensions",
                   "D:"+os.sep+"Users"+os.sep+"Diego"+os.sep+"Documents"+os.sep+"bprojects"+os.sep+"ExemplosB0Modificados"+os.sep+"bdp",
                   "testandoThreadsComThreads",
@@ -273,3 +274,4 @@ BTestBoxExecution("C:"+os.sep+"Program Files (x86)"+os.sep+"Atelier B free 4.2.1
                   "COMP_1seq1_OPS_IMP",
                   "Branch Coverage",
                   50)
+'''
