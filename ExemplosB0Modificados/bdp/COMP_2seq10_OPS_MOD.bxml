@@ -1,0 +1,191 @@
+<Machine name='COMP_2seq10_OPS_MOD' type='abstraction'>
+<Abstract_Variables>
+<Id value='counter' typref='2701647786'/>
+<Id value='max_counter' typref='2701647786'/>
+<Id value='cond1' typref='2043437594'/>
+<Id value='check_boolexp' typref='2043437594'/>
+<Id value='check_BLOCK' typref='2701647786'/>
+<Id value='check_BECOME' typref='2701647786'/>
+<Id value='check_IF' typref='2701647786'/>
+<Id value='check_CASE' typref='2701647786'/>
+<Id value='check_SEQUENCE' typref='2701647786'/>
+<Id value='check_WHILE' typref='2701647786'/>
+<Id value='check_OPER_CALL' typref='2701647786'/>
+</Abstract_Variables>
+<Invariant>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Id value='counter' typref='2701647786'/>
+<Id value='NAT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='max_counter' typref='2701647786'/>
+<Id value='NAT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='cond1' typref='2043437594'/>
+<Id value='BOOL' typref='4282494527'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_boolexp' typref='2043437594'/>
+<Id value='BOOL' typref='4282494527'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_BLOCK' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_BECOME' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_IF' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_CASE' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_SEQUENCE' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_WHILE' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='check_OPER_CALL' typref='2701647786'/>
+<Id value='INT' typref='3603043417'/>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Nary_Sub op='||'>
+<Assignement_Sub>
+<Variables>
+<Id value='counter' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='1' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='max_counter' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='1024' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='cond1' typref='2043437594'/>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_boolexp' typref='2043437594'/>
+</Variables>
+<Values>
+<Boolean_Literal value='TRUE' typref='2043437594'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_BLOCK' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_BECOME' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_IF' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_CASE' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_SEQUENCE' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_WHILE' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='check_OPER_CALL' typref='2701647786'/>
+</Variables>
+<Values>
+<Integer_Literal value='0' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Initialisation>
+<Operations>
+<Operation name='ID00000'>
+<Body>
+<Skip/>
+</Body>
+</Operation>
+<Operation name='ID00001'>
+<Body>
+<Skip/>
+</Body>
+</Operation>
+<Operation name='ID00002'>
+<Body>
+<Skip/>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+<Type id='2043437594'>
+<Id value='BOOL'/>
+</Type>
+<Type id='3603043417'>
+<Unary_Exp op='POW'>
+<Id value='INTEGER'/>
+</Unary_Exp>
+</Type>
+<Type id='4282494527'>
+<Unary_Exp op='POW'>
+<Id value='BOOL'/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>
