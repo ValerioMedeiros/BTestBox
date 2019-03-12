@@ -1,0 +1,1341 @@
+<Proof_Obligations>
+<Define merge="=" name="B definitions">
+<Nary_Pred op="&amp;" translate="((NAT) = (((0) .. (2147483647)))) &amp; ((INT) = (((-2147483647) .. (2147483647))))">
+<Exp_Comparison op="=">
+<Id value="NAT"/>
+<Binary_Exp op="..">
+<Integer_Literal value="0"/>
+<Id value="MAXINT"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="=">
+<Id value="INT"/>
+<Binary_Exp op="..">
+<Id value="MININT"/>
+<Id value="MAXINT"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Nary_Pred>
+</Define>
+<Define merge="=" name="ctx"/>
+<Define merge="=" name="seext"/>
+<Define merge="=" name="inv"/>
+<Define merge="=" name="ass"/>
+<Define merge="=" name="mchcst"/>
+<Define merge="=" name="aprp"/>
+<Define merge="=" name="abs"/>
+<Define merge="=" name="imlprp"/>
+<Define merge="=" name="imprp"/>
+<Define merge="=" name="imext"/>
+<Proof_Obligation merge="=">
+<Comment>Valuation dans une implantation</Comment>
+<Tag>ValuesLemmas</Tag>
+<Tag>CONSTRAINTS</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="imprp"/>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Comment>Initialisation dans une implantation</Comment>
+<Tag>Initialisation</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Local_Hyp num="1">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Comment>Operations dans une implantation / Precondition</Comment>
+<Tag>testSimples</Tag>
+<Tag>PRECONDITION</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:1" typref="2701647786" value="total"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Hypothesis>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Comment>Operations dans une implantation</Comment>
+<Tag>testSimples</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:1:1" typref="2701647786" value="total"/>
+<Id suffix="" typref="2701647786" value="total"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:1" typref="2701647786" value="total"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Simple_Goal merge="0">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)" goalTag="Loop initialisation">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="1">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)" goalTag="Loop initialisation">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="2">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="3">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="4">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="5">
+<Tag>Variant is decreasing</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op="&lt;" goalTag="Variant is decreasing">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:1" typref="2701647786" value="aux1"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Unproved" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="6">
+<Tag>End of loop</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="4"/>
+<Ref_Hyp num="3"/>
+</Nary_Pred>
+<Exp_Comparison op="=">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:4:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:4:1:1,,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:1:2" typref="2701647786" value="aux2"/>
+<Binary_Exp op="+" tag=",,D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:4:1:1:1" typref="2701647786">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:4:1:2:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:4:1:2:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Proved(Util)" methodList="pp(rt.1)" passList="Force(0),(?; 0)"/>
+</Simple_Goal>
+</Proof_Obligation>
+<Proof_Obligation merge="-">
+<Comment>Operations dans une implantation / Precondition</Comment>
+<Tag>testSimples1</Tag>
+<Tag>PRECONDITION</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:1" typref="2701647786" value="totales"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Hypothesis>
+</Proof_Obligation>
+<Proof_Obligation merge="-">
+<Comment>Operations dans une implantation</Comment>
+<Tag>testSimples1</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:1:1" typref="2701647786" value="totales"/>
+<Id suffix="" typref="2701647786" value="totales"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Nary_Pred op="&amp;"/>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:1" typref="2701647786" value="totales"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Simple_Goal merge="0">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)" goalTag="Loop initialisation">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="1">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)" goalTag="Loop initialisation">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="2">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="3">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="4">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="5">
+<Tag>Variant is decreasing</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="2"/>
+</Nary_Pred>
+<Exp_Comparison op="&lt;" goalTag="Variant is decreasing">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:1" typref="2701647786" value="aux1"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="6">
+<Tag>End of loop</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Nary_Pred op="&amp;">
+<Ref_Hyp num="6"/>
+<Ref_Hyp num="5"/>
+<Ref_Hyp num="4"/>
+<Ref_Hyp num="3"/>
+</Nary_Pred>
+<Exp_Comparison op="=">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:4:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:4:1:1,,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:1:2" typref="2701647786" value="aux2"/>
+<Binary_Exp op="+" tag=",,D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:4:1:1:1" typref="2701647786">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:4:1:2:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:4:1:2:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Tag>WellDefinednessProperties</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imprp"/>
+<Hypothesis/>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Tag>WellDefinednessInvariant</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Tag>WellDefinednessAssertions</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Tag>WellDefinednessInitialisation</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+</Proof_Obligation>
+<Proof_Obligation merge="=">
+<Comment>Operations dans une implementation</Comment>
+<Tag>WellDefinedness_testSimples</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:1" typref="2701647786" value="total"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:1:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="7">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Simple_Goal merge="">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="0">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="2">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="4">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+<Simple_Goal merge="5">
+<Tag>Variant is decreasing</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op="&lt;" goalTag="Variant is decreasing">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:1:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+<Proof_State proofState="Proved(0)" methodList="pr" passList="Force(0),?"/>
+</Simple_Goal>
+</Proof_Obligation>
+<Proof_Obligation merge="-">
+<Comment>Operations dans une implementation</Comment>
+<Tag>WellDefinedness_testSimples1</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="mchcst"/>
+<Definition name="aprp"/>
+<Definition name="imlprp"/>
+<Definition name="imprp"/>
+<Definition name="imext"/>
+<Definition name="seext"/>
+<Definition name="abs"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:1:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:3:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:1" typref="2701647786" value="yy"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:4:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+<Exp_Comparison op=">">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:5:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:6:2" typref="2701647786" value="5"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:1" typref="2701647786" value="totales"/>
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:2:2:3:1:7:2" typref="3603043417" value="NAT"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Hypothesis>
+<Local_Hyp num="1">
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="2">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+</Local_Hyp>
+<Local_Hyp num="3">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="4">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="5">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="6">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Local_Hyp>
+<Local_Hyp num="7">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Nary_Pred>
+<Unary_Pred op="not">
+<Exp_Comparison op=">">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:1:1:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Unary_Pred>
+</Nary_Pred>
+</Local_Hyp>
+<Simple_Goal merge="0">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:1:1:1" typref="2701647786" value="xx"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="1">
+<Tag>Loop initialisation</Tag>
+<Goal>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:2:1:1" typref="2701647786" value="yy"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="2">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op="=" initialTag="(((xx + yy)) = ((aux1 + aux2)))">
+<Binary_Exp op="+" typref="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:1" typref="2701647786" value="xx"/>
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:1:2" typref="2701647786" value="yy"/>
+</Binary_Exp>
+<Binary_Exp op="+" typref="2701647786">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:1:2:2,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+</Binary_Exp>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="3">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux1)">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:2:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="4">
+<Tag>Loop invariant is preserved</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op=">=" initialTag="(0 &lt;= aux2)">
+<Binary_Exp op="+" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:1:1" typref="2701647786" value="aux2" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:2:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:3:1:3:2" typref="2701647786" value="0"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+<Simple_Goal merge="5">
+<Tag>Variant is decreasing</Tag>
+<Goal>
+<Binary_Pred op="=>">
+<Ref_Hyp num="6"/>
+<Exp_Comparison op="&lt;" goalTag="Variant is decreasing">
+<Binary_Exp op="-" tag=",D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786">
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1" fixed="false"/>
+<Integer_Literal tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:2:1:2" typref="2701647786" value="1"/>
+</Binary_Exp>
+<Id suffix="1" tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:4:1,D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:3:2:3:1:2:1:3:2:1:1:1:1" typref="2701647786" value="aux1"/>
+</Exp_Comparison>
+</Binary_Pred>
+</Goal>
+</Simple_Goal>
+</Proof_Obligation>
+<TypeInfos merge="=">
+<Type id="2701647786">
+<Id tag="D:\Users\Diego\Documents\bprojects\ExemplosB0Modificados\bdp\whileSimples_i.bxml:1:4:1:1" value="INTEGER"/>
+</Type>
+<Type id="2701647786">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:3:1:1" value="INTEGER"/>
+</Type>
+<Type id="3603043417">
+<Unary_Exp op="POW">
+<Id tag="D:/Users/Diego/Documents/bprojects/ExemplosB0Modificados/bdp\whileSimples.bxml:1:3:2:1:1" value="INTEGER"/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+</Proof_Obligations>

@@ -1,0 +1,3510 @@
+﻿IMPLEMENTATION COMP_2seq1_OPS_IMP REFINES COMP_2seq1_OPS
+ IMPORTS COMPIMP
+ CONCRETE_CONSTANTS const1
+ PROPERTIES const1 : INT VALUES const1 = 1024
+ CONCRETE_VARIABLES counter , max_counter , cond1 , check_boolexp , check_BLOCK , check_BECOME , check_IF , check_CASE , check_SEQUENCE , check_WHILE , check_OPER_CALL
+ INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+ INITIALISATION counter := 1 ; max_counter := 1024 ; cond1 := TRUE ; check_boolexp := TRUE ; check_BLOCK := 0 ; check_BECOME := 0 ; check_IF := 0 ; check_CASE := 0 ; check_SEQUENCE := 0 ; check_WHILE := 0 ; check_OPER_CALL := 0
+OPERATIONS
+ID00000 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00001 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00002 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00003 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00004 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00005 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00006 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00007 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00008 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00009 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00010 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00011 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00012 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00013 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00014 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00015 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00016 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00017 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00018 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00019 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00020 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00021 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00022 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00023 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00024 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00025 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00026 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00027 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00028 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00029 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00030 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00031 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00032 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00033 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00034 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00035 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00036 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00037 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00038 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00039 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00040 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00041 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00042 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00043 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00044 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00045 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00046 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00047 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00048 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00049 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00050 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00051 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00052 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00053 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00054 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00055 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00056 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00057 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00058 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00059 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00060 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00061 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00062 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00063 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00064 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00065 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00066 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00067 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00068 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00069 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00070 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00071 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00072 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00073 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00074 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00075 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00076 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00077 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00078 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00079 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00080 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00081 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00082 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00083 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00084 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00085 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00086 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00087 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00088 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00089 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00090 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00091 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00092 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00093 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00094 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00095 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00096 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00097 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00098 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00099 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00100 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00101 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00102 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00103 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00104 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00105 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00106 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00107 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00108 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00109 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00110 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00111 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00112 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00113 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00114 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00115 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00116 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00117 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00118 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00119 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00120 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00121 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00122 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00123 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00124 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00125 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00126 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00127 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00128 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00129 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00130 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00131 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00132 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00133 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00134 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00135 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00136 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00137 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00138 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00139 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00140 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00141 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00142 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00143 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00144 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00145 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00146 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00147 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00148 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00149 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00150 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00151 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00152 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00153 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00154 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00155 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00156 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00157 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00158 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00159 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00160 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00161 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00162 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00163 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00164 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00165 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00166 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00167 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00168 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00169 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00170 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00171 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00172 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00173 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00174 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00175 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00176 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00177 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00178 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00179 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00180 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00181 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_BECOME := check_BECOME + 1
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00182 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSIF counter > max_counter THEN
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ ELSE
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00183 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSIF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSE
+ check_boolexp := bool ( counter = 0 )
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00184 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_BECOME := check_BECOME + 1
+
+ ELSE
+ check_OPER_CALL := 0
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00185 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ELSE
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00186 =
+BEGIN
+/*Comb Block1*/
+
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ;
+ check_boolexp := bool ( counter = 0 )
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00187 =
+BEGIN
+/*Comb Block1*/
+
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ;
+ check_BECOME := check_BECOME + 1
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00188 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_OPER_CALL := 0
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00189 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00190 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00191 =
+BEGIN
+/*Comb Block1*/
+BEGIN
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00192 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ ELSIF counter > max_counter THEN
+ check_boolexp := bool ( counter = 0 )
+ ELSE
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00193 =
+BEGIN
+/*Comb Block1*/
+IF counter > max_counter THEN
+ check_BECOME := check_BECOME + 1
+
+ ELSIF counter > max_counter THEN
+ check_OPER_CALL := 0
+
+ ELSE
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+ END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00194 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+ ELSE
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00195 =
+BEGIN
+/*Comb Block1*/
+CASE counter OF EITHER 0 THEN check_CASE := check_CASE + 1 ;
+ check_boolexp := bool ( counter = 0 )
+ OR 1 THEN check_CASE := check_CASE + 3 ;
+ BEGIN
+ check_BLOCK := check_BLOCK + 1
+ END
+
+ ELSE
+ check_BECOME := check_BECOME + 1
+
+ END END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00196 =
+BEGIN
+/*Comb Block1*/
+
+ check_OPER_CALL := 0
+
+ ;
+ IF counter = 0 THEN
+ check_IF := check_IF + 1
+ELSIF counter = 1 THEN
+ check_IF := check_IF + 3
+ELSE check_IF := check_IF + 10 END
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00197 =
+BEGIN
+/*Comb Block1*/
+
+ CASE check_CASE
+OF EITHER 0 THEN
+ check_CASE := check_CASE + 1
+ELSE check_CASE := check_CASE + 3
+END
+END
+ ;
+ check_SEQUENCE := counter + 1 ;
+ cond1 := bool ( counter = 0 )
+
+
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00198 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_WHILE := 0 ;
+ WHILE check_WHILE < counter DO
+  check_WHILE := check_WHILE + 1
+INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT
+VARIANT ( 1000 - check_WHILE ) END
+
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+; ID00199 =
+BEGIN
+/*Comb Block1*/
+WHILE counter > max_counter &  check_WHILE < 1000 DO
+ check_boolexp := bool ( counter = 0 )
+; check_WHILE := check_WHILE + 1 INVARIANT counter : NAT & max_counter : NAT & cond1 : BOOL & check_boolexp : BOOL & check_BLOCK : INT & check_BECOME : INT & check_IF : INT & check_CASE : INT & check_SEQUENCE : INT & check_WHILE : INT & check_OPER_CALL : INT VARIANT ( 100000 - check_WHILE ) END
+;
+ counter := ( counter + 1 )
+ END
+
+
+END

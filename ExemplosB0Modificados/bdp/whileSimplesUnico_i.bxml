@@ -1,0 +1,118 @@
+<Machine name='whileSimplesUnico_i' type='implementation'>
+<Abstraction>whileSimplesUnico</Abstraction>
+<Initialisation>
+<Skip/>
+</Initialisation>
+<Operations>
+<Operation name='testSimples'>
+<Output_Parameters>
+<Id value='total' typref='2701647786'/>
+</Output_Parameters>
+<Input_Parameters>
+<Id value='xx' typref='2701647786'/>
+<Id value='yy' typref='2701647786'/>
+</Input_Parameters>
+<Body>
+<VAR_IN>
+<Variables>
+<Id value='aux1' typref='2701647786'/>
+<Id value='aux2' typref='2701647786'/>
+</Variables>
+<Body>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Variables>
+<Id value='aux1' typref='2701647786'/>
+</Variables>
+<Values>
+<Id value='xx' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='aux2' typref='2701647786'/>
+</Variables>
+<Values>
+<Id value='yy' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+<While>
+<Condition>
+<Exp_Comparison op='&gt;'>
+<Id value='aux1' typref='2701647786'/>
+<Integer_Literal value='0' typref='2701647786'/>
+</Exp_Comparison>
+</Condition>
+<Body>
+<Nary_Sub op=';'>
+<Assignement_Sub>
+<Variables>
+<Id value='aux1' typref='2701647786'/>
+</Variables>
+<Values>
+<Binary_Exp op='-' typref='2701647786'>
+<Id value='aux1' typref='2701647786'/>
+<Integer_Literal value='1' typref='2701647786'/>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='aux2' typref='2701647786'/>
+</Variables>
+<Values>
+<Binary_Exp op='+' typref='2701647786'>
+<Id value='aux2' typref='2701647786'/>
+<Integer_Literal value='1' typref='2701647786'/>
+</Binary_Exp>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Body>
+<Invariant>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op='='>
+<Binary_Exp op='+' typref='2701647786'>
+<Id value='xx' typref='2701647786'/>
+<Id value='yy' typref='2701647786'/>
+</Binary_Exp>
+<Binary_Exp op='+' typref='2701647786'>
+<Id value='aux1' typref='2701647786'/>
+<Id value='aux2' typref='2701647786'/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op='&gt;='>
+<Id value='aux1' typref='2701647786'/>
+<Integer_Literal value='0' typref='2701647786'/>
+</Exp_Comparison>
+<Exp_Comparison op='&gt;='>
+<Id value='aux2' typref='2701647786'/>
+<Integer_Literal value='0' typref='2701647786'/>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Variant>
+<Id value='aux1' typref='2701647786'/>
+</Variant>
+</While>
+<Assignement_Sub>
+<Variables>
+<Id value='total' typref='2701647786'/>
+</Variables>
+<Values>
+<Id value='aux2' typref='2701647786'/>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Body>
+</VAR_IN>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='2701647786'>
+<Id value='INTEGER'/>
+</Type>
+</TypeInfos>
+
+</Machine>

@@ -1,0 +1,24 @@
+﻿/* whileSimplesUnico_i
+ * Author: diego
+ * Creation date: 28/11/2018
+ */
+
+IMPLEMENTATION whileSimplesUnico_i
+REFINES whileSimplesUnico
+
+OPERATIONS
+  total <-- testSimples ( xx , yy ) =
+    BEGIN
+        VAR aux1 , aux2 IN
+            aux1 := xx ;
+            aux2 := yy ;
+            WHILE ( aux1 > 0 ) DO
+                aux1 := aux1 - 1 ;
+                aux2 := aux2 + 1
+            INVARIANT xx + yy = aux1 + aux2 & aux1 >= 0 & aux2 >= 0
+            VARIANT aux1
+            END ;
+            total := aux2
+        END
+    END
+ END

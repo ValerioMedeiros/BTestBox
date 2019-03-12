@@ -1,10 +1,19 @@
 digraph {
 COMPIMP_i [ label=" COMPIMP\nCOMPIMP_i " shape= box ]
 COMP_1seq1_OPS_IMP [ label=" COMP_1seq1_OPS\nCOMP_1seq1_OPS_IMP " shape= box ]
+COMP_2seq10_OPS_IMP [ label=" COMP_2seq10_OPS\nCOMP_2seq10_OPS_IMP " shape= box ]
+COMP_2seq10_OPS_IMPMODIFI [ label=" COMP_2seq10_OPSMODIFI\nCOMP_2seq10_OPS_IMPMODIFI " shape= box ]
+COMP_2seq10_OPS_IMPMODIFI0 [ label=" COMP_2seq10_OPSMODIFI0\nCOMP_2seq10_OPS_IMPMODIFI0 " shape= box ]
+COMP_2seq10_OPS_IMPMODIFI1 [ label=" COMP_2seq10_OPSMODIFI1\nCOMP_2seq10_OPS_IMPMODIFI1 " shape= box ]
 COMP_2seq1_OPS_IMP [ label=" COMP_2seq1_OPS\nCOMP_2seq1_OPS_IMP " shape= box ]
 COMP_3seq1_OPS_IMP [ label=" COMP_3seq1_OPS\nCOMP_3seq1_OPS_IMP " shape= box ]
+whileSimplesUnico_i [ label=" whileSimplesUnico\nwhileSimplesUnico_i " shape= box ]
+whileSimples_i [ label=" whileSimples\nwhileSimples_i " shape= box ]
 
 "COMP_1seq1_OPS_IMP" -> "COMPIMP_i" []
+"COMP_2seq10_OPS_IMPMODIFI" -> "COMPIMP_i" []
+"COMP_2seq10_OPS_IMPMODIFI0" -> "COMPIMP_i" []
+"COMP_2seq10_OPS_IMPMODIFI1" -> "COMPIMP_i" []
 "COMP_2seq1_OPS_IMP" -> "COMPIMP_i" []
 "COMP_3seq1_OPS_IMP" -> "COMPIMP_i" []
 }

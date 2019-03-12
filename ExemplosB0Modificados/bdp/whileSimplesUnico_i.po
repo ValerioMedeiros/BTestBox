@@ -1,0 +1,51 @@
+THEORY ProofList IS
+_f(1) & _f(2) & WellDefinedness_testSimples.6,(_f(4) & _f(5) & _f(6) & _f(7) & _f(26) => _f(27));
+_f(1) & _f(2) & WellDefinedness_testSimples.5,(_f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(19) => _f(25));
+_f(1) & _f(2) & WellDefinedness_testSimples.4,(_f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(17) => _f(24));
+_f(1) & _f(2) & WellDefinedness_testSimples.3,(_f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(22) => _f(23));
+_f(1) & _f(2) & WellDefinedness_testSimples.2,(_f(16) & _f(19) & _f(19) => _f(20));
+_f(1) & _f(2) & WellDefinedness_testSimples.1,(_f(16) & _f(17) & _f(17) => _f(18));
+_f(1) & _f(3) & testSimples.7,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(4) & _f(5) & _f(6) & _f(8) & _f(28) => _f(29));
+_f(1) & _f(3) & testSimples.6,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(4) & _f(5) & _f(6) & _f(7) & _f(26) => _f(27));
+_f(1) & _f(3) & testSimples.5,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(19) => _f(25));
+_f(1) & _f(3) & testSimples.4,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(17) => _f(24));
+_f(1) & _f(3) & testSimples.3,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(4) & _f(5) & _f(6) & _f(7) & _f(21) & _f(22) => _f(23));
+_f(1) & _f(3) & testSimples.2,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(16) & _f(19) => _f(20));
+_f(1) & _f(3) & testSimples.1,(_f(9) & _f(10) & _f(11) & _f(12) & _f(13) & _f(14) & _f(15) & _f(16) & _f(17) => _f(18))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+((xx) : (NAT)) & (0 +1 <= xx) & (xx +1 <= 5) & ((yy) : (NAT)) & (0 +1 <= yy) & (yy +1 <= 5) & ((total) : (NAT));
+((total$1) = (total));
+(((xx + yy)) = ((aux1$1 + aux2$1)));
+(0 <= aux1$1);
+(0 <= aux2$1);
+(0 +1 <= aux1$1);
+not((0 +1 <= aux1$1));
+((xx) : (NAT));
+(0 +1 <= xx);
+(xx +1 <= 5);
+((yy) : (NAT));
+(0 +1 <= yy);
+(yy +1 <= 5);
+((total) : (NAT));
+"Loop initialisation";
+"Check invariant (0 <= aux1)";
+(0 <= xx);
+"Check invariant (0 <= aux2)";
+(0 <= yy);
+"Loop invariant is preserved";
+"Check invariant (((xx + yy)) = ((aux1 + aux2)))";
+(((xx + yy)) = (((aux1$1 - 1) + (aux2$1 + 1))));
+(0 <= (aux1$1 - 1));
+(0 <= (aux2$1 + 1));
+"Variant is decreasing";
+((aux1$1 - 1) +1 <= aux1$1);
+"End of loop";
+((aux2$1) = ((xx + yy)));
+(((xx + yy)) = ((xx + yy)))
+END
+&
+THEORY EnumerateX
+END
