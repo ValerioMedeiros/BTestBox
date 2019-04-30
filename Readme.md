@@ -5,7 +5,7 @@
  <b>BTestBox</b> is a tool to automatically test the translation of B in another language. BTestBox takes a target language and a B implementation as input and generate
  a test case to compare the execution of the translated B code and the B implementation. The tool uses ProB to animate the B implementation and get the expected states.
 
-# Demonstration video (First release)
+# Demonstration video (Release 1.0.1)
  
 [![Video demonstration BTestBox](http://img.youtube.com/vi/a4G6pSLVKpk/0.jpg)](https://www.youtube.com/watch?v=a4G6pSLVKpk)
 
